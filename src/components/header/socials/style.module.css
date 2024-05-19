@@ -1,0 +1,19 @@
+.socialItems svg path {
+  transition: 0.15s ease-in;
+}
+
+.socialItems a:hover svg path {
+  fill: #fff;
+}
+
+.blitz {
+  border: 1px solid #0a5c76;
+  border-radius: 25px;
+  padding: 13px 22px;
+  cursor: pointer;
+  transition: 0.12s ease-in;
+}
+
+.blitz:hover {
+  border-color: #7ba4b1;
+}
