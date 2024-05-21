@@ -1,0 +1,24 @@
+.myTeamsTitle {
+  border-bottom: 1px solid #e0e1e2;
+  margin-bottom: 10px;
+}
+
+.myTeamsTitle h2 {
+  font-size: 12.5px;
+  padding-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+.teams h2 {
+  color: #fd0046;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.teams:hover h2 {
+  color: #d6033f;
+}
+
+.teams:hover path {
+  fill: #d6033f;
+}

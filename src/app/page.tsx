@@ -1,7 +1,12 @@
 import Image from "next/image";
+import UserLists from "@/components/userLists/UserLists";
+import AllMatchInfos from "@/components/allMatchInfoSection/AllMatchInfos";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
+    <main className="container flex min-h-screen   py-4">
+      <UserLists />
+      <AllMatchInfos />
+    </main>
   );
 }

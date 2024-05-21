@@ -1,0 +1,4 @@
+.showMatcher {
+  display: flex;
+  flex-direction: column;
+}

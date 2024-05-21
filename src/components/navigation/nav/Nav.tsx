@@ -54,8 +54,10 @@ const Nav = () => {
     <article className={"flex items-center h-full"}>
       <div className="mr-9 flex justify-center items-center h-full">
         <Link
-          href={""}
-          className={`flex justify-center items-center gap-x-2 ${style.linkItem} `}
+          href={"/favorites"}
+          className={`flex justify-center items-center gap-x-2 ${
+            style.linkItem
+          } ${pathName === "/favorites" ? style.active : ""} `}
         >
           <Image src={"/images/nav/fav.svg"} width={21} height={20} alt="fav" />
           <h4>FAVORITES</h4>
