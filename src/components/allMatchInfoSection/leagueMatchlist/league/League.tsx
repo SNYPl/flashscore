@@ -1,7 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import style from "./style.module.css";
-import { EmptyFavouriteStarIcon, FavouriteStartIcon } from "@/common/svg/home";
+import Link from "next/link";
+import {
+  EmptyFavouriteStarIcon,
+  FavouriteStartIcon,
+  LeagueArrowIcon,
+} from "@/common/svg/home";
+import Image from "next/image";
 
 const Match = ({
   homeTeam,
@@ -18,15 +24,37 @@ const Match = ({
   status: any;
   showMatches: boolean;
 }) => (
-  <div>
-    <p>
-      <strong>{homeTeam}</strong> vs <strong>{awayTeam}</strong>
-    </p>
-    <p>
-      Score: {homeScore} - {awayScore}
-    </p>
-    <p>Status: {status}</p>
-  </div>
+  <section className={`flex justify-between items-center ${style.match}`}>
+    <article className={`flex  p-2 items-center`}>
+      <div
+        className={`flex items-center justify-center mr-7 ${style.starIcon}`}
+      >
+        <EmptyFavouriteStarIcon />
+      </div>
+      <div className="mr-7">
+        <h4>15:00</h4>
+      </div>
+      <div className={`flex items-center flex-col ${style.matchesItems}`}>
+        <div className="flex  flex-row mb-1">
+          <p className="mr-2">
+            <Image src="images/club.svg" alt="club" width={16} height={16} />
+          </p>
+          <p>Arsenal</p>
+        </div>
+        <div className="flex  flex-row mb-1">
+          <p className="mr-2">
+            <Image src="images/club.svg" alt="club" width={16} height={16} />
+          </p>
+          <p>Everton</p>
+        </div>
+      </div>
+    </article>
+    <div
+      className={`flex ${style.moreBtn} px-2 py-1 items-center justify-center`}
+    >
+      <Link href={"#"}>MORE INFO</Link>
+    </div>
+  </section>
 );
 
 const League = () => {
@@ -63,13 +91,43 @@ const League = () => {
   ];
   return (
     <section className={``}>
-      <div>
-        <EmptyFavouriteStarIcon />
-        <h2>ARGENTINA</h2>
-        <h3>Liga Profesional</h3>
-        <button onClick={() => setShowMatches(!showMatches)}>
-          Display Matches (0)
-        </button>
+      <article>
+        <div className={`flex justify-between ${style.premierTitle} p-2`}>
+          <div className={`flex items-center `}>
+            <div className={`mr-3 cursor-pointer ${style.starIcon}`}>
+              <EmptyFavouriteStarIcon />
+            </div>
+            <Image
+              src="/images/userSection/flag.svg"
+              alt="flag"
+              width={18}
+              height={13}
+            />
+            <h2 className="ml-2">ENGLAND:</h2>
+            <Link href={"#"} className="mr-2">
+              PREMIER LEAGUE
+            </Link>
+          </div>
+          <button
+            onClick={() => setShowMatches(!showMatches)}
+            className={`flex items-center gap-x-2 ${style.showMatchesBtn}`}
+          >
+            {!showMatches ? (
+              <span className={`${style.displayText}`}>
+                Display Matches (0)
+              </span>
+            ) : (
+              <span className={`${style.standings}`}>Standings</span>
+            )}
+            <span
+              className={`${style.arrowIconBtn} ${
+                showMatches ? style.arrowIconRotate : ""
+              }`}
+            >
+              <LeagueArrowIcon />
+            </span>
+          </button>
+        </div>
         <article className={`${showMatches ? style.showMatcher : "hidden"}`}>
           {matches.map((match, index) => (
             <Match
@@ -83,7 +141,7 @@ const League = () => {
             />
           ))}
         </article>
-      </div>
+      </article>
     </section>
   );
 };

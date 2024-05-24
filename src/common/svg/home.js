@@ -155,3 +155,33 @@ export const FavouriteStartIcon = () => (
     />
   </svg>
 );
+
+export const LeagueArrowIcon = () => (
+  <svg
+    width="10"
+    height="5"
+    viewBox="0 0 10 5"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M5 1.17686L0.666918 5L0 4.41157L5 2.38419e-07L10 4.41157L9.33308 5L5 1.17686Z"
+      fill="#555E61"
+    />
+  </svg>
+);
+
+export const PredictionStart = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 18 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M18 6.88966H11.13L9 0L6.87 6.88966H0L5.55 11.1414L3.45 18L9 13.7483L14.55 18L12.42 11.1103L18 6.88966Z"
+      fill="#FF9431"
+    />
+  </svg>
+);

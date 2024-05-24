@@ -14,12 +14,13 @@ const MatchNavigation = () => {
   ];
   return (
     <section className={`flex items-center gap-x-2 mt-3`}>
-      {filterLinks.map((el) => (
+      {filterLinks.map((el, id) => (
         <div
           className={`${
             selected === el.title ? style.selected : ""
           } cursor-pointer ${style.navLink}`}
           onClick={() => setSelected(el.title)}
+          key={id}
         >
           <p>{el.title}</p>
         </div>

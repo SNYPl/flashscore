@@ -1,0 +1,24 @@
+.prediction {
+  max-width: 252px;
+}
+
+.predictionItem {
+  border-radius: 10px;
+}
+
+.seeAlLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #dee1e5;
+  padding: 14px;
+}
+
+.seeAlLink a {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.seeAlLink a:hover {
+  color: #0092c1;
+}

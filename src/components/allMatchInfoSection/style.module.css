@@ -1,3 +1,10 @@
 .events {
+  max-width: 687px;
+}
+
+.ad {
   max-width: 688px;
+}
+.ad img {
+  border-radius: 10px;
 }

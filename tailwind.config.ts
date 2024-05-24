@@ -21,6 +21,8 @@ const config: Config = {
       "border-color": "border-color: #E0E1E2",
       white: "#fff",
       "gey-league": "#7F8385",
+      "prediction-color": "#00141E",
+      "prediction-team-title": "#555E61",
     },
   },
   plugins: [],

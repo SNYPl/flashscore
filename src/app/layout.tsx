@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/header/Header";
 import Advertisement from "@/components/advertisement/Advertisement";
 import Navigation from "@/components/navigation/Navigation";
+import Footer from "@/components/footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,11 @@ export default function RootLayout({
           <Navigation />
         </header>
         {children}
+        <footer className="w-full bg-white mt-5">
+          <div className="container">
+            <Footer />
+          </div>
+        </footer>
       </body>
     </html>
   );

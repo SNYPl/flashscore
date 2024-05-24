@@ -1,0 +1,31 @@
+.footermenu {
+  width: 18%;
+}
+
+.footerMenuTitle {
+  padding-bottom: 9px;
+  border-bottom: 1px solid #eeeeee;
+  margin-bottom: 4px;
+}
+
+.ball {
+  border-radius: 50%;
+  background-color: #0092c1;
+  width: 12px;
+  height: 12px;
+  display: block;
+  margin-right: 6px;
+}
+
+.footerMenuTitle h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #001e28;
+}
+
+.listItem a {
+  color: #001e28;
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 30px;
+}

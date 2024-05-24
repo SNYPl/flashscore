@@ -1,0 +1,7 @@
+.infoText p {
+  color: #555e61;
+}
+
+.infoText p:first-child {
+  margin-bottom: 2px;
+}

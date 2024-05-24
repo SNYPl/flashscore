@@ -9,6 +9,7 @@ const Advertisement: React.FC = () => {
         alt="AD"
         width={1180}
         height={100}
+        className="max-w-full"
       />
     </section>
   );
