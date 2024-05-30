@@ -1,6 +1,5 @@
 import React from "react";
-import style from "./style.module.css";
-import League from "./league/League";
+import League from "./matchLeague/MatchLeague";
 
 const MatchLists = () => {
   return (

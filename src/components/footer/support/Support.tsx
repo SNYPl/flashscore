@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import style from "./style.module.css";
 import Image from "next/image";
@@ -33,7 +32,7 @@ const supportImages = [
 const Support = () => {
   return (
     <section
-      className={`${style.support} w-full flex gap-x-9 items-center mt-7`}
+      className={`${style.support} w-full flex gap-x-9 items-center mt-7 container`}
     >
       {supportImages.map((el, id) => (
         <Image

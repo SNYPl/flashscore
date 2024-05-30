@@ -57,7 +57,7 @@ const Match = ({
   </section>
 );
 
-const League = () => {
+const MatchLeague = () => {
   const [showMatches, setShowMatches] = useState(false);
   const matches = [
     {
@@ -146,4 +146,4 @@ const League = () => {
   );
 };
 
-export default League;
+export default MatchLeague;

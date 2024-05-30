@@ -11,15 +11,15 @@ const InfoText = () => {
         famous: LaLiga, Serie A, Bundesliga, UEFA Champions League and also
         other leagues such as Saudi Pro League or MLS. Follow all the latest
         football results on Flashscore.com where you can find previews of the
-        football matches, detailed statistics (shots on goal, ball possesion,
-        corner stats, yellow and red cards, fouls etc.), odds comparison, H2H,
+        football matches, detailed statistics shots on goal, ball possesion,
+        corner stats, yellow and red cards, fouls etc., odds comparison, H2H,
         lineups, live commentary, match report, transfers, news or video
         highlights. In addition to football scores, football news and transfer
-        news & rumors you can also follow more than 30+ sports (tennis live,
+        news & rumors you can also follow more than 30+ sports tennis live,
         basketball scores, badminton results - complete list of sports can be
-        found in the Live scores section). Find all today's/tonight's football
+        found in the Live scores section. Find all todays/tonights football
         scores on Flashscore.com. The football livescore service is real time,
-        you don't need to refresh it.
+        you dont need to refresh it.
       </p>
       <p className="text-xs">
         EPL 2024 live on Flashscore.com! Upcoming matches: 11.05. Fulham -

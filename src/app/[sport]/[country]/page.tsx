@@ -1,6 +1,7 @@
 import UserLists from "@/components/userLists/UserLists";
 import AllMatchInfos from "@/components/allMatchInfoSection/AllMatchInfos";
 import Predictions from "@/components/predictions/Predictions";
+import CountryLeague from "@/components/CountryLigue/CountryLeague";
 
 export default function Home() {
   return (

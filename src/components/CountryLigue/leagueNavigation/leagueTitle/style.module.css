@@ -1,0 +1,46 @@
+.leagueTitle {
+  padding-bottom: 15px;
+}
+
+.img {
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #dfdfdf;
+  border-radius: 10px;
+  margin-right: 18px;
+}
+
+.title span {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+}
+
+.title span::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: #0092c1;
+  top: 0;
+  left: 0;
+  border-radius: 50px;
+  opacity: 12%;
+}
+
+.title h3 {
+  font-size: 17px;
+  color: #000;
+  font-weight: bold;
+}
+
+.title p {
+  color: #555e61;
+  font-weight: 600;
+  font-size: 13px;
+}

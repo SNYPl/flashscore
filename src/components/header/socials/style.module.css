@@ -17,3 +17,33 @@
 .blitz:hover {
   border-color: #7ba4b1;
 }
+
+.modalBtn {
+  background: none;
+  border: none;
+}
+
+.supportItems {
+  flex-direction: column;
+  border-top: 1px solid #e0e3e9;
+}
+
+.itemOne {
+  border-bottom: 1px solid #e0e3e9;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.itemTwo div:first-child,
+.itemOne div:first-child {
+  border-right: 1px solid #e0e3e9;
+}
+
+.itemTwo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.modalBody {
+  padding: 0 !important;
+}

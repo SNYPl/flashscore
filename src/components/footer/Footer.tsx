@@ -14,7 +14,7 @@ const Footer = () => {
   ];
   return (
     <section className={`${style.footer}  mt-5 bg-white pt-9`}>
-      <div className={`flex gap-x-6 ${style.footerItem}`}>
+      <div className={`flex gap-x-6 ${style.footerItem} container`}>
         <FooterMenu title={"FOOTBALL"} menuItems={menuItem} />{" "}
         <FooterMenu title={"TENNIS"} menuItems={menuItem} />
       </div>

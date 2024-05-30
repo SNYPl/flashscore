@@ -78,9 +78,8 @@ const DatePicker = ({
             const dayWeek = dayOfWeek.toUpperCase();
 
             return (
-              <li>
+              <li key={index}>
                 <button
-                  key={index}
                   className={`${styles.dateOption} ${
                     index === activeIndex ? styles.active : ""
                   }`}
