@@ -21,7 +21,7 @@ const PinnedLeagues = () => {
         >
           <Link href="/" className="flex items-center gap-x-2">
             <Image
-              src="/images/userSection/flag.svg"
+              src="/images/userSection/Flag.svg"
               alt="flag"
               width={18}
               height={13}
@@ -39,7 +39,7 @@ const PinnedLeagues = () => {
         >
           <Link href="/" className="flex items-center gap-x-2">
             <Image
-              src="/images/userSection/flag.svg"
+              src="/images/userSection/Flag.svg"
               alt="flag"
               width={18}
               height={13}

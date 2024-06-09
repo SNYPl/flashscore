@@ -98,7 +98,7 @@ const MatchLeague = () => {
               <EmptyFavouriteStarIcon />
             </div>
             <Image
-              src="/images/userSection/flag.svg"
+              src="/images/userSection/Flag.svg"
               alt="flag"
               width={18}
               height={13}

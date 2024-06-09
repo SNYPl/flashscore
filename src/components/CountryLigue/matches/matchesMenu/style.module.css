@@ -1,4 +1,16 @@
-.countryLeague {
-  max-width: 687px;
-  width: 100%;
+.menu li {
+  background-color: #eeeeee;
+  color: #555e61;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+.menu li a {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.menu .activeMenu {
+  background-color: #0092c1;
+  color: #fff;
 }

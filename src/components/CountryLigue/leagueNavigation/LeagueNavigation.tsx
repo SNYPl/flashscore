@@ -3,7 +3,6 @@ import style from "./style.module.css";
 import LeagueTitle from "./leagueTitle/LeagueTitle";
 import LeagueMenu from "./menu/LeagueMenu";
 import Todaymatches from "./todayMatches/Todaymatches";
-import Matches from "../matches/Matches";
 import ParamInfo from "@/components/paramInfo/ParamInfo";
 import LatestScores from "./latestScores/LatestScores";
 import ScheduledMatches from "./scheduledMatches/ScheduledMatches";
@@ -21,7 +20,6 @@ const LeagueNavigation = () => {
       <Todaymatches />
       <LatestScores />
       <ScheduledMatches />
-      <Matches />
     </section>
   );
 };
