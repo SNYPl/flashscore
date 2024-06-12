@@ -6,16 +6,20 @@
   position: relative;
 }
 
-.clubmatches .active {
-  color: #0092c1;
+.nav button {
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  background-color: #eeeeee;
+  color: #555e61;
+  font-weight: 600;
 }
 
-.active::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 3px;
+.nav .active {
   background-color: #0092c1;
-  top: 32px;
-  left: 0;
+  color: #fff;
+}
+
+.selector div {
+  width: 100% !important;
 }

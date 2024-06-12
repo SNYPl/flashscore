@@ -7,9 +7,14 @@ import { SoccerIcon, PredictionIcon } from "@/common/svg/navigation";
 
 const Navigation = () => {
   const pathName = usePathname();
+  const matchRouteHandler = pathName.includes("match");
 
   return (
-    <section className={"flex items-center justify-center gap-x-5 h-full"}>
+    <section
+      className={`flex items-center justify-center gap-x-5 h-full ${
+        matchRouteHandler ? "hide" : ""
+      }`}
+    >
       <div
         className={`${pathName === "/" ? style.active : ""} ${
           style.itemContainer

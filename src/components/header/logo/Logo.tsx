@@ -3,7 +3,7 @@ import { LogoImg } from "@/common/svg/logo";
 import Image from "next/image";
 import Link from "next/link";
 
-const Logo = () => {
+const Logo = ({ matchRouteHandler }: { matchRouteHandler: boolean }) => {
   return (
     <article>
       <Link href={"/"}>

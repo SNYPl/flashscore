@@ -39,7 +39,7 @@ const ClubInfo: React.FC<infoProps> = ({ setActiveSection, activeMenu }) => {
         <section className={`${style.clubMenu} p-4`}>
           <ul className="flex items-center gap-x-4">
             {menu.map((el, index) => (
-              <li key={index} onClick={() => setActiveSection("el.title")}>
+              <li key={index} onClick={() => setActiveSection(el.title)}>
                 <Link
                   href={el.href}
                   className={activeMenu === el.title ? style.active : ""}

@@ -29,6 +29,15 @@ body {
   margin: 0 auto;
 }
 
+.matchContainer {
+  max-width: 688px;
+  margin: 0 auto;
+}
+
 img {
   height: 100%;
+}
+
+.hide {
+  display: none;
 }

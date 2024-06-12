@@ -1,0 +1,59 @@
+.nav button {
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  background-color: #eeeeee;
+  color: #555e61;
+  font-weight: 600;
+}
+
+.nav .active {
+  background-color: #0092c1;
+  color: #fff;
+}
+
+.selector div {
+  width: 100% !important;
+}
+.infoItem {
+  border-bottom: 1px solid #e5e5e7;
+}
+
+.infoItemSection {
+  border: 1px solid #e5e5e7;
+  border-radius: 10px;
+}
+
+.infoIndex {
+  border: 1px solid #e5e5e7;
+  border-radius: 5px;
+  color: #505658;
+  font-size: 12.5px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 13px;
+}
+.infoTitle {
+  font-size: 13px;
+  color: #505658;
+}
+
+.infoNumber {
+  justify-self: flex-end;
+  font-size: 13px;
+  color: #505658;
+}
+
+.seeAllBtn {
+  padding-bottom: 16px;
+}
+
+.seeAllBtn button {
+  font-size: 12px;
+  font-weight: bold;
+  color: #143f36;
+  border-bottom: 1px solid #143f36;
+}

@@ -12,9 +12,9 @@ const ClubMatches = () => {
   };
 
   return (
-    <article className={`${style.clubmatches} bg-white rounded-lg`}>
+    <article className={`${style.clubmatches} bg-white rounded-lg p-4`}>
       <div>
-        <div>
+        <div className={`flex items-center mb-4 gap-x-3 ${style.nav}`}>
           <button
             className={`${active === "FIXTURES" ? style.active : ""}`}
             onClick={() => setActive("FIXTURES")}
@@ -28,16 +28,17 @@ const ClubMatches = () => {
             RESULTS
           </button>
         </div>
-        <div>
-          <Space wrap>
+        <div className="w-full mb-4">
+          <Space wrap className={style.selector} style={{ width: "100%" }}>
             <Select
-              defaultValue="lucy"
-              style={{ width: 120 }}
+              defaultValue="all"
+              style={{ width: "100%" }}
               onChange={handleChange}
               options={[
                 { value: "all", label: "All Competentions" },
                 { value: "not all", label: "not ALL" },
               ]}
+              className={style.selector}
             />
           </Space>
         </div>

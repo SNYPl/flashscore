@@ -37,13 +37,13 @@ const Match = ({
       <div className={`flex items-center flex-col ${style.matchesItems}`}>
         <div className="flex  flex-row mb-1">
           <p className="mr-2">
-            <Image src="images/club.svg" alt="club" width={16} height={16} />
+            <Image src="/images/club.svg" alt="club" width={16} height={16} />
           </p>
           <p>Arsenal</p>
         </div>
         <div className="flex  flex-row mb-1">
           <p className="mr-2">
-            <Image src="images/club.svg" alt="club" width={16} height={16} />
+            <Image src="/images/club.svg" alt="club" width={16} height={16} />
           </p>
           <p>Everton</p>
         </div>

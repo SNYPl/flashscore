@@ -1,0 +1,42 @@
+.teamInfo {
+  padding-top: 20px;
+  border-top: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+}
+.infoImage {
+  padding: 14px;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  margin-bottom: 6px;
+}
+
+.infoItem h3 {
+  font-size: 14px;
+  color: #001e28;
+}
+
+.infoTime p {
+  font-weight: 600;
+  font-size: 13px;
+  color: #5a5a5a;
+}
+
+.infoTime {
+  color: #00141e;
+  font-weight: 800;
+  text-align: center;
+}
+
+.infoText {
+  margin-bottom: 16px;
+}
+
+.infoText p {
+  font-size: 11px;
+  color: #555e61;
+  background-color: #eeeeee;
+  border-radius: 4px;
+  padding: 8px 13px;
+  display: flex;
+  align-items: center;
+}

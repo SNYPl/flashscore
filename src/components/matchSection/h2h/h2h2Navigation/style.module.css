@@ -1,0 +1,26 @@
+.navLink {
+  padding: 5px 10px;
+  background-color: #eeeeee;
+  border-radius: 10px;
+}
+
+.navLink:hover {
+  background-color: #0092c1;
+}
+
+.navLink:hover p {
+  color: #fff;
+}
+
+.navLink p {
+  font-size: 13px;
+  color: #555e61;
+  font-weight: 600;
+}
+
+.selected {
+  background-color: #0092c1;
+}
+.selected p {
+  color: #fff;
+}

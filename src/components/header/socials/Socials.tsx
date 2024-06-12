@@ -5,6 +5,7 @@ import style from "./style.module.css";
 import { Facebook, Twitter, Instagram, Email } from "@/common/svg/socials";
 import Image from "next/image";
 import { Modal } from "antd";
+import { usePathname } from "next/navigation";
 
 const socialArray = [
   { component: <Facebook />, w: 9, h: 15, alt: "fb", href: "" },
@@ -15,6 +16,8 @@ const socialArray = [
 
 const Socials = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const pathName = usePathname();
+  const matchRouteHandler = pathName.includes("match");
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -25,7 +28,11 @@ const Socials = () => {
   };
 
   return (
-    <section className={"flex items-center justify-center gap-x-8"}>
+    <section
+      className={`flex items-center justify-center gap-x-8 ${
+        matchRouteHandler ? "hide" : ""
+      }`}
+    >
       <div
         className={`flex justify-between items-center gap-x-5 ${style.socialItems}`}
       >

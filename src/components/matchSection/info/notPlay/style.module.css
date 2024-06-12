@@ -1,0 +1,60 @@
+.formInfo {
+  margin-bottom: 8px;
+}
+.title {
+  background-color: #eeeeee;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.title p {
+  font-size: 12px;
+  color: #505658;
+  font-weight: 600;
+}
+
+.playList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 15px;
+}
+
+.flagBorder {
+  border: 1px solid #e8e8e8;
+  padding: 7px 6px 8px 6px;
+}
+
+.player h2 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #001e28;
+}
+.player p {
+  color: #73787a;
+  font-size: 11px;
+}
+
+.even {
+  justify-content: end;
+  flex-direction: row-reverse;
+}
+
+.even .flag {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+.matchInfoItem {
+  display: flex;
+}
+
+.matchInfoItem h4 {
+  margin-left: 10px;
+  color: #505658;
+  font-size: 14px;
+}
+.matchInfoItem h3 {
+  font-weight: bold;
+  font-size: 14px;
+  color: #001e28;
+}

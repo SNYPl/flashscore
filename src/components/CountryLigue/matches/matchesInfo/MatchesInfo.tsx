@@ -26,7 +26,7 @@ const MatchesInfo = () => {
           </li>
         ))}
       </ul>
-      <article className="">
+      <article>
         <div
           className={`${style.infoTableTitle} flex items-center  p-2 gap-x-2`}
         >
