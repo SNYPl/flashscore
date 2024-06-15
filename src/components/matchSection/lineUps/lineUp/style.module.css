@@ -1,0 +1,86 @@
+.stadium {
+  background: url("/images/match/stadium.jpg");
+  width: 100%;
+  /* height: 100%; */
+  height: 1155px;
+  background-size: cover;
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.title {
+  background-color: #eeeeee;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.title p {
+  color: #505658;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.teamOne {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.teamTwo {
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.teamTitle {
+  font-weight: bold;
+  font-size: 14px;
+  color: #fff;
+  padding-left: 22px;
+  letter-spacing: 1px;
+}
+
+.teamTwoPlayers,
+.teamOnePlayers {
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+  justify-items: center;
+  align-items: center;
+}
+
+.teamTwoPlayers {
+  flex-direction: column-reverse;
+}
+
+.line {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.player {
+  width: 45px;
+  height: 45px;
+  background-color: #003546;
+  color: #fff;
+  text-align: center;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.teamTwo .player {
+  background-color: #fff;
+  color: #003546;
+}

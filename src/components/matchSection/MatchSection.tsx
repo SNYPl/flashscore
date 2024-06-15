@@ -11,6 +11,7 @@ import Image from "next/image";
 
 const MatchSection: React.FC = () => {
   const [activeMenu, setActiveSection] = useState("INFO");
+
   return (
     <section className={` flex flex-col `}>
       <TeamMatchInfo />
@@ -21,6 +22,8 @@ const MatchSection: React.FC = () => {
       {activeMenu === "TABLE" && <MatchesInfo />}
 
       {activeMenu === "H2H" && <H2h />}
+
+      {activeMenu === "LINE-UPS" && <LineUps />}
 
       <div className="p-3">
         <Image src="/images/ad/matchAd.png" alt="ad" width={658} height={100} />

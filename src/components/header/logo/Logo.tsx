@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Logo = ({ matchRouteHandler }: { matchRouteHandler: boolean }) => {
   return (
-    <article>
+    <article className={`${matchRouteHandler ? " pl-4" : ""}`}>
       <Link href={"/"}>
         <Image
           src={"/images/header/logo.svg"}

@@ -1,0 +1,60 @@
+.injuries {
+  margin-bottom: 8px;
+}
+.title {
+  background-color: #eeeeee;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 15px;
+  margin-top: 21px;
+}
+
+.title p {
+  color: #505658;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.playList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 15px;
+}
+
+.player h2 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #001e28;
+}
+.player p {
+  color: #73787a;
+  font-size: 11px;
+}
+
+.even {
+  justify-content: end;
+  flex-direction: row-reverse;
+}
+
+.even .flag {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+.coaches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 10px;
+}
+
+.flagBorder {
+  border: 1px solid #e8e8e8;
+  padding: 7px 6px 8px 6px;
+  border-radius: 100px;
+  width: 31px;
+  height: 31px;
+}

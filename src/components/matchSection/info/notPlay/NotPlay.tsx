@@ -11,10 +11,11 @@ const NotPlay: React.FC = () => {
       <div className={`${style.title} mb-4 `}>
         <p>WILL NOT PLAY</p>
       </div>
-      <article className={`${style.playList}  mb-4`}>
+      <div className={`${style.playList}  mb-4`}>
         {arrayOf6.map((el, id) => (
           <div
             className={` flex items-center ${id % 2 === 1 ? style.even : ""}`}
+            key={id}
           >
             <div className={`${style.flag} mr-2 `}>
               <div className={`${style.flagBorder} `}>
@@ -27,7 +28,7 @@ const NotPlay: React.FC = () => {
             </div>
           </div>
         ))}
-      </article>
+      </div>
 
       <div className={`${style.title} mb-4 `}>
         <p>MATCH INFORMATION</p>
