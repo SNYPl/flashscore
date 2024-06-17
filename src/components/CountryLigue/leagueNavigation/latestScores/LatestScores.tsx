@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./style.module.css";
-// import LeagueMatch from "@/components/leagueMatch/LeagueMatch";
+import LeagueMatch from "@/components/leagueMatch/LeagueMatch";
 
 import { EmptyFavouriteStarIcon } from "@/common/svg/home";
 import Image from "next/image";
@@ -33,10 +33,10 @@ const LatestScores: React.FC = ({}) => {
           <span className={`${style.standings}`}>Standings</span>
         </button>
       </div>
-      {/* 
+
       <LeagueMatch showMoreBtn={false} />
       <LeagueMatch showMoreBtn={false} />
-      <LeagueMatch showMoreBtn={false} /> */}
+      <LeagueMatch showMoreBtn={false} />
       <div className={style.moreMatches}>
         <button>Show More Matches</button>
       </div>

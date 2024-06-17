@@ -1,9 +1,9 @@
 import React from "react";
 import style from "./style.module.css";
-// import LeagueMatch from "@/components/leagueMatch/LeagueMatch";
 import { EmptyFavouriteStarIcon } from "@/common/svg/home";
 import Image from "next/image";
 import Link from "next/link";
+import LeagueMatch from "@/components/leagueMatch/LeagueMatch";
 
 const ScheduledMatches: React.FC = ({}) => {
   return (
@@ -33,9 +33,9 @@ const ScheduledMatches: React.FC = ({}) => {
         </button>
       </div>
 
-      {/* <LeagueMatch showMoreBtn />
       <LeagueMatch showMoreBtn />
-      <LeagueMatch showMoreBtn /> */}
+      <LeagueMatch showMoreBtn />
+      <LeagueMatch showMoreBtn />
       <div className={style.moreMatches}>
         <button>Show More Matches</button>
       </div>
