@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./style.module.css";
-import LeagueMatch from "@/components/leagueMatch/LeagueMatch";
+import LeagueMatch from "../../../leagueMatch/LeagueMatch";
 import {
   EmptyFavouriteStarIcon,
   FavouriteStartIcon,
