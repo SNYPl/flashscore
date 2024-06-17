@@ -2,11 +2,7 @@ import React from "react";
 import style from "./style.module.css";
 import LeagueMatch from "@/components/leagueMatch/LeagueMatch";
 
-import {
-  EmptyFavouriteStarIcon,
-  FavouriteStartIcon,
-  LeagueArrowIcon,
-} from "@/common/svg/home";
+import { EmptyFavouriteStarIcon } from "@/common/svg/home";
 import Image from "next/image";
 import Link from "next/link";
 

@@ -10,7 +10,7 @@ interface props {
 }
 
 const LeagueMatch: React.FC<props> = ({ showMoreBtn }) => {
-  const [showMatches, setShowMatches] = useState(false);
+  // const [showMatches, setShowMatches] = useState(false);
 
   return (
     <section className={` items-center ${style.match}`}>
