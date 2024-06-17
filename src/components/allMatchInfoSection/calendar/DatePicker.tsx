@@ -37,7 +37,7 @@ const DatePicker = ({
 
   useEffect(() => {
     onDateChange(selectedDate);
-  }, [selectedDate]);
+  }, [selectedDate, onDateChange]);
 
   const handleNavigation = (direction: any) => {
     const options = generateDateOptions();

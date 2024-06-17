@@ -42,6 +42,7 @@ const Injuries: React.FC = () => {
               className={`${style.coach}  flex items-center ${
                 id % 2 === 1 ? style.even : ""
               }`}
+              key={id}
             >
               <div className={`${style.flag} mr-2 `}>
                 <div className={`${style.flagBorder} `}>

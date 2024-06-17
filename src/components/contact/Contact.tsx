@@ -60,8 +60,8 @@ const Contact = () => {
             </p>
           </div>
           <div className="flex gap-x-3 mb-7">
-            {socLinks.map((el) => (
-              <Link href={el.href} target="_blank">
+            {socLinks.map((el, id) => (
+              <Link href={el.href} target="_blank" key={id}>
                 {el.icon}
               </Link>
             ))}

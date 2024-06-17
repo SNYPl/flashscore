@@ -22,10 +22,11 @@ const PlayerStats = () => {
     <article className={`${style.playerStats} bg-white rounded-lg p-4 `}>
       <div>
         <div className={`flex items-center mb-4 gap-x-3 ${style.nav}`}>
-          {menu.map((el) => (
+          {menu.map((el, id) => (
             <button
               className={`${active === el ? style.active : ""}`}
               onClick={() => setActive(el)}
+              key={id}
             >
               {el}
             </button>
