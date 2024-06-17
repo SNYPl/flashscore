@@ -3,7 +3,7 @@ import style from "./style.module.css";
 import { EmptyFavouriteStarIcon } from "@/common/svg/home";
 import Image from "next/image";
 import Link from "next/link";
-import LeagueMatch from "@/components/leagueMatch/LeagueMatch";
+import { LeagueMatch } from "@/components/leagueMatch/LeagueMatch";
 
 const Todaymatches: React.FC = ({}) => {
   return (
@@ -36,7 +36,7 @@ const Todaymatches: React.FC = ({}) => {
       <LeagueMatch showMoreBtn />
       <LeagueMatch showMoreBtn />
       <LeagueMatch showMoreBtn />
-      <div>
+      <div className={style.moreMatches}>
         <button>Show More Matches</button>
       </div>
     </section>

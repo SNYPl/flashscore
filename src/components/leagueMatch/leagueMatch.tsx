@@ -8,7 +8,7 @@ interface props {
   showMoreBtn: boolean;
 }
 
-const LeagueMatch: React.FC<props> = ({ showMoreBtn }) => {
+export const LeagueMatch: React.FC<props> = ({ showMoreBtn }) => {
   // const [showMatches, setShowMatches] = useState(false);
 
   return (
@@ -57,4 +57,4 @@ const LeagueMatch: React.FC<props> = ({ showMoreBtn }) => {
   );
 };
 
-export default LeagueMatch;
+// export default LeagueMatch;
