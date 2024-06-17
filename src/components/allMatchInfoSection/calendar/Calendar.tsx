@@ -35,9 +35,9 @@ const Calendar = () => {
     const calendarOptions = calendarOptionsRef.current;
     const dateDiv = calendarOptions?.children[index] as HTMLDivElement;
 
-    if (dateDiv) {
-      dateDiv.scrollIntoView({ behavior: "smooth", inline: "center" });
-    }
+    // if (dateDiv) {
+    //   dateDiv.scrollIntoView({ behavior: "smooth", inline: "center" });
+    // }
   };
 
   const handleDateChange = (date: any) => {

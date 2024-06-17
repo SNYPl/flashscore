@@ -48,7 +48,11 @@ const League: React.FC<props> = ({ showMoreBtn }) => {
           showMoreBtn ? style.moreBtn : ""
         } px-2 py-1 items-center justify-center`}
       >
-        {showMoreBtn && <Link href={"#"}>MORE INFO</Link>}
+        {showMoreBtn && (
+          <Link href={"/match/Arsenal"} target="_blank">
+            MORE INFO
+          </Link>
+        )}
       </div>
     </section>
   );

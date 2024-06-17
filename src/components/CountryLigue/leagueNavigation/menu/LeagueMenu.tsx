@@ -7,10 +7,10 @@ const LeagueMenu = () => {
   const [activeMenu, setActiveMenu] = useState("SUMMARY");
 
   const menu = [
-    { title: "SUMMARY", href: "/" },
-    { title: "RESULTS", href: "/" },
-    { title: "FIXTURES", href: "/" },
-    { title: "STANDINGS", href: "/" },
+    { title: "SUMMARY", href: "#" },
+    { title: "RESULTS", href: "#" },
+    { title: "FIXTURES", href: "#" },
+    { title: "STANDINGS", href: "#" },
   ];
   return (
     <section className={`${style.LeagueMenu} p-4`}>

@@ -52,7 +52,9 @@ const Match = ({
     <div
       className={`flex ${style.moreBtn} px-2 py-1 items-center justify-center`}
     >
-      <Link href={"#"}>MORE INFO</Link>
+      <Link href={"/match/Villarreal"} target="_blank">
+        MORE INFO
+      </Link>
     </div>
   </section>
 );
@@ -104,7 +106,7 @@ const MatchLeague = () => {
               height={13}
             />
             <h2 className="ml-2">ENGLAND:</h2>
-            <Link href={"#"} className="mr-2">
+            <Link href={"/football/england/premier-league"} className="mr-2">
               PREMIER LEAGUE
             </Link>
           </div>

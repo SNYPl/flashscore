@@ -18,7 +18,7 @@ const AllMatchInfos = () => {
         <Image
           src="/images/home/baner(688).png"
           alt="ad"
-          width={688}
+          width={704}
           height={100}
           className="w-full"
         />

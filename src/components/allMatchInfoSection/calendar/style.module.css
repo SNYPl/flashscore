@@ -4,6 +4,7 @@
   padding: 5px;
   display: flex;
   align-items: center;
+  user-select: none;
 }
 
 .calendarOptions {

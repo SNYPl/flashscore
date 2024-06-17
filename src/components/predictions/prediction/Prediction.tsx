@@ -49,7 +49,7 @@ const Prediction = ({ border }: { border: boolean }) => {
       <div
         className={`flex justify-center items-center ${style.predictionLink}`}
       >
-        <Link href="#" className={` text-xs`}>
+        <Link href="/prediction" className={` text-xs`}>
           PREDICTION
         </Link>
       </div>

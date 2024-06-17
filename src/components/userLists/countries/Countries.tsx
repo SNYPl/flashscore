@@ -42,7 +42,7 @@ const Countries = () => {
               }`}
             >
               <span className={`${style.blockLink}`}>
-                <Link href="">Superliga</Link>
+                <Link href="/football/algeria/superliga">Superliga</Link>
               </span>
               <span
                 className={`${style.pinIcon} `}

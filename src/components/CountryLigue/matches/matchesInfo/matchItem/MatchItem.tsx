@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./style.module.css";
 import { FlagIcon } from "@/common/svg/flag";
+import Link from "next/link";
 
 interface matchProps {
   id: number;
@@ -21,7 +22,10 @@ const MatchItem: React.FC<matchProps> = ({ id }) => {
         </p>
       </div>
       <div className="flex justify-start items-center font-bold gap-x-2">
-        <FlagIcon /> <h2>Arsenal</h2>
+        <FlagIcon />{" "}
+        <Link href={"/team/arsenal"} className={style.teamLink}>
+          Arsenal
+        </Link>
       </div>
       <p className="flex items-center justify-center font-normal">37</p>
       <p className="flex items-center justify-center font-normal">27</p>

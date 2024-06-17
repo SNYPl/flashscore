@@ -19,7 +19,10 @@ const PinnedLeagues = () => {
         <div
           className={`flex items-center justify-between  mb-2 ${style.league}`}
         >
-          <Link href="/" className="flex items-center gap-x-2">
+          <Link
+            href="/football/england/premier-league"
+            className="flex items-center gap-x-2"
+          >
             <Image
               src="/images/userSection/Flag.svg"
               alt="flag"
@@ -37,7 +40,10 @@ const PinnedLeagues = () => {
         <div
           className={`flex items-center justify-between  mb-2  ${style.league}`}
         >
-          <Link href="/" className="flex items-center gap-x-2">
+          <Link
+            href="/football/england/eredivisie"
+            className="flex items-center gap-x-2"
+          >
             <Image
               src="/images/userSection/Flag.svg"
               alt="flag"

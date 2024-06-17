@@ -22,3 +22,23 @@
 .teams:hover path {
   fill: #d6033f;
 }
+
+.modalTitle {
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+  font-weight: 700;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.modalInputSearch {
+  border: 1px solid #c8cdcd;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.searchSelector .ant-select-selector {
+  border: none !important;
+  outline: none !important;
+}

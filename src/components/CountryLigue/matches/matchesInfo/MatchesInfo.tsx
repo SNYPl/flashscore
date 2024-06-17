@@ -31,7 +31,7 @@ const MatchesInfo = () => {
           className={`${style.infoTableTitle} flex items-center  p-2 gap-x-2`}
         >
           <p className="flex items-center justify-center font-bold">
-            #{" "}
+            #
             <svg
               width="6"
               height="4"

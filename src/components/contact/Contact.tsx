@@ -47,103 +47,112 @@ const Contact = () => {
   };
 
   return (
-    <section className={`${style.contact}  bg-white`}>
-      <div className={style.topHalf}>
-        <div>
-          <h2>Contact Us</h2>
-          <p>
-            do you have questions We are ready to share our experience with you.
-            Write to us, follow us.
-          </p>
-        </div>
-        <div className="flex">
-          {socLinks.map((el) => (
-            <Link href={el.href} target="_blank">
-              {el.icon}
-            </Link>
-          ))}
-        </div>
-        <article className="flex">
-          <div className="flex">
-            <Phone />
-            <p>+995 595 00 00 00 </p>
+    <section className={`${style.contact}  bg-white p-5`}>
+      <div className={` ${style.contactContainer} flex flex-col `}>
+        <div className={`${style.topHalf} flex items-center flex-col pt-14`}>
+          <div className="flex items-center justify-center mb-7 flex-col">
+            <h2 className="font-semibold text-3xl mb-5 text-white">
+              Contact Us
+            </h2>
+            <p className={style.paragraph}>
+              do you have questions We are ready to share our experience with
+              you. Write to us, follow us.
+            </p>
           </div>
-          <div className="flex">
-            <EmailIcon />
-            <p>Info@Score.ge</p>
+          <div className="flex gap-x-3 mb-7">
+            {socLinks.map((el) => (
+              <Link href={el.href} target="_blank">
+                {el.icon}
+              </Link>
+            ))}
           </div>
-        </article>
-      </div>
-      <div className={style.bottomHalf}>
-        <h2>Send a Message</h2>
-
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <article className={`${style.mailInputs}`}>
-            <div className={`${style.nameInput}`}>
-              <input
-                type="text"
-                placeholder="სახელი"
-                {...register("username", {
-                  required: {
-                    value: true,
-                    message: "გრაფა ცარიელია",
-                  },
-                  minLength: {
-                    value: 3,
-                    message: "მინიმუმ 3 ასო",
-                  },
-                })}
-              />
-              {errors.username && (
-                <p className={style.error}>{errors.username.message}</p>
-              )}
+          <article className="flex gap-x-7">
+            <div className="flex gap-x-3 text-white items-center">
+              <Phone />
+              <p className="font-semibold text-xs">+995 595 00 00 00 </p>
             </div>
-            <div className={`${style.mailInput}`}>
-              <input
-                type="text"
-                placeholder="ელ.ფოსტა"
-                id="email"
-                {...register("email", {
-                  // onChange: () => setError(""),
-                  required: {
-                    value: true,
-                    message: "გრაფა ცარიელია",
-                  },
-                  minLength: {
-                    value: 3,
-                    message: "მინიმუმ 3 ასო",
-                  },
-                  pattern: {
-                    value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: "არასწორი ელ.ფოსტის ფორმატი",
-                  },
-                })}
-              />
-              {errors.email && (
-                <p className={style.error}>{errors.email.message}</p>
-              )}
+            <div className="flex  gap-x-3 text-white items-center">
+              <EmailIcon />
+              <p className="font-semibold text-xs">Info@Score.ge</p>
             </div>
           </article>
-          <textarea
-            {...register("message", {
-              required: {
-                value: true,
-                message: "გრაფა ცარიელია",
-              },
-              minLength: {
-                value: 10,
-                message: "მინიმუმ 10 ასო",
-              },
-            })}
-            placeholder="დატოვეთ შეტყობინება.."
-            className={`${style.textAreaInput}`}
-            required
-            rows={6}
-          />
-          <button type="submit" className={`${style.submitBtn}`}>
-            Send
-          </button>
-        </form>
+        </div>
+        <div className={`${style.bottomHalf}  pt-14 pb-16`}>
+          <h2 className="mb-6 text-center">
+            <span>Send a</span> Message
+          </h2>
+
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className={`${style.contactForm}`}
+          >
+            <article className={`${style.mailInputs}`}>
+              <div className={`${style.nameInput}`}>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  {...register("username", {
+                    required: {
+                      value: true,
+                      message: "გრაფა ცარიელია",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "მინიმუმ 3 ასო",
+                    },
+                  })}
+                />
+                {errors.username && (
+                  <p className={style.error}>{errors.username.message}</p>
+                )}
+              </div>
+              <div className={`${style.mailInput}`}>
+                <input
+                  type="text"
+                  placeholder="E-mail"
+                  id="email"
+                  {...register("email", {
+                    // onChange: () => setError(""),
+                    required: {
+                      value: true,
+                      message: "გრაფა ცარიელია",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "მინიმუმ 3 ასო",
+                    },
+                    pattern: {
+                      value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      message: "არასწორი ელ.ფოსტის ფორმატი",
+                    },
+                  })}
+                />
+                {errors.email && (
+                  <p className={style.error}>{errors.email.message}</p>
+                )}
+              </div>
+            </article>
+            <textarea
+              {...register("message", {
+                required: {
+                  value: true,
+                  message: "გრაფა ცარიელია",
+                },
+                minLength: {
+                  value: 10,
+                  message: "მინიმუმ 10 ასო",
+                },
+              })}
+              placeholder="Message.."
+              className={`${style.textAreaInput}`}
+              required
+              rows={6}
+            />
+            <button type="submit" className={`${style.submitBtn}`}>
+              Send
+            </button>
+          </form>
+        </div>
       </div>
     </section>
   );
