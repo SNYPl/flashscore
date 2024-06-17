@@ -3,7 +3,7 @@ import style from "./style.module.css";
 import { EmptyFavouriteStarIcon } from "@/common/svg/home";
 import Image from "next/image";
 import Link from "next/link";
-import { LeagueMatch } from "@/components/leagueMatch/LeagueMatch";
+import { LeagueMatch } from "@/components/matchLeague/LeagueMatch";
 
 const ScheduledMatches: React.FC = ({}) => {
   return (
