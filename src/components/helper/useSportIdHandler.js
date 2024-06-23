@@ -1,7 +1,7 @@
 import { usePathname } from "next/navigation";
 import { sportNavigation } from "@/lib/sportNavigation";
 
-export const sportIdHandler = () => {
+export const useSportIdHandler = () => {
   const pathName = usePathname();
 
   const foundSport = sportNavigation.find((el) => {

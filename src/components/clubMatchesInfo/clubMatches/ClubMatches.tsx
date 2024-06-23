@@ -44,9 +44,7 @@ const ClubMatches = () => {
         </div>
       </div>
 
-      <div>
-        <MatchLeague />
-      </div>
+      <div>{/* <MatchLeague /> */}</div>
     </article>
   );
 };

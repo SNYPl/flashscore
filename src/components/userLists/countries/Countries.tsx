@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { Skeleton } from "antd";
-import { sportIdHandler } from "@/components/helper/sportIdHandler";
+import { useSportIdHandler } from "@/components/helper/useSportIdHandler";
 
 interface League {
   LEAGUE_NAME: string;
@@ -27,7 +27,7 @@ const Countries = () => {
   const [pinActive, setPinActive] = useState(false);
   const allMatch = useSelector((state: any) => state.matchesSlice.allMatches);
   const [countrieShowNumber, setCountrieShowNumber] = useState(50);
-  const sportIdCheck = sportIdHandler();
+  const sportIdCheck = useSportIdHandler();
 
   const options = {
     method: "GET",

@@ -7,9 +7,7 @@ const H2h: React.FC = () => {
   return (
     <section className={`${style.h2h} p-3 pt-0`}>
       <H2hNavigation />
-      <section className={` mt-5`}>
-        <MatchLeague />
-      </section>
+      <section className={` mt-5`}>{/* <MatchLeague /> */}</section>
     </section>
   );
 };

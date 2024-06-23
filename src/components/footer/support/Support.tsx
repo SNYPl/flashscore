@@ -49,14 +49,12 @@ const Support = () => {
       </div>
 
       {supportImages.map((el, id) => (
-        <Link href={"#"}>
+        <Link href={"#"} key={id}>
           <Image
             src={el.src}
             alt={el.alt}
             width={el.width}
             height={el.height}
-            key={id}
-            // className="object-contain"
           />
         </Link>
       ))}
