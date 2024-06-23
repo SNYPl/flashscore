@@ -26,7 +26,6 @@ const DatePicker = ({
   };
 
   const handleDateSelect = (date: any, index: number) => {
-    console.log(date);
     setSelectedDate(date);
     setActiveIndex(index);
     setIsDropdownOpen(false);
@@ -74,16 +73,16 @@ const DatePicker = ({
       {isDropdownOpen && (
         <ul className={styles.dropdown} ref={dropdownRef}>
           {generateDateOptions().map((date: any, index: any) => {
-            const [day, dayOfWeek, month] = date;
+            const { day, dayOfWeek, month, id } = date;
             const dayWeek = dayOfWeek.toUpperCase();
 
             return (
-              <li key={index}>
+              <li key={id}>
                 <button
                   className={`${styles.dateOption} ${
-                    index === activeIndex ? styles.active : ""
+                    id === activeIndex ? styles.active : ""
                   }`}
-                  onClick={() => handleDateSelect(date, index)}
+                  onClick={() => handleDateSelect(date, id)}
                 >
                   {`${day}/${month} ${dayWeek}`}
                 </button>

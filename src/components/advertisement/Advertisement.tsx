@@ -16,7 +16,7 @@ const Advertisement: React.FC = () => {
       <Image
         src="/images/adversitment.jpg"
         alt="AD"
-        width={1180}
+        width={1160}
         height={100}
         className="max-w-full"
       />

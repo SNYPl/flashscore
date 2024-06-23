@@ -1,9 +1,11 @@
-.socialItems svg path {
-  transition: 0.15s ease-in;
+.socialItems a:hover span {
+  background-position: 0px -16px !important;
 }
 
-.socialItems a:hover svg path {
-  fill: #fff;
+.socialItems span {
+  height: 15px;
+  display: block;
+  transition: all 0.3s;
 }
 
 .blitz {
@@ -15,7 +17,36 @@
 }
 
 .blitz:hover {
-  border-color: #7ba4b1;
+  transition: all 0.3s;
+  border: 1px #10708f solid;
+  background-color: rgb(255 255 255 / 6%);
+}
+
+.blitzHover div {
+  transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  width: 200px;
+  height: 50px;
+  border-radius: 100px;
+  line-height: 65px;
+  margin: auto;
+  box-shadow: 0px 0px 10px 1px rgb(43 185 151 / 0%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blitzHover div:hover {
+  box-shadow: 0px 0px 10px 1px rgb(30 147 119 / 30%);
+}
+
+.blitzHover div img {
+  transition: all 0.3s ease-in-out;
+}
+
+.blitzHover div:hover img {
+  transform: scale(1.07);
 }
 
 .modalBtn {
@@ -26,6 +57,17 @@
 .supportItems {
   flex-direction: column;
   border-top: 1px solid #e0e3e9;
+  position: relative;
+}
+
+.supportItems:hover img {
+  filter: saturate(0%);
+  opacity: 60%;
+}
+
+.supportItems img {
+  opacity: 100%;
+  transition: all 0.3s ease-in-out;
 }
 
 .itemOne {
@@ -34,9 +76,28 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.itemOne div,
+.itemTwo div {
+  height: 70px;
+}
+
 .itemTwo div:first-child,
 .itemOne div:first-child {
   border-right: 1px solid #e0e3e9;
+}
+
+.itemTwo div:hover a,
+.itemOne div:hover a {
+  background: rgb(219 226 243 / 30%);
+  transition: all 0.3s ease-in-out;
+  opacity: 100% !important;
+}
+
+.itemTwo div:hover img,
+.itemOne div:hover img {
+  filter: saturate(100%) !important;
+  opacity: 100% !important;
+  transition: all 0.3s ease-in-out;
 }
 
 .itemTwo {
@@ -46,4 +107,8 @@
 
 .modalBody {
   padding: 0 !important;
+}
+
+.wrapper {
+  background-color: rgb(8 20 24 / 80%);
 }

@@ -14,7 +14,7 @@ const Header = () => {
     <section
       className={`${style.header} ${
         matchRouteHandler ? "matchContainer" : ""
-      }   h-20 w-full`}
+      }    w-full`}
     >
       <div className={`container flex justify-between items-center h-full`}>
         <Logo matchRouteHandler={matchRouteHandler} />

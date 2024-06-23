@@ -115,6 +115,27 @@
   fill: #0092c1;
 }
 
+.blockLink {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .blockLink a:hover {
   color: #0092c1;
+}
+
+.showMoreBtn {
+  display: flex;
+  align-items: center;
+  padding: 4px 9px 6px 8px;
+  cursor: pointer;
+}
+
+.showMoreBtn p {
+  font-size: 12.5px;
+  color: #0e1d26;
+  border-bottom: 1px solid #0e1d26;
+  font-weight: 600;
+  margin-right: 8px;
 }

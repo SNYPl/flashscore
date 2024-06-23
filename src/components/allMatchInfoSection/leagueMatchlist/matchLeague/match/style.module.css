@@ -1,0 +1,49 @@
+.match {
+  border-bottom: 1px solid #e5e5e7;
+  display: grid;
+  grid-template-columns: 3fr 1fr 75px;
+}
+
+.matchesItems p {
+  font-size: 13px;
+  color: #071e27;
+  font-weight: 500;
+}
+
+.match h4 {
+  color: #071e27;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.starIcon svg {
+  cursor: pointer;
+}
+.starIcon:hover path {
+  fill: #ffcd00;
+  stroke: #ffcd00;
+}
+
+.moreBtn {
+  background-color: #ffffff;
+  border: 1px solid #dee1e5;
+  border-radius: 5px;
+}
+
+.moreBtn a {
+  color: #797d7e;
+  font-size: 10px;
+}
+
+.moreBtn:hover {
+  background-color: #0092c1;
+  border: none;
+}
+
+.moreBtn:hover a {
+  color: #fff;
+}
+
+.scoreInfo p {
+  color: #122e37;
+}

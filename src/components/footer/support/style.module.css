@@ -4,3 +4,26 @@
   padding: 6px;
   margin-top: 27px;
 }
+
+.logoImgContainer {
+  border-radius: 100px;
+  background: #11adb1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 65px;
+  transition: all 0.5s;
+}
+
+.logoImgContainer img {
+  transition: all 0.5s;
+}
+.logoImgContainer a:hover img {
+  transform: scale(1.07);
+  opacity: 100%;
+}
+
+.support a:hover img {
+  opacity: 80%;
+}

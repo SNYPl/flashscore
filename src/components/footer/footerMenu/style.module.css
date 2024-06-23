@@ -4,8 +4,6 @@
 
 .footerMenuTitle {
   padding-bottom: 9px;
-  border-bottom: 1px solid #eeeeee;
-  margin-bottom: 4px;
 }
 
 .ball {
@@ -28,4 +26,8 @@
   font-size: 14.5px;
   font-weight: 500;
   line-height: 30px;
+}
+
+.listItem:hover a {
+  text-decoration: underline;
 }

@@ -3,17 +3,20 @@ import React, { useState, useRef, useEffect } from "react";
 import style from "./style.module.css";
 import DatePicker from "./DatePicker";
 
-const Calendar = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date().toDateString());
-  const defaultActiveIndex = 7;
-  const [activeIndex, setActiveIndex] = useState(defaultActiveIndex);
+interface calendarProps {
+  activeIndex: any;
+  setActiveIndex: any;
+}
+
+const Calendar: React.FC<calendarProps> = ({ activeIndex, setActiveIndex }) => {
+  const today = new Date();
+  const [selectedDate, setSelectedDate] = useState(today.toDateString());
 
   const calendarOptionsRef = useRef<HTMLDivElement>(null);
 
   const generateDateOptions = () => {
     const options = [];
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const today = new Date();
 
     for (let i = -7; i <= 7; i++) {
       const date = new Date(today);
@@ -23,7 +26,13 @@ const Calendar = () => {
       const month = String(date.getMonth() + 1).padStart(2, "0");
       const dayOfWeek = daysOfWeek[date.getDay()];
 
-      options.push([day, dayOfWeek, month, date.toDateString()]);
+      options.push({
+        id: i,
+        day,
+        dayOfWeek,
+        month,
+        fullDate: date.toDateString(),
+      });
     }
 
     return options;
@@ -95,8 +104,8 @@ const Calendar = () => {
   return (
     <section className={`${style.calendar} `}>
       <div className={`${style.calendarOptions} `} ref={calendarOptionsRef}>
-        {dateOptions.map((el: any, id: any) => {
-          const [day, dayOfWeek] = el;
+        {dateOptions.map((el: any) => {
+          const { day, dayOfWeek, id } = el;
           const dayWeek = dayOfWeek.toUpperCase();
 
           return (

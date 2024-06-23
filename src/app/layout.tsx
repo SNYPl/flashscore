@@ -5,6 +5,8 @@ import Header from "@/components/header/Header";
 import Advertisement from "@/components/advertisement/Advertisement";
 import Navigation from "@/components/navigation/Navigation";
 import Footer from "@/components/footer/Footer";
+import { QueryClientProviderHelper } from "@/components/helper/queryClient";
+import { ReduxToolkitProvider } from "@/components/helper/reduxProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +23,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header>
-          <Advertisement />
-          <Header />
-          <Navigation />
-        </header>
-        {children}
+        <ReduxToolkitProvider>
+          <QueryClientProviderHelper>
+            <header>
+              <Advertisement />
+              <Header />
+              <Navigation />
+            </header>
+            {children}
+          </QueryClientProviderHelper>
+        </ReduxToolkitProvider>
         <footer className="w-full bg-white mt-5">
           <Footer />
         </footer>
