@@ -37,7 +37,7 @@ const Countries = () => {
       locale: "en_INT",
     },
     headers: {
-      "x-rapidapi-key": "c17061d8e5mshe07dac8e48b2d4bp156ca8jsnde4a4cb37c2b",
+      "x-rapidapi-key": process.env.flashscore_api,
       "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
     },
   };
