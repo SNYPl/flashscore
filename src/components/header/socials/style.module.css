@@ -13,7 +13,6 @@
   border-radius: 25px;
   padding: 13px 22px;
   cursor: pointer;
-  transition: 0.12s ease-in;
 }
 
 .blitz:hover {
@@ -111,4 +110,8 @@
 
 .wrapper {
   background-color: rgb(8 20 24 / 80%);
+}
+
+.modal {
+  width: 450px !important;
 }

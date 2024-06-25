@@ -3,7 +3,7 @@ import style from "./style.module.css";
 
 const Copyright = () => {
   return (
-    <section className={`${style.copyright}  py-8`}>
+    <section className={`${style.copyright}  `}>
       <article className="container flex justify-between items-center">
         <h4>Copyright @ 2024</h4>
         <div>

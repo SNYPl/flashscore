@@ -41,3 +41,7 @@ img {
 .hide {
   display: none;
 }
+
+.transition-3 {
+  transition: all 0.3s;
+}

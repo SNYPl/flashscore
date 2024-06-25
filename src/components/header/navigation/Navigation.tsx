@@ -11,7 +11,7 @@ const Navigation = () => {
 
   return (
     <section
-      className={`flex items-center justify-center gap-x-5 h-full ${
+      className={`flex items-center justify-center  h-full  ${style.nav} ${
         matchRouteHandler ? "hide" : ""
       }`}
     >

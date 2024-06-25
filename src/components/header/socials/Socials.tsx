@@ -13,7 +13,7 @@ const socialArray = [
   { component: "4", w: 18, h: 15, alt: "email", href: "" },
 ];
 
-const Socials = () => {
+const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const pathName = usePathname();
   const matchRouteHandler = pathName.includes("match");
@@ -46,7 +46,10 @@ const Socials = () => {
           </Link>
         ))}
       </div>
-      <div className={style.blitz}>
+      <div
+        className={`${style.blitz} transition-3 `}
+        style={{ padding: isNavFixed ? "7px 12px" : "" }}
+      >
         <Image
           src="/images/header/blitz.svg"
           alt="blitz"
@@ -61,11 +64,10 @@ const Socials = () => {
           footer={null}
           className={style.modal}
           classNames={{ content: style.modalBody, wrapper: style.wrapper }}
-          style={{ transformOrigin: "400px 20px" }}
         >
           <article>
             <div
-              className={`flex justify-center items-center p-6 ${style.blitzHover}`}
+              className={`flex justify-center items-center py-6 ${style.blitzHover}`}
             >
               <Link href="#">
                 <div>

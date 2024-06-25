@@ -1,7 +1,7 @@
 .support {
   border-radius: 50px;
   border: 1px solid #eeeeee;
-  padding: 6px;
+  padding: 4px;
   margin-top: 27px;
 }
 
@@ -26,4 +26,8 @@
 
 .support a:hover img {
   opacity: 80%;
+}
+
+.supportLinks {
+  margin: 0 30px;
 }

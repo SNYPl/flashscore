@@ -29,7 +29,7 @@ const AllMatchInfos = () => {
       timezone: "4",
     },
     headers: {
-      "x-rapidapi-key": process.env.flashscore_api,
+      "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
       "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
     },
   };

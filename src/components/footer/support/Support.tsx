@@ -33,9 +33,9 @@ const supportImages = [
 const Support = () => {
   return (
     <section
-      className={`${style.support} w-full flex gap-x-9 items-center mt-7 container`}
+      className={`${style.support} w-full flex  items-center mt-7 container`}
     >
-      <div className={`${style.logoImgContainer}`}>
+      <div className={`${style.logoImgContainer} `}>
         <Link href={"#"}>
           <Image
             src={"/images/footer/blitz.svg"}
@@ -49,7 +49,7 @@ const Support = () => {
       </div>
 
       {supportImages.map((el, id) => (
-        <Link href={"#"} key={id}>
+        <Link href={"#"} key={id} className={style.supportLinks}>
           <Image
             src={el.src}
             alt={el.alt}

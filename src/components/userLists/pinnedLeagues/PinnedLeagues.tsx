@@ -17,7 +17,7 @@ const PinnedLeagues = () => {
       </article>
       <article className="pl-2 pr-2">
         <div
-          className={`flex items-center justify-between  mb-2 ${style.league}`}
+          className={`flex items-center justify-between  mb-2 ${style.league} h-9`}
         >
           <Link
             href="/football/england/premier-league"
@@ -38,7 +38,7 @@ const PinnedLeagues = () => {
           </div>
         </div>
         <div
-          className={`flex items-center justify-between  mb-2  ${style.league}`}
+          className={`flex items-center justify-between  mb-2  ${style.league} h-9`}
         >
           <Link
             href="/football/england/eredivisie"

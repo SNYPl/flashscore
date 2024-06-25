@@ -6,10 +6,12 @@ import Countries from "./countries/Countries";
 
 const UserLists = () => {
   return (
-    <section className={`${style.UserList} bg-white rounded-lg w-full `}>
-      <PinnedLeagues />
-      <UserTeams />
-      <Countries />
+    <section className={`${style.UserList}   w-full `}>
+      <div className="bg-white w-full rounded-lg">
+        <PinnedLeagues />
+        <UserTeams />
+        <Countries />
+      </div>
     </section>
   );
 };

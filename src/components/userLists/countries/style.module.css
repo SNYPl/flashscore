@@ -26,6 +26,7 @@
 
 .country {
   padding: 4px 9px 6px 8px;
+  transition: all 0.2s ease;
 }
 
 .country:hover {
