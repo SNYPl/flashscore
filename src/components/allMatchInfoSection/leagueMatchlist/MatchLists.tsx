@@ -9,7 +9,6 @@ interface matchProps {
 
 const MatchLists: React.FC<matchProps> = ({ selectedMatchNav, data }) => {
   const allMatch = useSelector((state: any) => state.matchesSlice.allMatches);
-  console.log(data);
 
   // if (!allMatch?.DATA || !Array.isArray(allMatch.DATA)) {
   //   return <div>No matches available</div>;
@@ -49,7 +48,7 @@ const MatchLists: React.FC<matchProps> = ({ selectedMatchNav, data }) => {
             url={eventMatch.URL}
             events={eventMatch.EVENTS}
             countryId={eventMatch.COUNTRY_ID}
-            trounamentId={eventMatch.TOURNAMENT_ID}
+            tournamentId={eventMatch.TOURNAMENT_ID}
             key={eventMatch.TOURNAMENT_STAGE_ID}
             countryName={eventMatch.COUNTRY_NAME}
           />

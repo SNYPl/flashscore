@@ -18,7 +18,15 @@ const Predictions = () => {
         </div>
         <div className="p-4">
           {arr.map((el, id) => (
-            <Prediction key={el} border={id == 1} />
+            // <Prediction key={el} border={id == 1} />
+            <div className="mb-3">
+              <Image
+                src="/images/prediction.jfif"
+                alt="prediction"
+                width={200}
+                height={200}
+              />
+            </div>
           ))}
         </div>
         <div className={`${style.seeAlLink} `}>

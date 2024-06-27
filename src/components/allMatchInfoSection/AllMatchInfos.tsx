@@ -47,9 +47,11 @@ const AllMatchInfos = () => {
     }
   );
 
-  // if (!isLoading && data) {
-  //   dispatch(setAllMatches(data));
-  // }
+  useEffect(() => {
+    if (!isLoading && data) {
+      dispatch(setAllMatches(data));
+    }
+  }, [data, isLoading, dispatch]);
 
   return (
     <section className={`${style.events}`}>

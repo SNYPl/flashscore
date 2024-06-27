@@ -1,19 +1,19 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./style.module.css";
 import Link from "next/link";
-import { countries } from "@/lib/countriesList";
-import { useSelector } from "react-redux";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { Skeleton } from "antd";
-import { useSportIdHandler } from "@/components/helper/useSportIdHandler";
+import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
+import { setAllTournament } from "@/components/store/slices/matchesSlice";
+import { useDispatch } from "react-redux";
+import { usePinnedLeagues } from "@/components/hooks/usePineedLeagues";
 
 interface League {
   LEAGUE_NAME: string;
   SPORT_ID: number;
-  STAGE_ID: string;
-  TOURNAMENT_IMAGE: string;
+  ACTUAL_TOURNAMENT_SEASON_ID: string;
 }
 
 interface Country {
@@ -24,14 +24,15 @@ interface Country {
 
 const Countries = () => {
   const [listOpen, setListOpen] = useState<number[]>([]);
-  const [pinActive, setPinActive] = useState(false);
-  const allMatch = useSelector((state: any) => state.matchesSlice.allMatches);
   const [countrieShowNumber, setCountrieShowNumber] = useState(50);
   const sportIdCheck = useSportIdHandler();
+  const dispatch = useDispatch();
+
+  const { pinnedLeagueIds, addLeagueToLocalStorage } = usePinnedLeagues();
 
   const options = {
     method: "GET",
-    url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/stages",
+    url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/list",
     params: {
       sport_id: "1",
       locale: "en_INT",
@@ -55,8 +56,18 @@ const Countries = () => {
     }
   );
 
+  useEffect(() => {
+    if (!isLoading && data) {
+      dispatch(setAllTournament(data));
+    }
+  }, [data, isLoading, dispatch]);
+
   if (isLoading) {
-    return <Skeleton active />;
+    return (
+      <div className="p-4 px-6">
+        <Skeleton active />{" "}
+      </div>
+    );
   }
   const aggregatedData: { [key: number]: Country } = {};
 
@@ -66,8 +77,7 @@ const Countries = () => {
       COUNTRY_NAME,
       LEAGUE_NAME,
       SPORT_ID,
-      STAGE_ID,
-      TOURNAMENT_IMAGE,
+      ACTUAL_TOURNAMENT_SEASON_ID,
     } = item;
 
     if (!aggregatedData[COUNTRY_ID]) {
@@ -81,8 +91,7 @@ const Countries = () => {
     aggregatedData[COUNTRY_ID].leagues.push({
       LEAGUE_NAME,
       SPORT_ID,
-      STAGE_ID,
-      TOURNAMENT_IMAGE,
+      ACTUAL_TOURNAMENT_SEASON_ID,
     });
   });
 
@@ -90,7 +99,7 @@ const Countries = () => {
 
   result.sort((a, b) => a.COUNTRY_NAME.localeCompare(b.COUNTRY_NAME));
 
-  const toggleListOpen = (countryId: number) => {
+  const toggleCountryList = (countryId: number) => {
     setListOpen((prevOpen) => {
       if (prevOpen.includes(countryId)) {
         return prevOpen.filter((id) => id !== countryId);
@@ -117,7 +126,7 @@ const Countries = () => {
             >
               <article
                 className={`flex items-center justify-between  mb-1 ${style.country} cursor-pointer `}
-                onClick={() => toggleListOpen(countrie.COUNTRY_ID)}
+                onClick={() => toggleCountryList(countrie.COUNTRY_ID)}
               >
                 <span>{countrie.COUNTRY_NAME}</span>
                 <div className={`${style.arrowIcon} `}>
@@ -141,13 +150,16 @@ const Countries = () => {
                   const leagueName = leagues.LEAGUE_NAME.toLowerCase()
                     .split(" ")
                     .join("-");
-                  const stageId = leagues.STAGE_ID;
+                  const stageId = leagues.ACTUAL_TOURNAMENT_SEASON_ID;
+
                   return (
                     <div
                       className={`flex items-center justify-between ${
-                        pinActive ? style.pinActive : null
+                        pinnedLeagueIds.includes(stageId)
+                          ? style.pinActive
+                          : null
                       }`}
-                      key={leagues.STAGE_ID}
+                      key={leagues.ACTUAL_TOURNAMENT_SEASON_ID}
                     >
                       <span className={`${style.blockLink}`}>
                         <Link
@@ -158,7 +170,7 @@ const Countries = () => {
                       </span>
                       <span
                         className={`${style.pinIcon} `}
-                        onClick={() => setPinActive((prevState) => !prevState)}
+                        onClick={() => addLeagueToLocalStorage(stageId)}
                       >
                         <svg
                           width="13"

@@ -34,9 +34,21 @@
   opacity: 0.15;
 }
 
+.pinImgContainer {
+  position: absolute;
+  right: 0px;
+  top: 20%;
+  background-color: #f1f1f1;
+}
+
 .league {
   padding: 4px 0 6px 8px;
   transition: all 0.2s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  max-width: 174px;
 }
 
 .league:hover {

@@ -1,7 +1,11 @@
 .match {
-  border-bottom: 1px solid #e5e5e7;
   display: grid;
   grid-template-columns: 3fr 1fr 75px;
+  width: 100%;
+}
+.matchContainer {
+  border-bottom: 1px solid #e5e5e7;
+  grid-template-columns: 18px 1fr;
 }
 
 .matchesItems p {
@@ -16,10 +20,22 @@
   font-weight: 600;
 }
 
+.starIcon {
+  cursor: pointer;
+}
+
 .starIcon svg {
   cursor: pointer;
 }
 .starIcon:hover path {
+  fill: #ffcd00;
+  stroke: #ffcd00;
+}
+.favorited {
+  transition: all 0.3s ease;
+}
+
+.favorited path {
   fill: #ffcd00;
   stroke: #ffcd00;
 }
@@ -30,7 +46,7 @@
   border-radius: 5px;
 }
 
-.moreBtn a {
+.moreBtn p {
   color: #797d7e;
   font-size: 10px;
 }
@@ -40,7 +56,7 @@
   border: none;
 }
 
-.moreBtn:hover a {
+.moreBtn:hover p {
   color: #fff;
 }
 

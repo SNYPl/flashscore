@@ -8,18 +8,7 @@ import {
   LeagueArrowIcon,
 } from "@/common/svg/home";
 
-const Match = ({
-  homeTeam,
-  awayTeam,
-  homeScore,
-  awayScore,
-  status,
-  showMatches,
-  awayImage,
-  homeImage,
-  time,
-  id,
-}: {
+interface matchProps {
   homeTeam: any;
   awayTeam: any;
   homeScore: any;
@@ -30,6 +19,25 @@ const Match = ({
   showMatches: boolean;
   time: number;
   id: string;
+  addToFavourite: any;
+  isFavouritedEvent: any;
+  tournamentId: string;
+}
+
+const Match: React.FC<matchProps> = ({
+  homeTeam,
+  awayTeam,
+  homeScore,
+  awayScore,
+  status,
+  showMatches,
+  awayImage,
+  homeImage,
+  time,
+  id,
+  addToFavourite,
+  isFavouritedEvent,
+  tournamentId,
 }) => {
   const timeStamp = time * 1000;
   const date = new Date(timeStamp);
@@ -37,16 +45,34 @@ const Match = ({
   const hour = date.getHours();
   const minute = date.getMinutes();
 
+  const isFavourite = () => {
+    const favoriteLeague = isFavouritedEvent.find(
+      (el: any) => el.mainLeagueID === tournamentId
+    )?.events;
+
+    if (favoriteLeague) {
+      const favoriteMatch = favoriteLeague.find((el: any) => el.eventId === id)
+        ?.eventId;
+
+      return favoriteMatch;
+    }
+  };
+
+  const favoriteId = isFavourite();
+
   return (
-    <div>
-      <Link href={"/match/Villarreal"} target="_blank">
+    <div className={`flex ${style.matchContainer} p-2`}>
+      <div
+        className={`flex items-center justify-center mr-7  ${style.starIcon} ${
+          favoriteId === id ? style.favorited : ""
+        }`}
+        onClick={addToFavourite}
+      >
+        <EmptyFavouriteStarIcon />
+      </div>
+      <Link href={"/match/Villarreal"} target="_blank" className="w-full">
         <section className={` items-center ${style.match}`}>
-          <article className={`flex  p-2 items-center `}>
-            <div
-              className={`flex items-center justify-center mr-7 ${style.starIcon}`}
-            >
-              <EmptyFavouriteStarIcon />
-            </div>
+          <article className={`flex   items-center `}>
             <div className="mr-7 w-16">
               <h4>
                 {status == "SCHEDULED" ||
@@ -111,9 +137,7 @@ const Match = ({
           <div
             className={`flex ${style.moreBtn} px-2 py-1 items-center justify-center`}
           >
-            <Link href={"/match/Villarreal"} target="_blank">
-              MORE INFO
-            </Link>
+            <p>MORE INFO</p>
           </div>
         </section>
       </Link>
