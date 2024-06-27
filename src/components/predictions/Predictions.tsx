@@ -21,6 +21,7 @@ const Predictions = () => {
             // <Prediction key={el} border={id == 1} />
             <div className="mb-3">
               <Image
+                key={id}
                 src="/images/prediction.jfif"
                 alt="prediction"
                 width={200}
