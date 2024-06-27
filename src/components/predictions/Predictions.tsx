@@ -19,9 +19,8 @@ const Predictions = () => {
         <div className="p-4">
           {arr.map((el, id) => (
             // <Prediction key={el} border={id == 1} />
-            <div className="mb-3">
+            <div className="mb-3" key={id}>
               <Image
-                key={id}
                 src="/images/prediction.jfif"
                 alt="prediction"
                 width={200}
