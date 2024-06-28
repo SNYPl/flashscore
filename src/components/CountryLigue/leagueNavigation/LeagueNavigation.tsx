@@ -3,17 +3,13 @@ import React, { useEffect } from "react";
 import style from "./style.module.css";
 import LeagueTitle from "./leagueTitle/LeagueTitle";
 import LeagueMenu from "./menu/LeagueMenu";
-import Todaymatches from "./todayMatches/Todaymatches";
 import ParamInfo from "@/components/paramInfo/ParamInfo";
-import LatestScores from "./latestScores/LatestScores";
-import ScheduledMatches from "./scheduledMatches/ScheduledMatches";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import { setAllStages } from "@/components/store/slices/matchesSlice";
 import { useSearchParams } from "next/navigation";
-import { useSelector } from "react-redux";
 
 interface leagueProps {
   COUNTRY_ID: number;
@@ -31,8 +27,6 @@ const LeagueNavigation = ({
   activeMenu: string;
   setActiveMenu: any;
 }) => {
-  const allMatch = useSelector((state: any) => state.matchesSlice.allMatches);
-
   const sportIdCheck = useSportIdHandler();
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
@@ -65,7 +59,6 @@ const LeagueNavigation = ({
       }
     }
   );
-  console.log(data);
 
   useEffect(() => {
     if (data) {
@@ -76,8 +69,6 @@ const LeagueNavigation = ({
   const filteredLeague = data?.DATA?.find(
     (el: leagueProps) => el.LEAGUE_NAME === countryName
   );
-
-  console.log(filteredLeague);
 
   return (
     <section className={`${style.leagueNavigaion} flex flex-col`}>

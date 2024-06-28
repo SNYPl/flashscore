@@ -6,7 +6,7 @@ import headerNavReducer from "./slices/headerNavSlice";
 const store = configureStore({
   reducer: {
     navigationReducer: navigationReducer,
-    matchesSlice: matchesSlice,
+    matches: matchesSlice,
     headerNavReducer: headerNavReducer,
   },
 });

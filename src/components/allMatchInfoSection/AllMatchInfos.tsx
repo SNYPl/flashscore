@@ -39,6 +39,7 @@ const AllMatchInfos = () => {
     async () => {
       try {
         const response = await axios.request(options);
+
         return response.data;
       } catch (error) {
         console.error("Error fetching featured products", error);
@@ -47,9 +48,11 @@ const AllMatchInfos = () => {
     }
   );
 
-  if (data) {
-    dispatch(setAllMatches(data?.DATA));
-  }
+  useEffect(() => {
+    if (data) {
+      dispatch(setAllMatches(data?.DATA));
+    }
+  }, [data, dispatch]);
 
   return (
     <section className={`${style.events}`}>

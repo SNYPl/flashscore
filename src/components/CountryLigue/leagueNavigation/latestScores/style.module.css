@@ -1,7 +1,4 @@
-.todayMatches {
-}
-
-.todayMatches h2 {
+.title {
   font-size: 15px;
   color: #001e28;
   margin-bottom: 14px;
@@ -9,29 +6,6 @@
 
 .standings {
   border-bottom: 1px solid #555e61;
-}
-
-.premierTitle {
-  background-color: #eeeeee;
-  border-radius: 10px;
-}
-
-.premierTitle h4,
-.premierTitle a {
-  font-size: 12.5px;
-  color: #505658;
-  font-weight: 600;
-}
-.premierTitle a {
-  margin-left: 2px;
-}
-.premierTitle a:hover {
-  text-decoration: underline;
-}
-
-.starIcon:hover path {
-  fill: #ffcd00;
-  stroke: #ffcd00;
 }
 
 .showMatchesBtn {

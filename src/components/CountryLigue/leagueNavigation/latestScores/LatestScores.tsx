@@ -1,45 +1,48 @@
 import React from "react";
 import style from "./style.module.css";
-import { LeagueMatch } from "@/components/matchLeague/LeagueMatch";
 
-import { EmptyFavouriteStarIcon } from "@/common/svg/home";
-import Image from "next/image";
-import Link from "next/link";
+import League from "@/components/allMatchInfoSection/leagueMatchlist/matchLeague/MatchLeague";
 
-const LatestScores: React.FC = ({}) => {
+const LatestScores = ({
+  resultData,
+  sliceLength,
+  setActiveMenu,
+  activeMenu,
+}: {
+  resultData: any[];
+  sliceLength: number;
+  setActiveMenu?: any;
+  activeMenu: string;
+}) => {
   return (
-    <section
-      className={`${style.todayMatches} py-4 px-3 bg-white mb-4 rounded-lg`}
-    >
-      <h2 className="font-bold">Latest Scores</h2>
+    <section className={` py-4 px-3 bg-white mb-4 rounded-lg`}>
+      <h2 className={`font-bold ${style.title}`}>Latest Scores</h2>
 
-      <div className={`flex justify-between ${style.premierTitle} p-2`}>
-        <div className={`flex items-center `}>
-          <div className={`mr-3 cursor-pointer ${style.starIcon}`}>
-            <EmptyFavouriteStarIcon />
-          </div>
-          <Image
-            src="/images/userSection/Flag.svg"
-            alt="flag"
-            width={18}
-            height={13}
+      {resultData?.slice(0, sliceLength).map((eventMatch: any) => {
+        return (
+          <League
+            tournamentStageId={eventMatch.TOURNAMENT_STAGE_ID}
+            NAME1={eventMatch.NAME_PART_1}
+            NAME2={eventMatch.NAME_PART_2}
+            url={eventMatch.URL}
+            events={eventMatch.EVENTS}
+            countryId={eventMatch.COUNTRY_ID}
+            tournamentId={eventMatch.TOURNAMENT_ID}
+            key={eventMatch.TOURNAMENT_STAGE_ID}
+            countryName={eventMatch.COUNTRY_NAME}
+            showMatchesDefault={true}
           />
-          <h4 className="ml-2">ENGLAND:</h4>
-          <Link href={"#"} className="mr-2">
-            PREMIER LEAGUE
-          </Link>
-        </div>
-        <button className={`flex items-center gap-x-2 ${style.showMatchesBtn}`}>
-          <span className={`${style.standings}`}>Standings</span>
-        </button>
-      </div>
+        );
+      })}
 
-      <LeagueMatch showMoreBtn={false} />
-      <LeagueMatch showMoreBtn={false} />
-      <LeagueMatch showMoreBtn={false} />
-      <div className={style.moreMatches}>
-        <button>Show More Matches</button>
-      </div>
+      {activeMenu !== "RESULTS" && (
+        <div
+          className={style.moreMatches}
+          onClick={() => setActiveMenu("RESULTS")}
+        >
+          <button>Show More Matches</button>
+        </div>
+      )}
     </section>
   );
 };

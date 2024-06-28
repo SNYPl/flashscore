@@ -1,6 +1,5 @@
 import React from "react";
 import League from "./matchLeague/MatchLeague";
-import { useSelector } from "react-redux";
 
 interface matchProps {
   selectedMatchNav: string;
@@ -38,9 +37,6 @@ const MatchLists: React.FC<matchProps> = ({ selectedMatchNav, data }) => {
   return (
     <section className={` mt-5`}>
       {filteredMatchData?.map((eventMatch: any) => {
-        if (eventMatch.CATEGORY_NAME === "Africa") {
-          console.log(eventMatch);
-        }
         return (
           <League
             tournamentStageId={eventMatch.TOURNAMENT_STAGE_ID}

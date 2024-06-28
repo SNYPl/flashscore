@@ -11,7 +11,7 @@ import { usePinnedLeagues } from "@/components/hooks/usePineedLeagues";
 
 const PinnedLeagues = () => {
   const allTournament = useSelector(
-    (state: any) => state.matchesSlice.allTournaments
+    (state: any) => state.matches.allTournaments
   );
 
   const { pinnedLeagueIds, removePinnedLeague } = usePinnedLeagues();

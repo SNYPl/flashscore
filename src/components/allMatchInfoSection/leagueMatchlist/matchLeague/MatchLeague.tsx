@@ -23,6 +23,7 @@ interface leagueProps {
   countryId: number;
   tournamentId: string;
   countryName: string;
+  showMatchesDefault?: boolean;
 }
 
 const MatchLeague: React.FC<leagueProps> = ({
@@ -34,8 +35,9 @@ const MatchLeague: React.FC<leagueProps> = ({
   tournamentId,
   countryName,
   url,
+  showMatchesDefault = false,
 }) => {
-  const [showMatches, setShowMatches] = useState(false);
+  const [showMatches, setShowMatches] = useState(showMatchesDefault);
 
   const currentCountryIcon = countries.filter((el) => el.name === countryName);
   const [countryObject] = currentCountryIcon;

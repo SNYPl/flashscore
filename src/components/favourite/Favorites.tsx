@@ -2,19 +2,12 @@
 import React from "react";
 import style from "./style.module.css";
 
-import { usePathname } from "next/navigation";
-import { useLocalStorage } from "usehooks-ts";
 import { useFavouriteLeagues } from "@/components/hooks/useFavouriteLeagues ";
 
 import League from "../allMatchInfoSection/leagueMatchlist/matchLeague/MatchLeague";
 
-interface FavouriteLeague {
-  mainLeagueID: string;
-  eventsId: string[];
-}
-
 const Favorites = () => {
-  const { favouriteLeagues, addToFavourite } = useFavouriteLeagues();
+  const { favouriteLeagues } = useFavouriteLeagues();
 
   const transformEventArray = (events: any) => {
     return events.map((event: any) => {
@@ -39,7 +32,6 @@ const Favorites = () => {
       <div className={`bg-white rounded-lg  p-3 w-full `}>
         {favouriteLeagues?.map((eventMatch: any) => {
           const transformedEvents = transformEventArray(eventMatch.events);
-          console.log(transformedEvents);
           return (
             <League
               tournamentStageId={eventMatch.mainLeagueID}
