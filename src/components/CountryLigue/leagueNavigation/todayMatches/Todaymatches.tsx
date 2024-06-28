@@ -36,9 +36,6 @@ const Todaymatches: React.FC = ({}) => {
       <LeagueMatch showMoreBtn />
       <LeagueMatch showMoreBtn />
       <LeagueMatch showMoreBtn />
-      <div className={style.moreMatches}>
-        <button>Show More Matches</button>
-      </div>
     </section>
   );
 };

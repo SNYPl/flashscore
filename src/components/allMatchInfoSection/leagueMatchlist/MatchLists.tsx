@@ -8,8 +8,6 @@ interface matchProps {
 }
 
 const MatchLists: React.FC<matchProps> = ({ selectedMatchNav, data }) => {
-  const allMatch = useSelector((state: any) => state.matchesSlice.allMatches);
-
   // if (!allMatch?.DATA || !Array.isArray(allMatch.DATA)) {
   //   return <div>No matches available</div>;
   // }
@@ -40,6 +38,9 @@ const MatchLists: React.FC<matchProps> = ({ selectedMatchNav, data }) => {
   return (
     <section className={` mt-5`}>
       {filteredMatchData?.map((eventMatch: any) => {
+        if (eventMatch.CATEGORY_NAME === "Africa") {
+          console.log(eventMatch);
+        }
         return (
           <League
             tournamentStageId={eventMatch.TOURNAMENT_STAGE_ID}

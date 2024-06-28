@@ -128,6 +128,8 @@ const MatchLeague: React.FC<leagueProps> = ({
 
   const isLeagueFavorited = isFavorited(tournamentId);
 
+  const newUrl = `${url}?leagueId=${tournamentStageId}&name=${NAME2}&tournamentId=${tournamentId}`;
+
   return (
     <section className={``}>
       <article className="mb-1">
@@ -165,7 +167,7 @@ const MatchLeague: React.FC<leagueProps> = ({
               />
             )}
             <h2 className="ml-2">{NAME1}:</h2>
-            <Link href={"/football/england/premier-league"} className="mr-2">
+            <Link href={newUrl} className="mr-2">
               {NAME2}
             </Link>
             <div

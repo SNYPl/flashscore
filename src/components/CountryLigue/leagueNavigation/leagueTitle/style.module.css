@@ -19,18 +19,41 @@
   align-items: center;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
-.title span::after {
+.title span:hover:after {
   content: "";
   position: absolute;
   width: 25px;
   height: 25px;
-  background-color: #0092c1;
+  background-color: #99999926;
   top: 0;
   left: 0;
   border-radius: 50px;
-  opacity: 12%;
+}
+.notActive svg path {
+  color: #999 !important;
+  fill: #999;
+}
+
+.activePin:after {
+  background-color: #0092c1;
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 0;
+  left: 0;
+  border-radius: 50px;
+  opacity: 20%;
+}
+.activePin svg {
+  transform: rotate(317deg);
+}
+
+.activePin:hover:after {
+  background-color: #0092c1;
 }
 
 .title h3 {

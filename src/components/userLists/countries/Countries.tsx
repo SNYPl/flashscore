@@ -57,10 +57,10 @@ const Countries = () => {
   );
 
   useEffect(() => {
-    if (!isLoading && data) {
+    if (data) {
       dispatch(setAllTournament(data));
     }
-  }, [data, isLoading, dispatch]);
+  }, [data, dispatch]);
 
   if (isLoading) {
     return (

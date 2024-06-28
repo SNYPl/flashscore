@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   allMatches: [],
   allTournaments: [],
+  allStages: [],
 };
 
 const matchSlice = createSlice({
@@ -15,8 +16,15 @@ const matchSlice = createSlice({
     setAllTournament: (state, action) => {
       state.allTournaments = action.payload;
     },
+    setAllStages: (state, action) => {
+      state.allStages = action.payload;
+    },
   },
 });
 
-export const { setAllMatches, setAllTournament } = matchSlice.actions;
+export const {
+  setAllMatches,
+  setAllTournament,
+  setAllStages,
+} = matchSlice.actions;
 export default matchSlice.reducer;

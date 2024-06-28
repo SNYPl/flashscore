@@ -23,7 +23,7 @@ const AllMatchInfos = () => {
     method: "GET",
     url: "https://flashlive-sports.p.rapidapi.com/v1/events/list",
     params: {
-      sport_id: "1",
+      sport_id: sportId,
       indent_days: activeDateIndex,
       locale: "en_INT",
       timezone: "4",
@@ -47,11 +47,9 @@ const AllMatchInfos = () => {
     }
   );
 
-  useEffect(() => {
-    if (!isLoading && data) {
-      dispatch(setAllMatches(data));
-    }
-  }, [data, isLoading, dispatch]);
+  if (data) {
+    dispatch(setAllMatches(data?.DATA));
+  }
 
   return (
     <section className={`${style.events}`}>

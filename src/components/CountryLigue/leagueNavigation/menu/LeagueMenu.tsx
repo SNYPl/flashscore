@@ -3,26 +3,25 @@ import React, { useState } from "react";
 import style from "./style.module.css";
 import Link from "next/link";
 
-const LeagueMenu = () => {
-  const [activeMenu, setActiveMenu] = useState("SUMMARY");
-
-  const menu = [
-    { title: "SUMMARY", href: "#" },
-    { title: "RESULTS", href: "#" },
-    { title: "FIXTURES", href: "#" },
-    { title: "STANDINGS", href: "#" },
-  ];
+const LeagueMenu = ({
+  setActiveMenu,
+  activeMenu,
+}: {
+  activeMenu: string;
+  setActiveMenu: any;
+}) => {
+  const menu = ["SUMMARY", "RESULTS", "FIXTURES", "STANDINGS"];
   return (
     <section className={`${style.LeagueMenu} p-4`}>
       <ul className="flex items-center gap-x-4">
         {menu.map((el, index) => (
           <li key={index}>
-            <Link
-              href={el.href}
-              className={activeMenu === el.title ? style.active : ""}
+            <button
+              className={activeMenu === el ? style.active : ""}
+              onClick={() => setActiveMenu(el)}
             >
-              {el.title}
-            </Link>
+              {el}
+            </button>
           </li>
         ))}
       </ul>
