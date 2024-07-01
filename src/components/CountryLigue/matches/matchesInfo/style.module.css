@@ -10,7 +10,7 @@
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
-.info li a {
+.info li button {
   color: #555e61;
   font-size: 13px;
   font-weight: 600;

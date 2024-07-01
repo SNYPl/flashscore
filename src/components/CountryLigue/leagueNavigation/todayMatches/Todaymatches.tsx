@@ -45,6 +45,10 @@ const Todaymatches: React.FC = ({}) => {
     (el: any) => el.TOURNAMENT_ID === tournamentId
   );
 
+  if (currentLeague.length === 0 && !isLoading) {
+    return <div></div>;
+  }
+
   return (
     <section className={` py-4 px-3 bg-white mb-4 rounded-lg`}>
       <h2 className={`font-bold ${style.title}`}>Todays Matches</h2>

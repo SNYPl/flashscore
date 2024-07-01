@@ -18,14 +18,14 @@ const ScheduledMatches = ({
     <section className={` py-4 px-3 bg-white mb-4 rounded-lg`}>
       <h2 className={`font-bold ${style.title}`}>Scheduled</h2>
 
-      {fixturesMatchData?.slice(0, sliceLength).map((eventMatch: any) => {
+      {fixturesMatchData?.map((eventMatch: any) => {
         return (
           <League
             tournamentStageId={eventMatch.TOURNAMENT_STAGE_ID}
             NAME1={eventMatch.NAME_PART_1}
             NAME2={eventMatch.NAME_PART_2}
             url={eventMatch.URL}
-            events={eventMatch.EVENTS}
+            events={eventMatch.EVENTS.slice(0, sliceLength)}
             countryId={eventMatch.COUNTRY_ID}
             tournamentId={eventMatch.TOURNAMENT_ID}
             key={eventMatch.TOURNAMENT_STAGE_ID}

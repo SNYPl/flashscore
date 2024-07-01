@@ -9,7 +9,7 @@ import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import { setAllStages } from "@/components/store/slices/matchesSlice";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 
 interface leagueProps {
   COUNTRY_ID: number;
@@ -23,16 +23,20 @@ interface leagueProps {
 const LeagueNavigation = ({
   setActiveMenu,
   activeMenu,
+  setLeagueId,
 }: {
   activeMenu: string;
   setActiveMenu: any;
+  setLeagueId: any;
 }) => {
   const sportIdCheck = useSportIdHandler();
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
+  const path = usePathname();
 
   const leagueID = searchParams.get("leagueId");
-  const countryName = searchParams.get("name");
+  const leagueName = searchParams.get("name");
+  const countryId = Number(searchParams.get("countryId"));
 
   const options = {
     method: "GET",
@@ -66,9 +70,17 @@ const LeagueNavigation = ({
     }
   }, [data, dispatch]);
 
-  const filteredLeague = data?.DATA?.find(
-    (el: leagueProps) => el.LEAGUE_NAME === countryName
-  );
+  const filteredLeague = data?.DATA?.find((el: leagueProps) => {
+    if (el.COUNTRY_ID === countryId && el.LEAGUE_NAME === leagueName) {
+      return el;
+    }
+  });
+
+  useEffect(() => {
+    if (filteredLeague) {
+      setLeagueId(filteredLeague.STAGE_ID);
+    }
+  }, [filteredLeague]);
 
   return (
     <section className={`${style.leagueNavigaion} flex flex-col`}>

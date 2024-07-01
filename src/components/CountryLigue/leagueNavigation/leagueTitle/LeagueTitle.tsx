@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./style.module.css";
 import Image from "next/image";
 import { Mark } from "@/common/svg/mark";
@@ -21,6 +21,16 @@ const LeagueTitle = ({
 
   const isActivePin = pinnedLeagueIds.includes(tournamentId);
 
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    if (isActivePin) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  }, [isActivePin]);
+
   const imageUrl = leagueImage
     ? leagueImage
     : `/images/leagueMiddle/emptyLeagueLogo.gif`;
@@ -35,7 +45,7 @@ const LeagueTitle = ({
         <h3 className="flex items-center gap-x-4">
           {leagueName}{" "}
           <span
-            className={`${isActivePin ? style.activePin : style.notActive}`}
+            className={`${isActive ? style.activePin : style.notActive}`}
             onClick={() => addLeagueToLocalStorage(tournamentId)}
           >
             <Mark />

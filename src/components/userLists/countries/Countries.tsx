@@ -14,6 +14,7 @@ interface League {
   LEAGUE_NAME: string;
   SPORT_ID: number;
   ACTUAL_TOURNAMENT_SEASON_ID: string;
+  COUNTRY_ID: string;
 }
 
 interface Country {
@@ -92,6 +93,7 @@ const Countries = () => {
       LEAGUE_NAME,
       SPORT_ID,
       ACTUAL_TOURNAMENT_SEASON_ID,
+      COUNTRY_ID,
     });
   });
 
@@ -151,7 +153,8 @@ const Countries = () => {
                     .split(" ")
                     .join("-");
                   const stageId = leagues.ACTUAL_TOURNAMENT_SEASON_ID;
-
+                  const name = leagues?.LEAGUE_NAME;
+                  const countryId = leagues?.COUNTRY_ID;
                   return (
                     <div
                       className={`flex items-center justify-between ${
@@ -163,7 +166,7 @@ const Countries = () => {
                     >
                       <span className={`${style.blockLink}`}>
                         <Link
-                          href={`/${sportName}/${countryName}/${leagueName}`}
+                          href={`/${sportName}/${countryName}/${leagueName}?name=${name}&tournamentId=${stageId}&countryId=${countryId}`}
                         >
                           {leagues.LEAGUE_NAME}
                         </Link>

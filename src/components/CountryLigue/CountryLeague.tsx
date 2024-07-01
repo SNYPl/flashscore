@@ -15,14 +15,15 @@ const CountryLeague = () => {
   const [activeMenu, setActiveMenu] = useState("SUMMARY");
   const sportId = useSelector((state: any) => state.navigationReducer.sportId);
   const searchParams = useSearchParams();
-  const leagueID = searchParams.get("leagueId");
+  const seasonId = searchParams.get("tournamentId");
+  const [leagueId, setLeagueId] = useState("");
 
   const resultMatchesOption = {
     method: "GET",
     url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/results",
     params: {
       locale: "en_INT",
-      tournament_stage_id: leagueID,
+      tournament_stage_id: leagueId,
       page: "1",
     },
     headers: {
@@ -32,14 +33,16 @@ const CountryLeague = () => {
   };
 
   const { data, isLoading, isError, isFetched } = useQuery(
-    ["matchesResults", sportId],
+    ["matchesResults", sportId, leagueId],
     async () => {
-      try {
-        const response = await axios.request(resultMatchesOption);
-        return response.data;
-      } catch (error) {
-        console.error("Error fetching result events", error);
-        throw new Error("Error fetching result events");
+      if (leagueId) {
+        try {
+          const response = await axios.request(resultMatchesOption);
+          return response.data;
+        } catch (error) {
+          console.error("Error fetching result events", error);
+          throw new Error("Error fetching result events");
+        }
       }
     }
   );
@@ -48,7 +51,7 @@ const CountryLeague = () => {
     method: "GET",
     url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/fixtures",
     params: {
-      tournament_stage_id: leagueID,
+      tournament_stage_id: leagueId,
       page: "1",
       locale: "en_INT",
     },
@@ -58,19 +61,28 @@ const CountryLeague = () => {
     },
   };
 
-  const scheduledMatches = useQuery(["scheduledMatches", sportId], async () => {
-    try {
-      const response = await axios.request(scheduledMatchesOption);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching scheduled events", error);
-      throw new Error("Error fetching scheduled events");
+  const scheduledMatches = useQuery(
+    ["scheduledMatches", sportId, leagueId],
+    async () => {
+      if (leagueId) {
+        try {
+          const response = await axios.request(scheduledMatchesOption);
+          return response.data;
+        } catch (error) {
+          console.error("Error fetching scheduled events", error);
+          throw new Error("Error fetching scheduled events");
+        }
+      }
     }
-  });
+  );
 
   return (
     <section className={`${style.countryLeague}`}>
-      <LeagueNavigation activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
+      <LeagueNavigation
+        activeMenu={activeMenu}
+        setActiveMenu={setActiveMenu}
+        setLeagueId={setLeagueId}
+      />
 
       {activeMenu === "SUMMARY" && (
         <div>
@@ -87,25 +99,27 @@ const CountryLeague = () => {
             setActiveMenu={setActiveMenu}
             activeMenu={activeMenu}
           />
-          <Table />
+          <Table leagueId={leagueId} seasonId={seasonId} />
         </div>
       )}
 
       {activeMenu === "RESULTS" && (
         <LatestScores
           resultData={data?.DATA}
-          sliceLength={data?.DATA.length}
+          sliceLength={data?.DATA?.EVENTS?.length}
           activeMenu={activeMenu}
         />
       )}
       {activeMenu === "FIXTURES" && (
         <ScheduledMatches
           fixturesMatchData={scheduledMatches.data.DATA}
-          sliceLength={scheduledMatches?.data?.DATA.length}
+          sliceLength={scheduledMatches?.data?.DATA?.EVENTS?.length}
           activeMenu={activeMenu}
         />
       )}
-      {activeMenu === "STANDINGS" && <Table />}
+      {activeMenu === "STANDINGS" && (
+        <Table leagueId={leagueId} seasonId={seasonId} />
+      )}
     </section>
   );
 };
