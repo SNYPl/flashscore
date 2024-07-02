@@ -7,10 +7,6 @@ interface matchProps {
 }
 
 const MatchLists: React.FC<matchProps> = ({ selectedMatchNav, data }) => {
-  // if (!allMatch?.DATA || !Array.isArray(allMatch.DATA)) {
-  //   return <div>No matches available</div>;
-  // }
-
   const filterEvents = (events: any[]) => {
     switch (selectedMatchNav) {
       case "LIVE":

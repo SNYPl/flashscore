@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./style.module.css";
 import LeagueNavigation from "./leagueNavigation/LeagueNavigation";
-import Table from "./matches/Matches";
+import Table from "./table/Table";
 import Todaymatches from "./leagueNavigation/todayMatches/Todaymatches";
 import LatestScores from "./leagueNavigation/latestScores/LatestScores";
 import ScheduledMatches from "./leagueNavigation/scheduledMatches/ScheduledMatches";
@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useSearchParams } from "next/navigation";
+import { Skeleton } from "antd";
 
 const CountryLeague = () => {
   const [activeMenu, setActiveMenu] = useState("SUMMARY");
@@ -75,6 +76,12 @@ const CountryLeague = () => {
       }
     }
   );
+
+  if (isLoading) {
+    <div className="p-5 w-full">
+      <Skeleton />
+    </div>;
+  }
 
   return (
     <section className={`${style.countryLeague}`}>

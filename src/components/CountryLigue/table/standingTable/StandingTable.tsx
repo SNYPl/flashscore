@@ -1,18 +1,57 @@
+"use client";
 import React, { useState } from "react";
 import style from "./style.module.css";
-import Link from "next/link";
-import MatchItem from "./matchItem/MatchItem";
+import MatchItem from "../tableTeamInfo/TableTeamInfo";
+import MatchesInfoTips from "./matchesInfoTips/MatchesInfoTips";
+import { useQuery } from "react-query";
+import axios from "axios";
 
-const MatchesInfo = ({
-  setTableMenu,
-  tableMenu,
-  data,
-}: {
-  setTableMenu: any;
-  tableMenu: string;
-  data: any;
+interface tableProps {
+  setApiMenuRequest: any;
+  apiMenuRequest: string;
+  seasonId: string | null;
+  leagueId: string;
+}
+
+const StandingTable: React.FC<tableProps> = ({
+  setApiMenuRequest,
+  apiMenuRequest,
+  seasonId,
+  leagueId,
 }) => {
+  const [tableMenu, setTableMenu] = useState("OVERALL");
+
   const menu = ["OVERALL", "HOME", "AWAY"];
+
+  const options = {
+    method: "GET",
+    url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/standings",
+    params: {
+      tournament_season_id: seasonId,
+      standing_type: apiMenuRequest,
+      locale: "en_INT",
+      tournament_stage_id: leagueId,
+    },
+    headers: {
+      "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
+      "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
+    },
+  };
+
+  const { data, isLoading, isError, isFetched, refetch } = useQuery(
+    ["matchTable", apiMenuRequest, leagueId, seasonId],
+    async () => {
+      try {
+        const response = await axios.request(options);
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching table data ", error);
+        throw new Error("Error fetching table data");
+      }
+    }
+  );
+
+  const decisionData = data?.META?.DECISIONS || [];
 
   return (
     <section className={`${style.info}`}>
@@ -21,16 +60,19 @@ const MatchesInfo = ({
           <li
             key={index}
             className={`${tableMenu === el ? style.activeMenu : ""}`}
-            onClick={() => setTableMenu(el)}
+            onClick={() => {
+              setTableMenu(el);
+              setApiMenuRequest(el.toLocaleLowerCase());
+            }}
           >
             <button>{el}</button>
           </li>
         ))}
       </ul>
 
-      {data?.map((el: any) => {
+      {data?.DATA.map((el: any) => {
         return (
-          <article>
+          <article key={el.GROUP_ID}>
             <div>
               <div
                 className={`${style.infoTableTitle} flex items-center  p-2 gap-x-2`}
@@ -93,8 +135,16 @@ const MatchesInfo = ({
           </article>
         );
       })}
+
+      <MatchesInfoTips
+        qualification={data?.META.QUALIFICATION_INFO}
+        decisionData={decisionData}
+      />
+      {decisionData?.length !== 0 && (
+        <p className={style.infoText}>{decisionData[0]}</p>
+      )}
     </section>
   );
 };
 
-export default MatchesInfo;
+export default StandingTable;

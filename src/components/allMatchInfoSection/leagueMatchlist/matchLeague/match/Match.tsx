@@ -70,7 +70,7 @@ const Match: React.FC<matchProps> = ({
       >
         <EmptyFavouriteStarIcon />
       </div>
-      <Link href={"/match/Villarreal"} target="_blank" className="w-full">
+      <Link href={`/match/event?id=${id}`} target="_blank" className="w-full">
         <section className={` items-center ${style.match}`}>
           <article className={`flex   items-center `}>
             <div className="mr-7 w-16">

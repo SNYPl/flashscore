@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./style.module.css";
-import { FlagIcon } from "@/common/svg/flag";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -15,7 +14,7 @@ interface matchProps {
   image: string;
 }
 
-const MatchItem: React.FC<matchProps> = ({
+const TableTeamInfo: React.FC<matchProps> = ({
   id,
   name,
   mp,
@@ -73,4 +72,4 @@ const MatchItem: React.FC<matchProps> = ({
   );
 };
 
-export default MatchItem;
+export default TableTeamInfo;

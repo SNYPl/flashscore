@@ -45,7 +45,7 @@ const Todaymatches: React.FC = ({}) => {
     (el: any) => el.TOURNAMENT_ID === tournamentId
   );
 
-  if (currentLeague.length === 0 && !isLoading) {
+  if (currentLeague?.length === 0 && !isLoading) {
     return <div></div>;
   }
 

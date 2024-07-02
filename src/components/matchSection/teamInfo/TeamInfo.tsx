@@ -2,6 +2,10 @@ import React from "react";
 import style from "./style.module.css";
 import Image from "next/image";
 
+interface props {
+  data: any;
+}
+
 const Icon = () => (
   <svg
     width="16"
@@ -24,15 +28,21 @@ const Icon = () => (
   </svg>
 );
 
-const TeamInfo: React.FC = () => {
+const TeamInfo: React.FC<props> = ({ data }) => {
+  console.log(data);
   return (
     <section className={`${style.teamInfo}  w-full px-3`}>
       <article className="flex justify-around">
         <div className={`${style.infoItem} flex flex-col`}>
           <div className={`${style.infoImage}`}>
-            <Image src="/images/club.svg" alt="club" width={55} height={55} />
+            <Image
+              src={data?.HOME_IMAGES[0]}
+              alt="club"
+              width={55}
+              height={55}
+            />
           </div>
-          <h3 className="text-center font-bold">Villarreal</h3>
+          <h3 className="text-center font-bold">{data?.HOME_NAME}</h3>
         </div>
 
         <div className={`${style.infoTime} flex flex-col items-center`}>
