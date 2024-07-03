@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { useQuery } from "react-query";
+import { Skeleton } from "antd";
 
 const MatchSection: React.FC = () => {
   const [activeMenu, setActiveSection] = useState("INFO");
@@ -31,7 +32,7 @@ const MatchSection: React.FC = () => {
     },
   };
 
-  const { data, isLoading, isError, isFetched } = useQuery(
+  const { data, isLoading, isError, isFetched, isFetching } = useQuery(
     ["eventInfo", eventId],
     async () => {
       try {
@@ -46,16 +47,81 @@ const MatchSection: React.FC = () => {
 
   console.log(data);
 
+  const h2hOption = {
+    method: "GET",
+    url: "https://flashlive-sports.p.rapidapi.com/v1/events/h2h",
+    params: {
+      event_id: eventId,
+      locale: "en_INT",
+    },
+    headers: {
+      "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
+      "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
+    },
+  };
+
+  const h2hData = useQuery(["h2hData", eventId], async () => {
+    try {
+      const response = await axios.request(h2hOption);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching result events", error);
+      throw new Error("Error fetching result events");
+    }
+  });
+
+  const summaryIncidents = {
+    method: "GET",
+    url: "https://flashlive-sports.p.rapidapi.com/v1/events/summary-incidents",
+    params: {
+      event_id: eventId,
+      locale: "en_INT",
+    },
+    headers: {
+      "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
+      "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
+    },
+  };
+
+  const summaryData = useQuery(["summaryDataIncidents", eventId], async () => {
+    try {
+      const response = await axios.request(summaryIncidents);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching summary incidents events", error);
+      throw new Error("Error fetching summary incidents events");
+    }
+  });
+
+  if (isLoading || h2hData.isLoading) {
+    return (
+      <div className="p-4">
+        <Skeleton />
+      </div>
+    );
+  }
+
+  const stageId = data?.DATA?.TOURNAMENT.TOURNAMENT_STAGE_ID;
+  const seasonId = data?.DATA?.TOURNAMENT.TOURNAMENT_SEASON_ID;
+
   return (
     <section className={` flex flex-col `}>
-      <TeamMatchInfo data={data?.DATA.EVENT} />
+      <TeamMatchInfo data={data?.DATA.EVENT} h2hData={h2hData?.data?.DATA} />
       <Nav activeMenu={activeMenu} setActiveSection={setActiveSection} />
 
-      {activeMenu === "INFO" && <Info />}
+      {activeMenu === "INFO" && (
+        <Info
+          eventData={data?.DATA.EVENT}
+          h2hData={h2hData?.data?.DATA}
+          summaryData={summaryData?.data}
+        />
+      )}
 
-      {/* {activeMenu === "TABLE" && <Table />} */}
+      {activeMenu === "TABLE" && (
+        <Table leagueId={stageId} seasonId={seasonId} />
+      )}
 
-      {activeMenu === "H2H" && <H2h />}
+      {activeMenu === "H2H" && <H2h data={h2hData?.data} />}
 
       {activeMenu === "LINE-UPS" && <LineUps />}
 

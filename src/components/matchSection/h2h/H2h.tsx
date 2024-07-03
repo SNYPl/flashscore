@@ -3,7 +3,7 @@ import style from "./style.module.css";
 import H2hNavigation from "./h2h2Navigation/H2hNavigation";
 import MatchLeague from "@/components/allMatchInfoSection/leagueMatchlist/matchLeague/MatchLeague";
 
-const H2h: React.FC = () => {
+const H2h = ({ data }: { data: any }) => {
   return (
     <section className={`${style.h2h} p-3 pt-0`}>
       <H2hNavigation />

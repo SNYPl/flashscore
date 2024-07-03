@@ -1,34 +1,121 @@
 import React from "react";
 import style from "./style.module.css";
 import { Venue, Flag, Capacity, Referee } from "@/common/svg/match";
+import { useSearchParams } from "next/navigation";
+import axios from "axios";
+import { useQuery } from "react-query";
+import Image from "next/image";
+import { Skeleton } from "antd";
 
-const NotPlay: React.FC = () => {
-  let arrayOf6 = new Array(6).fill(1);
+const NotPlay = ({ summaryData }: { summaryData: any }) => {
+  const searchParams = useSearchParams();
+  const eventId = searchParams.get("id");
+
+  const options = {
+    method: "GET",
+    url: "https://flashlive-sports.p.rapidapi.com/v1/events/missing-players",
+    params: {
+      event_id: eventId,
+      locale: "en_INT",
+    },
+    headers: {
+      "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
+      "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
+    },
+  };
+
+  const { data, isLoading, isError, isFetched, isFetching } = useQuery(
+    ["eventMissingPlayers", eventId],
+    async () => {
+      try {
+        const response = await axios.request(options);
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching missingPlayers events", error);
+        throw new Error("Error fetching missingPlayers events");
+      }
+    },
+    {
+      retry: false,
+      refetchOnWindowFocus: false,
+      enabled: !!eventId,
+    }
+  );
+
+  if (isLoading) {
+    return (
+      <div className="p-4">
+        <Skeleton />
+      </div>
+    );
+  }
+
+  const team1Players = data?.DATA.filter((el: any) => el.TEAM === 1);
+  const team2Players = data?.DATA.filter((el: any) => el.TEAM === 2);
+
   return (
-    <article
+    <section
       className={`${style.formInfo}  flex justify-between p-3 gap-x-3 flex-col`}
     >
       <div className={`${style.title} mb-4 `}>
         <p>WILL NOT PLAY</p>
       </div>
-      <div className={`${style.playList}  mb-4`}>
-        {arrayOf6.map((el, id) => (
-          <div
-            className={` flex items-center ${id % 2 === 1 ? style.even : ""}`}
-            key={id}
-          >
-            <div className={`${style.flag} mr-2 `}>
-              <div className={`${style.flagBorder} `}>
-                <Flag />
-              </div>
-            </div>
-            <div className={`${style.player} `}>
-              <h2>Duranville J.</h2>
-              <p>(Muscle Injury)</p>
-            </div>
-          </div>
-        ))}
-      </div>
+      {data?.DATA.length !== 0 ? (
+        <div className={`${style.playList}  mb-4`}>
+          <article>
+            {team1Players?.map((el: any) => {
+              return (
+                <div className={` flex items-center mb-3 `} key={el.PLAYER_ID}>
+                  <div className={`${style.flag} mr-2  `}>
+                    <div className={`${style.flagBorder} `}>
+                      <Image
+                        src={`https://www.flashscore.com/res/image/data/${el.STL}`}
+                        alt="img"
+                        width={18}
+                        height={11}
+                      />
+                    </div>
+                  </div>
+                  <div className={`${style.player} `}>
+                    <h2>{el.PLAYER_NAME}</h2>
+                    <p>({el.ABSENCE_REASON})</p>
+                  </div>
+                </div>
+              );
+            })}
+          </article>
+
+          <article className={style.missingTeamTwoPlayers}>
+            {team2Players?.map((el: any) => {
+              return (
+                <div
+                  className={` flex items-center mb-3 flex-row-reverse`}
+                  key={el.PLAYER_ID}
+                >
+                  <div className={`${style.flag} ml-2  `}>
+                    <div className={`${style.flagBorder} `}>
+                      <Image
+                        src={`https://www.flashscore.com/res/image/data/${el.STL}`}
+                        alt="img"
+                        width={18}
+                        height={11}
+                      />
+                    </div>
+                  </div>
+                  <div className={`${style.player} `}>
+                    <h2>{el.PLAYER_NAME}</h2>
+                    <p className="text-right">({el.ABSENCE_REASON})</p>
+                  </div>
+                </div>
+              );
+            })}
+          </article>
+        </div>
+      ) : (
+        <div>
+          <p className={style.noMissedPlayer}>All Players Included</p>
+        </div>
+      )}
 
       <div className={`${style.title} mb-4 `}>
         <p>MATCH INFORMATION</p>
@@ -38,20 +125,27 @@ const NotPlay: React.FC = () => {
         <div className={`${style.matchInfoItem} mb-4 `}>
           <Referee />
           <h4>REFEREE:</h4>
-          <h3>Vincic S.</h3>
+          <h3>{summaryData?.INFO?.REFEREE}</h3>
         </div>
         <div className={`${style.matchInfoItem} mb-4 `}>
           <Venue />
           <h4>VENUE:</h4>
-          <h3>Wembley Stadium (London)</h3>
+          <h3>{summaryData?.INFO?.VENUE}</h3>
         </div>
         <div className={`${style.matchInfoItem} mb-4 `}>
           <Capacity />
           <h4>CAPACITY:</h4>
-          <h3>90 000</h3>
+          <h3>{summaryData?.INFO?.MIV}</h3>
         </div>
+        {summaryData?.INFO?.ATTENDANCE && (
+          <div className={`${style.matchInfoItem} mb-4 `}>
+            <Capacity />
+            <h4>ATTENDANCE:</h4>
+            <h3>{summaryData?.INFO?.ATTENDANCE}</h3>
+          </div>
+        )}
       </article>
-    </article>
+    </section>
   );
 };
 

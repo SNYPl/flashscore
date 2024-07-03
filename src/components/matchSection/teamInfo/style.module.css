@@ -2,6 +2,7 @@
   padding-top: 20px;
   border-top: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 20px;
 }
 .infoImage {
   padding: 14px;
@@ -39,4 +40,9 @@
   padding: 8px 13px;
   display: flex;
   align-items: center;
+}
+
+.stageTitle {
+  color: #0092c1 !important;
+  margin-top: 10px;
 }

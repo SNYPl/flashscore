@@ -38,6 +38,7 @@
 
 .tableWords {
   display: grid;
+  /* grid-template-columns: repeat(6, 1fr); */
   grid-template-columns: repeat(5, 1fr);
 }
 .tableWords p {
@@ -53,15 +54,15 @@
   padding-top: 1px;
 }
 
-.yellowColor {
+.D {
   background-color: #f3a000;
 }
 
-.greenColor {
+.W {
   background-color: #00a83f;
 }
 
-.redColor {
+.L {
   background-color: #dc0000;
 }
 
@@ -83,4 +84,8 @@
   font-weight: 500;
   letter-spacing: 1px;
   line-height: 20px;
+}
+
+.tooltip {
+  font-size: 11px;
 }

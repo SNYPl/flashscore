@@ -47,9 +47,11 @@ const TopScoresTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
   );
 
   if (isLoading) {
-    <div className="p-5">
-      <Skeleton />
-    </div>;
+    return (
+      <div className="p-5 ">
+        <Skeleton />
+      </div>
+    );
   }
 
   return (

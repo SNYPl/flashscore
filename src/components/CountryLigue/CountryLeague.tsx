@@ -78,9 +78,11 @@ const CountryLeague = () => {
   );
 
   if (isLoading) {
-    <div className="p-5 w-full">
-      <Skeleton />
-    </div>;
+    return (
+      <div className="p-5 ">
+        <Skeleton />
+      </div>
+    );
   }
 
   return (

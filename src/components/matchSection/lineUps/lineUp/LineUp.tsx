@@ -1,7 +1,42 @@
 import React from "react";
 import style from "./style.module.css";
+import { useSearchParams } from "next/navigation";
+import axios from "axios";
+import { useQuery } from "react-query";
 
 const LineUp: React.FC = () => {
+  const searchParams = useSearchParams();
+
+  const eventId = searchParams.get("id");
+
+  const options = {
+    method: "GET",
+    url: "https://flashlive-sports.p.rapidapi.com/v1/events/lineups",
+    params: {
+      event_id: eventId,
+      locale: "en_INT",
+    },
+    headers: {
+      "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
+      "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
+    },
+  };
+
+  const { data, isLoading, isError, isFetched, isFetching } = useQuery(
+    ["eventLineUp", eventId],
+    async () => {
+      try {
+        const response = await axios.request(options);
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching result events", error);
+        throw new Error("Error fetching result events");
+      }
+    }
+  );
+
+  console.log(data);
+
   const formation = [4, 3, 1, 2];
 
   const formation1 = [4, 3, 3];
