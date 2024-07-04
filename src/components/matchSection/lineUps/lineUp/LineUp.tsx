@@ -1,16 +1,13 @@
 import React from "react";
 import style from "./style.module.css";
 
-
 interface props {
-  data:any;
-  teamOneFormation:any;
-  teamTwoFormation:any;
-  homeTeamName:string;
-  awayTeamName:string;
+  data: any;
+  teamOneFormation: any;
+  teamTwoFormation: any;
+  homeTeamName: string;
+  awayTeamName: string;
 }
-
-
 
 interface Player {
   PLAYER_FULL_NAME: string;
@@ -19,12 +16,13 @@ interface Player {
   PLAYER_ID: string;
 }
 
-
-
-
-const LineUp:React.FC<props>= ({teamOneFormation,data,teamTwoFormation,awayTeamName,homeTeamName}) => {
-
-
+const LineUp: React.FC<props> = ({
+  teamOneFormation,
+  data,
+  teamTwoFormation,
+  awayTeamName,
+  homeTeamName,
+}) => {
   const isLineUp = teamOneFormation?.FORMATION_DISPOSTION;
 
   const renderFormation = (formation: string, players: Player[]) => {
@@ -39,7 +37,9 @@ const LineUp:React.FC<props>= ({teamOneFormation,data,teamTwoFormation,awayTeamN
           return (
             <div key={player?.PLAYER_ID} className={style.player}>
               <div className={style.playerNumber}>{player?.PLAYER_NUMBER}</div>
-              <div className={style.playerName}><p>{player?.PLAYER_FULL_NAME}</p></div>
+              <div className={style.playerName}>
+                <p>{player?.PLAYER_FULL_NAME}</p>
+              </div>
             </div>
           );
         })}
@@ -47,36 +47,50 @@ const LineUp:React.FC<props>= ({teamOneFormation,data,teamTwoFormation,awayTeamN
     ));
   };
 
-
-  const sortingPlayers = (members:Player[]) => {
-    return members.sort((a,b)=> a.PLAYER_POSITION - b.PLAYER_POSITION)
-  }
-
-
+  const sortingPlayers = (members: Player[]) => {
+    return members.sort((a, b) => a.PLAYER_POSITION - b.PLAYER_POSITION);
+  };
 
   return (
     <section className={`${style.lineUp}`}>
       <div className={`${style.title}`}>
         <p>Possible line up</p>
       </div>
-      {data.DATA.length !== 0 && isLineUp ? <article
-        style={{ backgroundImage: "/images/match/stadium.jpg" }}
-        className={`${style.stadium}`}
-      >
-        <div className={`${style.teamOne}`}>
-          <p className={`${style.teamTitle}`}>{homeTeamName} <span>{teamOneFormation?.FORMATION_DISPOSTION.slice(2)}</span></p>
-          <div className={`pt-6 ${style.teamOnePlayers}`}>
-            {renderFormation(teamOneFormation.FORMATION_DISPOSTION, sortingPlayers(teamOneFormation.MEMBERS))}
-
+      {data.DATA.length !== 0 && isLineUp ? (
+        <article
+          style={{ backgroundImage: "/images/match/stadium.jpg" }}
+          className={`${style.stadium}`}
+        >
+          <div className={`${style.teamOne}`}>
+            <p className={`${style.teamTitle}`}>
+              {homeTeamName}{" "}
+              <span>{teamOneFormation?.FORMATION_DISPOSTION.slice(2)}</span>
+            </p>
+            <div className={`pt-6 ${style.teamOnePlayers}`}>
+              {renderFormation(
+                teamOneFormation.FORMATION_DISPOSTION,
+                sortingPlayers(teamOneFormation.MEMBERS)
+              )}
+            </div>
           </div>
-        </div>
-        <div className={`${style.teamTwo}`}>
-          <p className={`${style.teamTitle}`}>{awayTeamName} <span>{teamTwoFormation?.FORMATION_DISPOSTION.slice(2)}</span></p>
-          <div className={`pb-6 ${style.teamTwoPlayers}`}>
-          {renderFormation(teamTwoFormation.FORMATION_DISPOSTION, sortingPlayers(teamTwoFormation.MEMBERS))}
+          <div className={`${style.teamTwo}`}>
+            <p className={`${style.teamTitle}`}>
+              {awayTeamName}{" "}
+              <span>{teamTwoFormation?.FORMATION_DISPOSTION.slice(2)}</span>
+            </p>
+            <div className={`pb-6 ${style.teamTwoPlayers}`}>
+              {renderFormation(
+                teamTwoFormation.FORMATION_DISPOSTION,
+                sortingPlayers(teamTwoFormation.MEMBERS)
+              )}
+            </div>
           </div>
+        </article>
+      ) : (
+        <div className="pl-2">
+          <p className={style.noData}>ინფორმაცია არ არის</p>
         </div>
-      </article>: <div className="pl-2"><p className={style.noData}>ინფორმაცია არ არის</p></div>}
+      )}
     </section>
   );
 };

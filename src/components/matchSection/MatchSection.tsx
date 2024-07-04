@@ -45,7 +45,6 @@ const MatchSection: React.FC = () => {
     }
   );
 
-
   const h2hOption = {
     method: "GET",
     url: "https://flashlive-sports.p.rapidapi.com/v1/events/h2h",
@@ -100,9 +99,6 @@ const MatchSection: React.FC = () => {
     );
   }
 
-  console.log(data?.DATA.EVENT.AWAY_NAME);
-
-
   const stageId = data?.DATA?.TOURNAMENT.TOURNAMENT_STAGE_ID;
   const seasonId = data?.DATA?.TOURNAMENT.TOURNAMENT_SEASON_ID;
 
@@ -125,7 +121,12 @@ const MatchSection: React.FC = () => {
 
       {activeMenu === "H2H" && <H2h data={h2hData?.data} />}
 
-      {activeMenu === "LINE-UPS" && <LineUps homeTeamName={data?.DATA.EVENT.HOME_NAME} awayTeamName={data?.DATA.EVENT.AWAY_NAME}/>}
+      {activeMenu === "LINE-UPS" && (
+        <LineUps
+          homeTeamName={data?.DATA.EVENT.HOME_NAME}
+          awayTeamName={data?.DATA.EVENT.AWAY_NAME}
+        />
+      )}
 
       <div className="p-3">
         <Image src="/images/ad/matchAd.png" alt="ad" width={658} height={100} />

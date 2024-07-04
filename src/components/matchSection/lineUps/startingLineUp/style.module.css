@@ -1,4 +1,4 @@
-.injuries {
+.lineUP {
   margin-bottom: 8px;
 }
 .title {
@@ -26,7 +26,7 @@
 }
 
 .player h2 {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   color: #001e28;
 }
@@ -40,18 +40,18 @@
   flex-direction: row-reverse;
 }
 
-.even .flag {
+.even .img {
   margin-right: 0;
   margin-left: 8px;
 }
 
-.coaches {
+.info {
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 10px;
 }
 
-.flagBorder {
+.imgBorder {
   border: 1px solid #e8e8e8;
   padding: 7px 6px 8px 6px;
   border-radius: 100px;
@@ -62,7 +62,13 @@
   align-items: center;
 }
 
-.coachTwo {
+.playerTwo {
   justify-content: flex-start;
   flex-direction: row-reverse;
+}
+
+.num {
+  font-size: 13px;
+  font-weight: 600;
+  color: #001e28;
 }

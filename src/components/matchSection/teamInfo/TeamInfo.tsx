@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./style.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
 interface props {
   data: any;
@@ -38,7 +39,9 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
               height={55}
             />
           </div>
-          <h3 className="text-center font-bold">{data?.HOME_NAME}</h3>
+          <Link href="#">
+            <h3 className="text-center font-bold">{data?.HOME_NAME}</h3>
+          </Link>
         </div>
 
         <div className={`${style.infoTime} flex flex-col items-center`}>
@@ -79,7 +82,9 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
               height={55}
             />
           </div>
-          <h3 className="text-center font-bold">{data?.AWAY_NAME}</h3>
+          <Link href="#">
+            <h3 className="text-center font-bold">{data?.AWAY_NAME}</h3>
+          </Link>
         </div>
       </article>
       {/* <div className={`flex justify-center items-center ${style.infoText}`}>

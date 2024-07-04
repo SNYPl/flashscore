@@ -1,63 +1,60 @@
 import React from "react";
 import style from "./style.module.css";
-import { InjuriesICon, Flag } from "@/common/svg/match";
-import WillNotPlay from "../../info/notPlay/NotPlay"
+import WillNotPlay from "../../info/notPlay/NotPlay";
+import { UserOutlined } from "@ant-design/icons";
 
-const Injuries: React.FC = () => {
-  let arrayOf6 = new Array(6).fill(1);
+const Injuries = ({ coaches }: { coaches: any }) => {
+  if (!coaches) {
+    return <WillNotPlay />;
+  }
+  const [formation1, formation2] = coaches?.FORMATIONS;
 
   return (
     <article
       className={`${style.injuries}  flex justify-between p-3 gap-x-3 flex-col px-0`}
     >
-
-<WillNotPlay/>
-      {/* <div className={`${style.title} mb-4 `}>
-        <p>WILL NOT PLAY</p>
-      </div>
-      <div className={`${style.playList}  mb-4`}>
-        {arrayOf6.map((el: any, id: any) => (
-          <div
-            className={` flex items-center ${id % 2 === 1 ? style.even : ""}`}
-            key={id}
-          >
-            <div className={`${style.flag} mr-2 `}>
-              <div>
-                <InjuriesICon />
-              </div>
-            </div>
-            <div className={`${style.player} `}>
-              <h2>Duranville J.</h2>
-              <p>(Muscle Injury)</p>
-            </div>
-          </div>
-        ))}
-      </div> */}
+      <WillNotPlay />
 
       <div className={`${style.title} mb-4 `}>
         <p>COACHES</p>
       </div>
 
       <article className={`${style.coaches} mb-4 `}>
-        {arrayOf6.map((el: any, id: any) => {
-          return (
-            <div
-              className={`${style.coach}  flex items-center ${
-                id % 2 === 1 ? style.even : ""
-              }`}
-              key={id}
-            >
-              <div className={`${style.flag} mr-2 `}>
-                <div className={`${style.flagBorder} `}>
-                  <Flag />
+        <div>
+          {formation1?.MEMBERS.map((el: any) => {
+            return (
+              <div className={`${style.coach}  flex items-center `}>
+                <div className={`${style.flag} mr-2 `}>
+                  <div className={`${style.flagBorder} `}>
+                    <UserOutlined />
+                  </div>
+                </div>
+                <div className={`${style.player}  `}>
+                  <h2>{el.PLAYER_FULL_NAME}</h2>
                 </div>
               </div>
-              <div className={`${style.player}  `}>
-                <h2>Duranville J.</h2>
+            );
+          })}
+        </div>
+
+        <div>
+          {formation2?.MEMBERS.map((el: any) => {
+            return (
+              <div
+                className={`${style.coach}  ${style.coachTwo} flex items-center `}
+              >
+                <div className={`${style.flag} ml-2 `}>
+                  <div className={`${style.flagBorder} `}>
+                    <UserOutlined />
+                  </div>
+                </div>
+                <div className={`${style.player}  `}>
+                  <h2>{el.PLAYER_FULL_NAME}</h2>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </article>
     </article>
   );

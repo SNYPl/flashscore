@@ -105,7 +105,10 @@ const FormInfo: React.FC<props> = ({ eventData, h2hData }) => {
                       key={match.EVENT_ID}
                       className={style.tooltip}
                     >
-                      <Link href={"#"} target="_blank">
+                      <Link
+                        href={`/match/event?id=${match.EVENT_ID}`}
+                        target="_blank"
+                      >
                         <p className={`${style[result]}`}>{result}</p>
                       </Link>{" "}
                     </Tooltip>

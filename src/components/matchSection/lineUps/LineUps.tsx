@@ -6,15 +6,14 @@ import { Skeleton } from "antd";
 import axios, { isAxiosError } from "axios";
 import { useQuery } from "react-query";
 import { useSearchParams } from "next/navigation";
+import StartingLineUp from "./startingLineUp/StartingLineUp";
 
 interface lineUpProp {
-  homeTeamName:string;
-  awayTeamName:string;
+  homeTeamName: string;
+  awayTeamName: string;
 }
 
-
-const LineUps: React.FC<lineUpProp> = ({awayTeamName,homeTeamName}) => {
-
+const LineUps: React.FC<lineUpProp> = ({ awayTeamName, homeTeamName }) => {
   const searchParams = useSearchParams();
 
   const eventId = searchParams.get("id");
@@ -36,12 +35,11 @@ const LineUps: React.FC<lineUpProp> = ({awayTeamName,homeTeamName}) => {
     ["eventLineUp", eventId],
     async () => {
       try {
-        const response = await axios.request(options).catch(error => {
+        const response = await axios.request(options).catch((error) => {
           if (isAxiosError(error)) {
             switch (error.response?.status) {
               case 404:
-
-                return { data: { DATA:[]}  };
+                return { data: { DATA: [] } };
 
               default:
                 break;
@@ -55,17 +53,15 @@ const LineUps: React.FC<lineUpProp> = ({awayTeamName,homeTeamName}) => {
         console.error("Error fetching result events", error);
         throw new Error("Error fetching result events");
       }
-    }, {
+    },
+    {
       retry: false,
       refetchOnWindowFocus: false,
       enabled: !!eventId,
     }
   );
 
-
-  
-
-  if (isLoading ) {
+  if (isLoading) {
     return (
       <div className="p-5 ">
         <Skeleton />
@@ -73,16 +69,31 @@ const LineUps: React.FC<lineUpProp> = ({awayTeamName,homeTeamName}) => {
     );
   }
 
+  if (data.DATA.length === 0) {
+    return (
+      <div className="p-5 ">
+        <p className="text-sm">ინფორმაცია არ არის</p>
+      </div>
+    );
+  }
 
-  
-  const [ startingLineUp,subtitiles] = data?.DATA;
-  const[teamOneFormation,teamTwoFormation] = startingLineUp?.FORMATIONS;
-
+  const [startingLineUp, subtitiles, coaches] = data?.DATA;
+  const [teamOneFormation, teamTwoFormation] = startingLineUp?.FORMATIONS;
 
   return (
     <section className={`${style.lineUps}`}>
-      <LineUp  data={data}  teamOneFormation={teamOneFormation} teamTwoFormation={teamTwoFormation} awayTeamName={awayTeamName} homeTeamName={homeTeamName}/>
-      <Injuries />
+      <LineUp
+        data={data}
+        teamOneFormation={teamOneFormation}
+        teamTwoFormation={teamTwoFormation}
+        awayTeamName={awayTeamName}
+        homeTeamName={homeTeamName}
+      />
+      <StartingLineUp
+        teamOneFormation={teamOneFormation}
+        teamTwoFormation={teamTwoFormation}
+      />
+      <Injuries coaches={coaches} />
     </section>
   );
 };
