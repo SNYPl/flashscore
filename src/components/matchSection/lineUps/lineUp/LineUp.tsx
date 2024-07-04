@@ -1,91 +1,82 @@
 import React from "react";
 import style from "./style.module.css";
-import { useSearchParams } from "next/navigation";
-import axios from "axios";
-import { useQuery } from "react-query";
 
-const LineUp: React.FC = () => {
-  const searchParams = useSearchParams();
 
-  const eventId = searchParams.get("id");
+interface props {
+  data:any;
+  teamOneFormation:any;
+  teamTwoFormation:any;
+  homeTeamName:string;
+  awayTeamName:string;
+}
 
-  const options = {
-    method: "GET",
-    url: "https://flashlive-sports.p.rapidapi.com/v1/events/lineups",
-    params: {
-      event_id: eventId,
-      locale: "en_INT",
-    },
-    headers: {
-      "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
-      "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
-    },
+
+
+interface Player {
+  PLAYER_FULL_NAME: string;
+  PLAYER_POSITION: number;
+  PLAYER_NUMBER: number;
+  PLAYER_ID: string;
+}
+
+
+
+
+const LineUp:React.FC<props>= ({teamOneFormation,data,teamTwoFormation,awayTeamName,homeTeamName}) => {
+
+
+  const isLineUp = teamOneFormation?.FORMATION_DISPOSTION;
+
+  const renderFormation = (formation: string, players: Player[]) => {
+    const lines = formation.split("-").map(Number);
+    let playerIndex = 0;
+
+    return lines.map((count, lineIndex) => (
+      <div key={lineIndex} className={style.line}>
+        {Array.from({ length: count }).map((_, playerPos) => {
+          const player = players[playerIndex];
+          playerIndex++;
+          return (
+            <div key={player?.PLAYER_ID} className={style.player}>
+              <div className={style.playerNumber}>{player?.PLAYER_NUMBER}</div>
+              <div className={style.playerName}><p>{player?.PLAYER_FULL_NAME}</p></div>
+            </div>
+          );
+        })}
+      </div>
+    ));
   };
 
-  const { data, isLoading, isError, isFetched, isFetching } = useQuery(
-    ["eventLineUp", eventId],
-    async () => {
-      try {
-        const response = await axios.request(options);
-        return response.data;
-      } catch (error) {
-        console.error("Error fetching result events", error);
-        throw new Error("Error fetching result events");
-      }
-    }
-  );
 
-  console.log(data);
+  const sortingPlayers = (members:Player[]) => {
+    return members.sort((a,b)=> a.PLAYER_POSITION - b.PLAYER_POSITION)
+  }
 
-  const formation = [4, 3, 1, 2];
 
-  const formation1 = [4, 3, 3];
 
   return (
     <section className={`${style.lineUp}`}>
       <div className={`${style.title}`}>
         <p>Possible line up</p>
       </div>
-      <article
+      {data.DATA.length !== 0 && isLineUp ? <article
         style={{ backgroundImage: "/images/match/stadium.jpg" }}
         className={`${style.stadium}`}
       >
         <div className={`${style.teamOne}`}>
-          <p className={`${style.teamTitle}`}>Real madrid</p>
+          <p className={`${style.teamTitle}`}>{homeTeamName} <span>{teamOneFormation?.FORMATION_DISPOSTION.slice(2)}</span></p>
           <div className={`pt-6 ${style.teamOnePlayers}`}>
-            <div className={style.player}>GK</div>
-            {formation.map((count: any, index) => {
-              console.log(count);
-              return (
-                <div key={index} className={style.line}>
-                  {Array.from({ length: parseInt(count) }).map((_, idx) => (
-                    <div key={idx} className={style.player}>
-                      {count}
-                    </div>
-                  ))}
-                </div>
-              );
-            })}
+            {renderFormation(teamOneFormation.FORMATION_DISPOSTION, sortingPlayers(teamOneFormation.MEMBERS))}
+
           </div>
         </div>
         <div className={`${style.teamTwo}`}>
-          <p className={`${style.teamTitle}`}>VillaReal</p>
+          <p className={`${style.teamTitle}`}>{awayTeamName} <span>{teamTwoFormation?.FORMATION_DISPOSTION.slice(2)}</span></p>
           <div className={`pb-6 ${style.teamTwoPlayers}`}>
-            <div className={style.player}>GK</div>
-            {formation1.map((count: any, index) => {
-              return (
-                <div key={index} className={style.line}>
-                  {Array.from({ length: parseInt(count) }).map((_, idx) => (
-                    <div key={idx} className={style.player}>
-                      {count}
-                    </div>
-                  ))}
-                </div>
-              );
-            })}
+          {renderFormation(teamTwoFormation.FORMATION_DISPOSTION, sortingPlayers(teamTwoFormation.MEMBERS))}
           </div>
         </div>
-      </article>
+      </article>: <div className="pl-2"><p className={style.noData}>ინფორმაცია არ არის</p></div>}
     </section>
   );
 };

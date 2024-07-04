@@ -14,6 +14,14 @@ const ScheduledMatches = ({
   setActiveMenu?: any;
   activeMenu: string;
 }) => {
+
+  
+  
+  if(activeMenu==="FIXTURES" && fixturesMatchData?.length ===0) {
+    return <div><p>ინფორმაცია არ არის</p></div>
+  }  
+
+
   return (
     <section className={` py-4 px-3 bg-white mb-4 rounded-lg`}>
       <h2 className={`font-bold ${style.title}`}>Scheduled</h2>

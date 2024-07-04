@@ -46,7 +46,6 @@ const MatchLeague: React.FC<leagueProps> = ({
 
   const { pinnedLeagueIds, addLeagueToLocalStorage } = usePinnedLeagues();
 
-  //     // Handle adding/removing a single event
   //     const existingLeague = favouriteEvents.find(
   //       (fav) => fav.mainLeagueID === tournamentId
   //     );
@@ -130,7 +129,7 @@ const MatchLeague: React.FC<leagueProps> = ({
 
   const isLeagueFavorited = isFavorited(tournamentId);
 
-  const newUrl = `${url}?name=${NAME2}&tournamentId=${tournamentId}&countryId=${countryId}`;
+  const newUrl = `${url}?seasonStageId=${tournamentStageId}&name=${NAME2}&tournamentId=${tournamentId}`;
 
   return (
     <section className={``}>

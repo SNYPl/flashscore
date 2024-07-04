@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import style from "./style.module.css";
 import MatchItem from "../tableTeamInfo/TableTeamInfo";
 import { useQuery } from "react-query";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
+import { Skeleton } from "antd";
 
 interface tableProps {
   setApiMenuRequest: any;
   apiMenuRequest: string;
   seasonId: string | null;
-  leagueId: string;
+  leagueId: string | null;
 }
 
 const FormTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
@@ -35,14 +36,42 @@ const FormTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
     ["formTable", leagueId, seasonId],
     async () => {
       try {
-        const response = await axios.request(options);
+        const response = await axios.request(options).catch(error => {
+          if (isAxiosError(error)) {
+            switch (error.response?.status) {
+              case 404:
+
+                return { data: { DATA:[]}  };
+
+              default:
+                break;
+            }
+          }
+
+          throw error;
+        });
         return response.data;
       } catch (error) {
         console.error("Error fetching table data ", error);
         throw new Error("Error fetching table data");
       }
+    },{
+      retry: false,
+      refetchOnWindowFocus: false,
+      enabled: !!leagueId || !!seasonId,
+    
     }
   );
+
+
+  
+  if (isLoading ) {
+    return (
+      <div className="p-5 ">
+        <Skeleton />
+      </div>
+    );
+  }
 
   function filterTeamsRankedFirst(groups: any) {
     const newArr = groups?.map((el: any) => {
@@ -75,6 +104,13 @@ const FormTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
   }
 
   const groups = filterTeamsRankedFirst(data?.DATA) || [];
+
+
+
+  if(!data?.DATA?.length) {
+    return <div><p>ინფორმაცია არ არის</p></div>
+  }
+
   return (
     <section className={`${style.info}`}>
       <ul className="flex items-center gap-x-2 pb-3 p-2">

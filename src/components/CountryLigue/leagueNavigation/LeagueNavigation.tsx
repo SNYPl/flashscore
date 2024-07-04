@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import { setAllStages } from "@/components/store/slices/matchesSlice";
 import { useSearchParams, usePathname } from "next/navigation";
+import { Skeleton } from "antd";
 
 interface leagueProps {
   COUNTRY_ID: number;
@@ -23,36 +24,34 @@ interface leagueProps {
 const LeagueNavigation = ({
   setActiveMenu,
   activeMenu,
-  setLeagueId,
 }: {
   activeMenu: string;
   setActiveMenu: any;
-  setLeagueId: any;
 }) => {
   const sportIdCheck = useSportIdHandler();
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
-  const path = usePathname();
 
   const leagueID = searchParams.get("leagueId");
-  const leagueName = searchParams.get("name");
-  const countryId = Number(searchParams.get("countryId"));
+  const seasonStageId = searchParams.get("seasonStageId");
+
 
   const options = {
-    method: "GET",
-    url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/stages",
+    method: 'GET',
+    url: 'https://flashlive-sports.p.rapidapi.com/v1/tournaments/stages/data',
     params: {
-      sport_id: "1",
-      locale: "en_INT",
+      tournament_stage_id: seasonStageId,
+      locale: 'en_INT'
     },
     headers: {
-      "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
-      "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
-    },
+      'x-rapidapi-key': process.env.NEXT_PUBLIC_FLASHSCORE_API,
+      'x-rapidapi-host': 'flashlive-sports.p.rapidapi.com'
+    }
   };
 
+
   const { data, isLoading, isError, isFetched } = useQuery(
-    ["allStages"],
+    ["tournamentInformation",seasonStageId],
     async () => {
       try {
         const response = await axios.request(options);
@@ -64,23 +63,18 @@ const LeagueNavigation = ({
     }
   );
 
-  useEffect(() => {
-    if (data) {
-      dispatch(setAllStages(data));
-    }
-  }, [data, dispatch]);
 
-  const filteredLeague = data?.DATA?.find((el: leagueProps) => {
-    if (el.COUNTRY_ID === countryId && el.LEAGUE_NAME === leagueName) {
-      return el;
-    }
-  });
 
-  useEffect(() => {
-    if (filteredLeague) {
-      setLeagueId(filteredLeague.STAGE_ID);
-    }
-  }, [filteredLeague]);
+
+  if (isLoading ) {
+    return (
+      <div className="p-5 ">
+        <Skeleton />
+      </div>
+    );
+  }
+
+
 
   return (
     <section className={`${style.leagueNavigaion} flex flex-col`}>
@@ -88,8 +82,8 @@ const LeagueNavigation = ({
         <div className="p-4 pb-0">
           <ParamInfo />
           <LeagueTitle
-            leagueName={filteredLeague?.LEAGUE_NAME}
-            leagueImage={filteredLeague?.TOURNAMENT_IMAGE}
+            leagueName={data?.DATA?.LEAGUE_NAME}
+            leagueImage={data?.DATA?.TOURNAMENT_IMAGE}
           />
         </div>
         <LeagueMenu setActiveMenu={setActiveMenu} activeMenu={activeMenu} />

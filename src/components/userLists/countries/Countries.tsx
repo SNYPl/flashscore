@@ -15,6 +15,7 @@ interface League {
   SPORT_ID: number;
   ACTUAL_TOURNAMENT_SEASON_ID: string;
   COUNTRY_ID: string;
+  stageSeasonId:any;
 }
 
 interface Country {
@@ -57,6 +58,9 @@ const Countries = () => {
     }
   );
 
+  const filtered = data?.DATA.filter((el:any)  =>el.COUNTRY_NAME === "Belarus")
+
+
   useEffect(() => {
     if (data) {
       dispatch(setAllTournament(data));
@@ -79,7 +83,9 @@ const Countries = () => {
       LEAGUE_NAME,
       SPORT_ID,
       ACTUAL_TOURNAMENT_SEASON_ID,
+      STAGES
     } = item;
+    
 
     if (!aggregatedData[COUNTRY_ID]) {
       aggregatedData[COUNTRY_ID] = {
@@ -88,18 +94,33 @@ const Countries = () => {
         leagues: [],
       };
     }
+    
+
+    const stageId = STAGES.filter((el: any) => el.STAGE_NAME === "Main");
+    const stageSeasonId = stageId.length > 0 ? stageId[0] : STAGES[0];
+
+
+
 
     aggregatedData[COUNTRY_ID].leagues.push({
       LEAGUE_NAME,
       SPORT_ID,
       ACTUAL_TOURNAMENT_SEASON_ID,
       COUNTRY_ID,
+      stageSeasonId
     });
   });
 
   const result: Country[] = Object.values(aggregatedData).slice(7, -1);
 
   result.sort((a, b) => a.COUNTRY_NAME.localeCompare(b.COUNTRY_NAME));
+
+
+
+
+
+
+
 
   const toggleCountryList = (countryId: number) => {
     setListOpen((prevOpen) => {
@@ -154,7 +175,9 @@ const Countries = () => {
                     .join("-");
                   const stageId = leagues.ACTUAL_TOURNAMENT_SEASON_ID;
                   const name = leagues?.LEAGUE_NAME;
-                  const countryId = leagues?.COUNTRY_ID;
+                  const seasonId = leagues?.stageSeasonId?.STAGE_ID
+
+
                   return (
                     <div
                       className={`flex items-center justify-between ${
@@ -166,7 +189,7 @@ const Countries = () => {
                     >
                       <span className={`${style.blockLink}`}>
                         <Link
-                          href={`/${sportName}/${countryName}/${leagueName}?name=${name}&tournamentId=${stageId}&countryId=${countryId}`}
+                          href={`/${sportName}/${countryName}/${leagueName}?seasonStageId=${seasonId}&name=${name}&tournamentId=${stageId}`}
                         >
                           {leagues.LEAGUE_NAME}
                         </Link>

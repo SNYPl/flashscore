@@ -1,15 +1,18 @@
 import React from "react";
 import style from "./style.module.css";
 import { InjuriesICon, Flag } from "@/common/svg/match";
+import WillNotPlay from "../../info/notPlay/NotPlay"
 
 const Injuries: React.FC = () => {
   let arrayOf6 = new Array(6).fill(1);
 
   return (
     <article
-      className={`${style.injuries}  flex justify-between p-3 gap-x-3 flex-col`}
+      className={`${style.injuries}  flex justify-between p-3 gap-x-3 flex-col px-0`}
     >
-      <div className={`${style.title} mb-4 `}>
+
+<WillNotPlay/>
+      {/* <div className={`${style.title} mb-4 `}>
         <p>WILL NOT PLAY</p>
       </div>
       <div className={`${style.playList}  mb-4`}>
@@ -29,7 +32,7 @@ const Injuries: React.FC = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       <div className={`${style.title} mb-4 `}>
         <p>COACHES</p>

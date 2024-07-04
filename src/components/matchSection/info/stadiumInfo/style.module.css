@@ -1,0 +1,30 @@
+.formInfo {
+  margin-bottom: 8px;
+}
+.title {
+  background-color: #eeeeee;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.title p {
+  font-size: 12px;
+  color: #505658;
+  font-weight: 600;
+}
+
+.matchInfoItem {
+  display: flex;
+}
+
+.matchInfoItem h4 {
+  margin-left: 10px;
+  color: #505658;
+  font-size: 14px;
+  margin-right: 4px;
+}
+.matchInfoItem h3 {
+  font-weight: bold;
+  font-size: 14px;
+  color: #001e28;
+}

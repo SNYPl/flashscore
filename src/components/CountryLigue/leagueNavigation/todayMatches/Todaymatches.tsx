@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 import League from "@/components/allMatchInfoSection/leagueMatchlist/matchLeague/MatchLeague";
 import { useSearchParams } from "next/navigation";
+import { Skeleton } from "antd";
 
 const Todaymatches: React.FC = ({}) => {
   const sportId = useSelector((state: any) => state.navigationReducer.sportId);
@@ -18,7 +19,7 @@ const Todaymatches: React.FC = ({}) => {
     url: "https://flashlive-sports.p.rapidapi.com/v1/events/list",
     params: {
       sport_id: sportId,
-      indent_days: "1",
+      indent_days: "0",
       locale: "en_INT",
       timezone: "4",
     },
@@ -40,6 +41,17 @@ const Todaymatches: React.FC = ({}) => {
       }
     }
   );
+
+  
+
+  if (isLoading ) {
+    return (
+      <div className="p-5 ">
+        <Skeleton />
+      </div>
+    );
+  }
+
 
   const currentLeague = data?.DATA.filter(
     (el: any) => el.TOURNAMENT_ID === tournamentId

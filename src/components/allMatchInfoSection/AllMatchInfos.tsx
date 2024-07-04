@@ -10,6 +10,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useQuery } from "react-query";
 import { setAllMatches } from "../store/slices/matchesSlice";
+import { Skeleton } from "antd";
 
 const AllMatchInfos = () => {
   const [selectedMatchNav, setSelected] = useState("ALL");
@@ -48,11 +49,23 @@ const AllMatchInfos = () => {
     }
   );
 
-  useEffect(() => {
-    if (data) {
-      dispatch(setAllMatches(data?.DATA));
-    }
-  }, [data, dispatch]);
+
+  
+
+  if (isLoading ) {
+    return (
+      <div className="p-5 ">
+        <Skeleton />
+      </div>
+    );
+  }
+
+
+  // useEffect(() => {
+  //   if (data) {
+  //     dispatch(setAllMatches(data?.DATA));
+  //   }
+  // }, [data, dispatch]);
 
   return (
     <section className={`${style.events}`}>

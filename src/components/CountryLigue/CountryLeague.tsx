@@ -7,7 +7,7 @@ import Todaymatches from "./leagueNavigation/todayMatches/Todaymatches";
 import LatestScores from "./leagueNavigation/latestScores/LatestScores";
 import ScheduledMatches from "./leagueNavigation/scheduledMatches/ScheduledMatches";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import { useQuery } from "react-query";
 import { useSearchParams } from "next/navigation";
 import { Skeleton } from "antd";
@@ -17,14 +17,14 @@ const CountryLeague = () => {
   const sportId = useSelector((state: any) => state.navigationReducer.sportId);
   const searchParams = useSearchParams();
   const seasonId = searchParams.get("tournamentId");
-  const [leagueId, setLeagueId] = useState("");
+  const seasonStageId = searchParams.get("seasonStageId");
 
   const resultMatchesOption = {
     method: "GET",
     url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/results",
     params: {
       locale: "en_INT",
-      tournament_stage_id: leagueId,
+      tournament_stage_id: seasonStageId,
       page: "1",
     },
     headers: {
@@ -34,17 +34,32 @@ const CountryLeague = () => {
   };
 
   const { data, isLoading, isError, isFetched } = useQuery(
-    ["matchesResults", sportId, leagueId],
+    ["matchesResults", sportId, seasonStageId],
     async () => {
-      if (leagueId) {
         try {
-          const response = await axios.request(resultMatchesOption);
+          const response = await axios.request(resultMatchesOption).catch(error => {
+            if (isAxiosError(error)) {
+              switch (error.response?.status) {
+                case 404:
+  
+                  return { data: { DATA:[]}  };
+  
+                default:
+                  break;
+              }
+            }
+  
+            throw error;
+          });;
           return response.data;
         } catch (error) {
           console.error("Error fetching result events", error);
           throw new Error("Error fetching result events");
         }
-      }
+    },{
+      retry: false,
+      refetchOnWindowFocus: false,
+      enabled: !!seasonStageId,
     }
   );
 
@@ -52,7 +67,7 @@ const CountryLeague = () => {
     method: "GET",
     url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/fixtures",
     params: {
-      tournament_stage_id: leagueId,
+      tournament_stage_id: seasonStageId,
       page: "1",
       locale: "en_INT",
     },
@@ -63,21 +78,41 @@ const CountryLeague = () => {
   };
 
   const scheduledMatches = useQuery(
-    ["scheduledMatches", sportId, leagueId],
+    ["scheduledMatches", sportId, seasonStageId],
     async () => {
-      if (leagueId) {
-        try {
-          const response = await axios.request(scheduledMatchesOption);
-          return response.data;
-        } catch (error) {
-          console.error("Error fetching scheduled events", error);
-          throw new Error("Error fetching scheduled events");
-        }
+
+      try {
+        const response = await axios.request(scheduledMatchesOption).catch(error => {
+          if (isAxiosError(error)) {
+            switch (error.response?.status) {
+              case 404:
+
+                return { data: { DATA:[]}  };
+
+              default:
+                break;
+            }
+          }
+
+          throw error;
+        });
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching scheduled events", error);
+        throw new Error("Error fetching scheduled events");
       }
     }
+    , {
+    retry: false,
+    refetchOnWindowFocus: false,
+    enabled: !!seasonStageId,
+  }
+
   );
 
-  if (isLoading) {
+
+
+  if (isLoading || scheduledMatches.isLoading) {
     return (
       <div className="p-5 ">
         <Skeleton />
@@ -85,49 +120,57 @@ const CountryLeague = () => {
     );
   }
 
+
   return (
     <section className={`${style.countryLeague}`}>
       <LeagueNavigation
         activeMenu={activeMenu}
         setActiveMenu={setActiveMenu}
-        setLeagueId={setLeagueId}
       />
 
       {activeMenu === "SUMMARY" && (
         <div>
           <Todaymatches />
-          <LatestScores
+
+
+          { data?.DATA.length !==0 &&<LatestScores
             resultData={data?.DATA}
             sliceLength={4}
             setActiveMenu={setActiveMenu}
             activeMenu={activeMenu}
-          />
-          <ScheduledMatches
+          />}
+
+          {  scheduledMatches?.data?.DATA.length !==0 && <ScheduledMatches
             fixturesMatchData={scheduledMatches?.data?.DATA}
             sliceLength={10}
             setActiveMenu={setActiveMenu}
             activeMenu={activeMenu}
-          />
-          <Table leagueId={leagueId} seasonId={seasonId} />
+          />}
+
+          <Table leagueId={seasonStageId} seasonId={seasonId} />
         </div>
       )}
 
-      {activeMenu === "RESULTS" && (
+      {activeMenu === "RESULTS" &&   (
         <LatestScores
           resultData={data?.DATA}
           sliceLength={data?.DATA?.EVENTS?.length}
           activeMenu={activeMenu}
         />
       )}
-      {activeMenu === "FIXTURES" && (
+
+
+      {activeMenu === "FIXTURES"  && (
         <ScheduledMatches
-          fixturesMatchData={scheduledMatches.data.DATA}
+          fixturesMatchData={scheduledMatches?.data?.DATA}
           sliceLength={scheduledMatches?.data?.DATA?.EVENTS?.length}
           activeMenu={activeMenu}
         />
       )}
+
+
       {activeMenu === "STANDINGS" && (
-        <Table leagueId={leagueId} seasonId={seasonId} />
+        <Table leagueId={seasonStageId} seasonId={seasonId} />
       )}
     </section>
   );

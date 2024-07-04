@@ -19,11 +19,14 @@
   margin-bottom: 15px;
 }
 
+.noData,
 .title p {
   color: #505658;
   font-size: 12px;
   font-weight: 600;
 }
+
+
 
 .teamOne {
   padding-top: 20px;
@@ -78,7 +81,25 @@
   align-items: center;
   font-weight: bold;
   font-size: 15px;
+  position:relative;
 }
+.playerName {
+  position:absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom:-20px;
+  
+}
+
+.playerName p {
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  color:#fff;
+}
+
+
 
 .teamTwo .player {
   background-color: #fff;

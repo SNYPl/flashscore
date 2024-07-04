@@ -4,13 +4,14 @@ import style from "./style.module.css";
 import MatchItem from "../tableTeamInfo/TableTeamInfo";
 import MatchesInfoTips from "./matchesInfoTips/MatchesInfoTips";
 import { useQuery } from "react-query";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
+import { Skeleton } from "antd";
 
 interface tableProps {
   setApiMenuRequest: any;
   apiMenuRequest: string;
   seasonId: string | null;
-  leagueId: string;
+  leagueId: string | null;
 }
 
 const StandingTable: React.FC<tableProps> = ({
@@ -42,16 +43,50 @@ const StandingTable: React.FC<tableProps> = ({
     ["matchTable", apiMenuRequest, leagueId, seasonId],
     async () => {
       try {
-        const response = await axios.request(options);
+        const response = await axios.request(options).catch(error => {
+          if (isAxiosError(error)) {
+            switch (error.response?.status) {
+              case 404:
+
+                return { data: { DATA:[]}  };
+
+              default:
+                break;
+            }
+          }
+
+          throw error;
+        });
         return response.data;
       } catch (error) {
         console.error("Error fetching table data ", error);
         throw new Error("Error fetching table data");
       }
+    },{
+      retry: false,
+      refetchOnWindowFocus: false,
+      enabled: !!leagueId || !!seasonId,
+    
     }
   );
 
+
+  
+  if (isLoading ) {
+    return (
+      <div className="p-5 ">
+        <Skeleton />
+      </div>
+    );
+  }
+
   const decisionData = data?.META?.DECISIONS || [];
+
+
+  if(!data?.DATA?.length) {
+    return <div><p>ინფორმაცია არ არის</p></div>
+  }
+
 
   return (
     <section className={`${style.info}`}>
