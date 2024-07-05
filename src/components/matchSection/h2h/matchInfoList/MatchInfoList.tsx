@@ -1,100 +1,204 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./style.module.css";
 import Link from "next/link";
 import { EmptyFavouriteStarIcon } from "@/common/svg/home";
+import { Tooltip } from "antd";
+import Image from "next/image";
+import { useFavouriteLeagues } from "@/components/hooks/useFavouriteLeagues ";
 
-interface matchProps {
-  homeTeam: any;
-  awayTeam: any;
-  homeScore: any;
-  awayScore: any;
-  status: any;
-  awayImage: [string];
-  homeImage: [string];
-  showMatches: boolean;
-  time: number;
-  id: string;
-  addToFavourite: any;
-  isFavouritedEvent: any;
-  tournamentId: string;
-}
+const MatchInfoList = ({ filteredData }: { filteredData: any }) => {
+  const { favouriteLeagues, addToFavourite } = useFavouriteLeagues();
 
-const MatchInfoList = () => {
+  const [matchLengths, setMatchLengths] = useState(
+    filteredData?.GROUPS.map(() => 5) // Initial length of 5 for each group
+  );
+
+  const showMoreMatches = (index: number) => {
+    setMatchLengths((prev: any) =>
+      prev.map((length: any, i: any) => (i === index ? length + 5 : length))
+    );
+  };
+
+  // const isFavourite = (tournamentId: string) => {
+  //   const favoriteLeague = favouriteLeagues.find(
+  //     (el: any) => el.mainLeagueID === tournamentId
+  //   )?.events;
+
+  //   if (favoriteLeague) {
+  //     const favoriteMatch = favoriteLeague.find((el: any) => el.eventId === id)
+  //       ?.eventId;
+
+  //     return favoriteMatch;
+  //   }
+  // };
+
+  // const addToFavouritehandler = (
+  //   tournamentId: string,
+  //   eventID: string,
+  //   NAME1: string,
+  //   NAME2: string,
+  //   url: string,
+  //   countryId: number,
+  //   countryName: string,
+  //   eventInfo: any
+  // ) =>
+  //   addToFavourite(
+  //     tournamentId,
+  //     filteredData?.GROUPS,
+  //     { NAME1, NAME2, url, countryId, countryName },
+  //     eventID,
+  //     eventInfo
+  //   );
+
   return (
-    <section className={``}>
-      <div className={`${style.title}`}>Title</div>
-      <div className={`flex ${style.matchContainer} p-2`}>
-        <div
-          // className={`flex items-center justify-center mr-7  ${style.starIcon} ${
-          //   favoriteId === id ? style.favorited : ""
-          // }`}
-          className={`flex items-center justify-center mr-4 ${style.starIcon}`}
-        >
-          <EmptyFavouriteStarIcon />
-        </div>
-        <Link
-          href={`/match/event?id=${"id"}`}
-          target="_blank"
-          className="w-full"
-        >
-          <section className={` items-center ${style.match}`}>
-            <article className={`flex   items-center `}>
-              <div className={`mr-7 ${style.dateTitle}`}>
-                <h4>04.07.2024</h4>
-              </div>
-              <div className="mr-7 font-bold ">
-                <h4>Premier League(Ehiopia)</h4>
-              </div>
-              <div className={`flex  flex-col ${style.matchesItems}`}>
-                <div className="flex  flex-row mb-1">
-                  <p className="mr-2">
-                    {/* <Image
-                    src={
-                      homeImage && homeImage !== null
-                        ? homeImage[0]
-                        : "/images/userSection/Flag.svg"
-                    }
-                    alt="club"
-                    width={16}
-                    height={16}
-                    priority
-                  /> */}
-                  </p>
-                  <p>{"homeTeam"}</p>
-                </div>
+    <>
+      {filteredData?.GROUPS.map((matches: any, index: number) => {
+        return (
+          <section key={index}>
+            <div className={`${style.title}`}>{matches.GROUP_LABEL}</div>
 
-                <div className="flex  flex-row mb-1">
-                  <p className="mr-2">
-                    {/* <Image
-                    src={
-                      awayImage && awayImage !== null
-                        ? awayImage[0]
-                        : "/images/userSection/Flag.svg"
-                    }
-                    alt="club"
-                    width={16}
-                    height={16}
-                    priority
-                  /> */}
-                  </p>
-                  <p>away</p>
-                </div>
-              </div>
-            </article>
-            <div className={`flex  flex-col ${style.scoreInfo}`}>
-              <p className="text-xs font-semibold mb-2 ">2</p>
-              <p className="text-xs font-semibold ">3</p>
-            </div>
+            {matches.ITEMS.slice(0, matchLengths[index]).map((match: any) => {
+              const date = new Date(match.START_TIME * 1000);
+              const formattedDate = `${date.getDate()}.${(date.getMonth() + 1)
+                .toString()
+                .padStart(2, "0")}.${date.getFullYear().toString().slice(-2)}`;
 
-            <div
-              className={`flex ${style.moreBtn} px-2 py-1 items-center justify-center`}
-            >
-              <p>MORE INFO</p>
-            </div>
+              const result =
+                match.H_RESULT === "WIN"
+                  ? "W"
+                  : match.H_RESULT === "DRAW"
+                  ? "D"
+                  : match.H_RESULT === "LOST"
+                  ? "L"
+                  : null;
+
+              const whoWin =
+                Number(match.HOME_SCORE_FULL) > Number(match.AWAY_SCORE_FULL)
+                  ? match.HOME_PARTICIPANT
+                  : Number(match.HOME_SCORE_FULL) <
+                    Number(match.AWAY_SCORE_FULL)
+                  ? match.AWAY_PARTICIPANT
+                  : null;
+
+              // const favoriteId = isFavourite(match.EVENT_ID);
+
+              return (
+                <article
+                  className={`flex ${style.matchContainer} p-2`}
+                  key={match.EVENT_ID}
+                >
+                  {/* <div
+                    // className={`flex items-center justify-center mr-7  ${style.starIcon} ${
+                    //   favoriteId === id ? style.favorited : ""
+                    // }`}
+
+                    className={`flex items-center justify-center mr-4 ${style.starIcon}`}
+                  >
+                    <EmptyFavouriteStarIcon />
+                  </div> */}
+                  <Link
+                    href={`/match/event?id=${match.EVENT_ID}`}
+                    target="_blank"
+                    className="w-full"
+                  >
+                    <section className={` items-center ${style.match}`}>
+                      <article
+                        className={`flex   items-center ${style.matchInfoTitle} `}
+                      >
+                        <div className={`mr-7 ${style.dateTitle}`}>
+                          <h4>{formattedDate}</h4>
+                        </div>
+                        <Tooltip title={match.COUNTRY}>
+                          <div className="mr-7 font-bold ">
+                            <h4>{match.EVENT_ACRONYM}</h4>
+                          </div>
+                        </Tooltip>
+                        <div className={`flex  flex-col ${style.matchesItems}`}>
+                          <div className="flex  flex-row mb-1">
+                            <p className="mr-2">
+                              <Image
+                                src={
+                                  match.HOME_IMAGES &&
+                                  match.HOME_IMAGES !== null
+                                    ? match.HOME_IMAGES[0]
+                                    : "/images/userSection/Flag.svg"
+                                }
+                                alt="club"
+                                width={16}
+                                height={16}
+                                priority
+                              />
+                            </p>
+                            <p
+                              className={`${
+                                whoWin === match.HOME_PARTICIPANT
+                                  ? style.winner
+                                  : ""
+                              }`}
+                            >
+                              {match.HOME_PARTICIPANT.replace("*", "").trim()}
+                            </p>
+                          </div>
+
+                          <div className="flex  flex-row mb-1">
+                            <p className="mr-2">
+                              <Image
+                                src={
+                                  match.AWAY_IMAGES &&
+                                  match.AWAY_IMAGES !== null
+                                    ? match.AWAY_IMAGES[0]
+                                    : "/images/userSection/Flag.svg"
+                                }
+                                alt="club"
+                                width={16}
+                                height={16}
+                                priority
+                              />
+                            </p>
+                            <p
+                              className={`${
+                                whoWin === match.AWAY_PARTICIPANT
+                                  ? style.winner
+                                  : ""
+                              }`}
+                            >
+                              {match.AWAY_PARTICIPANT.replace("*", "").trim()}
+                            </p>
+                          </div>
+                        </div>
+                      </article>
+                      <div className={`flex  flex-col ${style.scoreInfo}`}>
+                        <p className="text-xs font-semibold mb-2 ">
+                          {match.HOME_SCORE_FULL}
+                        </p>
+                        <p className="text-xs font-semibold ">
+                          {match.AWAY_SCORE_FULL}
+                        </p>
+                      </div>
+
+                      {result && (
+                        <div
+                          className={`flex ${style.moreBtn} px-2 py-1 items-center justify-center`}
+                        >
+                          <p className={`${style[result]}`}>{result}</p>
+                        </div>
+                      )}
+                    </section>
+                  </Link>
+                </article>
+              );
+            })}
+            {matchLengths[index] < matches.ITEMS.length && (
+              <div className={style.moreMatches}>
+                <button onClick={() => showMoreMatches(index)}>
+                  Show More Matches
+                </button>
+              </div>
+            )}
           </section>
-        </Link>
-      </div>
-    </section>
+        );
+      })}
+    </>
   );
 };
 

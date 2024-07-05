@@ -88,7 +88,6 @@ const LineUps: React.FC<lineUpProp> = ({
   const [startingLineUp, subtitiles, coaches] = data?.DATA;
   const [teamOneFormation, teamTwoFormation] = startingLineUp?.FORMATIONS;
 
-  console.log(data);
   return (
     <section className={`${style.lineUps}`}>
       <LineUp

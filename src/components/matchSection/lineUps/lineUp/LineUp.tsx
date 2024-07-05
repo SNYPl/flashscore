@@ -63,7 +63,7 @@ const LineUp: React.FC<props> = ({
         >
           <div className={`${style.teamOne}`}>
             <p className={`${style.teamTitle}`}>
-              {homeTeamName}{" "}
+              {homeTeamName.replace("*", "").trim()}{" "}
               <span>{teamOneFormation?.FORMATION_DISPOSTION.slice(2)}</span>
             </p>
             <div className={`pt-6 ${style.teamOnePlayers}`}>
@@ -75,7 +75,7 @@ const LineUp: React.FC<props> = ({
           </div>
           <div className={`${style.teamTwo}`}>
             <p className={`${style.teamTitle}`}>
-              {awayTeamName}{" "}
+              {awayTeamName.replace("*", "").trim()}{" "}
               <span>{teamTwoFormation?.FORMATION_DISPOSTION.slice(2)}</span>
             </p>
             <div className={`pb-6 ${style.teamTwoPlayers}`}>

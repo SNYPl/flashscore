@@ -119,7 +119,13 @@ const MatchSection: React.FC = () => {
         <Table leagueId={stageId} seasonId={seasonId} />
       )}
 
-      {activeMenu === "H2H" && <H2h data={h2hData?.data} />}
+      {activeMenu === "H2H" && (
+        <H2h
+          data={h2hData?.data}
+          homeTeamName={data?.DATA.EVENT.HOME_NAME}
+          awayTeamName={data?.DATA.EVENT.AWAY_NAME}
+        />
+      )}
 
       {activeMenu === "LINE-UPS" && (
         <LineUps

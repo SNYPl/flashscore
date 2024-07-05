@@ -40,7 +40,9 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
             />
           </div>
           <Link href="#">
-            <h3 className="text-center font-bold">{data?.HOME_NAME}</h3>
+            <h3 className="text-center font-bold">
+              {data?.HOME_NAME.replace("*", "").trim()}
+            </h3>
           </Link>
         </div>
 
@@ -83,7 +85,9 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
             />
           </div>
           <Link href="#">
-            <h3 className="text-center font-bold">{data?.AWAY_NAME}</h3>
+            <h3 className="text-center font-bold">
+              {data?.AWAY_NAME.replace("*", "").trim()}
+            </h3>
           </Link>
         </div>
       </article>

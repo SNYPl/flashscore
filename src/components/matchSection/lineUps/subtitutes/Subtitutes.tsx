@@ -16,7 +16,6 @@ const Subtitutes: React.FC<props> = ({
 }) => {
   const [teamOneFormation, teamTwoFormation] = subtitiles?.FORMATIONS;
 
-  console.log(subtitiles);
   return (
     <article
       className={`${style.lineUP}  flex justify-between p-3 pt-0 gap-x-3 flex-col px-0`}

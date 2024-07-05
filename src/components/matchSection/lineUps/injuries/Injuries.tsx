@@ -23,7 +23,10 @@ const Injuries = ({ coaches }: { coaches: any }) => {
         <div>
           {formation1?.MEMBERS.map((el: any) => {
             return (
-              <div className={`${style.coach}  flex items-center `}>
+              <div
+                className={`${style.coach}  flex items-center `}
+                key={el.PLAYER_ID}
+              >
                 <div className={`${style.flag} mr-2 `}>
                   <div className={`${style.flagBorder} `}>
                     <UserOutlined />
@@ -42,6 +45,7 @@ const Injuries = ({ coaches }: { coaches: any }) => {
             return (
               <div
                 className={`${style.coach}  ${style.coachTwo} flex items-center `}
+                key={el.PLAYER_ID}
               >
                 <div className={`${style.flag} ml-2 `}>
                   <div className={`${style.flagBorder} `}>

@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./style.module.css";
-import { LeagueMatch } from "@/components/matchLeague/LeagueMatch";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
@@ -42,16 +41,13 @@ const Todaymatches: React.FC = ({}) => {
     }
   );
 
-  
-
-  if (isLoading ) {
+  if (isLoading) {
     return (
       <div className="p-5 ">
         <Skeleton />
       </div>
     );
   }
-
 
   const currentLeague = data?.DATA.filter(
     (el: any) => el.TOURNAMENT_ID === tournamentId
