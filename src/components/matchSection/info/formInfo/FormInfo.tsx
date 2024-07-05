@@ -88,7 +88,6 @@ const FormInfo: React.FC<props> = ({ eventData, h2hData }) => {
               <div
                 className={` items-center font-normal ${style.tableWords} gap-x-1`}
               >
-                {/* <p style={{ backgroundColor: "#C8CDCD" }}>?</p> */}
                 {firstTeamLastGames.map((match: any) => {
                   const result =
                     match.H_RESULT === "WIN"
@@ -142,7 +141,6 @@ const FormInfo: React.FC<props> = ({ eventData, h2hData }) => {
               <div
                 className={` items-center font-normal ${style.tableWords} gap-x-1`}
               >
-                {/* <p style={{ backgroundColor: "#C8CDCD" }}>?</p> */}
                 {secondTeamLAstGames.map((match: any) => {
                   const result =
                     match.H_RESULT === "WIN"

@@ -125,6 +125,8 @@ const MatchSection: React.FC = () => {
         <LineUps
           homeTeamName={data?.DATA.EVENT.HOME_NAME}
           awayTeamName={data?.DATA.EVENT.AWAY_NAME}
+          homeTeamImg={data?.DATA.EVENT.HOME_IMAGES}
+          awayTeamImg={data?.DATA.EVENT.AWAY_IMAGES}
         />
       )}
 

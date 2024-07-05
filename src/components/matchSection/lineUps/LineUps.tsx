@@ -7,13 +7,21 @@ import axios, { isAxiosError } from "axios";
 import { useQuery } from "react-query";
 import { useSearchParams } from "next/navigation";
 import StartingLineUp from "./startingLineUp/StartingLineUp";
+import Subtitutes from "./subtitutes/Subtitutes";
 
 interface lineUpProp {
   homeTeamName: string;
   awayTeamName: string;
+  homeTeamImg: string[];
+  awayTeamImg: string[];
 }
 
-const LineUps: React.FC<lineUpProp> = ({ awayTeamName, homeTeamName }) => {
+const LineUps: React.FC<lineUpProp> = ({
+  awayTeamName,
+  homeTeamName,
+  homeTeamImg,
+  awayTeamImg,
+}) => {
   const searchParams = useSearchParams();
 
   const eventId = searchParams.get("id");
@@ -80,6 +88,7 @@ const LineUps: React.FC<lineUpProp> = ({ awayTeamName, homeTeamName }) => {
   const [startingLineUp, subtitiles, coaches] = data?.DATA;
   const [teamOneFormation, teamTwoFormation] = startingLineUp?.FORMATIONS;
 
+  console.log(data);
   return (
     <section className={`${style.lineUps}`}>
       <LineUp
@@ -93,6 +102,13 @@ const LineUps: React.FC<lineUpProp> = ({ awayTeamName, homeTeamName }) => {
         teamOneFormation={teamOneFormation}
         teamTwoFormation={teamTwoFormation}
       />
+      {subtitiles && subtitiles?.length !== 0 && (
+        <Subtitutes
+          subtitiles={subtitiles}
+          homeTeamImg={homeTeamImg}
+          awayTeamImg={awayTeamImg}
+        />
+      )}
       <Injuries coaches={coaches} />
     </section>
   );

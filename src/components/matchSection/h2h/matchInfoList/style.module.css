@@ -1,0 +1,89 @@
+.match {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.matchContainer {
+  border-bottom: 1px solid #e5e5e7;
+  grid-template-columns: 18px 1fr;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease;
+}
+.matchContainer:hover {
+  background-color: #c8cdcd33;
+}
+
+.matchesItems p {
+  font-size: 13px;
+  color: #071e27;
+  font-weight: 500;
+}
+
+.match h4 {
+  color: #071e27;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.starIcon {
+  cursor: pointer;
+}
+
+.starIcon svg {
+  cursor: pointer;
+}
+.starIcon:hover path {
+  fill: #ffcd00;
+  stroke: #ffcd00;
+}
+.favorited {
+  transition: all 0.3s ease;
+}
+
+.favorited path {
+  fill: #ffcd00;
+  stroke: #ffcd00;
+}
+
+.moreBtn {
+  background-color: #ffffff;
+  border: 1px solid #dee1e5;
+  border-radius: 5px;
+}
+
+.moreBtn p {
+  color: #797d7e;
+  font-size: 10px;
+}
+
+.moreBtn:hover {
+  background-color: #0092c1;
+  border: none;
+}
+
+.moreBtn:hover p {
+  color: #fff;
+}
+
+.scoreInfo p {
+  color: #122e37;
+}
+
+.dateTitle h4 {
+  color: #555e61;
+}
+
+.title {
+  align-items: center;
+  background-color: #eee;
+  border-radius: 4px;
+  color: #555e61;
+  display: flex;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  text-transform: uppercase;
+}
