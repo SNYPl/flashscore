@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { useQuery } from "react-query";
+import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
 interface props {
   eventData: any;
@@ -21,6 +22,8 @@ const FormInfo: React.FC<props> = ({ eventData, h2hData }) => {
   const [firstTeam, secondTeam] = overall.GROUPS;
   const firstTeamLastGames = firstTeam.ITEMS.slice(0, 5);
   const secondTeamLAstGames = secondTeam.ITEMS.slice(0, 5);
+
+  const sportIdCheck = useSportIdHandler();
 
   const options = {
     method: "GET",
@@ -105,7 +108,7 @@ const FormInfo: React.FC<props> = ({ eventData, h2hData }) => {
                       className={style.tooltip}
                     >
                       <Link
-                        href={`/match/event?id=${match.EVENT_ID}`}
+                        href={`${sportIdCheck?.alt}/match/event?id=${match.EVENT_ID}`}
                         target="_blank"
                       >
                         <p className={`${style[result]}`}>{result}</p>

@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import style from "./style.module.css";
 import Link from "next/link";
-import { EmptyFavouriteStarIcon } from "@/common/svg/home";
 import { Tooltip } from "antd";
 import Image from "next/image";
-import { useFavouriteLeagues } from "@/components/hooks/useFavouriteLeagues ";
+import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
 const MatchInfoList = ({ filteredData }: { filteredData: any }) => {
-  const { favouriteLeagues, addToFavourite } = useFavouriteLeagues();
-
   const [matchLengths, setMatchLengths] = useState(
     filteredData?.GROUPS.map(() => 5) // Initial length of 5 for each group
   );
@@ -19,36 +16,7 @@ const MatchInfoList = ({ filteredData }: { filteredData: any }) => {
     );
   };
 
-  // const isFavourite = (tournamentId: string) => {
-  //   const favoriteLeague = favouriteLeagues.find(
-  //     (el: any) => el.mainLeagueID === tournamentId
-  //   )?.events;
-
-  //   if (favoriteLeague) {
-  //     const favoriteMatch = favoriteLeague.find((el: any) => el.eventId === id)
-  //       ?.eventId;
-
-  //     return favoriteMatch;
-  //   }
-  // };
-
-  // const addToFavouritehandler = (
-  //   tournamentId: string,
-  //   eventID: string,
-  //   NAME1: string,
-  //   NAME2: string,
-  //   url: string,
-  //   countryId: number,
-  //   countryName: string,
-  //   eventInfo: any
-  // ) =>
-  //   addToFavourite(
-  //     tournamentId,
-  //     filteredData?.GROUPS,
-  //     { NAME1, NAME2, url, countryId, countryName },
-  //     eventID,
-  //     eventInfo
-  //   );
+  const sportIdCheck = useSportIdHandler();
 
   return (
     <>
@@ -80,24 +48,13 @@ const MatchInfoList = ({ filteredData }: { filteredData: any }) => {
                   ? match.AWAY_PARTICIPANT
                   : null;
 
-              // const favoriteId = isFavourite(match.EVENT_ID);
-
               return (
                 <article
                   className={`flex ${style.matchContainer} p-2`}
                   key={match.EVENT_ID}
                 >
-                  {/* <div
-                    // className={`flex items-center justify-center mr-7  ${style.starIcon} ${
-                    //   favoriteId === id ? style.favorited : ""
-                    // }`}
-
-                    className={`flex items-center justify-center mr-4 ${style.starIcon}`}
-                  >
-                    <EmptyFavouriteStarIcon />
-                  </div> */}
                   <Link
-                    href={`/match/event?id=${match.EVENT_ID}`}
+                    href={`${sportIdCheck?.alt}/match/event?id=${match.EVENT_ID}`}
                     target="_blank"
                     className="w-full"
                   >

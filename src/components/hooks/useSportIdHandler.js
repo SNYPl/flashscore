@@ -1,19 +1,31 @@
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { sportNavigation } from "@/lib/sportNavigation";
+import { FootballIcon } from "@/common/svg/navigation";
 
 export const useSportIdHandler = () => {
   const pathName = usePathname();
+  const searchParams = useSearchParams();
+  const sportIdCheck = searchParams.get("sportId");
+  if (sportIdCheck) {
+    return sportNavigation.find((el) => el.id === sportIdCheck);
+  }
+
+  if (pathName === "/") {
+    return {
+      img: <FootballIcon />,
+      alt: "/football",
+      w: 20,
+      h: 20,
+      href: "/football",
+      text: "FOOTBALL",
+      id: 1,
+    };
+  }
 
   const foundSport = sportNavigation.find((el) => {
-    const alt = el.alt.replace(/^\//, "");
-    const regex = new RegExp(`^/${alt}(/|$)`);
-
+    const regex = new RegExp(`^${el.alt}(\/|$)`, "i");
     return regex.test(pathName);
   });
 
-  if (foundSport) {
-    return foundSport;
-  } else {
-    return null;
-  }
+  return foundSport ? foundSport : null;
 };

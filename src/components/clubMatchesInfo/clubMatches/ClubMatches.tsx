@@ -1,15 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import style from "./style.module.css";
-import { Select, Space } from "antd";
-import MatchLeague from "@/components/allMatchInfoSection/leagueMatchlist/matchLeague/MatchLeague";
+import FixturesMatches from "./fixutresClubMatches/FixturesMatches";
+import ResultMatches from "./resultClubMatches/ResultMatches";
 
 const ClubMatches = () => {
   const [active, setActive] = useState("FIXTURES");
-
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
 
   return (
     <article className={`${style.clubmatches} bg-white rounded-lg p-4`}>
@@ -28,23 +24,10 @@ const ClubMatches = () => {
             RESULTS
           </button>
         </div>
-        <div className="w-full mb-4">
-          <Space wrap className={style.selector} style={{ width: "100%" }}>
-            <Select
-              defaultValue="all"
-              style={{ width: "100%" }}
-              onChange={handleChange}
-              options={[
-                { value: "all", label: "All Competentions" },
-                { value: "not all", label: "not ALL" },
-              ]}
-              className={style.selector}
-            />
-          </Space>
-        </div>
       </div>
 
-      <div>{/* <MatchLeague /> */}</div>
+      {active === "FIXTURES" && <FixturesMatches />}
+      {active === "RESULTS" && <ResultMatches />}
     </article>
   );
 };

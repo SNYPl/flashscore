@@ -2,13 +2,13 @@ import React from "react";
 import style from "./style.module.css";
 import axios from "axios";
 import { useQuery } from "react-query";
-import { useSelector } from "react-redux";
 import League from "@/components/allMatchInfoSection/leagueMatchlist/matchLeague/MatchLeague";
 import { useSearchParams } from "next/navigation";
 import { Skeleton } from "antd";
+import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
 const Todaymatches: React.FC = ({}) => {
-  const sportId = useSelector((state: any) => state.navigationReducer.sportId);
+  const sportIdCheck = useSportIdHandler();
   const searchParams = useSearchParams();
 
   const tournamentId = searchParams.get("tournamentId");
@@ -17,7 +17,7 @@ const Todaymatches: React.FC = ({}) => {
     method: "GET",
     url: "https://flashlive-sports.p.rapidapi.com/v1/events/list",
     params: {
-      sport_id: sportId,
+      sport_id: sportIdCheck?.id,
       indent_days: "0",
       locale: "en_INT",
       timezone: "4",
@@ -29,7 +29,7 @@ const Todaymatches: React.FC = ({}) => {
   };
 
   const { data, isLoading, isError, isFetched } = useQuery(
-    ["todayMatches", sportId],
+    ["todayMatches", sportIdCheck?.id],
     async () => {
       try {
         const response = await axios.request(options);
@@ -60,7 +60,6 @@ const Todaymatches: React.FC = ({}) => {
   return (
     <section className={` py-4 px-3 bg-white mb-4 rounded-lg`}>
       <h2 className={`font-bold ${style.title}`}>Todays Matches</h2>
-
       {currentLeague?.map((eventMatch: any) => {
         return (
           <League

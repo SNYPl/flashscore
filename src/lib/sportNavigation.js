@@ -9,12 +9,12 @@ import {
 export const sportNavigation = [
   {
     img: <FootballIcon />,
-    alt: "/",
+    alt: "/football",
     w: 20,
     h: 20,
-    href: "/",
+    href: "/football",
     text: "FOOTBALL",
-    id: 1,
+    id: "1",
   },
   {
     img: <TennisIcon />,
@@ -23,7 +23,7 @@ export const sportNavigation = [
     h: 19,
     href: "tennis",
     text: "TENNIS",
-    id: 2,
+    id: "2",
   },
   {
     img: <BasketballIcon />,
@@ -32,7 +32,7 @@ export const sportNavigation = [
     h: 18,
     href: "basketball",
     text: "BASKETBALL",
-    id: 3,
+    id: "3",
   },
   {
     img: <HockeyIcon />,
@@ -41,6 +41,6 @@ export const sportNavigation = [
     h: 18,
     href: "hockey",
     text: "HOCKEY",
-    id: 4,
+    id: "4",
   },
 ];

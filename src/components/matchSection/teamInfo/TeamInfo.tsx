@@ -2,6 +2,7 @@ import React from "react";
 import style from "./style.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
 interface props {
   data: any;
@@ -10,7 +11,7 @@ interface props {
 
 const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
   const START_TIME = data?.START_TIME;
-
+  const sportIdCheck = useSportIdHandler();
   const date = new Date(START_TIME * 1000);
 
   const formattedDate = date.toLocaleDateString("de-DE", {
@@ -27,6 +28,9 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
 
   const formattedDateTime = `${formattedDate} ${formattedTime}`;
 
+  const [homeTeamId] = data?.HOME_PARTICIPANT_IDS;
+  const [awayTeamId] = data?.AWAY_PARTICIPANT_IDS;
+
   return (
     <section className={`${style.teamInfo}  w-full px-3`}>
       <article className="flex justify-around">
@@ -39,7 +43,9 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
               height={55}
             />
           </div>
-          <Link href="#">
+          <Link
+            href={`/team/${data?.SHORTNAME_HOME}?id=${homeTeamId}&sportId=${sportIdCheck?.id}`}
+          >
             <h3 className="text-center font-bold">
               {data?.HOME_NAME.replace("*", "").trim()}
             </h3>
@@ -84,7 +90,7 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
               height={55}
             />
           </div>
-          <Link href="#">
+          <Link href={`/team/${data?.SHORTNAME_AWAY}?id=${awayTeamId}`}>
             <h3 className="text-center font-bold">
               {data?.AWAY_NAME.replace("*", "").trim()}
             </h3>

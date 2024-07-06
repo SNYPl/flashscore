@@ -4,12 +4,38 @@ import ParamInfo from "@/components/paramInfo/ParamInfo";
 import Image from "next/image";
 import Link from "next/link";
 
+interface Country {
+  COUNTRY_ID: number;
+  COUNTRY_NAME: string;
+  GENDER_ID: number;
+  ID: string;
+  IMAGE_ID: string;
+  IMAGE_PATH: string;
+  IMAGE_TABLE_PATH: string;
+  IMAGE_WIDTH: string;
+  IME: string;
+  IMM: string;
+  LAYOUT: string;
+  NAME: string;
+  PCI: string;
+  SHORT_NAME: string;
+  SPORT_ID: number;
+  TAB: string;
+  TYPE_ID: number;
+  TYPE_NAME: string;
+}
+
 type infoProps = {
   setActiveSection: (section: string) => void;
   activeMenu: string;
+  clubInfoData: Country;
 };
 
-const ClubInfo: React.FC<infoProps> = ({ setActiveSection, activeMenu }) => {
+const ClubInfo: React.FC<infoProps> = ({
+  setActiveSection,
+  activeMenu,
+  clubInfoData,
+}) => {
   const menu = [
     { title: "MATCHES", href: "#" },
     { title: "PLAYER STATS", href: "#" },
@@ -23,7 +49,7 @@ const ClubInfo: React.FC<infoProps> = ({ setActiveSection, activeMenu }) => {
           <section className={`${style.leagueTitle} flex  items-center`}>
             <div className={style.img}>
               <Image
-                src={"/images/leagueMiddle/leagueImg.png"}
+                src={clubInfoData.IMAGE_PATH}
                 alt="img"
                 width={60}
                 height={60}
@@ -31,8 +57,10 @@ const ClubInfo: React.FC<infoProps> = ({ setActiveSection, activeMenu }) => {
             </div>
 
             <div className={style.title}>
-              <h3 className="flex items-center gap-x-4">Real Madrid </h3>
-              <p>Stadium: Estadio Santiago Bernabéu (Madrid)</p>
+              <h3 className="flex items-center gap-x-4">
+                {clubInfoData.NAME}{" "}
+              </h3>
+              <p>Country: {clubInfoData.COUNTRY_NAME}</p>
             </div>
           </section>
         </div>

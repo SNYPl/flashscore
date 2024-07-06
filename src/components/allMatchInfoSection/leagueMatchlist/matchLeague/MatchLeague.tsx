@@ -2,17 +2,14 @@
 import React, { useState } from "react";
 import style from "./style.module.css";
 import Link from "next/link";
-import {
-  EmptyFavouriteStarIcon,
-  FavouriteStartIcon,
-  LeagueArrowIcon,
-} from "@/common/svg/home";
+import { EmptyFavouriteStarIcon, LeagueArrowIcon } from "@/common/svg/home";
 import Image from "next/image";
 import Match from "./match/Match";
 import { countries } from "@/lib/countriesList";
 import Flag from "react-world-flags";
 import { useFavouriteLeagues } from "@/components/hooks/useFavouriteLeagues ";
 import { usePinnedLeagues } from "@/components/hooks/usePineedLeagues";
+import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
 interface leagueProps {
   tournamentStageId: string;
@@ -24,6 +21,7 @@ interface leagueProps {
   tournamentId: string;
   countryName: string;
   showMatchesDefault?: boolean;
+  ShowFullDate?: boolean;
 }
 
 const MatchLeague: React.FC<leagueProps> = ({
@@ -32,6 +30,7 @@ const MatchLeague: React.FC<leagueProps> = ({
   countryId,
   events,
   tournamentStageId,
+  ShowFullDate = false,
   tournamentId,
   countryName,
   url,
@@ -43,6 +42,8 @@ const MatchLeague: React.FC<leagueProps> = ({
   const [countryObject] = currentCountryIcon;
 
   const { favouriteLeagues, addToFavourite } = useFavouriteLeagues();
+
+  const sportIdCheck = useSportIdHandler();
 
   const { pinnedLeagueIds, addLeagueToLocalStorage } = usePinnedLeagues();
 
@@ -163,7 +164,7 @@ const MatchLeague: React.FC<leagueProps> = ({
                 homeScore={match.HOME_SCORE_CURRENT}
                 awayScore={match.AWAY_SCORE_CURRENT}
                 status={match.STAGE}
-                showMatches={showMatches}
+                ShowFullDate={ShowFullDate}
                 time={match.START_TIME}
                 id={match.EVENT_ID}
                 addToFavourite={() =>
@@ -175,6 +176,7 @@ const MatchLeague: React.FC<leagueProps> = ({
                     eventInfo
                   )
                 }
+                sportId={sportIdCheck}
                 isFavouritedEvent={favouriteLeagues}
                 tournamentId={tournamentId}
               />

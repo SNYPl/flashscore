@@ -1,5 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import style from "./style.module.css";
 import Link from "next/link";
 import axios from "axios";
@@ -15,7 +20,7 @@ interface League {
   SPORT_ID: number;
   ACTUAL_TOURNAMENT_SEASON_ID: string;
   COUNTRY_ID: string;
-  stageSeasonId:any;
+  stageSeasonId: any;
 }
 
 interface Country {
@@ -36,7 +41,7 @@ const Countries = () => {
     method: "GET",
     url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/list",
     params: {
-      sport_id: "1",
+      sport_id: sportIdCheck?.id,
       locale: "en_INT",
     },
     headers: {
@@ -46,7 +51,7 @@ const Countries = () => {
   };
 
   const { data, isLoading, isError, isFetched } = useQuery(
-    ["stagesList"],
+    ["stagesList", sportIdCheck?.id],
     async () => {
       try {
         const response = await axios.request(options);
@@ -55,25 +60,18 @@ const Countries = () => {
         console.error("Error fetching featured products", error);
         throw new Error("Error fetching featured products");
       }
+    },
+    {
+      refetchOnWindowFocus: false,
     }
   );
 
-  const filtered = data?.DATA.filter((el:any)  =>el.COUNTRY_NAME === "Belarus")
-
-
   useEffect(() => {
-    if (data) {
+    if (data && !isLoading) {
       dispatch(setAllTournament(data));
     }
-  }, [data, dispatch]);
+  }, [data, isLoading, dispatch]);
 
-  if (isLoading) {
-    return (
-      <div className="p-4 px-6">
-        <Skeleton active />{" "}
-      </div>
-    );
-  }
   const aggregatedData: { [key: number]: Country } = {};
 
   data?.DATA.forEach((item: any) => {
@@ -83,9 +81,8 @@ const Countries = () => {
       LEAGUE_NAME,
       SPORT_ID,
       ACTUAL_TOURNAMENT_SEASON_ID,
-      STAGES
+      STAGES,
     } = item;
-    
 
     if (!aggregatedData[COUNTRY_ID]) {
       aggregatedData[COUNTRY_ID] = {
@@ -94,33 +91,22 @@ const Countries = () => {
         leagues: [],
       };
     }
-    
 
     const stageId = STAGES.filter((el: any) => el.STAGE_NAME === "Main");
     const stageSeasonId = stageId.length > 0 ? stageId[0] : STAGES[0];
-
-
-
 
     aggregatedData[COUNTRY_ID].leagues.push({
       LEAGUE_NAME,
       SPORT_ID,
       ACTUAL_TOURNAMENT_SEASON_ID,
       COUNTRY_ID,
-      stageSeasonId
+      stageSeasonId,
     });
   });
 
   const result: Country[] = Object.values(aggregatedData).slice(7, -1);
 
   result.sort((a, b) => a.COUNTRY_NAME.localeCompare(b.COUNTRY_NAME));
-
-
-
-
-
-
-
 
   const toggleCountryList = (countryId: number) => {
     setListOpen((prevOpen) => {
@@ -132,6 +118,14 @@ const Countries = () => {
     });
   };
 
+  if (isLoading) {
+    return (
+      <div className="p-4 px-6">
+        <Skeleton active />{" "}
+      </div>
+    );
+  }
+
   return (
     <section className={`p-4`}>
       <div className={`${style.countriesTitle} flex items-center pb-3  `}>
@@ -141,7 +135,9 @@ const Countries = () => {
         {result.slice(0, countrieShowNumber).map((countrie: any) => {
           const isOpen = listOpen.includes(countrie.COUNTRY_ID);
           const countryName = countrie.COUNTRY_NAME.toLowerCase();
-          const sportName = sportIdCheck?.text.toLowerCase();
+          const sportName = sportIdCheck
+            ? sportIdCheck?.text.toLowerCase()
+            : "";
           return (
             <div
               className={`${isOpen ? style.blockOpened : ""} mb-2`}
@@ -175,8 +171,7 @@ const Countries = () => {
                     .join("-");
                   const stageId = leagues.ACTUAL_TOURNAMENT_SEASON_ID;
                   const name = leagues?.LEAGUE_NAME;
-                  const seasonId = leagues?.stageSeasonId?.STAGE_ID
-
+                  const seasonId = leagues?.stageSeasonId?.STAGE_ID;
 
                   return (
                     <div

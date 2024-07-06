@@ -2,11 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import style from "./style.module.css";
 
-import {
-  EmptyFavouriteStarIcon,
-  FavouriteStartIcon,
-  LeagueArrowIcon,
-} from "@/common/svg/home";
+import { EmptyFavouriteStarIcon } from "@/common/svg/home";
 
 interface matchProps {
   homeTeam: any;
@@ -16,12 +12,13 @@ interface matchProps {
   status: any;
   awayImage: [string];
   homeImage: [string];
-  showMatches: boolean;
+  ShowFullDate?: boolean;
   time: number;
   id: string;
   addToFavourite: any;
   isFavouritedEvent: any;
   tournamentId: string;
+  sportId: any;
 }
 
 const Match: React.FC<matchProps> = ({
@@ -30,7 +27,7 @@ const Match: React.FC<matchProps> = ({
   homeScore,
   awayScore,
   status,
-  showMatches,
+  ShowFullDate = false,
   awayImage,
   homeImage,
   time,
@@ -38,12 +35,19 @@ const Match: React.FC<matchProps> = ({
   addToFavourite,
   isFavouritedEvent,
   tournamentId,
+  sportId,
 }) => {
   const timeStamp = time * 1000;
   const date = new Date(timeStamp);
 
   const hour = date.getHours();
   const minute = date.getMinutes();
+
+  const formattedDate = date.toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+  });
 
   const isFavourite = () => {
     const favoriteLeague = isFavouritedEvent.find(
@@ -70,24 +74,32 @@ const Match: React.FC<matchProps> = ({
       >
         <EmptyFavouriteStarIcon />
       </div>
-      <Link href={`/match/event?id=${id}`} target="_blank" className="w-full">
+      <Link
+        href={`${sportId.alt}/match/event?id=${id}`}
+        target="_blank"
+        className="w-full"
+      >
         <section className={` items-center ${style.match}`}>
           <article className={`flex   items-center `}>
             <div className="mr-7 w-16">
-              <h4>
-                {status == "SCHEDULED" ||
-                status == "SECOND_HALF" ||
-                status == "FIRST_HALF" ||
-                status == "HALF_TIME" ? (
-                  <span>
-                    {hour}:{minute === 0 ? "00" : minute}
-                  </span>
-                ) : (
-                  <span className="font-xs font-medium text-prediction-team-title">
-                    {status}
-                  </span>
-                )}
-              </h4>
+              {!ShowFullDate && (
+                <h4>
+                  {status == "SCHEDULED" ||
+                  status == "SECOND_HALF" ||
+                  status == "FIRST_HALF" ||
+                  status == "HALF_TIME" ? (
+                    <span>
+                      {hour}:{minute === 0 ? "00" : minute}
+                    </span>
+                  ) : (
+                    <span className="font-xs font-medium text-prediction-team-title">
+                      {status}
+                    </span>
+                  )}
+                </h4>
+              )}
+
+              {ShowFullDate && <h4>{formattedDate}</h4>}
             </div>
             <div className={`flex  flex-col ${style.matchesItems}`}>
               <div className="flex  flex-row mb-1">

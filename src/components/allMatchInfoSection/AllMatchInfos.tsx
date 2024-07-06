@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import style from "./style.module.css";
 import Calendar from "./calendar/Calendar";
 import MatchNavigation from "./matchNavigation/MatchNavigation";
@@ -7,24 +7,24 @@ import MatchLists from "./leagueMatchlist/MatchLists";
 import InfoText from "./infoText/InfoText";
 import Image from "next/image";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useQuery } from "react-query";
 import { setAllMatches } from "../store/slices/matchesSlice";
 import { Skeleton } from "antd";
+import { useSportIdHandler } from "../hooks/useSportIdHandler";
 
 const AllMatchInfos = () => {
   const [selectedMatchNav, setSelected] = useState("ALL");
-  const dispatch = useDispatch();
   const defaultActiveIndex = 0;
   const [activeDateIndex, setActiveDateIndex] = useState(defaultActiveIndex);
 
-  const sportId = useSelector((state: any) => state.navigationReducer.sportId);
+  const sportIdCheck = useSportIdHandler();
 
   const options = {
     method: "GET",
     url: "https://flashlive-sports.p.rapidapi.com/v1/events/list",
     params: {
-      sport_id: sportId,
+      sport_id: sportIdCheck?.id,
       indent_days: activeDateIndex,
       locale: "en_INT",
       timezone: "4",
@@ -36,7 +36,7 @@ const AllMatchInfos = () => {
   };
 
   const { data, isLoading, isError, isFetched } = useQuery(
-    ["sportEvents", activeDateIndex],
+    ["sportEvents", activeDateIndex, sportIdCheck?.id],
     async () => {
       try {
         const response = await axios.request(options);
@@ -49,17 +49,13 @@ const AllMatchInfos = () => {
     }
   );
 
-
-  
-
-  if (isLoading ) {
+  if (isLoading) {
     return (
       <div className="p-5 ">
         <Skeleton />
       </div>
     );
   }
-
 
   // useEffect(() => {
   //   if (data) {

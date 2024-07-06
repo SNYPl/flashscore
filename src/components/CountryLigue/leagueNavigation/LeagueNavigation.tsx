@@ -12,15 +12,6 @@ import { setAllStages } from "@/components/store/slices/matchesSlice";
 import { useSearchParams, usePathname } from "next/navigation";
 import { Skeleton } from "antd";
 
-interface leagueProps {
-  COUNTRY_ID: number;
-  COUNTRY_NAME: string;
-  LEAGUE_NAME: string;
-  SPORT_ID: number;
-  STAGE_ID: string;
-  TOURNAMENT_IMAGE: string;
-}
-
 const LeagueNavigation = ({
   setActiveMenu,
   activeMenu,
@@ -28,30 +19,24 @@ const LeagueNavigation = ({
   activeMenu: string;
   setActiveMenu: any;
 }) => {
-  const sportIdCheck = useSportIdHandler();
-  const dispatch = useDispatch();
   const searchParams = useSearchParams();
-
-  const leagueID = searchParams.get("leagueId");
   const seasonStageId = searchParams.get("seasonStageId");
 
-
   const options = {
-    method: 'GET',
-    url: 'https://flashlive-sports.p.rapidapi.com/v1/tournaments/stages/data',
+    method: "GET",
+    url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/stages/data",
     params: {
       tournament_stage_id: seasonStageId,
-      locale: 'en_INT'
+      locale: "en_INT",
     },
     headers: {
-      'x-rapidapi-key': process.env.NEXT_PUBLIC_FLASHSCORE_API,
-      'x-rapidapi-host': 'flashlive-sports.p.rapidapi.com'
-    }
+      "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
+      "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
+    },
   };
 
-
   const { data, isLoading, isError, isFetched } = useQuery(
-    ["tournamentInformation",seasonStageId],
+    ["tournamentInformation", seasonStageId],
     async () => {
       try {
         const response = await axios.request(options);
@@ -63,18 +48,13 @@ const LeagueNavigation = ({
     }
   );
 
-
-
-
-  if (isLoading ) {
+  if (isLoading) {
     return (
       <div className="p-5 ">
         <Skeleton />
       </div>
     );
   }
-
-
 
   return (
     <section className={`${style.leagueNavigaion} flex flex-col`}>
