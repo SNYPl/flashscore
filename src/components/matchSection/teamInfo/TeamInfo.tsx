@@ -90,7 +90,9 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
               height={55}
             />
           </div>
-          <Link href={`/team/${data?.SHORTNAME_AWAY}?id=${awayTeamId}`}>
+          <Link
+            href={`/team/${data?.SHORTNAME_AWAY}?id=${awayTeamId}&sportId=${sportIdCheck?.id}`}
+          >
             <h3 className="text-center font-bold">
               {data?.AWAY_NAME.replace("*", "").trim()}
             </h3>

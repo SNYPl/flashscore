@@ -8,6 +8,7 @@ import { SoccerIcon, PredictionIcon } from "@/common/svg/navigation";
 const Navigation = () => {
   const pathName = usePathname();
   const matchRouteHandler = pathName.includes("match");
+  const isActiveSoccer = pathName.includes("prediction");
 
   return (
     <section
@@ -16,7 +17,7 @@ const Navigation = () => {
       }`}
     >
       <div
-        className={`${pathName === "/" ? style.active : ""} ${
+        className={`${!isActiveSoccer ? style.active : ""} ${
           style.itemContainer
         }`}
       >

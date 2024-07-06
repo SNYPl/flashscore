@@ -2,6 +2,7 @@ import React from "react";
 import style from "./style.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
 interface matchProps {
   id: number;
@@ -35,6 +36,13 @@ const TableTeamInfo: React.FC<matchProps> = ({
   const draws = pointsFromDraws / pointsPerDraw;
   const losses = mp - (wins + draws);
 
+  const sportId = useSportIdHandler();
+
+  const shortName = name
+    .split(" ")
+    .map((word) => word.charAt(0))
+    .join("");
+
   return (
     <div className={`${style.matchItem} p-2  gap-x-2`}>
       <div
@@ -50,7 +58,10 @@ const TableTeamInfo: React.FC<matchProps> = ({
       </div>
       <div className="flex justify-start items-center font-bold gap-x-2">
         <Image src={image} alt="flag" width={20} height={20} />
-        <Link href={"/team/arsenal"} className={style.teamLink}>
+        <Link
+          href={`/team/${shortName}?id=${id}&sportId=${sportId?.id}`}
+          className={style.teamLink}
+        >
           {name}
         </Link>
       </div>
