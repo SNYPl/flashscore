@@ -1,38 +1,15 @@
-.nav button {
-  font-size: 13px;
-  padding: 6px 10px;
-  border-radius: 5px;
-  background-color: #eeeeee;
-  color: #555e61;
-  font-weight: 600;
-}
-
-.nav .active {
-  background-color: #0092c1;
-  color: #fff;
-}
-
-.selector div {
-  width: 100% !important;
-}
-
-.infoItemSection {
-  border: 1px solid #e5e5e7;
-  border-radius: 10px;
-}
-
 .infoItem {
   display: grid;
   align-items: center;
   justify-content: space-between;
-  grid-template-columns: minmax(32px, 48px) minmax(140px, 1fr) repeat(
+  grid-template-columns: minmax(32px, 37px) minmax(140px, 1fr) repeat(
       7,
       minmax(30px, 48px)
     );
 }
 
 .infoIndex {
-  border: 1px solid #e5e5e7;
+  /* border: 1px solid #e5e5e7; */
   border-radius: 5px;
   color: #505658;
   font-size: 12.5px;
@@ -41,8 +18,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 13px;
 }
+
+.infoItem a:hover {
+  text-decoration: underline;
+}
+
 .infoTitle {
   font-size: 13px;
   color: #505658;

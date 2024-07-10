@@ -50,6 +50,8 @@ const ClubMatchesInfo = () => {
     );
   }
 
+  // console.log(data?.DATA);
+
   return (
     <section className={`${style.clubMatches} `}>
       <ClubInfo

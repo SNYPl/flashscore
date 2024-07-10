@@ -19,39 +19,8 @@
 .infoItemSection {
   border: 1px solid #e5e5e7;
   border-radius: 10px;
-}
-
-.infoItem {
-  display: grid;
-  align-items: center;
-  justify-content: space-between;
-  grid-template-columns: minmax(32px, 48px) minmax(140px, 1fr) repeat(
-      7,
-      minmax(30px, 48px)
-    );
-}
-
-.infoIndex {
-  border: 1px solid #e5e5e7;
-  border-radius: 5px;
-  color: #505658;
-  font-size: 12.5px;
-  width: 22px;
-  height: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 13px;
-}
-.infoTitle {
-  font-size: 13px;
-  color: #505658;
-}
-
-.infoNumber {
-  justify-self: flex-end;
-  font-size: 13px;
-  color: #505658;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .seeAllBtn {
@@ -82,4 +51,8 @@
   display: flex;
   justify-content: center;
   padding: 6px 0;
+}
+.titles p:nth-child(2) {
+  justify-content: flex-start;
+  padding-left: 10px;
 }

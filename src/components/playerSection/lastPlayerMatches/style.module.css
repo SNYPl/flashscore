@@ -1,0 +1,122 @@
+.match {
+  display: grid;
+  grid-template-columns: 0.75fr 70px 40px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.matchContainer {
+  border-bottom: 1px solid #e5e5e7;
+  grid-template-columns: 18px 1fr;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease;
+}
+.matchContainer:hover {
+  background-color: #c8cdcd33;
+}
+
+.matchesItems p {
+  font-size: 13px;
+  color: #071e27;
+  font-weight: 500;
+}
+
+.match h4 {
+  color: #071e27;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.starIcon {
+  cursor: pointer;
+}
+
+.starIcon svg {
+  cursor: pointer;
+}
+.starIcon:hover path {
+  fill: #ffcd00;
+  stroke: #ffcd00;
+}
+.favorited {
+  transition: all 0.3s ease;
+}
+
+.favorited path {
+  fill: #ffcd00;
+  stroke: #ffcd00;
+}
+
+.matchInfoTitle {
+  display: grid;
+  grid-template-columns: 60px 36px 1fr;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.scoreInfo p {
+  color: #122e37;
+}
+
+.dateTitle h4 {
+  color: #555e61;
+}
+
+.title {
+  align-items: center;
+  background-color: #eee;
+  border-radius: 4px;
+  color: #555e61;
+  display: flex;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+
+.moreBtn p {
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  padding-top: 1px;
+}
+
+.moreMatches {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 17px;
+  padding-bottom: 6px;
+}
+
+.moreMatches button {
+  color: #143f36;
+  border-bottom: 1px solid #143f36;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.D {
+  background-color: #f3a000;
+}
+
+.W {
+  background-color: #00a83f;
+}
+
+.L {
+  background-color: #dc0000;
+}
+
+.winner {
+  font-weight: bolder !important;
+}
