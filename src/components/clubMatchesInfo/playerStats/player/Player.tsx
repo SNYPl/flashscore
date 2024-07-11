@@ -56,6 +56,14 @@ const Player: React.FC<playerProps> = ({
   //   }
   // );
 
+  // for (let i: number = 0; i >= playersArray.length; i++) {
+  //     console.log(i);
+
+  //     if (i % 5 === 0) {
+  //       await new Promise((resolve) => setTimeout(resolve, 1000));
+  //     }
+  //   }
+
   return (
     <div
       className={` ${style.infoItem} flex items-center justify-between p-4 mb-4`}

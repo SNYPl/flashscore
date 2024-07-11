@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./style.module.css";
 import { Select, Skeleton, Space } from "antd";
 import Player from "./player/Player";
@@ -12,6 +12,7 @@ const PlayerStats = () => {
   const searchParams = useSearchParams();
   const teamId = searchParams.get("id");
   const sportId = searchParams.get("sportId");
+  const [playerData, setPlayerData] = useState<any[]>([]);
 
   const menu = [
     "ALL",
@@ -46,8 +47,73 @@ const PlayerStats = () => {
         console.error("Error fetching result events", error);
         throw new Error("Error fetching result events");
       }
-    }
+    },
+    { refetchOnWindowFocus: false }
   );
+
+  const playersArray =
+    data?.DATA.flatMap((el: any) =>
+      el.ITEMS.filter((item: any) => item.PLAYER_ID).map(
+        (item: any) => item.PLAYER_ID
+      )
+    ) || [];
+
+  async function getPlayerInfo(playerId: string) {
+    const Playeroptions = {
+      method: "GET",
+      url: "https://flashlive-sports.p.rapidapi.com/v1/players/last-events",
+      params: {
+        sport_id: sportId,
+        locale: "en_INT",
+        player_id: playerId,
+      },
+      headers: {
+        "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
+        "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await axios.request(Playeroptions);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching result events", error);
+      throw new Error("Error fetching result events");
+    }
+  }
+
+  const handleChange = (value: string) => {
+    console.log(`selected ${value}`);
+  };
+
+  const delay = async (ms: number) =>
+    await new Promise((resolve) => setTimeout(resolve, ms));
+
+  useEffect(() => {
+    const playersDataArray: any[] = [];
+
+    async function fetchPlayerInfo() {
+      if (playersArray.length !== 0) {
+        for (let i: number = 1; i <= 2; i++) {
+          const data = await getPlayerInfo(playersArray[i - 1]);
+          if (data) {
+            playersDataArray.push({
+              playerId: playersArray[i - 1],
+              data: data?.DATA,
+            });
+          }
+          await delay(1000);
+        }
+      }
+      if (playersArray.slice(0, 2).length === playersDataArray.length) {
+        setPlayerData(playersDataArray);
+      }
+    }
+
+    if (playersArray.length !== 0) {
+      fetchPlayerInfo();
+    }
+  }, [playersArray.length]);
 
   if (isLoading) {
     return (
@@ -56,24 +122,25 @@ const PlayerStats = () => {
       </div>
     );
   }
-  const playersArray =
-    data?.DATA.flatMap((el: any) => el.ITEMS.filter((item: any) => item)) || [];
 
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
+  // Merging function
+  const mergePlayerEvents = (playerGroups: any, eventsData: any) => {
+    return playerGroups.map((group: any) => {
+      return {
+        ...group,
+        ITEMS: group.ITEMS.map((player: any) => {
+          const playerEvents =
+            eventsData.find((event: any) => event.playerId === player.PLAYER_ID)
+              ?.data || [];
+          return { ...player, events: playerEvents };
+        }),
+      };
+    });
   };
 
-  // const pauseRequest = async () => {
-  //   for (let i: number = 0; i >= playersArray.length; i++) {
-  //     console.log(i);
-
-  //     if (i % 5 === 0) {
-  //       await new Promise((resolve) => setTimeout(resolve, 1000));
-  //     }
-  //   }
-  // };
-
-  // pauseRequest();
+  // Merged player data with events
+  const mergedPlayerData = mergePlayerEvents(data?.DATA, playerData);
+  console.log(mergedPlayerData);
 
   return (
     <article className={`${style.playerStats} bg-white rounded-lg p-4 `}>
