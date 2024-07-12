@@ -2,8 +2,6 @@ import React from "react";
 import style from "./style.module.css";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import axios from "axios";
-import { useQuery, useQueryClient } from "react-query";
 import Link from "next/link";
 
 interface playerProps {
@@ -11,7 +9,7 @@ interface playerProps {
   name: string;
   image: string;
   number: number;
-  playerLength: any[];
+  playerEvents: any[];
 }
 
 const Player: React.FC<playerProps> = ({
@@ -19,50 +17,12 @@ const Player: React.FC<playerProps> = ({
   image,
   name,
   number,
-  playerLength,
+  playerEvents,
 }) => {
   const searchParams = useSearchParams();
   const sportId = searchParams.get("sportId");
-  const queryClient = useQueryClient();
 
-  const options = {
-    method: "GET",
-    url: "https://flashlive-sports.p.rapidapi.com/v1/players/last-events",
-    params: {
-      sport_id: sportId,
-      locale: "en_INT",
-      player_id: id,
-    },
-    headers: {
-      "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
-      "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
-    },
-  };
-
-  // const { data, isLoading, isError, isFetched, isFetching } = useQuery(
-  //   ["playerLastEvents", id, sportId],
-  //   async () => {
-  //     try {
-  //       const response = await axios.request(options);
-  //       return response.data;
-  //     } catch (error) {
-  //       console.error("Error fetching result events", error);
-  //       throw new Error("Error fetching result events");
-  //     }
-  //   },
-  //   {
-  //     retry: false,
-  //     enabled: !!id,
-  //   }
-  // );
-
-  // for (let i: number = 0; i >= playersArray.length; i++) {
-  //     console.log(i);
-
-  //     if (i % 5 === 0) {
-  //       await new Promise((resolve) => setTimeout(resolve, 1000));
-  //     }
-  //   }
+  console.log(playerEvents);
 
   return (
     <div

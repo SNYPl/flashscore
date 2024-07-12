@@ -102,9 +102,10 @@ const PlayerStats = () => {
               data: data?.DATA,
             });
           }
-          await delay(1000);
+          await delay(700);
         }
       }
+
       if (playersArray.slice(0, 2).length === playersDataArray.length) {
         setPlayerData(playersDataArray);
       }
@@ -140,7 +141,6 @@ const PlayerStats = () => {
 
   // Merged player data with events
   const mergedPlayerData = mergePlayerEvents(data?.DATA, playerData);
-  console.log(mergedPlayerData);
 
   return (
     <article className={`${style.playerStats} bg-white rounded-lg p-4 `}>
@@ -174,7 +174,7 @@ const PlayerStats = () => {
         </div>
       </div>
 
-      {data?.DATA.map((el: any) => {
+      {mergedPlayerData?.map((el: any) => {
         return (
           <article className={` mb-6`} key={el.GROUP_ID}>
             <h4 className="font-semibold text-xl mb-3">{el.GROUP_LABEL}</h4>
@@ -191,6 +191,7 @@ const PlayerStats = () => {
             </div>
             <div className={`${style.infoItemSection} `}>
               {el?.ITEMS.map((player: any) => {
+                console.log(player);
                 return (
                   <Player
                     key={player.PLAYER_ID}
@@ -198,7 +199,7 @@ const PlayerStats = () => {
                     name={player.PLAYER_NAME}
                     number={player.PLAYER_JERSEY_NUMBER}
                     image={player.PLAYER_IMAGE_PATH}
-                    playerLength={playersArray}
+                    playerEvents={player.events}
                   />
                 );
               })}
