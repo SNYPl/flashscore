@@ -157,11 +157,13 @@ const LastPlayerEvents = () => {
           );
         })}
 
-        <div className={style.moreMatches}>
-          <button onClick={() => setShowMoreMatches(data?.DATA.length)}>
-            Show More Matches
-          </button>
-        </div>
+        {showMorematches !== data?.DATA.length && (
+          <div className={style.moreMatches}>
+            <button onClick={() => setShowMoreMatches(data?.DATA.length)}>
+              Show More Matches
+            </button>
+          </div>
+        )}
       </section>
     </>
   );

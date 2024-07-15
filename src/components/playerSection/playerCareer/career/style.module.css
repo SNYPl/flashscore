@@ -1,20 +1,14 @@
 .infoItem {
   display: grid;
   align-items: center;
-  justify-content: space-between;
-  grid-template-columns: minmax(32px, 37px) minmax(140px, 1fr) repeat(
-      10,
-      minmax(30px, 48px)
-    );
+  grid-template-columns: 90px 1fr 1fr repeat(6, 40px);
+  border-bottom: 1px solid #eee;
 }
 
 .infoIndex {
-  /* border: 1px solid #e5e5e7; */
   border-radius: 5px;
   color: #505658;
-  font-size: 12.5px;
-  width: 22px;
-  height: 22px;
+  font-size: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,18 +24,15 @@
 }
 
 .infoNumber {
-  justify-self: flex-end;
+  font-size: 12px;
+  color: #505658;
+  text-align: center;
+}
+.tournamentName {
   font-size: 13px;
   color: #505658;
-}
-
-.seeAllBtn {
-  padding-bottom: 16px;
-}
-
-.seeAllBtn button {
-  font-size: 12px;
-  font-weight: bold;
-  color: #143f36;
-  border-bottom: 1px solid #143f36;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
 }

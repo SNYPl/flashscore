@@ -10,6 +10,7 @@ import { useQuery } from "react-query";
 import { Skeleton } from "antd";
 import ParamInfo from "../paramInfo/ParamInfo";
 import LastPlayerEvents from "./lastPlayerMatches/LastPlayerMatches";
+import PlayerCareer from "./playerCareer/PlayerCareer";
 
 const PlayerSection: React.FC = () => {
   const searchParams = useSearchParams();
@@ -28,12 +29,12 @@ const PlayerSection: React.FC = () => {
     <section className={`${style.playerSection} flex flex-col  `}>
       <div className=" p-4">
         <div className="bg-white rounded-lg p-4 mb-3">
-          {" "}
           <ParamInfo />
           <PlayerInfo />
         </div>
 
-        <LastPlayerEvents />
+        {/* <LastPlayerEvents /> */}
+        <PlayerCareer />
 
         <div className="bg-white rounded-lg p-4">
           <Image

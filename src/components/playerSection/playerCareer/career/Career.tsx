@@ -10,47 +10,49 @@ interface playerProps {
   id: string;
   name: string;
   image: string;
-  number: number;
-  playerEvents: any[];
-  isLoading: boolean;
-  typeId: string;
+  tournamentName: number;
+  seasonLabel: string;
+  stats: any;
 }
 
 const Career: React.FC<playerProps> = ({
   id,
   image,
   name,
-  number,
-  playerEvents,
-  isLoading = true,
-  typeId,
+  tournamentName,
+  seasonLabel,
+  stats,
 }) => {
   const searchParams = useSearchParams();
   const sportId = searchParams.get("sportId");
 
+  console.log(stats);
+
+  console.log(Object.entries(stats));
+
   return (
     <div
-      className={` ${style.infoItem} flex items-center justify-between p-4 mb-4`}
+      className={` ${style.infoItem} flex items-center justify-between py-3 `}
     >
-      <p className={`${style.infoIndex} font-semibold`}>{number}</p>
-      <div className=" flex items-center">
+      <p className={`${style.infoIndex} font-semibold mr-5`}>{seasonLabel}</p>
+      <div className=" flex items-center ml-1">
         <span className={`${style.infoIcon} mr-2`}>
           <Image src={image} width={20} height={20} alt="player" />
         </span>
-        <Link href={`/player/${name}/?playerId=${id}&sportId=${sportId}`}>
+        <Link href={`/team/${name}?id=${id}&sportId=${sportId} `}>
           <h3 className={`${style.infoTitle} font-semibold `}>{name}</h3>
         </Link>
       </div>
-      <p>Season</p>
-      <p>Team</p>
-      <p>Competition</p>
-      <p>R</p>
-      <p className={`${style.infoNumber} font-semibold `}>2</p>
-      <p className={`${style.infoNumber} font-semibold `}>3</p>
-      <p className={`${style.infoNumber} font-semibold `}>4</p>
-      <p className={`${style.infoNumber} font-semibold `}>5</p>
-      <p className={`${style.infoNumber} font-semibold `}>1</p>
-      <p className={`${style.infoNumber} font-semibold `}>2</p>
+
+      <p className={`${style.tournamentName} font-semibold text-center px-3`}>
+        {tournamentName}
+      </p>
+      <p className={`${style.infoNumber}  `}>{stats["13"]}</p>
+      <p className={`${style.infoNumber}  `}>{stats["4"]}</p>
+      <p className={`${style.infoNumber} font-bold `}>{stats["1"]}</p>
+      <p className={`${style.infoNumber}  `}>{stats["8"]}</p>
+      <p className={`${style.infoNumber}  `}>{stats["2"]}</p>
+      <p className={`${style.infoNumber}  `}>{stats["3"]}</p>
     </div>
   );
 };

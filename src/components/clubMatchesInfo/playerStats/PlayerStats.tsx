@@ -144,7 +144,7 @@ const PlayerStats = ({ countryName }: { countryName: string }) => {
 
   // Merging function
   const mergePlayerEvents = (playerGroups: any, eventsData: any) => {
-    return playerGroups.map((group: any) => {
+    return playerGroups?.map((group: any) => {
       return {
         ...group,
         ITEMS: group.ITEMS.map((player: any) => {
@@ -157,15 +157,23 @@ const PlayerStats = ({ countryName }: { countryName: string }) => {
     });
   };
 
-  const mergedPlayerData = mergePlayerEvents(data?.DATA, playerData);
+  const mergedPlayerData = mergePlayerEvents(data?.DATA, playerData) || [];
 
-  const filteredData = mergedPlayerData.filter((data: any) => {
+  const filteredData = mergedPlayerData?.filter((data: any) => {
     if (active === "All") {
       return true;
     } else {
       return data.GROUP_LABEL === active;
     }
   });
+
+  if (filteredData.length === 0) {
+    return (
+      <div>
+        <p className="text-xs font-bold">No player data</p>
+      </div>
+    );
+  }
 
   return (
     <article className={`${style.playerStats} bg-white rounded-lg p-4 `}>

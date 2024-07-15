@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { IoShirtOutline, IoFootballOutline } from "react-icons/io5";
 import { TbPlayFootball } from "react-icons/tb";
+import { GiVibratingBall } from "react-icons/gi";
 
 const PlayerCareer = () => {
   const [active, setActive] = useState("League");
@@ -36,65 +37,69 @@ const PlayerCareer = () => {
     },
   };
 
-  // const { data, isLoading, isError, isFetched, isFetching } = useQuery(
-  //   ["teamSquad", teamId, sportId],
-  //   async () => {
-  //     try {
-  //       const response = await axios.request(options);
-  //       return response.data;
-  //     } catch (error) {
-  //       console.error("Error fetching result events", error);
-  //       throw new Error("Error fetching result events");
-  //     }
-  //   },
-  //   { refetchOnWindowFocus: false }
-  // );
+  const { data, isLoading, isError, isFetched, isFetching } = useQuery(
+    ["playerCareer", playerId, sportId],
+    async () => {
+      try {
+        const response = await axios.request(options);
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching result events", error);
+        throw new Error("Error fetching result events");
+      }
+    },
+    { refetchOnWindowFocus: false }
+  );
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="p-4">
-  //       <Skeleton />
-  //     </div>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <div className="p-4">
+        <Skeleton />
+      </div>
+    );
+  }
 
   return (
     <article className={`${style.playerStats} bg-white rounded-lg p-4 `}>
+      <h4 className={style.matchesTitle}>Career</h4>
       <div>
-        <div className={`flex items-center mb-4 gap-x-3 ${style.nav}`}>
+        <div className={`flex items-center  gap-x-3 ${style.nav}`}>
           {menu.map((el, id) => (
             <button
               className={`${active === el ? style.active : ""}`}
               onClick={() => setActive(el)}
               key={id}
             >
-              {el}
+              {el.toUpperCase()}
             </button>
           ))}
         </div>
       </div>
-      return (
+
       <article className={` mb-6`}>
-        <h4 className="font-semibold text-xl mb-3">test</h4>
         <div className={style.titles}>
           <p>Season</p>
           <p>Team</p>
           <p>Competition</p>
-          <p>R</p>
+
+          <Tooltip title="Rating">
+            <p className={style.iconMenu}>
+              <GiVibratingBall />
+            </p>
+          </Tooltip>
 
           <Tooltip title="Matches Played">
-            <p>
+            <p className={style.iconMenu}>
               <IoShirtOutline />
             </p>
           </Tooltip>
-          <p>MIN</p>
           <Tooltip title="Goals">
-            <p>
+            <p className={style.iconMenu}>
               <IoFootballOutline />
             </p>
           </Tooltip>
           <Tooltip title="Assist">
-            <p>
+            <p className={style.iconMenu}>
               <TbPlayFootball />
             </p>
           </Tooltip>
@@ -104,19 +109,28 @@ const PlayerCareer = () => {
           <div className={`${style.card} ${style.cardRed}`}></div>
         </div>
         <div className={`${style.infoItemSection} `}>
-          {/* <Career
-                    key={player.PLAYER_ID}
-                    id={player.PLAYER_ID}
-                    name={player.PLAYER_NAME}
-                    number={player.PLAYER_JERSEY_NUMBER}
-                    image={player.PLAYER_IMAGE_PATH}
-                    playerEvents={filteredEvents}
-                    isLoading={isLoading}
-                    typeId={player.PLAYER_TYPE_ID}
-                  /> */}
+          {data?.DATA.map((career: any) => {
+            if (career.TAB_LABEL === active) {
+              return career.ROWS.map((el: any) => {
+                console.log(el);
+
+                return (
+                  <Career
+                    key={el.TOURNAMENT_STAGE_ID}
+                    id={el.TEAM_ID}
+                    name={el.TEAM_NAME}
+                    tournamentName={el.TOURNAMENT_NAME}
+                    image={el.TEAM_IMAGE_URL}
+                    seasonLabel={el.SEASON_LABEL}
+                    stats={el.STATS}
+                  />
+                );
+              });
+            }
+            return null;
+          })}
         </div>
       </article>
-      );
     </article>
   );
 };

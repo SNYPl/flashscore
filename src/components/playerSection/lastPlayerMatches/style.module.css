@@ -162,6 +162,13 @@
   font-weight: 500;
 }
 
+.type6 {
+  display: grid;
+  grid-template-columns: 1fr 35px;
+  align-items: center;
+  justify-items: center;
+}
+
 .type6 p {
   color: #555e61;
   font-size: 11px;

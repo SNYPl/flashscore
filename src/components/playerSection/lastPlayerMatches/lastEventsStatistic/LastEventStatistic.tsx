@@ -23,8 +23,11 @@ const LastEventStatistic = ({
 
   if (type6Value !== "N/A") {
     return (
-      <div className={`flex justify-center items-center ${style.type6}`}>
-        <p>{type6Value.toUpperCase()}</p>
+      <div className={` ${style.type6}`}>
+        <p className="text-center">{type6Value.toUpperCase()}</p>
+        <div className={`${style.winners} ${style[winnerStat]} `}>
+          <p className={`text-white`}>{winner.toUpperCase()}</p>
+        </div>
       </div>
     );
   }

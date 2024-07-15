@@ -6,21 +6,27 @@
   color: #555e61;
   font-weight: 600;
 }
+.nav {
+  background-color: #eee;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  padding: 8px;
+  margin-bottom: 1px;
+}
 
 .nav .active {
-  background-color: #0092c1;
-  color: #fff;
+  pointer-events: none;
+  background-color: #ffffff;
+  color: #0f2d37;
+}
+
+.nav button:hover {
+  background-color: #ffffff;
+  color: #0f2d37;
 }
 
 .selector div {
   width: 100% !important;
-}
-
-.infoItemSection {
-  border: 1px solid #e5e5e7;
-  border-radius: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
 }
 
 .seeAllBtn {
@@ -37,11 +43,7 @@
 .titles {
   display: grid;
   align-items: center;
-  justify-content: space-between;
-  grid-template-columns: minmax(32px, 48px) minmax(140px, 1fr) repeat(
-      10,
-      minmax(30px, 48px)
-    );
+  grid-template-columns: 90px 1fr 1fr repeat(6, 40px);
   background-color: #eee;
 }
 .titles p {
@@ -62,6 +64,7 @@
   height: 14px;
   margin-left: 3px;
   border-radius: 4px;
+  justify-self: center;
 }
 
 .cardYellow {
@@ -70,4 +73,15 @@
 
 .cardRed {
   background-color: red;
+}
+
+.matchesTitle {
+  color: #001e28;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.iconMenu {
+  font-size: 13px !important;
 }
