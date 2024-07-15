@@ -50,8 +50,6 @@ const ClubMatchesInfo = () => {
     );
   }
 
-  // console.log(data?.DATA);
-
   return (
     <section className={`${style.clubMatches} `}>
       <ClubInfo
@@ -61,7 +59,9 @@ const ClubMatchesInfo = () => {
       />
 
       {activeSection === "MATCHES" && <ClubMatches />}
-      {activeSection === "PLAYER STATS" && <PlayerStats />}
+      {activeSection === "PLAYER STATS" && (
+        <PlayerStats countryName={data?.DATA.NAME} />
+      )}
     </section>
   );
 };

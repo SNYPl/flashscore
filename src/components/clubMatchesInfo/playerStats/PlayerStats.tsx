@@ -1,26 +1,28 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import style from "./style.module.css";
-import { Select, Skeleton, Space } from "antd";
+import { Skeleton, Tooltip } from "antd";
 import Player from "./player/Player";
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { IoShirtOutline, IoFootballOutline } from "react-icons/io5";
+import { TbPlayFootball } from "react-icons/tb";
 
-const PlayerStats = () => {
-  const [active, setActive] = useState("ALL");
+const PlayerStats = ({ countryName }: { countryName: string }) => {
+  const [active, setActive] = useState("All");
   const searchParams = useSearchParams();
   const teamId = searchParams.get("id");
   const sportId = searchParams.get("sportId");
   const [playerData, setPlayerData] = useState<any[]>([]);
 
   const menu = [
-    "ALL",
-    "GOALS",
-    "ASSISTS",
-    "SHOTS ON TARGET",
-    "YELLOW CARDS",
-    "RED CARDS",
+    "All",
+    "Goalkeepers",
+    "Defenders",
+    "Midfielders",
+    "Forwards",
+    "Coach",
   ];
 
   const options = {
@@ -50,64 +52,80 @@ const PlayerStats = () => {
     },
     { refetchOnWindowFocus: false }
   );
-
   const playersArray =
-    data?.DATA.flatMap((el: any) =>
-      el.ITEMS.filter((item: any) => item.PLAYER_ID).map(
-        (item: any) => item.PLAYER_ID
-      )
-    ) || [];
+    data?.DATA.flatMap((el: any) => {
+      if (el.GROUP_LABEL !== "Coach") {
+        return el.ITEMS.filter((item: any) => item.PLAYER_ID).map(
+          (item: any) => item.PLAYER_ID
+        );
+      } else {
+        return []; // Return an empty array if GROUP_LABEL is "Coach"
+      }
+    }) || [];
 
   async function getPlayerInfo(playerId: string) {
-    const Playeroptions = {
+    const playeroptions = (page: any) => ({
       method: "GET",
-      url: "https://flashlive-sports.p.rapidapi.com/v1/players/last-events",
+      url: "https://flashlive-sports.p.rapidapi.com/v1/players/alt-events",
       params: {
         sport_id: sportId,
-        locale: "en_INT",
         player_id: playerId,
+        locale: "en_INT",
+        page: page.toString(),
       },
       headers: {
         "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
         "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
       },
-    };
+    });
 
     try {
-      const response = await axios.request(Playeroptions);
-      return response.data;
+      const responses = await Promise.all([
+        axios.request(playeroptions(0)),
+        axios.request(playeroptions(1)),
+      ]);
+      const data = responses.map((response) => response.data);
+      const combinedData = data.flat();
+
+      const mergedObject = combinedData.reduce(
+        (acc, current) => {
+          acc.DATA = [...acc.DATA, ...current.DATA];
+
+          return acc;
+        },
+        { DATA: [] }
+      );
+
+      return mergedObject;
     } catch (error) {
       console.error("Error fetching result events", error);
       throw new Error("Error fetching result events");
     }
   }
 
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
-
   const delay = async (ms: number) =>
     await new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
-    const playersDataArray: any[] = [];
-
     async function fetchPlayerInfo() {
       if (playersArray.length !== 0) {
-        for (let i: number = 1; i <= 2; i++) {
-          const data = await getPlayerInfo(playersArray[i - 1]);
-          if (data) {
-            playersDataArray.push({
-              playerId: playersArray[i - 1],
-              data: data?.DATA,
-            });
+        for (let i = 0; i < playersArray.length; i++) {
+          try {
+            const data = await getPlayerInfo(playersArray[i]);
+            await delay(200);
+            if (data) {
+              setPlayerData((prevPlayerData) => [
+                ...prevPlayerData,
+                { playerId: playersArray[i], data: data.DATA },
+              ]);
+            }
+          } catch (error) {
+            console.error(
+              `Error fetching player ${playersArray[i]} info:`,
+              error
+            );
           }
-          await delay(700);
         }
-      }
-
-      if (playersArray.slice(0, 2).length === playersDataArray.length) {
-        setPlayerData(playersDataArray);
       }
     }
 
@@ -139,11 +157,21 @@ const PlayerStats = () => {
     });
   };
 
-  // Merged player data with events
   const mergedPlayerData = mergePlayerEvents(data?.DATA, playerData);
+
+  const filteredData = mergedPlayerData.filter((data: any) => {
+    if (active === "All") {
+      return true;
+    } else {
+      return data.GROUP_LABEL === active;
+    }
+  });
 
   return (
     <article className={`${style.playerStats} bg-white rounded-lg p-4 `}>
+      <div className="mb-5">
+        <h2 className="font-bold">Last game statistic</h2>
+      </div>
       <div>
         <div className={`flex items-center mb-4 gap-x-3 ${style.nav}`}>
           {menu.map((el, id) => (
@@ -156,42 +184,53 @@ const PlayerStats = () => {
             </button>
           ))}
         </div>
-        <div>
-          <div className="w-full mb-4">
-            <Space wrap className={style.selector} style={{ width: "100%" }}>
-              <Select
-                defaultValue="Laliga"
-                style={{ width: "100%" }}
-                onChange={handleChange}
-                options={[
-                  { value: "Laliga", label: "Laliga" },
-                  { value: "not all", label: "not ALL" },
-                ]}
-                className={style.selector}
-              />
-            </Space>
-          </div>
-        </div>
       </div>
 
-      {mergedPlayerData?.map((el: any) => {
+      {filteredData?.map((el: any) => {
         return (
           <article className={` mb-6`} key={el.GROUP_ID}>
             <h4 className="font-semibold text-xl mb-3">{el.GROUP_LABEL}</h4>
             <div className={style.titles}>
               <p>#</p>
               <p>NAME</p>
-              <p>AGE</p>
-              <p>PLAY</p>
-              <p>MIN</p>
-              <p>G</p>
-              <p>A</p>
-              <p>Y</p>
-              <p>R</p>
+              {el.GROUP_LABEL !== "Coach" && (
+                <>
+                  <Tooltip title="Matches Played">
+                    <p>
+                      <IoShirtOutline />
+                    </p>
+                  </Tooltip>
+                  <p>MIN</p>
+                  <Tooltip title="Goals">
+                    <p>
+                      <IoFootballOutline />
+                    </p>
+                  </Tooltip>
+                  <Tooltip title="Assist">
+                    <p>
+                      <TbPlayFootball />
+                    </p>
+                  </Tooltip>
+
+                  <div className={`${style.card} ${style.cardYellow}`}></div>
+
+                  <div className={`${style.card} ${style.cardRed}`}></div>
+                </>
+              )}
             </div>
             <div className={`${style.infoItemSection} `}>
               {el?.ITEMS.map((player: any) => {
-                console.log(player);
+                const filteredEvents = player.events.filter(
+                  (event: any) =>
+                    event.HOME_PARTICIPANT_NAME === countryName ||
+                    event.AWAY_PARTICIPANT_NAME === countryName
+                );
+
+                const isLoading =
+                  player.PLAYER_TYPE_ID === "COACH"
+                    ? true
+                    : filteredEvents.length !== 0;
+
                 return (
                   <Player
                     key={player.PLAYER_ID}
@@ -199,7 +238,9 @@ const PlayerStats = () => {
                     name={player.PLAYER_NAME}
                     number={player.PLAYER_JERSEY_NUMBER}
                     image={player.PLAYER_IMAGE_PATH}
-                    playerEvents={player.events}
+                    playerEvents={filteredEvents}
+                    isLoading={isLoading}
+                    typeId={player.PLAYER_TYPE_ID}
                   />
                 );
               })}

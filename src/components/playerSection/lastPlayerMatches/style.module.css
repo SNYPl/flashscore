@@ -1,7 +1,6 @@
 .match {
   display: grid;
-  grid-template-columns: 0.75fr 70px 40px;
-  justify-content: space-between;
+  grid-template-columns: 2fr 50px 1.2fr;
   align-items: center;
   width: 100%;
 }
@@ -50,9 +49,8 @@
 }
 
 .matchInfoTitle {
-  display: grid;
-  grid-template-columns: 60px 36px 1fr;
-  align-items: center;
+  display: flex;
+
   column-gap: 16px;
 }
 
@@ -65,16 +63,20 @@
 }
 
 .title {
-  align-items: center;
   background-color: #eee;
   border-radius: 4px;
   color: #555e61;
-  display: flex;
   font-size: 11px;
   font-weight: 700;
   padding: 6px 12px;
   text-transform: uppercase;
   margin-top: 20px;
+  display: grid;
+  grid-template-columns: 2fr 50px 1.2fr;
+}
+
+.title p svg {
+  font-size: 14px;
 }
 
 .moreBtn p {
@@ -119,4 +121,70 @@
 
 .winner {
   font-weight: bolder !important;
+}
+
+.WO {
+  background: linear-gradient(to bottom right, #00a83f 80%, #f3a000 20%);
+}
+
+.card {
+  width: 11px;
+  height: 14px;
+  margin-left: 3px;
+  border-radius: 4px;
+}
+
+.cardYellow {
+  background-color: yellow;
+}
+
+.cardRed {
+  background-color: red;
+}
+
+.titlesMenu {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: center;
+  justify-items: center;
+}
+
+.itemsStatistic {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: center;
+  justify-items: center;
+}
+
+.itemsStatistic p {
+  font-size: 12px;
+  color: #555e61;
+  font-weight: 500;
+}
+
+.type6 p {
+  color: #555e61;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.winners {
+  border-radius: 4px;
+  display: flex;
+  height: 20px;
+  justify-content: center;
+  position: relative;
+  width: 20px;
+  align-items: center;
+}
+
+.winners p {
+  color: #fff;
+  font-size: 11px;
+}
+
+.matchesTitle {
+  color: #001e28;
+  font-size: 18px;
+  font-weight: bold;
 }

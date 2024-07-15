@@ -1,143 +1,168 @@
 import React, { useState } from "react";
 import style from "./style.module.css";
 import Link from "next/link";
-import { Tooltip } from "antd";
+import { Skeleton, Tooltip } from "antd";
 import Image from "next/image";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
+import { IoFootballOutline } from "react-icons/io5";
+import { TbPlayFootball } from "react-icons/tb";
+import { useSearchParams } from "next/navigation";
+import axios from "axios";
+import { useQuery } from "react-query";
+import LastEventStatistic from "./lastEventsStatistic/LastEventStatistic";
+import { HiOutlineClock } from "react-icons/hi";
 
 const LastPlayerEvents = () => {
-  // const [matchLengths, setMatchLengths] = useState(
-  //   filteredData?.GROUPS.map(() => 5) // Initial length of 5 for each group
-  // );
-
-  // const showMoreMatches = (index: number) => {
-  //   setMatchLengths((prev: any) =>
-  //     prev.map((length: any, i: any) => (i === index ? length + 5 : length))
-  //   );
-  // };
-
+  const searchParams = useSearchParams();
+  const playerId = searchParams.get("playerId");
+  const sportId = searchParams.get("sportId");
   const sportIdCheck = useSportIdHandler();
+  const [showMorematches, setShowMoreMatches] = useState(10);
+
+  const options = {
+    method: "GET",
+    url: "https://flashlive-sports.p.rapidapi.com/v1/players/last-events",
+    params: {
+      sport_id: sportId,
+      locale: "en_INT",
+      player_id: playerId,
+    },
+    headers: {
+      "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
+      "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
+    },
+  };
+
+  const { data, isLoading, isError, isFetched, isFetching } = useQuery(
+    ["lastPlayerEvents", playerId, sportId],
+    async () => {
+      try {
+        const response = await axios.request(options);
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching result events", error);
+        throw new Error("Error fetching result events");
+      }
+    },
+    { refetchOnWindowFocus: false }
+  );
+
+  if (isLoading) {
+    return (
+      <div className="p-4">
+        <Skeleton />
+      </div>
+    );
+  }
 
   return (
     <>
-      {/* {filteredData?.GROUPS.map((matches: any, index: number) => {
-        return ( */}
-      <section key={"index"} className="bg-white rounded-lg p-4  mb-3">
-        <div className={`${style.title}`}>{"matches.GROUP_LABEL"}</div>
+      <section className="bg-white rounded-lg p-4  mb-3">
+        <h4 className={style.matchesTitle}>Last Matches</h4>
+        <div className={`${style.title}`}>
+          <div></div>
+          <div></div>
+          <div className={style.titlesMenu}>
+            <Tooltip title="Minutes Played">
+              <p>
+                <HiOutlineClock />
+              </p>
+            </Tooltip>
+            <Tooltip title="Goals">
+              <p>
+                <IoFootballOutline />
+              </p>
+            </Tooltip>
+            <Tooltip title="Assist">
+              <p>
+                <TbPlayFootball />
+              </p>
+            </Tooltip>
 
-        {/* {matches.ITEMS.slice(0, matchLengths[index]).map((match: any) => { */}
-        {/* const date = new Date(match.START_TIME * 1000);
-          const formattedDate = `${date.getDate()}.${(date.getMonth() + 1)
-            .toString()
-            .padStart(2, "0")}.${date.getFullYear().toString().slice(-2)}`;
+            <div className={`${style.card} ${style.cardYellow}`}></div>
 
-          const result =
-            match.H_RESULT === "WIN"
-              ? "W"
-              : match.H_RESULT === "DRAW"
-              ? "D"
-              : match.H_RESULT === "LOST"
-              ? "L"
-              : null;
+            <div className={`${style.card} ${style.cardRed}`}></div>
+          </div>
+        </div>
 
-          const whoWin =
-            Number(match.HOME_SCORE_FULL) > Number(match.AWAY_SCORE_FULL)
-              ? match.HOME_PARTICIPANT
-              : Number(match.HOME_SCORE_FULL) < Number(match.AWAY_SCORE_FULL)
-              ? match.AWAY_PARTICIPANT
-              : null; */}
+        {data?.DATA.slice(0, showMorematches).map((event: any) => {
+          const timeStamp = event.START_TIME * 1000;
+          const date = new Date(timeStamp);
 
-        {/* return ( */}
-        <article
-          className={`flex ${style.matchContainer} p-2`}
-          key={"match.EVENT_ID"}
-        >
-          <Link
-            href={`${sportIdCheck?.alt}/match/event?id=${"match.EVENT_ID"}`}
-            target="_blank"
-            className="w-full"
-          >
-            <section className={` items-center ${style.match}`}>
-              <article
-                className={`flex   items-center ${style.matchInfoTitle} `}
+          const formattedDate = date.toLocaleDateString("de-DE", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "2-digit",
+          });
+
+          return (
+            <article
+              className={`flex ${style.matchContainer} p-2`}
+              key={event.EVENT_ID}
+            >
+              <Link
+                href={`${sportIdCheck?.alt}/match/event?id=${event.EVENT_ID}`}
+                target="_blank"
+                className="w-full"
               >
-                <div className={`mr-7 ${style.dateTitle}`}>
-                  <h4>{"formattedDate"}</h4>
-                </div>
-                <Tooltip title={"match.COUNTRY"}>
-                  <div className="mr-7 font-bold ">
-                    {/* <h4>{match.EVENT_ACRONYM}</h4> */}
-                    <h4>EU</h4>
-                  </div>
-                </Tooltip>
-                <div className={`flex  flex-col ${style.matchesItems}`}>
-                  <div className="flex  flex-row mb-1">
-                    <p className="mr-2">
-                      <Image
-                        src={
-                          "match.HOME_IMAGES" && "match.HOME_IMAGES" !== null
-                            ? "match.HOME_IMAGES"[0]
-                            : "/images/userSection/Flag.svg"
-                        }
-                        alt="club"
-                        width={16}
-                        height={16}
-                        priority
-                      />
-                    </p>
-                    <p className={``}>
-                      {"match.HOME_PARTICIPANT".replace("*", "").trim()}
-                    </p>
-                  </div>
+                <section className={` items-center ${style.match}`}>
+                  <article
+                    className={`flex   items-center ${style.matchInfoTitle} `}
+                  >
+                    <div className={`mr-7 ${style.dateTitle}`}>
+                      <h4>{formattedDate}</h4>
+                    </div>
 
-                  <div className="flex  flex-row mb-1">
-                    <p className="mr-2">
-                      <Image
-                        src={
-                          "match.AWAY_IMAGES" && "match.AWAY_IMAGES" !== null
-                            ? "match.AWAY_IMAGES[0]"
-                            : "/images/userSection/Flag.svg"
-                        }
-                        alt="club"
-                        width={16}
-                        height={16}
-                        priority
-                      />
-                    </p>
-                    <p className={``}>
-                      {"match.AWAY_PARTICIPANT".replace("*", "").trim()}
-                    </p>
-                  </div>
-                </div>
-              </article>
-              <div className={`flex  flex-col ${style.scoreInfo}`}>
-                <p className="text-xs font-semibold mb-2 ">
-                  {"match.HOME_SCORE_FULL"}
-                </p>
-                <p className="text-xs font-semibold ">
-                  {"match.AWAY_SCORE_FULL"}
-                </p>
-              </div>
+                    <div className={`flex  flex-col ${style.matchesItems}`}>
+                      <div className="flex  flex-row mb-1">
+                        <p className="mr-2">
+                          <Image
+                            src={event.HOME_IMAGE_ID}
+                            alt="club"
+                            width={16}
+                            height={16}
+                            priority
+                          />
+                        </p>
+                        <p className={``}>{event.HOME_NAME}</p>
+                      </div>
 
-              {"result" && (
-                <div
-                  className={`flex ${style.moreBtn} px-2 py-1 items-center justify-center`}
-                >
-                  <p className={`${style["result"]}`}>{"result"}</p>
-                </div>
-              )}
-            </section>
-          </Link>
-        </article>
-        {/* ); */}
-        {/* // })} */}
+                      <div className="flex  flex-row mb-1">
+                        <p className="mr-2">
+                          <Image
+                            src={event.AWAY_IMAGE_ID}
+                            alt="club"
+                            width={16}
+                            height={16}
+                            priority
+                          />
+                        </p>
+                        <p className={``}>{event.AWAY_NAME}</p>
+                      </div>
+                    </div>
+                  </article>
+                  <div className={`flex  flex-col ${style.scoreInfo}`}>
+                    <p className="text-xs font-semibold mb-2 ">
+                      {event.HOME_SCORE}
+                    </p>
+                    <p className="text-xs font-semibold ">{event.AWAY_SCORE}</p>
+                  </div>
+                  <LastEventStatistic
+                    items={event.ITEMS}
+                    winner={event.WINNER_ICON_SUFFIX}
+                  />
+                </section>
+              </Link>
+            </article>
+          );
+        })}
 
         <div className={style.moreMatches}>
-          <button>Show More Matches</button>
+          <button onClick={() => setShowMoreMatches(data?.DATA.length)}>
+            Show More Matches
+          </button>
         </div>
       </section>
-      {/* );
-      })} */}
     </>
   );
 };

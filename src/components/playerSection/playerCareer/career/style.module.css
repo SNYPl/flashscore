@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   grid-template-columns: minmax(32px, 37px) minmax(140px, 1fr) repeat(
-      6,
+      10,
       minmax(30px, 48px)
     );
 }
