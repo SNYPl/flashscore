@@ -8,11 +8,13 @@ import { useSelector } from "react-redux";
 import { countries } from "@/lib/countriesList";
 import Flag from "react-world-flags";
 import { usePinnedLeagues } from "@/components/hooks/usePineedLeagues";
+import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
 const PinnedLeagues = () => {
   const allTournament = useSelector(
     (state: any) => state.matches.allTournaments
   );
+  const sportId = useSportIdHandler();
 
   const { pinnedLeagueIds, removePinnedLeague } = usePinnedLeagues();
 
@@ -38,15 +40,19 @@ const PinnedLeagues = () => {
       </article>
       <article className="pl-2 pr-2">
         {filteredLeagues?.map((tournament: any) => {
+          const stageId = tournament.STAGES.filter(
+            (el: any) => el.STAGE_NAME === "Main"
+          );
+          const stageSeasonId =
+            stageId.length > 0 ? stageId[0] : tournament.STAGES[0];
+
+          const url = `${sportId?.href}/${tournament.COUNTRY_NAME}/${tournament.LEAGUE_NAME}?seasonStageId=${stageSeasonId.STAGE_ID}&name=${tournament.LEAGUE_NAME}&tournamentId=${tournament.ACTUAL_TOURNAMENT_SEASON_ID}`;
           return (
             <div
               className={`flex items-center justify-between  mb-2 ${style.league} h-9`}
               key={tournament.ACTUAL_TOURNAMENT_SEASON_ID}
             >
-              <Link
-                href="/football/england/premier-league"
-                className="flex items-center gap-x-2"
-              >
+              <Link href={url} className="flex items-center gap-x-2">
                 {tournament.countryCode ? (
                   <Flag
                     code={tournament.countryCode}

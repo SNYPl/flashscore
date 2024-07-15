@@ -55,7 +55,7 @@
 
 .supportItems {
   flex-direction: column;
-  border-top: 1px solid #e0e3e9;
+  border-top: 1px solid #024256;
   position: relative;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .itemOne {
-  border-bottom: 1px solid #e0e3e9;
+  border-bottom: 1px solid #024256;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -82,12 +82,13 @@
 
 .itemTwo div:first-child,
 .itemOne div:first-child {
-  border-right: 1px solid #e0e3e9;
+  border-right: 1px solid #024256;
 }
 
 .itemTwo div:hover a,
 .itemOne div:hover a {
-  background: rgb(219 226 243 / 30%);
+  /* background: rgb(219 226 243 / 30%); */
+  background: rgb(219 226 243 / 3%);
   transition: all 0.3s ease-in-out;
   opacity: 100% !important;
 }
@@ -104,14 +105,67 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.modalBody {
-  padding: 0 !important;
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(8 20 24 / 80%);
+  transition: opacity 0.3s 0s, visibility 0s 0.3s;
+  z-index: 9999999999;
+  opacity: 0;
+  visibility: hidden;
 }
 
-.wrapper {
-  background-color: rgb(8 20 24 / 80%);
+.openedWrapper {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s 0s, visibility 0s 0s;
+}
+
+.modalContainer {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  margin: 5em auto;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-40px);
+  transition-property: transform;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  margin: 5em auto;
+  -webkit-backface-visibility: hidden;
+}
+
+.openedWrapper .modalContainer {
+  transform: translateY(0);
 }
 
 .modal {
-  width: 450px !important;
+  background-color: #003040;
+  border-radius: 14px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease-in;
+}
+
+.closeBtn {
+  position: absolute;
+  right: 8px;
+  top: 12px;
+  cursor: pointer;
+}
+
+.closeBtn svg {
+  color: #fff;
+  font-size: 26px;
+  transition: all 0.3s ease-in;
+}
+
+.closeBtn:hover svg {
+  transform: rotate(180deg);
 }

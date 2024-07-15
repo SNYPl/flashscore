@@ -59,7 +59,7 @@ const PlayerStats = ({ countryName }: { countryName: string }) => {
           (item: any) => item.PLAYER_ID
         );
       } else {
-        return []; // Return an empty array if GROUP_LABEL is "Coach"
+        return [];
       }
     }) || [];
 
@@ -112,7 +112,7 @@ const PlayerStats = ({ countryName }: { countryName: string }) => {
         for (let i = 0; i < playersArray.length; i++) {
           try {
             const data = await getPlayerInfo(playersArray[i]);
-            await delay(200);
+            await delay(190);
             if (data) {
               setPlayerData((prevPlayerData) => [
                 ...prevPlayerData,
@@ -133,14 +133,6 @@ const PlayerStats = ({ countryName }: { countryName: string }) => {
       fetchPlayerInfo();
     }
   }, [playersArray.length]);
-
-  if (isLoading) {
-    return (
-      <div className="p-4">
-        <Skeleton />
-      </div>
-    );
-  }
 
   // Merging function
   const mergePlayerEvents = (playerGroups: any, eventsData: any) => {
@@ -166,6 +158,14 @@ const PlayerStats = ({ countryName }: { countryName: string }) => {
       return data.GROUP_LABEL === active;
     }
   });
+
+  if (isLoading) {
+    return (
+      <div className="p-4">
+        <Skeleton />
+      </div>
+    );
+  }
 
   if (filteredData.length === 0) {
     return (

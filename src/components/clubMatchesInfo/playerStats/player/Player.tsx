@@ -87,7 +87,7 @@ const Player: React.FC<playerProps> = ({
       <p className={`${style.infoIndex} font-semibold`}>{number}</p>
       <div className=" flex items-center">
         <span className={`${style.infoIcon} mr-2`}>
-          <Image src={image} width={20} height={20} alt="player" />
+          {image && <Image src={image} width={20} height={20} alt="player" />}
         </span>
         <Link href={`/player/${name}/?playerId=${id}&sportId=${sportId}`}>
           <h3 className={`${style.infoTitle} font-semibold `}>{name}</h3>

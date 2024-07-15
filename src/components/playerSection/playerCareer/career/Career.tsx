@@ -26,10 +26,6 @@ const Career: React.FC<playerProps> = ({
   const searchParams = useSearchParams();
   const sportId = searchParams.get("sportId");
 
-  console.log(stats);
-
-  console.log(Object.entries(stats));
-
   return (
     <div
       className={` ${style.infoItem} flex items-center justify-between py-3 `}

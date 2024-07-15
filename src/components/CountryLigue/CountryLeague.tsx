@@ -36,27 +36,29 @@ const CountryLeague = () => {
   const { data, isLoading, isError, isFetched } = useQuery(
     ["matchesResults", sportId, seasonStageId],
     async () => {
-        try {
-          const response = await axios.request(resultMatchesOption).catch(error => {
+      try {
+        const response = await axios
+          .request(resultMatchesOption)
+          .catch((error) => {
             if (isAxiosError(error)) {
               switch (error.response?.status) {
                 case 404:
-  
-                  return { data: { DATA:[]}  };
-  
+                  return { data: { DATA: [] } };
+
                 default:
                   break;
               }
             }
-  
+
             throw error;
-          });;
-          return response.data;
-        } catch (error) {
-          console.error("Error fetching result events", error);
-          throw new Error("Error fetching result events");
-        }
-    },{
+          });
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching result events", error);
+        throw new Error("Error fetching result events");
+      }
+    },
+    {
       retry: false,
       refetchOnWindowFocus: false,
       enabled: !!seasonStageId,
@@ -80,37 +82,34 @@ const CountryLeague = () => {
   const scheduledMatches = useQuery(
     ["scheduledMatches", sportId, seasonStageId],
     async () => {
-
       try {
-        const response = await axios.request(scheduledMatchesOption).catch(error => {
-          if (isAxiosError(error)) {
-            switch (error.response?.status) {
-              case 404:
+        const response = await axios
+          .request(scheduledMatchesOption)
+          .catch((error) => {
+            if (isAxiosError(error)) {
+              switch (error.response?.status) {
+                case 404:
+                  return { data: { DATA: [] } };
 
-                return { data: { DATA:[]}  };
-
-              default:
-                break;
+                default:
+                  break;
+              }
             }
-          }
 
-          throw error;
-        });
+            throw error;
+          });
         return response.data;
       } catch (error) {
         console.error("Error fetching scheduled events", error);
         throw new Error("Error fetching scheduled events");
       }
+    },
+    {
+      retry: false,
+      refetchOnWindowFocus: false,
+      enabled: !!seasonStageId,
     }
-    , {
-    retry: false,
-    refetchOnWindowFocus: false,
-    enabled: !!seasonStageId,
-  }
-
   );
-
-
 
   if (isLoading || scheduledMatches.isLoading) {
     return (
@@ -120,38 +119,37 @@ const CountryLeague = () => {
     );
   }
 
-
   return (
     <section className={`${style.countryLeague}`}>
-      <LeagueNavigation
-        activeMenu={activeMenu}
-        setActiveMenu={setActiveMenu}
-      />
+      <LeagueNavigation activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
 
       {activeMenu === "SUMMARY" && (
         <div>
           <Todaymatches />
 
+          {data?.DATA.length !== 0 && (
+            <LatestScores
+              resultData={data?.DATA}
+              sliceLength={4}
+              setActiveMenu={setActiveMenu}
+              activeMenu={activeMenu}
+            />
+          )}
 
-          { data?.DATA.length !==0 &&<LatestScores
-            resultData={data?.DATA}
-            sliceLength={4}
-            setActiveMenu={setActiveMenu}
-            activeMenu={activeMenu}
-          />}
-
-          {  scheduledMatches?.data?.DATA.length !==0 && <ScheduledMatches
-            fixturesMatchData={scheduledMatches?.data?.DATA}
-            sliceLength={10}
-            setActiveMenu={setActiveMenu}
-            activeMenu={activeMenu}
-          />}
+          {scheduledMatches?.data?.DATA.length !== 0 && (
+            <ScheduledMatches
+              fixturesMatchData={scheduledMatches?.data?.DATA}
+              sliceLength={10}
+              setActiveMenu={setActiveMenu}
+              activeMenu={activeMenu}
+            />
+          )}
 
           <Table leagueId={seasonStageId} seasonId={seasonId} />
         </div>
       )}
 
-      {activeMenu === "RESULTS" &&   (
+      {activeMenu === "RESULTS" && (
         <LatestScores
           resultData={data?.DATA}
           sliceLength={data?.DATA?.EVENTS?.length}
@@ -159,15 +157,13 @@ const CountryLeague = () => {
         />
       )}
 
-
-      {activeMenu === "FIXTURES"  && (
+      {activeMenu === "FIXTURES" && (
         <ScheduledMatches
           fixturesMatchData={scheduledMatches?.data?.DATA}
           sliceLength={scheduledMatches?.data?.DATA?.EVENTS?.length}
           activeMenu={activeMenu}
         />
       )}
-
 
       {activeMenu === "STANDINGS" && (
         <Table leagueId={seasonStageId} seasonId={seasonId} />

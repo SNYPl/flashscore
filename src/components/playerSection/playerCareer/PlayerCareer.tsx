@@ -112,8 +112,6 @@ const PlayerCareer = () => {
           {data?.DATA.map((career: any) => {
             if (career.TAB_LABEL === active) {
               return career.ROWS.map((el: any) => {
-                console.log(el);
-
                 return (
                   <Career
                     key={el.TOURNAMENT_STAGE_ID}

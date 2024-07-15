@@ -33,7 +33,7 @@ const PlayerSection: React.FC = () => {
           <PlayerInfo />
         </div>
 
-        {/* <LastPlayerEvents /> */}
+        <LastPlayerEvents />
         <PlayerCareer />
 
         <div className="bg-white rounded-lg p-4">
