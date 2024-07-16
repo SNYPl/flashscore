@@ -1,18 +1,22 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import style from "./style.module.css";
 import DatePicker from "./DatePicker";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/free-mode";
 
 interface calendarProps {
   activeIndex: any;
   setActiveIndex: any;
 }
 
+import { FreeMode } from "swiper/modules";
+
 const Calendar: React.FC<calendarProps> = ({ activeIndex, setActiveIndex }) => {
   const today = new Date();
-  const [selectedDate, setSelectedDate] = useState(today.toDateString());
-
-  const calendarOptionsRef = useRef<HTMLDivElement>(null);
+  const [selectedDate, setSelectedDate] = useState<any>(today.toDateString());
+  const swiperRef = useRef<any>(null);
 
   const generateDateOptions = () => {
     const options = [];
@@ -40,96 +44,65 @@ const Calendar: React.FC<calendarProps> = ({ activeIndex, setActiveIndex }) => {
 
   const dateOptions = generateDateOptions();
 
-  const scrollToActiveDate = (index: number) => {
-    const calendarOptions = calendarOptionsRef.current;
-    const dateDiv = calendarOptions?.children[index] as HTMLDivElement;
+  const initialIndex = dateOptions.findIndex((date) => date.id === 0);
 
-    // if (dateDiv) {
-    //   dateDiv.scrollIntoView({ behavior: "smooth", inline: "center" });
-    // }
+  const slideToHandler = (id: number) => {
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(id);
+    }
   };
 
   const handleDateChange = (date: any) => {
     setSelectedDate(date);
   };
 
-  useEffect(() => {
-    scrollToActiveDate(activeIndex);
-  }, [activeIndex]);
-
-  // Drag to Scroll
-  useEffect(() => {
-    const calendarOptions = calendarOptionsRef.current;
-    if (!calendarOptions) return;
-
-    let isDown = false;
-    let startX: number;
-    let scrollLeft: number;
-
-    const handleMouseDown = (e: MouseEvent) => {
-      isDown = true;
-      startX = e.pageX - calendarOptions.offsetLeft;
-      scrollLeft = calendarOptions.scrollLeft;
-    };
-
-    const handleMouseLeave = () => {
-      isDown = false;
-    };
-
-    const handleMouseUp = () => {
-      isDown = false;
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - calendarOptions.offsetLeft;
-      const walk = (x - startX) * 3; // Scroll speed
-      calendarOptions.scrollLeft = scrollLeft - walk;
-    };
-
-    calendarOptions.addEventListener("mousedown", handleMouseDown);
-    calendarOptions.addEventListener("mouseleave", handleMouseLeave);
-    calendarOptions.addEventListener("mouseup", handleMouseUp);
-    calendarOptions.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      calendarOptions.removeEventListener("mousedown", handleMouseDown);
-      calendarOptions.removeEventListener("mouseleave", handleMouseLeave);
-      calendarOptions.removeEventListener("mouseup", handleMouseUp);
-      calendarOptions.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
+  const handleSlideClick = (index: number) => {
+    setActiveIndex(dateOptions[index].id);
+    setSelectedDate(dateOptions[index]);
+    slideToHandler(index);
+  };
 
   return (
     <section className={`${style.calendar} `}>
-      <div className={`${style.calendarOptions} `} ref={calendarOptionsRef}>
-        {dateOptions.map((el: any) => {
-          const { day, dayOfWeek, id } = el;
-          const dayWeek = dayOfWeek.toUpperCase();
+      <div className={`${style.calendarOptions} `}>
+        <Swiper
+          spaceBetween={40}
+          slidesPerView={7}
+          centeredSlides={true}
+          centeredSlidesBounds={true}
+          pagination={false}
+          freeMode={true}
+          initialSlide={initialIndex}
+          allowTouchMove={true}
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          modules={[FreeMode]}
+          className="mySwiper"
+        >
+          {dateOptions.map((el: any, index: number) => {
+            const { day, dayOfWeek, id } = el;
+            const dayWeek = dayOfWeek.toUpperCase();
 
-          return (
-            <div
-              className={`${
-                style.calendarDate
-              } flex items-center justify-center flex-col ${
-                activeIndex === id ? style.activeDate : ""
-              }`}
-              key={id}
-              onClick={() => {
-                setSelectedDate(el);
-                setActiveIndex(id);
-              }}
-            >
-              <h4 className="font-extrabold text-base text-gey-league">
-                {day}
-              </h4>
-              <span className="text-xs text-gey-league font-semibold">
-                {dayWeek}
-              </span>
-            </div>
-          );
-        })}
+            return (
+              <SwiperSlide key={id} onClick={() => handleSlideClick(index)}>
+                <div
+                  className={`${
+                    style.calendarDate
+                  } flex items-center justify-center flex-col ${
+                    activeIndex === id ? style.activeDate : ""
+                  }`}
+                  key={id}
+                >
+                  <h4 className="font-extrabold text-base text-gey-league">
+                    {day}
+                  </h4>
+                  <span className="text-xs text-gey-league font-semibold">
+                    {dayWeek}
+                  </span>
+                </div>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
       </div>
       <article className={`${style.calendarPicker}`}>
         <DatePicker
@@ -139,6 +112,7 @@ const Calendar: React.FC<calendarProps> = ({ activeIndex, setActiveIndex }) => {
           generateDateOptions={generateDateOptions}
           setActiveIndex={setActiveIndex}
           activeIndex={activeIndex}
+          slideToHandler={slideToHandler}
         />
       </article>
     </section>

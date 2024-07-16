@@ -9,6 +9,7 @@ const DatePicker = ({
   setSelectedDate,
   generateDateOptions,
   activeIndex,
+  slideToHandler,
   setActiveIndex,
 }: {
   onDateChange: any;
@@ -17,6 +18,7 @@ const DatePicker = ({
   generateDateOptions: any;
   activeIndex: Number | String;
   setActiveIndex: (id: any) => void;
+  slideToHandler: (id: number) => void;
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLUListElement>(null);
@@ -29,6 +31,7 @@ const DatePicker = ({
     setSelectedDate(date);
     setActiveIndex(index);
     setIsDropdownOpen(false);
+
     if (onDateChange) {
       onDateChange(date);
     }
@@ -37,18 +40,6 @@ const DatePicker = ({
   useEffect(() => {
     onDateChange(selectedDate);
   }, [selectedDate, onDateChange]);
-
-  const handleNavigation = (direction: any) => {
-    const options = generateDateOptions();
-    const currentIndex = options.findIndex(
-      (date: any) => date === selectedDate
-    );
-    if (direction === "prev" && currentIndex > 0) {
-      setSelectedDate(options[currentIndex - 1]);
-    } else if (direction === "next" && currentIndex < options.length - 1) {
-      setSelectedDate(options[currentIndex + 1]);
-    }
-  };
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -82,7 +73,10 @@ const DatePicker = ({
                   className={`${styles.dateOption} ${
                     id === activeIndex ? styles.active : ""
                   }`}
-                  onClick={() => handleDateSelect(date, id)}
+                  onClick={() => {
+                    slideToHandler(index);
+                    handleDateSelect(date, id);
+                  }}
                 >
                   {`${day}/${month} ${dayWeek}`}
                 </button>

@@ -7,9 +7,7 @@ import MatchLists from "./leagueMatchlist/MatchLists";
 import InfoText from "./infoText/InfoText";
 import Image from "next/image";
 import axios from "axios";
-import { useDispatch } from "react-redux";
 import { useQuery } from "react-query";
-import { setAllMatches } from "../store/slices/matchesSlice";
 import { Skeleton } from "antd";
 import { useSportIdHandler } from "../hooks/useSportIdHandler";
 
@@ -49,19 +47,13 @@ const AllMatchInfos = () => {
     }
   );
 
-  if (isLoading) {
-    return (
-      <div className="p-5 ">
-        <Skeleton />
-      </div>
-    );
-  }
-
-  // useEffect(() => {
-  //   if (data) {
-  //     dispatch(setAllMatches(data?.DATA));
-  //   }
-  // }, [data, dispatch]);
+  // if (isLoading) {
+  //   return (
+  //     <div className="p-5 ">
+  //       <Skeleton />
+  //     </div>
+  //   );
+  // }
 
   return (
     <section className={`${style.events}`}>
@@ -74,7 +66,13 @@ const AllMatchInfos = () => {
           selected={selectedMatchNav}
           setSelected={setSelected}
         />
-        <MatchLists selectedMatchNav={selectedMatchNav} data={data} />
+        {isLoading ? (
+          <div className="p-5 ">
+            <Skeleton />
+          </div>
+        ) : (
+          <MatchLists selectedMatchNav={selectedMatchNav} data={data} />
+        )}
       </article>
       <article className={`${style.ad} mt-4   w-full`}>
         <Image

@@ -9,19 +9,23 @@
 
 .calendarOptions {
   overflow-x: hidden;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  cursor: pointer;
+  cursor: pointer; */
 }
 
 .calendarDate {
-  width: 11.5%;
-  height: 100%;
+  /* width: 11.5%; */
+  /* height: 100%; */
   border-radius: 50px;
   min-width: 76px;
   z-index: 22;
   transition: all 0.1s ease-in;
   margin: 0 3px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 .calendarDate:hover {
   background-color: #e1e1e1;
