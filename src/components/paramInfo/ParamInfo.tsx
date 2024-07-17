@@ -15,7 +15,9 @@ const ParamInfo: React.FC = () => {
       <p className={`${style.addedParams}`}>
         {pathArray.map((el: any, id: number) => (
           <React.Fragment key={el}>
-            <span>{el.replaceAll("%20", " ").toUpperCase()}</span>
+            <span>
+              {el.replaceAll("%20", " ").replaceAll("-", " ").toUpperCase()}
+            </span>
             {id !== pathArray.length - 1 ? (
               <span className={`${style.paramArrow}`}>{">"}</span>
             ) : (

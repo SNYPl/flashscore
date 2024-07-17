@@ -9,6 +9,8 @@ import League from "../allMatchInfoSection/leagueMatchlist/matchLeague/MatchLeag
 const Favorites = () => {
   const { favouriteLeagues } = useFavouriteLeagues();
 
+  console.log(favouriteLeagues);
+
   const transformEventArray = (events: any) => {
     return events.map((event: any) => {
       let transformedEvent = {
@@ -30,12 +32,12 @@ const Favorites = () => {
   return (
     <section className={`${style.favorites}    w-full`}>
       <div className={`bg-white rounded-lg  p-3 w-full `}>
-        {favouriteLeagues?.map((eventMatch: any) => {
+        {/* {favouriteLeagues?.map((eventMatch: any) => {
           const transformedEvents = transformEventArray(eventMatch.events);
           return (
             <League
               tournamentStageId={eventMatch.mainLeagueID}
-              NAME1={eventMatch.leagueInfo.NAME1}
+              NAME1={"test"}
               NAME2={eventMatch.leagueInfo.NAME2}
               url={eventMatch.leagueInfo.url}
               events={transformedEvents}
@@ -45,7 +47,7 @@ const Favorites = () => {
               countryName={eventMatch.COUNTRY_NAME}
             />
           );
-        })}
+        })} */}
       </div>
     </section>
   );

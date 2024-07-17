@@ -78,7 +78,7 @@ const MatchInfoList = ({ filteredData }: { filteredData: any }) => {
                                   match.HOME_IMAGES &&
                                   match.HOME_IMAGES !== null
                                     ? match.HOME_IMAGES[0]
-                                    : "/images/userSection/Flag.svg"
+                                    : "/images/default/club.gif"
                                 }
                                 alt="club"
                                 width={16}
@@ -104,7 +104,7 @@ const MatchInfoList = ({ filteredData }: { filteredData: any }) => {
                                   match.AWAY_IMAGES &&
                                   match.AWAY_IMAGES !== null
                                     ? match.AWAY_IMAGES[0]
-                                    : "/images/userSection/Flag.svg"
+                                    : "/images/default/club.gif"
                                 }
                                 alt="club"
                                 width={16}

@@ -78,7 +78,11 @@ const FormInfo: React.FC<props> = ({ eventData, h2hData }) => {
           <div className={`${style.infoItemCont} flex flex-row items-center`}>
             <div className={`${style.infoImage} mr-4`}>
               <Image
-                src={eventData?.HOME_IMAGES[0] || "/images/club.svg"}
+                src={
+                  eventData?.HOME_IMAGES
+                    ? eventData?.HOME_IMAGES[0]
+                    : "/images/default/club.gif"
+                }
                 alt="club"
                 width={55}
                 height={55}
@@ -130,7 +134,11 @@ const FormInfo: React.FC<props> = ({ eventData, h2hData }) => {
           >
             <div className={`${style.infoImage} ml-4`}>
               <Image
-                src={eventData?.AWAY_IMAGES[0] || "/images/club.svg"}
+                src={
+                  eventData?.AWAY_IMAGES
+                    ? eventData?.AWAY_IMAGES[0]
+                    : "/images/default/club.gif"
+                }
                 alt="club"
                 width={55}
                 height={55}

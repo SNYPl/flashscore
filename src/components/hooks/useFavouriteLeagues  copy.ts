@@ -1,5 +1,19 @@
 import { useLocalStorage } from "usehooks-ts";
 
+interface FavouriteEvent {
+  eventId: string;
+  eventInfo: {
+    awayTeam: string;
+    awayImage: string;
+    homeImage: string;
+    homeTeam: string;
+    homeScore: number;
+    awayScore: number;
+    status: string;
+    time: string;
+  };
+}
+
 interface LeagueInfo {
   NAME1: string;
   NAME2: string;
@@ -10,9 +24,8 @@ interface LeagueInfo {
 
 interface FavouriteLeague {
   mainLeagueID: string;
-  tournamentStageId: string;
   leagueInfo: LeagueInfo;
-  stageIds: string[];
+  events: FavouriteEvent[];
 }
 
 export const useFavouriteLeagues = () => {
@@ -24,27 +37,29 @@ export const useFavouriteLeagues = () => {
     tournamentId: string,
     events: any[],
     leagueInfo: LeagueInfo,
-    tournamentStageId: string,
-    eventId?: string | undefined
+    eventId?: string,
+    eventInfo?: FavouriteEvent["eventInfo"]
   ) => {
     const existingLeague = favouriteLeagues.find(
       (fav) => fav.mainLeagueID === tournamentId
     );
 
-    if (eventId) {
+    if (eventId && eventInfo) {
       if (existingLeague) {
-        const updatedStageIds = existingLeague.stageIds.includes(eventId)
-          ? existingLeague.stageIds.filter((id) => id !== eventId)
-          : [...existingLeague.stageIds, eventId];
+        const updatedEvents = existingLeague.events.some(
+          (event) => event.eventId === eventId
+        )
+          ? existingLeague.events.filter((event) => event.eventId !== eventId)
+          : [...existingLeague.events, { eventId, eventInfo }];
 
         setFavouriteLeagues(
-          updatedStageIds.length === 0
+          updatedEvents.length === 0
             ? favouriteLeagues.filter(
                 (fav) => fav.mainLeagueID !== tournamentId
               )
             : favouriteLeagues.map((fav) =>
                 fav.mainLeagueID === tournamentId
-                  ? { ...fav, stageIds: updatedStageIds }
+                  ? { ...fav, events: updatedEvents }
                   : fav
               )
         );
@@ -54,17 +69,28 @@ export const useFavouriteLeagues = () => {
           {
             mainLeagueID: tournamentId,
             leagueInfo,
-            stageIds: [eventId],
-            tournamentStageId: tournamentStageId,
+            events: [{ eventId, eventInfo }],
           },
         ]);
       }
     } else {
-      const eventIds = events.map((event) => event.EVENT_ID);
+      const eventIds = events.map((event) => ({
+        eventId: event.EVENT_ID,
+        eventInfo: {
+          awayTeam: event.AWAY_NAME,
+          awayImage: event.AWAY_IMAGES,
+          homeImage: event.HOME_IMAGES,
+          homeTeam: event.HOME_NAME,
+          homeScore: event.HOME_SCORE_CURRENT,
+          awayScore: event.AWAY_SCORE_CURRENT,
+          status: event.STAGE,
+          time: event.START_TIME,
+        },
+      }));
 
       if (existingLeague) {
         const allEventsIncluded = eventIds.every((id) =>
-          existingLeague.stageIds.includes(id)
+          existingLeague.events.some((event) => event.eventId === id.eventId)
         );
 
         setFavouriteLeagues(
@@ -74,55 +100,18 @@ export const useFavouriteLeagues = () => {
               )
             : favouriteLeagues.map((fav) =>
                 fav.mainLeagueID === tournamentId
-                  ? { ...fav, stageIds: eventIds }
+                  ? { ...fav, events: eventIds }
                   : fav
               )
         );
       } else {
         setFavouriteLeagues([
           ...favouriteLeagues,
-          {
-            mainLeagueID: tournamentId,
-            leagueInfo,
-            stageIds: eventIds,
-            tournamentStageId: tournamentStageId,
-          },
+          { mainLeagueID: tournamentId, leagueInfo, events: eventIds },
         ]);
       }
     }
   };
 
   return { favouriteLeagues, addToFavourite };
-};
-
-export const isFavoritedLeague = (
-  tournamentId: string,
-  favouriteLeagues?: any
-): boolean => {
-  if (favouriteLeagues.length === 0) return false;
-
-  const favoriteLeague = favouriteLeagues.find(
-    (el: any) => el.mainLeagueID === tournamentId
-  );
-
-  if (favoriteLeague) {
-    return true;
-  }
-
-  return false;
-};
-
-export const isFavoriteEvent = (
-  eventId: string,
-  favouriteLeagues: any[] = []
-): boolean => {
-  if (favouriteLeagues.length === 0) return false;
-
-  const favoriteLeague = favouriteLeagues.includes(eventId);
-
-  if (favoriteLeague) {
-    return true;
-  }
-
-  return false;
 };

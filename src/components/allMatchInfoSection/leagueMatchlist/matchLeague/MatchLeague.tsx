@@ -7,7 +7,10 @@ import Image from "next/image";
 import Match from "./match/Match";
 import { countries } from "@/lib/countriesList";
 import Flag from "react-world-flags";
-import { useFavouriteLeagues } from "@/components/hooks/useFavouriteLeagues ";
+import {
+  useFavouriteLeagues,
+  isFavoritedLeague,
+} from "@/components/hooks/useFavouriteLeagues ";
 import { usePinnedLeagues } from "@/components/hooks/usePineedLeagues";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
@@ -47,19 +50,7 @@ const MatchLeague: React.FC<leagueProps> = ({
 
   const { pinnedLeagueIds, addLeagueToLocalStorage } = usePinnedLeagues();
 
-  const isFavorited = (tournamentId: string, eventIds?: string[]): boolean => {
-    const favoriteLeague = favouriteLeagues.find(
-      (el) => el.mainLeagueID === tournamentId
-    );
-
-    if (favoriteLeague) {
-      return true;
-    }
-
-    return false;
-  };
-
-  const isLeagueFavorited = isFavorited(tournamentId);
+  const isLeagueFavorited = isFavoritedLeague(tournamentId, favouriteLeagues);
 
   const newUrl = `${url}?seasonStageId=${tournamentStageId}&name=${NAME2}&tournamentId=${tournamentId}`;
 
@@ -73,13 +64,19 @@ const MatchLeague: React.FC<leagueProps> = ({
                 isLeagueFavorited ? style.favorited : ""
               }`}
               onClick={() =>
-                addToFavourite(tournamentId, events, {
-                  NAME1,
-                  NAME2,
-                  url,
-                  countryId,
-                  countryName,
-                })
+                addToFavourite(
+                  tournamentId,
+                  events,
+                  {
+                    NAME1,
+                    NAME2,
+                    url,
+                    countryId,
+                    countryName,
+                  },
+                  tournamentStageId,
+                  undefined
+                )
               }
             >
               <EmptyFavouriteStarIcon />
@@ -143,16 +140,16 @@ const MatchLeague: React.FC<leagueProps> = ({
           className={`${showMatches ? style.showMatcher : "hidden"} mb-5`}
         >
           {events?.map((match, index) => {
-            const eventInfo = {
-              awayTeam: match.AWAY_NAME,
-              awayImage: match.AWAY_IMAGES,
-              homeImage: match.HOME_IMAGES,
-              homeTeam: match.HOME_NAME,
-              homeScore: match.HOME_SCORE_CURRENT,
-              awayScore: match.AWAY_SCORE_CURRENT,
-              status: match.STAGE,
-              time: match.START_TIME,
-            };
+            // const eventInfo = {
+            //   awayTeam: match.AWAY_NAME,
+            //   awayImage: match.AWAY_IMAGES,
+            //   homeImage: match.HOME_IMAGES,
+            //   homeTeam: match.HOME_NAME,
+            //   homeScore: match.HOME_SCORE_CURRENT,
+            //   awayScore: match.AWAY_SCORE_CURRENT,
+            //   status: match.STAGE,
+            //   time: match.START_TIME,
+            // };
 
             return (
               <Match
@@ -172,12 +169,11 @@ const MatchLeague: React.FC<leagueProps> = ({
                     tournamentId,
                     events,
                     { NAME1, NAME2, url, countryId, countryName },
-                    match.EVENT_ID,
-                    eventInfo
+                    tournamentStageId,
+                    match.EVENT_ID
                   )
                 }
                 sportId={sportIdCheck}
-                isFavouritedEvent={favouriteLeagues}
                 tournamentId={tournamentId}
               />
             );

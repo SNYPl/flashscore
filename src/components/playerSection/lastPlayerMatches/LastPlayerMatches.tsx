@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import style from "./style.module.css";
 import Link from "next/link";
@@ -117,7 +118,11 @@ const LastPlayerEvents = () => {
                       <div className="flex  flex-row mb-1">
                         <p className="mr-2">
                           <Image
-                            src={event.HOME_IMAGE_ID}
+                            src={
+                              event.HOME_IMAGE_ID
+                                ? event.HOME_IMAGE_ID
+                                : "/images/default/club.gif"
+                            }
                             alt="club"
                             width={16}
                             height={16}
@@ -130,7 +135,11 @@ const LastPlayerEvents = () => {
                       <div className="flex  flex-row mb-1">
                         <p className="mr-2">
                           <Image
-                            src={event.AWAY_IMAGE_ID}
+                            src={
+                              event.AWAY_IMAGE_ID
+                                ? event.AWAY_IMAGE_ID
+                                : "/images/default/club.gif"
+                            }
                             alt="club"
                             width={16}
                             height={16}

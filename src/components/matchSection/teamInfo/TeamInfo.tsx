@@ -37,7 +37,11 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
         <div className={`${style.infoItem} flex flex-col`}>
           <div className={`${style.infoImage}`}>
             <Image
-              src={data?.HOME_IMAGES[0]}
+              src={
+                data?.HOME_IMAGES
+                  ? data?.HOME_IMAGES[0]
+                  : "/images/default/club.gif"
+              }
               alt="club"
               width={55}
               height={55}
@@ -84,7 +88,11 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
         <div className={`${style.infoItem} flex flex-col`}>
           <div className={`${style.infoImage}`}>
             <Image
-              src={data?.AWAY_IMAGES[0]}
+              src={
+                data?.AWAY_IMAGES
+                  ? data?.AWAY_IMAGES[0]
+                  : "/images/default/club.gif"
+              }
               alt="club"
               width={55}
               height={55}
@@ -99,14 +107,6 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
           </Link>
         </div>
       </article>
-      {/* <div className={`flex justify-center items-center ${style.infoText}`}>
-        <p className="">
-          <span className="mr-1">
-            <Icon />
-          </span>
-          Neutral location - Wembley Stadium.
-        </p>
-      </div> */}
     </section>
   );
 };

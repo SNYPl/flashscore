@@ -3,6 +3,10 @@ import Image from "next/image";
 import style from "./style.module.css";
 
 import { EmptyFavouriteStarIcon } from "@/common/svg/home";
+import {
+  useFavouriteLeagues,
+  isFavoriteEvent,
+} from "@/components/hooks/useFavouriteLeagues ";
 
 interface matchProps {
   homeTeam: any;
@@ -16,7 +20,6 @@ interface matchProps {
   time: number;
   id: string;
   addToFavourite: any;
-  isFavouritedEvent: any;
   tournamentId: string;
   sportId: any;
 }
@@ -33,12 +36,15 @@ const Match: React.FC<matchProps> = ({
   time,
   id,
   addToFavourite,
-  isFavouritedEvent,
   tournamentId,
   sportId,
 }) => {
   const timeStamp = time * 1000;
   const date = new Date(timeStamp);
+
+  const { favouriteLeagues } = useFavouriteLeagues();
+
+  const [favIds] = favouriteLeagues;
 
   const hour = date.getHours();
   const minute = date.getMinutes();
@@ -49,26 +55,13 @@ const Match: React.FC<matchProps> = ({
     year: "2-digit",
   });
 
-  const isFavourite = () => {
-    const favoriteLeague = isFavouritedEvent.find(
-      (el: any) => el.mainLeagueID === tournamentId
-    )?.events;
-
-    if (favoriteLeague) {
-      const favoriteMatch = favoriteLeague.find((el: any) => el.eventId === id)
-        ?.eventId;
-
-      return favoriteMatch;
-    }
-  };
-
-  const favoriteId = isFavourite();
+  const isEventFavourited = isFavoriteEvent(id, favIds?.stageIds);
 
   return (
     <div className={`flex ${style.matchContainer} p-2`}>
       <div
         className={`flex items-center justify-center mr-7  ${style.starIcon} ${
-          favoriteId === id ? style.favorited : ""
+          isEventFavourited ? style.favorited : ""
         }`}
         onClick={addToFavourite}
       >
@@ -108,7 +101,7 @@ const Match: React.FC<matchProps> = ({
                     src={
                       homeImage && homeImage !== null
                         ? homeImage[0]
-                        : "/images/userSection/Flag.svg"
+                        : "/images/default/club.gif"
                     }
                     alt="club"
                     width={16}
@@ -125,7 +118,7 @@ const Match: React.FC<matchProps> = ({
                     src={
                       awayImage && awayImage !== null
                         ? awayImage[0]
-                        : "/images/userSection/Flag.svg"
+                        : "/images/default/club.gif"
                     }
                     alt="club"
                     width={16}

@@ -1,8 +1,7 @@
+"use client";
 import React from "react";
 import style from "./style.module.css";
 import Image from "next/image";
-import Link from "next/link";
-import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -91,7 +90,11 @@ const PlayerInfo = () => {
       <div className="flex gap-x-4">
         <div className={style.img}>
           <Image
-            src={data?.DATA.IMAGE_PATH}
+            src={
+              data?.DATA.IMAGE_PATH
+                ? data?.DATA.IMAGE_PATH
+                : "/images/default/person.gif"
+            }
             alt="player"
             width={72}
             height={72}
@@ -110,7 +113,7 @@ const PlayerInfo = () => {
               Market value:<span>{data?.DATA.PMV}</span>
             </p>
             <p>
-              Contract expires:<span>{contractDate}</span>
+              Contract expires:<span>{data?.DATA.PCE ? contractDate : ""}</span>
             </p>
           </div>
         </div>

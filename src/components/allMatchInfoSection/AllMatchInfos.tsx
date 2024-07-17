@@ -46,15 +46,6 @@ const AllMatchInfos = () => {
       }
     }
   );
-
-  // if (isLoading) {
-  //   return (
-  //     <div className="p-5 ">
-  //       <Skeleton />
-  //     </div>
-  //   );
-  // }
-
   return (
     <section className={`${style.events}`}>
       <article className={`bg-white rounded-lg  p-3 w-full `}>
