@@ -4,51 +4,42 @@ import style from "./style.module.css";
 
 import { useFavouriteLeagues } from "@/components/hooks/useFavouriteLeagues ";
 
-import League from "../allMatchInfoSection/leagueMatchlist/matchLeague/MatchLeague";
+import FavLeagues from "./favLeagues/FavLeagues";
 
 const Favorites = () => {
   const { favouriteLeagues } = useFavouriteLeagues();
 
-  console.log(favouriteLeagues);
-
-  const transformEventArray = (events: any) => {
-    return events.map((event: any) => {
-      let transformedEvent = {
-        EVENT_ID: event.eventId,
-        AWAY_IMAGES: event.eventInfo.awayImage,
-        AWAY_SCORE_CURRENT: event.eventInfo.awayScore,
-        AWAY_NAME: event.eventInfo.awayTeam,
-        HOME_IMAGES: event.eventInfo.homeImage,
-        HOME_SCORE_CURRENT: event.eventInfo.homeScore,
-        HOME_NAME: event.eventInfo.homeTeam,
-        STAGE: event.eventInfo.status,
-        START_TIME: event.eventInfo.time,
-      };
-
-      return transformedEvent;
-    });
-  };
-
   return (
-    <section className={`${style.favorites}    w-full`}>
-      <div className={`bg-white rounded-lg  p-3 w-full `}>
-        {/* {favouriteLeagues?.map((eventMatch: any) => {
-          const transformedEvents = transformEventArray(eventMatch.events);
+    <section
+      className={`${style.favorites}    w-full`}
+      suppressHydrationWarning
+    >
+      <article
+        className={`bg-white rounded-lg  p-3 w-full `}
+        suppressHydrationWarning
+      >
+        {favouriteLeagues?.map((eventMatch: any) => {
+          const eventIds =
+            eventMatch.stageIds.length !== 0 ? eventMatch.stageIds : [];
+
           return (
-            <League
+            <FavLeagues
               tournamentStageId={eventMatch.mainLeagueID}
-              NAME1={"test"}
+              NAME1={eventMatch.leagueInfo.NAME1}
               NAME2={eventMatch.leagueInfo.NAME2}
               url={eventMatch.leagueInfo.url}
-              events={transformedEvents}
+              events={eventIds}
               countryId={eventMatch.leagueInfo.countryId}
-              tournamentId={eventMatch.mainLeagueID}
+              tournamentId={eventMatch.tournamentStageId}
               key={eventMatch.mainLeagueID}
+              sportHref={eventMatch.leagueInfo.sportHref}
               countryName={eventMatch.COUNTRY_NAME}
+              ShowFullDate={true}
+              showMatchesDefault={true}
             />
           );
-        })} */}
-      </div>
+        })}
+      </article>
     </section>
   );
 };

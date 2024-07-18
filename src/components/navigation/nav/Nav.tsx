@@ -30,7 +30,9 @@ const Nav = () => {
         >
           <Image src={"/images/nav/fav.svg"} width={21} height={20} alt="fav" />
           <h4>FAVORITES</h4>
-          <span>{favouriteLeagues.length}</span>
+          <span suppressHydrationWarning>
+            {favouriteLeagues.length === 0 ? 0 : favouriteLeagues.length}
+          </span>
         </Link>
       </div>
       {sportNavigation.map((el, id) => {

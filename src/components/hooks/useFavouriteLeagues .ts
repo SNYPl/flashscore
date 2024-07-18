@@ -6,6 +6,8 @@ interface LeagueInfo {
   url: string;
   countryId: number;
   countryName: string;
+  sportHref: string | undefined;
+  img: string;
 }
 
 interface FavouriteLeague {
@@ -92,7 +94,30 @@ export const useFavouriteLeagues = () => {
     }
   };
 
-  return { favouriteLeagues, addToFavourite };
+  const removeLeague = (tournamentId: string) => {
+    setFavouriteLeagues(
+      favouriteLeagues.filter((fav) => fav.mainLeagueID !== tournamentId)
+    );
+  };
+
+  const removeEventFromLeague = (tournamentId: string, eventId: string) => {
+    setFavouriteLeagues(
+      favouriteLeagues.map((fav) => {
+        if (fav.mainLeagueID === tournamentId) {
+          const updatedStageIds = fav.stageIds.filter((id) => id !== eventId);
+          return { ...fav, stageIds: updatedStageIds };
+        }
+        return fav;
+      })
+    );
+  };
+
+  return {
+    favouriteLeagues,
+    addToFavourite,
+    removeLeague,
+    removeEventFromLeague,
+  };
 };
 
 export const isFavoritedLeague = (

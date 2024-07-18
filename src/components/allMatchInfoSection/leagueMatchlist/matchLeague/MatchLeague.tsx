@@ -73,6 +73,7 @@ const MatchLeague: React.FC<leagueProps> = ({
                     url,
                     countryId,
                     countryName,
+                    sportHref: sportIdCheck?.href,
                   },
                   tournamentStageId,
                   undefined
@@ -140,17 +141,6 @@ const MatchLeague: React.FC<leagueProps> = ({
           className={`${showMatches ? style.showMatcher : "hidden"} mb-5`}
         >
           {events?.map((match, index) => {
-            // const eventInfo = {
-            //   awayTeam: match.AWAY_NAME,
-            //   awayImage: match.AWAY_IMAGES,
-            //   homeImage: match.HOME_IMAGES,
-            //   homeTeam: match.HOME_NAME,
-            //   homeScore: match.HOME_SCORE_CURRENT,
-            //   awayScore: match.AWAY_SCORE_CURRENT,
-            //   status: match.STAGE,
-            //   time: match.START_TIME,
-            // };
-
             return (
               <Match
                 key={match.EVENT_ID}
@@ -168,7 +158,14 @@ const MatchLeague: React.FC<leagueProps> = ({
                   addToFavourite(
                     tournamentId,
                     events,
-                    { NAME1, NAME2, url, countryId, countryName },
+                    {
+                      NAME1,
+                      NAME2,
+                      url,
+                      countryId,
+                      countryName,
+                      sportHref: sportIdCheck?.href,
+                    },
                     tournamentStageId,
                     match.EVENT_ID
                   )

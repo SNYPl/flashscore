@@ -1,0 +1,65 @@
+.match {
+  display: grid;
+  grid-template-columns: 3fr 1fr 75px;
+  width: 100%;
+}
+.matchContainer {
+  border-bottom: 1px solid #e5e5e7;
+  grid-template-columns: 18px 1fr;
+}
+
+.matchesItems p {
+  font-size: 13px;
+  color: #071e27;
+  font-weight: 500;
+}
+
+.match h4 {
+  color: #071e27;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.starIcon {
+  cursor: pointer;
+}
+
+.starIcon svg {
+  cursor: pointer;
+}
+.starIcon:hover path {
+  fill: #ffcd00;
+  stroke: #ffcd00;
+}
+.favorited {
+  transition: all 0.3s ease;
+}
+
+.favorited path {
+  fill: #ffcd00;
+  stroke: #ffcd00;
+}
+
+.moreBtn {
+  background-color: #ffffff;
+  border: 1px solid #dee1e5;
+  border-radius: 5px;
+}
+
+.moreBtn p {
+  color: #797d7e;
+  font-size: 10px;
+}
+
+.moreBtn:hover {
+  background-color: #0092c1;
+  border: none;
+}
+
+.moreBtn:hover p {
+  color: #fff;
+}
+
+.scoreInfo p {
+  color: #122e37;
+}
