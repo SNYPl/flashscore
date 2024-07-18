@@ -1,6 +1,6 @@
 import Predictions from "@/components/predictions/Predictions";
 import UserTeams from "@/components/userLists/userTeams/UserTeams";
-// import FavoritesSection from "@/components/favourite/Favorites";
+import FavoritesSection from "@/components/favourite/Favorites";
 import dynamic from "next/dynamic";
 
 export default function Favorites() {

@@ -56,15 +56,16 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
         className={`${style.blitz} transition-3 `}
         style={{ padding: isNavFixed ? "7px 12px" : "" }}
       >
-        <Tooltip title="projects">
-          <Image
-            src="/images/header/blitz.svg"
-            alt="blitz"
-            width={60}
-            height={20}
-            onClick={showModal}
-          />
-        </Tooltip>
+        <div onClick={showModal} className={style.blitzImgP}>
+          <Tooltip title="projects">
+            <Image
+              src="/images/header/blitz.svg"
+              alt="blitz"
+              width={60}
+              height={20}
+            />
+          </Tooltip>
+        </div>
 
         <section
           className={`${style.wrapper} ${

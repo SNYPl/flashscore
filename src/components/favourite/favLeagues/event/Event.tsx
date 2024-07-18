@@ -44,7 +44,9 @@ const Match: React.FC<matchProps> = ({
 
   const { favouriteLeagues } = useFavouriteLeagues();
 
-  const [favIds] = favouriteLeagues;
+  const allStageIds = favouriteLeagues.reduce((acc: any, league: any) => {
+    return acc.concat(league.stageIds);
+  }, []);
 
   const hour = date.getHours();
   const minute = date.getMinutes();
@@ -55,7 +57,7 @@ const Match: React.FC<matchProps> = ({
     year: "2-digit",
   });
 
-  const isEventFavourited = isFavoriteEvent(id, favIds?.stageIds);
+  const isEventFavourited = isFavoriteEvent(id, allStageIds);
 
   return (
     <div className={`flex ${style.matchContainer} p-2`}>

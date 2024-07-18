@@ -123,6 +123,9 @@ const FavLeague: React.FC<leagueProps> = ({
     events.includes(event?.EVENT?.EVENT_ID)
   );
 
+  console.log(filteredFavEvents);
+  console.log(events);
+
   return (
     <div className={``}>
       <div className="mb-1">

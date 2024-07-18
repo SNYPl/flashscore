@@ -11,8 +11,10 @@
 .blitz {
   border: 1px solid #0a5c76;
   border-radius: 25px;
-  padding: 13px 22px;
   cursor: pointer;
+}
+.blitzImgP {
+  padding: 13px 22px;
 }
 
 .blitz:hover {
