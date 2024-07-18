@@ -36,6 +36,7 @@ const Favorites = () => {
               countryName={eventMatch.COUNTRY_NAME}
               ShowFullDate={true}
               showMatchesDefault={true}
+              img={eventMatch.leagueInfo.img}
             />
           );
         })}

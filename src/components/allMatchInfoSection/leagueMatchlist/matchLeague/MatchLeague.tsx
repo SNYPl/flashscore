@@ -74,6 +74,7 @@ const MatchLeague: React.FC<leagueProps> = ({
                     countryId,
                     countryName,
                     sportHref: sportIdCheck?.href,
+                    img: countryObject?.countryCode,
                   },
                   tournamentStageId,
                   undefined
@@ -165,6 +166,7 @@ const MatchLeague: React.FC<leagueProps> = ({
                       countryId,
                       countryName,
                       sportHref: sportIdCheck?.href,
+                      img: countryObject?.countryCode,
                     },
                     tournamentStageId,
                     match.EVENT_ID

@@ -26,9 +26,10 @@ interface leagueProps {
   showMatchesDefault?: boolean;
   ShowFullDate?: boolean;
   sportHref: string;
+  img: string;
 }
 
-const favLeague: React.FC<leagueProps> = ({
+const FavLeague: React.FC<leagueProps> = ({
   NAME1,
   NAME2,
   countryId,
@@ -40,6 +41,7 @@ const favLeague: React.FC<leagueProps> = ({
   url,
   sportHref,
   showMatchesDefault = false,
+  img,
 }) => {
   const [showMatches, setShowMatches] = useState(showMatchesDefault);
   const [eventData, setEventData] = useState<any[]>([]);
@@ -136,10 +138,7 @@ const favLeague: React.FC<leagueProps> = ({
             </div>
 
             {countryObject ? (
-              <Flag
-                code={countryObject?.countryCode}
-                style={{ width: "18px", height: "13px" }}
-              />
+              <Flag code={img} style={{ width: "18px", height: "13px" }} />
             ) : (
               <Image
                 src="/images/match/world.png"
@@ -229,4 +228,4 @@ const favLeague: React.FC<leagueProps> = ({
   );
 };
 
-export default favLeague;
+export default FavLeague;
