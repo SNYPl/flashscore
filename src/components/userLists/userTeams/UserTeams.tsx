@@ -98,7 +98,7 @@ const UserTeams = () => {
         {myTeamsList.map((el: any) => {
           console.log(el);
           return (
-            <div className={style.favItem}>
+            <div className={style.favItem} key={el.id}>
               <Link href={`/team/real-madrid?id=W8mj7MDD&sportId=1`}>
                 <div>
                   <Image src={el.image} width={15} height={15} alt="flag" />
@@ -164,6 +164,7 @@ const UserTeams = () => {
                 return (
                   <div
                     className={`relative  ${isfavorited ? style.added : ""}`}
+                    key={searched.ID}
                   >
                     <Link
                       href={url}
