@@ -96,6 +96,7 @@ const Search = () => {
             <Skeleton />
           </div>
         )}
+
         {searchedData?.map((searched: any) => {
           const defaultImage =
             searched.TYPE === "playersInTeam"

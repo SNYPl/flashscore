@@ -34,11 +34,123 @@
 .modalInputSearch {
   border: 1px solid #c8cdcd;
   border-radius: 8px;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+  /* display: grid; */
+  /* grid-template-columns: 2fr 1fr; */
+  margin-bottom: 20px;
+  padding-right: 24px;
+}
+
+.modalInputSearch input {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: var(--color-combination-2);
+  flex: 1;
+  font-family: inherit;
+  font-size: 13px;
+  height: 36px;
+  margin: 0;
+  outline: 0;
+  padding-left: 12px;
+}
+
+.text {
+  color: #00141e;
+  margin: 0 0 16px 0;
+  font-size: 12px;
 }
 
 .searchSelector .ant-select-selector {
   border: none !important;
   outline: none !important;
+}
+
+.searchedItemLink {
+  display: flex;
+}
+.searchedItemLink:hover {
+  background-color: rgb(200 205 205 / 20%);
+}
+
+.searchImage {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border: 1px solid #eeeeee;
+  display: flex;
+  grid-area: participantImage;
+  height: 36px;
+  justify-content: center;
+  width: 36px;
+}
+
+.searchImage img {
+  height: 30px;
+  object-fit: cover;
+  width: 30px;
+}
+
+.searchInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchInfo h4 {
+  color: #001e28;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.searchInfo p {
+  color: #555e61;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.searchInput input::placeholder {
+  font-size: 12px;
+  color: #878d8e;
+}
+
+.serachItem {
+  padding: 8px;
+  width: 100%;
+  column-gap: 12px;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+}
+
+.starIcon {
+  position: absolute;
+  right: 6px;
+  top: 13px;
+  z-index: 22222222;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.starIcon:hover path {
+  fill: #ffcd00;
+  stroke: #ffcd00;
+}
+
+.added .starIcon path {
+  fill: #ffcd00;
+  stroke: #ffcd00;
+}
+
+.favItem {
+  align-items: center;
+  border-radius: 4px;
+  color: #0f2d37;
+  display: flex;
+  font-size: 13px;
+  margin-bottom: 4px;
+  min-height: 26px;
+  overflow: hidden;
 }

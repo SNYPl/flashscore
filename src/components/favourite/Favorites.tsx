@@ -22,8 +22,6 @@ const Favorites = () => {
           const eventIds =
             eventMatch.stageIds.length !== 0 ? eventMatch.stageIds : [];
 
-          console.log(eventMatch);
-
           return (
             <FavLeagues
               tournamentStageId={eventMatch.mainLeagueID}

@@ -102,9 +102,14 @@ export const useFavouriteLeagues = () => {
 
   const removeEventFromLeague = (tournamentId: string, eventId: string) => {
     setFavouriteLeagues(
-      favouriteLeagues.map((fav) => {
+      favouriteLeagues.flatMap((fav) => {
         if (fav.mainLeagueID === tournamentId) {
           const updatedStageIds = fav.stageIds.filter((id) => id !== eventId);
+
+          if (updatedStageIds.length === 0) {
+            return [];
+          }
+
           return { ...fav, stageIds: updatedStageIds };
         }
         return fav;

@@ -52,11 +52,12 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
           </Link>
         ))}
       </div>
-      <div
-        className={`${style.blitz} transition-3 `}
-        style={{ padding: isNavFixed ? "7px 12px" : "" }}
-      >
-        <div onClick={showModal} className={style.blitzImgP}>
+      <div className={`${style.blitz} transition-3 `}>
+        <div
+          onClick={showModal}
+          className={style.blitzImgP}
+          style={{ padding: isNavFixed ? "7px 12px" : "" }}
+        >
           <Tooltip title="projects">
             <Image
               src="/images/header/blitz.svg"
@@ -84,7 +85,7 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
                 <Link href="#">
                   <div>
                     <Image
-                      src={"images/header/blitz/BLITZ.svg"}
+                      src={"/images/header/blitz/BLITZ.svg"}
                       alt="blitz"
                       width={87}
                       height={27}
@@ -101,7 +102,7 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
                       className="w-full h-full flex justify-center items-center relative"
                     >
                       <Image
-                        src={"images/header/blitz/soccer.svg"}
+                        src={"/images/header/blitz/soccer.svg"}
                         alt="soccer"
                         width={90}
                         height={20}
@@ -115,7 +116,7 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
                       className="w-full h-full flex justify-center items-center"
                     >
                       <Image
-                        src={"images/header/blitz/FOTBALLNEWS.svg"}
+                        src={"/images/header/blitz/FOTBALLNEWS.svg"}
                         alt="football"
                         width={145}
                         height={12}
@@ -133,7 +134,7 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
                       className="w-full h-full flex justify-center items-center"
                     >
                       <Image
-                        src={"images/header/blitz/ISPORT.svg"}
+                        src={"/images/header/blitz/ISPORT.svg"}
                         alt="isport"
                         width={90}
                         height={22}
@@ -147,7 +148,7 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
                       className="w-full h-full flex justify-center items-center relative"
                     >
                       <Image
-                        src={"images/header/blitz/INEWS.svg"}
+                        src={"/images/header/blitz/INEWS.svg"}
                         alt="inews"
                         width={80}
                         height={23}

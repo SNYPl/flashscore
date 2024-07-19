@@ -5,7 +5,6 @@ import Link from "next/link";
 import { EmptyFavouriteStarIcon, LeagueArrowIcon } from "@/common/svg/home";
 import Image from "next/image";
 import Event from "./event/Event";
-import { countries } from "@/lib/countriesList";
 import Flag from "react-world-flags";
 import {
   useFavouriteLeagues,
@@ -13,6 +12,7 @@ import {
 } from "@/components/hooks/useFavouriteLeagues ";
 import { usePinnedLeagues } from "@/components/hooks/usePineedLeagues";
 import axios from "axios";
+import { Skeleton } from "antd";
 
 interface leagueProps {
   tournamentStageId: string;
@@ -45,9 +45,7 @@ const FavLeague: React.FC<leagueProps> = ({
 }) => {
   const [showMatches, setShowMatches] = useState(showMatchesDefault);
   const [eventData, setEventData] = useState<any[]>([]);
-
-  const currentCountryIcon = countries.filter((el) => el.name === countryName);
-  const [countryObject] = currentCountryIcon;
+  const [loading, setLoading] = useState(true);
 
   const {
     favouriteLeagues,
@@ -98,6 +96,7 @@ const FavLeague: React.FC<leagueProps> = ({
             const data = await getPlayerInfo(events[i]);
             await delay(190);
             if (data) {
+              setLoading(false);
               setEventData((pevEventData) => [
                 ...pevEventData,
                 { ...data.DATA },
@@ -123,9 +122,6 @@ const FavLeague: React.FC<leagueProps> = ({
     events.includes(event?.EVENT?.EVENT_ID)
   );
 
-  console.log(filteredFavEvents);
-  console.log(events);
-
   return (
     <div className={``}>
       <div className="mb-1">
@@ -140,7 +136,7 @@ const FavLeague: React.FC<leagueProps> = ({
               <EmptyFavouriteStarIcon />
             </div>
 
-            {countryObject ? (
+            {img ? (
               <Flag code={img} style={{ width: "18px", height: "13px" }} />
             ) : (
               <Image
@@ -221,9 +217,7 @@ const FavLeague: React.FC<leagueProps> = ({
               );
             })
           ) : (
-            <div>
-              <p>No Data</p>
-            </div>
+            <div>{loading ? <Skeleton /> : <p>No Data</p>}</div>
           )}
         </article>
       </div>
