@@ -37,12 +37,11 @@ const TopScoresTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
     ["topScoresTable", leagueId, seasonId],
     async () => {
       try {
-        const response = await axios.request(options).catch(error => {
+        const response = await axios.request(options).catch((error) => {
           if (isAxiosError(error)) {
             switch (error.response?.status) {
               case 404:
-
-                return { data: { DATA:[]}  };
+                return { data: { DATA: [] } };
 
               default:
                 break;
@@ -50,17 +49,17 @@ const TopScoresTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
           }
 
           throw error;
-        });;
+        });
         return response.data;
       } catch (error) {
         console.error("Error fetching table data ", error);
         throw new Error("Error fetching table data");
       }
-    },{
+    },
+    {
       retry: false,
       refetchOnWindowFocus: false,
       enabled: !!leagueId || !!seasonId,
-    
     }
   );
 
@@ -72,12 +71,13 @@ const TopScoresTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
     );
   }
 
-
-  
-  if(!data?.DATA?.length) {
-    return <div><p>ინფორმაცია არ არის</p></div>
+  if (!data?.DATA?.length) {
+    return (
+      <div>
+        <p>ინფორმაცია არ არის</p>
+      </div>
+    );
   }
-
 
   return (
     <section className={`${style.info}`}>

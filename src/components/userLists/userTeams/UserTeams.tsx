@@ -2,11 +2,11 @@
 import React, { useRef, useState } from "react";
 import { StarIcon, PlusIcon, EmptyFavouriteStarIcon } from "@/common/svg/home";
 import style from "./style.module.css";
-import { Modal, Skeleton } from "antd";
+import { Modal, Skeleton, Tooltip } from "antd";
 import Link from "next/link";
 import Image from "next/image";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import { useQuery } from "react-query";
 import { useLocalStorage } from "usehooks-ts";
 
@@ -15,6 +15,7 @@ interface team {
   name: string;
   id: string;
   url: string;
+  sportId: number;
 }
 
 const UserTeams = () => {
@@ -34,6 +35,9 @@ const UserTeams = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    if (searchRef.current) {
+      searchRef.current.value = "";
+    }
   };
 
   const options = {
@@ -56,8 +60,8 @@ const UserTeams = () => {
         const response = await axios.request(options);
         return response.data;
       } catch (error) {
-        console.error("Error fetching featured products", error);
-        throw new Error("Error fetching featured products");
+        console.error("Error searching my team ", error);
+        throw new Error("Error searching my team");
       }
     },
     {
@@ -67,6 +71,7 @@ const UserTeams = () => {
           searchRef.current.value = "";
         }
       },
+      retry: false,
     }
   );
 
@@ -75,42 +80,65 @@ const UserTeams = () => {
     setSearchItems(searchRef?.current?.value);
   };
 
-  function addToMyTeam(name: string, image: string, id: string, url: string) {
+  function addToMyTeam(
+    name: string,
+    image: string,
+    id: string,
+    url: string,
+    sportId: number
+  ) {
     const itemIndex = myTeamsList?.findIndex((el) => el.id === id);
 
     if (itemIndex !== -1) {
       setMyTeamsList(myTeamsList.filter((el) => el.id !== id));
     } else {
-      setMyTeamsList([...myTeamsList, { name, image, id, url }]);
+      setMyTeamsList([...myTeamsList, { name, image, id, url, sportId }]);
     }
   }
 
-  console.log(data);
+  function removeFromMyTeam(id: string) {
+    const filteredList = myTeamsList.filter((el: team) => el.id !== id);
+
+    setMyTeamsList(filteredList);
+  }
 
   return (
-    <section className={`p-4   mb-9 `}>
-      <div className={`${style.myTeamsTitle} flex items-center pb-3  `}>
+    <section className={`p-4 px-2 mb-9 `}>
+      <div className={`${style.myTeamsTitle} flex items-center pb-3 pl-2   `}>
         <StarIcon />
         <h2 className="ml-2  text-userList-light font-bold ">MY TEAMS</h2>
       </div>
 
-      <article>
+      <article className={`${style.userListItems}`}>
         {myTeamsList.map((el: any) => {
-          console.log(el);
           return (
-            <div className={style.favItem} key={el.id}>
-              <Link href={`/team/real-madrid?id=W8mj7MDD&sportId=1`}>
+            <div className={`${style.favItem} px-2`} key={el.id}>
+              <Link href={`/team/${el.url}?id=${el.id}&sportId=${el.sportId}`}>
                 <div>
                   <Image src={el.image} width={15} height={15} alt="flag" />
                 </div>
                 <span>{el.name}</span>
               </Link>
+              <Tooltip
+                title="Remove from my team"
+                overlayStyle={{ fontSize: "12px" }}
+              >
+                <div
+                  className={style.favItemStar}
+                  onClick={() => removeFromMyTeam(el.id)}
+                >
+                  <StarIcon />
+                </div>
+              </Tooltip>
             </div>
           );
         })}
       </article>
 
-      <div className={`${style.teams} flex items-center`} onClick={showModal}>
+      <div
+        className={`${style.teams} flex items-center mt-2  pl-2`}
+        onClick={showModal}
+      >
         <PlusIcon />
         <h2 className="ml-2 text-userList-light font-semibold  ">
           ADD THE TEAM
@@ -125,11 +153,13 @@ const UserTeams = () => {
               type="text"
               placeholder="type your search here"
               ref={searchRef}
+              minLength={2}
+              min={2}
             />
           </div>
         </form>
         <p className={style.text}>
-          Please type at least 1 characters and press enter. search only teams
+          Please type at least 2 characters and press enter. search only teams
         </p>
 
         {isLoading ? (
@@ -137,7 +167,13 @@ const UserTeams = () => {
             <Skeleton />
           </div>
         ) : (
-          <article className={`${style.searches}`}>
+          <article>
+            {!data && (
+              <div>
+                <p className="font-bold">No data</p>
+              </div>
+            )}
+
             {data
               ?.filter((el: any) => el.TYPE === "participants")
               .map((searched: any) => {
@@ -189,19 +225,27 @@ const UserTeams = () => {
                         </div>
                       </article>
                     </Link>
-                    <div
-                      className={style.starIcon}
-                      onClick={() =>
-                        addToMyTeam(
-                          searched.NAME,
-                          searched.IMAGE,
-                          searched.ID,
-                          searched.URL
-                        )
+                    <Tooltip
+                      title={
+                        isfavorited ? "Remove from my team" : "Add to my team"
                       }
+                      overlayStyle={{ fontSize: "12px" }}
                     >
-                      <EmptyFavouriteStarIcon />
-                    </div>
+                      <div
+                        className={style.starIcon}
+                        onClick={() =>
+                          addToMyTeam(
+                            searched.NAME,
+                            searched.IMAGE,
+                            searched.ID,
+                            searched.URL,
+                            searched.SPORT_ID
+                          )
+                        }
+                      >
+                        <EmptyFavouriteStarIcon />
+                      </div>
+                    </Tooltip>
                   </div>
                 );
               })}
