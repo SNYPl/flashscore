@@ -7,6 +7,8 @@ import Socials from "./socials/Socials";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setNavFixed } from "../store/slices/headerNavSlice";
+import Search from "../navigation/search/Search";
+import MobileBurgerCotnent from "./mobileBurgerContent/MobileBurgerCotnent";
 
 const Header = () => {
   const pathName = usePathname();
@@ -40,8 +42,20 @@ const Header = () => {
     >
       <div className={`container flex justify-between items-center h-full`}>
         <Logo matchRouteHandler={matchRouteHandler} isNavFixed={isNavFixed} />
-        <Navigation />
-        <Socials isNavFixed={isNavFixed} />
+
+        <div className="mobileNone h-full">
+          <Navigation />
+        </div>
+
+        <div className="flex items-center gap-x-3 pr-3">
+          <div className="desktopNo">
+            <Search />
+          </div>
+
+          <Socials isNavFixed={isNavFixed} />
+
+          <MobileBurgerCotnent />
+        </div>
       </div>
     </section>
   );

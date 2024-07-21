@@ -31,3 +31,43 @@
 .supportLinks {
   margin: 0 30px;
 }
+
+.arrow {
+  transform: rotate(180deg);
+}
+
+.transformArrow {
+  transform: rotate(0deg);
+}
+
+@media only screen and (max-width: 700px) {
+  .support {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 21px;
+    border: 1px solid #dee1e5;
+    border-radius: 10px;
+    padding: 15px;
+    max-height: 80px;
+    overflow: hidden;
+  }
+  .showAllItems {
+    max-height: max-content;
+  }
+
+  .logoImgContainer {
+    background: transparent;
+    justify-content: space-between;
+    height: auto;
+    width: 100%;
+  }
+  .logoImgContainer a {
+    background: #11adb1;
+    padding: 10px;
+    border-radius: 100px;
+  }
+
+  .supportLinks {
+    margin-left: 0;
+  }
+}

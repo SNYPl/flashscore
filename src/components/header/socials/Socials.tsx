@@ -39,7 +39,7 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
       }`}
     >
       <div
-        className={`flex justify-between items-center gap-x-4 ${style.socialItems}`}
+        className={`flex justify-between items-center gap-x-4 desktopYes ${style.socialItems}`}
       >
         {socialArray.map((el, id) => (
           <Link href={el.href} key={id} target="_blank">
@@ -64,6 +64,16 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
               alt="blitz"
               width={60}
               height={20}
+              className="mobileNone"
+            />
+          </Tooltip>
+          <Tooltip title="projects">
+            <Image
+              src="/images/header/blizMob.svg"
+              alt="blitz"
+              width={22}
+              height={22}
+              className="desktopNo"
             />
           </Tooltip>
         </div>

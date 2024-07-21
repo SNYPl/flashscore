@@ -21,7 +21,9 @@ const Navigation = () => {
     >
       <div className={`container flex items-center justify-between h-16`}>
         <NoSSR />
-        <Search />
+        <div className="desktopYes">
+          <Search />
+        </div>
       </div>
     </section>
   );

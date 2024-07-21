@@ -60,3 +60,10 @@
 .league:hover .pinIcon {
   display: flex;
 }
+
+@media only screen and (max-width: 965px) {
+  .pinnedLeague {
+    margin-bottom: 0;
+    padding-bottom: 8px;
+  }
+}

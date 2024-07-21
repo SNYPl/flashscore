@@ -7,6 +7,8 @@ import Navigation from "@/components/navigation/Navigation";
 import Footer from "@/components/footer/Footer";
 import { QueryClientProviderHelper } from "@/components/helper/queryClient";
 import { ReduxToolkitProvider } from "@/components/helper/reduxProvider";
+import MainNav from "@/components/header/navigation/Navigation";
+import Predictions from "@/components/predictions/Predictions";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +30,12 @@ export default function RootLayout({
             <header>
               <Advertisement />
               <Header />
+              <div className="desktopNo mobailMainNavigation">
+                <MainNav />
+              </div>
+              <div className="desktopNo">
+                <Predictions />
+              </div>
               <Navigation />
             </header>
             {children}

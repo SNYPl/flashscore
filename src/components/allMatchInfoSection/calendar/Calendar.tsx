@@ -77,6 +77,28 @@ const Calendar: React.FC<calendarProps> = ({ activeIndex, setActiveIndex }) => {
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           modules={[FreeMode]}
           className="mySwiper"
+          breakpoints={{
+            50: {
+              slidesPerView: 3,
+              spaceBetween: 5,
+            },
+            390: {
+              slidesPerView: 3,
+              spaceBetween: 5,
+            },
+            530: {
+              slidesPerView: 3,
+              spaceBetween: 5,
+            },
+            768: {
+              slidesPerView: 6,
+              spaceBetween: 25,
+            },
+            1065: {
+              slidesPerView: 7,
+              spaceBetween: 30,
+            },
+          }}
         >
           {dateOptions.map((el: any, index: number) => {
             const { day, dayOfWeek, id } = el;
@@ -104,7 +126,7 @@ const Calendar: React.FC<calendarProps> = ({ activeIndex, setActiveIndex }) => {
           })}
         </Swiper>
       </div>
-      <article className={`${style.calendarPicker}`}>
+      <article className={`${style.calendarPicker} `}>
         <DatePicker
           onDateChange={handleDateChange}
           setSelectedDate={setSelectedDate}

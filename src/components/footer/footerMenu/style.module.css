@@ -31,3 +31,9 @@
 .listItem:hover a {
   text-decoration: underline;
 }
+
+@media only screen and (max-width: 965px) {
+  .footermenu {
+    width: 100%;
+  }
+}

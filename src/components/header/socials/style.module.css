@@ -171,3 +171,12 @@
 .closeBtn:hover svg {
   transform: rotate(180deg);
 }
+
+@media only screen and (max-width: 965px) {
+  .blitz {
+    border-radius: 10px;
+  }
+  .blitzImgP {
+    padding: 12px !important;
+  }
+}

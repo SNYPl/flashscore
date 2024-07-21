@@ -45,3 +45,20 @@
   height: 2px;
   background-color: #0092c1;
 }
+
+@media only screen and (max-width: 965px) {
+  .nav {
+    overflow-x: scroll;
+    padding-left: 12px;
+    padding-bottom: 0;
+  }
+
+  .nav::-webkit-scrollbar {
+    width: 0px;
+    height: 0;
+  }
+
+  .navContainer {
+    margin-top: 0 !important;
+  }
+}

@@ -98,10 +98,13 @@ const MatchLeague: React.FC<leagueProps> = ({
                 className="max-w-none max-h-none h-3"
               />
             )}
-            <h2 className="ml-2">{NAME1}:</h2>
-            <Link href={newUrl} className="mr-2">
-              {NAME2}
-            </Link>
+            <div className={`flex items-center ${style.matchNames}`}>
+              <h2 className="ml-2">{NAME1}</h2>
+              <span className="m-0.5 mobileNone">:</span>
+              <Link href={newUrl} className="mr-2">
+                {NAME2}
+              </Link>
+            </div>
             <div
               className={`${style.pinImage} ${
                 pinnedLeagueIds.includes(tournamentId) ? style.pinActive : ""
@@ -123,11 +126,11 @@ const MatchLeague: React.FC<leagueProps> = ({
             className={`flex items-center gap-x-2 ${style.showMatchesBtn}`}
           >
             {!showMatches ? (
-              <span className={`${style.displayText}`}>
+              <span className={`${style.displayText} mobileNone`}>
                 Display Matches ({events.length})
               </span>
             ) : (
-              <span className={`${style.standings}`}>Standings</span>
+              <span className={`${style.standings} mobileNone`}>Standings</span>
             )}
             <span
               className={`${style.arrowIconBtn} ${

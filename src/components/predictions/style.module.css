@@ -1,5 +1,6 @@
 .prediction {
-  max-width: 252px;
+  /* max-width: 252px; */
+  width: 100%;
 }
 
 .predictionItem {
@@ -21,4 +22,44 @@
 
 .seeAlLink a:hover {
   color: #0092c1;
+}
+
+@media only screen and (max-width: 965px) {
+  .predictionItem {
+    margin-bottom: 15px;
+  }
+
+  .predictionList {
+    display: flex;
+    overflow-x: scroll;
+    column-gap: 9px;
+    justify-content: space-between;
+    padding: 0;
+    padding-bottom: 0 !important;
+  }
+
+  .predictionList::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+
+  .predictionList div {
+    margin-bottom: 0;
+  }
+
+  .predictionList img {
+    /* width: 100%; */
+    border-radius: 10px;
+    min-width: 222px;
+    max-width: 230px;
+  }
+
+  .prediction {
+    background-color: #fff;
+    padding: 15px;
+    padding-right: 0;
+  }
+  .adImgSection {
+    padding-right: 15px;
+  }
 }

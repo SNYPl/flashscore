@@ -26,6 +26,7 @@
   border-radius: 10px;
 }
 
+.premierTitle span,
 .premierTitle h2,
 .premierTitle a {
   font-size: 12.5px;
@@ -89,4 +90,29 @@
 
 .pinActive:hover {
   background-color: #0787fa26 !important;
+}
+
+@media only screen and (max-width: 540px) {
+  .matchNames {
+    flex-direction: column;
+    margin-left: 12px;
+  }
+
+  .matchNames h2 {
+    align-self: flex-start;
+    margin-left: 0;
+    color: #797979;
+    font-weight: normal;
+  }
+
+  .matchNames a {
+    font-weight: bolder;
+  }
+
+  .pinImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 8px;
+  }
 }

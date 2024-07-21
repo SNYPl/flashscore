@@ -52,5 +52,13 @@
   text-transform: uppercase;
 }
 
-.searchInfo p span {
+.mobailSearchIcon {
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #0a5c76;
+  border-radius: 10px;
+  padding: 15px;
+}
+.mobailSearchIcon svg path {
+  fill: #7ba4b1;
 }

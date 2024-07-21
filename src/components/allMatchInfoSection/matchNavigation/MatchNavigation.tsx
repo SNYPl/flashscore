@@ -25,7 +25,7 @@ const MatchNavigation = ({
   };
 
   return (
-    <section className={`flex items-center gap-x-2 mt-3`}>
+    <section className={`${style.navLinkItems} flex items-center gap-x-2 mt-3`}>
       {filterLinks.map((el, id) => (
         <div
           className={`

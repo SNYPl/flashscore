@@ -210,3 +210,9 @@
 .favItem:hover {
   background-color: rgb(200 205 205 / 30%);
 }
+
+@media only screen and (max-width: 965px) {
+  .userTeamContainer {
+    margin-bottom: 8px;
+  }
+}

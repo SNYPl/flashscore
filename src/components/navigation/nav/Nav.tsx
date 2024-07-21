@@ -20,7 +20,7 @@ const Nav = () => {
   const { favouriteLeagues } = useFavouriteLeagues();
 
   return (
-    <article className={"flex items-center h-full"}>
+    <article className={`flex items-center h-full ${style.nav}`}>
       <div className="mr-9 flex justify-center items-center h-full">
         <Link
           href={"/favorites"}

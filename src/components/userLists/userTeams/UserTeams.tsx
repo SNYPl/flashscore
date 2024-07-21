@@ -103,7 +103,7 @@ const UserTeams = () => {
   }
 
   return (
-    <section className={`p-4 px-2 mb-9 `}>
+    <section className={`p-4 px-2 mb-9 ${style.userTeamContainer} `}>
       <div className={`${style.myTeamsTitle} flex items-center pb-3 pl-2   `}>
         <StarIcon />
         <h2 className="ml-2  text-userList-light font-bold ">MY TEAMS</h2>

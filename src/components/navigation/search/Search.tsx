@@ -61,18 +61,27 @@ const Search = () => {
 
   const handleCancel = () => {
     setOpen(false);
+    if (searchRef.current) {
+      searchRef.current.value = "";
+    }
   };
 
   return (
     <section className={`flex`}>
+      <div
+        className={`flex ${style.mobailSearchIcon} desktopNo`}
+        onClick={() => setOpen(true)}
+      >
+        <SearchICon />
+      </div>
       <form
-        className={`${style.searchInput} relative w-60 h-9 mr-3`}
+        className={`${style.searchInput} relative w-60 h-9 mr-3 desktopYes `}
         onSubmit={handleSubmitForm}
       >
         <input
           type="text"
           placeholder="Search..."
-          className="w-full h-full rounded-full pl-5 pr-7  mr outline-none text-xs"
+          className=" w-full h-full rounded-full pl-5 pr-7  mr outline-none text-xs"
           ref={searchRef}
         />
         <div className="absolute right-3 top-2">
@@ -81,7 +90,7 @@ const Search = () => {
           </button>
         </div>
       </form>
-      <div className="cursor-pointer">
+      <div className="cursor-pointer mobileNone">
         <SettingIcon />
       </div>
 
@@ -96,6 +105,23 @@ const Search = () => {
             <Skeleton />
           </div>
         )}
+
+        <form
+          className={`${style.searchInput} relative w-60 h-9 mr-3 desktopNo`}
+          onSubmit={handleSubmitForm}
+        >
+          <input
+            type="text"
+            placeholder="Search..."
+            className="  w-full h-full rounded-full pl-5 pr-7  mr outline-none text-xs"
+            ref={searchRef}
+          />
+          <div className="absolute right-3 top-2">
+            <button type="submit" aria-label="Search">
+              <SearchICon />
+            </button>
+          </div>
+        </form>
 
         {searchedData?.map((searched: any) => {
           const defaultImage =
