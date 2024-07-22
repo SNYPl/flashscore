@@ -62,3 +62,12 @@
 .mobailSearchIcon svg path {
   fill: #7ba4b1;
 }
+
+.mobileSearchForm {
+  width: 100%;
+}
+
+.mobileSearchInput {
+  border: 1px solid #c8cdcd;
+  width: 100%;
+}

@@ -50,6 +50,7 @@
     padding: 15px;
     max-height: 80px;
     overflow: hidden;
+    transition: all 0.3s ease-in;
   }
   .showAllItems {
     max-height: max-content;

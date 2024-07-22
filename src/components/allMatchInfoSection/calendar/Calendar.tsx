@@ -87,7 +87,7 @@ const Calendar: React.FC<calendarProps> = ({ activeIndex, setActiveIndex }) => {
               spaceBetween: 5,
             },
             530: {
-              slidesPerView: 3,
+              slidesPerView: 5,
               spaceBetween: 5,
             },
             768: {

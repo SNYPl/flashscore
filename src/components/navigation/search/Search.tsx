@@ -100,20 +100,14 @@ const Search = () => {
         onCancel={handleCancel}
         footer={false}
       >
-        {isLoading && (
-          <div className="p-4">
-            <Skeleton />
-          </div>
-        )}
-
         <form
-          className={`${style.searchInput} relative w-60 h-9 mr-3 desktopNo`}
+          className={`${style.mobileSearchForm} relative w-60 h-9 mr-3 desktopNo`}
           onSubmit={handleSubmitForm}
         >
           <input
             type="text"
             placeholder="Search..."
-            className="  w-full h-full rounded-full pl-5 pr-7  mr outline-none text-xs"
+            className={`w-full h-full rounded-full pl-5 pr-7  mr outline-none text-xs ${style.mobileSearchInput}`}
             ref={searchRef}
           />
           <div className="absolute right-3 top-2">
@@ -122,6 +116,12 @@ const Search = () => {
             </button>
           </div>
         </form>
+
+        {isLoading && (
+          <div className="p-4">
+            <Skeleton />
+          </div>
+        )}
 
         {searchedData?.map((searched: any) => {
           const defaultImage =

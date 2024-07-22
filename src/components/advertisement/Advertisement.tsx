@@ -21,13 +21,15 @@ const Advertisement: React.FC = () => {
         height={100}
         className="max-w-full mobileNone"
       />
-      <Image
-        src="/images/ad/mainMobileAd.png"
-        alt="AD"
-        width={965}
-        height={100}
-        className="max-w-full desktopNo"
-      />
+      <div className={` ${style.mobileAd} desktopNo`}>
+        <Image
+          src="/images/ad/mainMobileAd.png"
+          alt="AD"
+          width={965}
+          height={800}
+          className="max-w-full "
+        />
+      </div>
     </section>
   );
 };

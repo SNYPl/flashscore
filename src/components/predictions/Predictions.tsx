@@ -44,7 +44,7 @@ const Predictions = () => {
       <article className={style.adImgSection}>
         <Image
           src="/images/ad/sideAd.png "
-          width={252}
+          width={272}
           height={100}
           alt="ad"
           className="mobileNone"
@@ -54,7 +54,7 @@ const Predictions = () => {
           width={400}
           height={100}
           alt="ad"
-          className="w-full"
+          className="w-full desktopNo h-full"
         />
       </article>
     </section>

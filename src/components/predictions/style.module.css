@@ -61,5 +61,10 @@
   }
   .adImgSection {
     padding-right: 15px;
+    max-height: 100px;
+    height: 100%;
+  }
+  .adImgSection img {
+    object-fit: cover;
   }
 }

@@ -5,3 +5,11 @@
     margin: 0;
   }
 }
+
+.mobileAd {
+  height: 100px;
+}
+
+.mobileAd img {
+  object-fit: cover;
+}
