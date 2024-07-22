@@ -9,10 +9,12 @@ export default function Favorites() {
   });
 
   return (
-    <main className=" flex  py-4 pb-0 container gap-x-4">
+    <main className=" flex  py-4 pb-0 container gap-x-4 mobailmain">
       <UserTeams />
       <NoSSR />
-      <Predictions />
+      <div className="mobileNone">
+        <Predictions />
+      </div>
     </main>
   );
 }

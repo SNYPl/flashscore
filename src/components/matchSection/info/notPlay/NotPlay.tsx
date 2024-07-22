@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./style.module.css";
-import { Venue, Flag, Capacity, Referee } from "@/common/svg/match";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -69,7 +68,11 @@ const NotPlay = () => {
                   <div className={`${style.flag} mr-2  `}>
                     <div className={`${style.flagBorder} `}>
                       <Image
-                        src={`https://www.flashscore.com/res/image/data/${el.STL}`}
+                        src={`${
+                          el.STL
+                            ? `https://www.flashscore.com/res/image/data/${el.STL}`
+                            : "/images/default/person.gif"
+                        }`}
                         alt="img"
                         width={18}
                         height={11}
@@ -95,7 +98,11 @@ const NotPlay = () => {
                   <div className={`${style.flag} ml-2  `}>
                     <div className={`${style.flagBorder} `}>
                       <Image
-                        src={`https://www.flashscore.com/res/image/data/${el.STL}`}
+                        src={`${
+                          el.STL
+                            ? `https://www.flashscore.com/res/image/data/${el.STL}`
+                            : "/images/default/person.gif"
+                        }`}
                         alt="img"
                         width={18}
                         height={11}
@@ -116,7 +123,6 @@ const NotPlay = () => {
           <p className={style.noMissedPlayer}>All Players Included</p>
         </div>
       )}
-
     </section>
   );
 };

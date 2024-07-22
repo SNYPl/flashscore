@@ -36,12 +36,11 @@ const FormTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
     ["formTable", leagueId, seasonId],
     async () => {
       try {
-        const response = await axios.request(options).catch(error => {
+        const response = await axios.request(options).catch((error) => {
           if (isAxiosError(error)) {
             switch (error.response?.status) {
               case 404:
-
-                return { data: { DATA:[]}  };
+                return { data: { DATA: [] } };
 
               default:
                 break;
@@ -55,17 +54,15 @@ const FormTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
         console.error("Error fetching table data ", error);
         throw new Error("Error fetching table data");
       }
-    },{
+    },
+    {
       retry: false,
       refetchOnWindowFocus: false,
       enabled: !!leagueId || !!seasonId,
-    
     }
   );
 
-
-  
-  if (isLoading ) {
+  if (isLoading) {
     return (
       <div className="p-5 ">
         <Skeleton />
@@ -105,10 +102,12 @@ const FormTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
 
   const groups = filterTeamsRankedFirst(data?.DATA) || [];
 
-
-
-  if(!data?.DATA?.length) {
-    return <div><p>ინფორმაცია არ არის</p></div>
+  if (!data?.DATA?.length) {
+    return (
+      <div>
+        <p>ინფორმაცია არ არის</p>
+      </div>
+    );
   }
 
   return (
@@ -137,7 +136,7 @@ const FormTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
               <div
                 className={`${style.infoTableTitle} flex items-center  p-2 gap-x-2`}
               >
-                <p className="flex items-center justify-center font-bold">
+                <p className="flex items-center justify-center font-bold mobileNone">
                   #
                   <svg
                     width="6"
@@ -172,9 +171,9 @@ const FormTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
                 <p className="flex items-center justify-center font-bold">
                   PTS
                 </p>
-                <p className="flex items-center justify-center font-normal">
+                {/* <p className="flex items-center justify-center font-normal">
                   FORM
-                </p>
+                </p> */}
               </div>
             </div>
             {el?.ROWS[findMenuIndex]?.map((teamArray: any) => {

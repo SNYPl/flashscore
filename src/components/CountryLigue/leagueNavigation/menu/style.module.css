@@ -23,3 +23,15 @@
   top: 32px;
   left: 0;
 }
+
+@media only screen and (max-width: 370px) {
+  .LeagueMenu ul {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 12px;
+  }
+
+  .active::after {
+    display: none;
+  }
+}

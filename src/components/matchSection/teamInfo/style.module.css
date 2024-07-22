@@ -50,3 +50,23 @@
 .infoItem a:hover {
   text-decoration: underline;
 }
+.infoImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 400px) {
+  .infoTime h3 {
+    font-size: 30px;
+  }
+  .infoTime p {
+    font-size: 11px;
+  }
+  .infoItem h3 {
+    font-size: 12px;
+  }
+  .infoImage {
+    padding: 8px;
+  }
+}

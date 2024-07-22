@@ -4,10 +4,14 @@ import CountryLeague from "@/components/CountryLigue/CountryLeague";
 
 export default function Home() {
   return (
-    <main className=" flex  py-4 pb-0 container gap-x-4">
-      <UserLists />
+    <main className=" flex  py-4 pb-0 container gap-x-4 mobailmain">
+      <div className="mobileNone">
+        <UserLists />
+      </div>
       <CountryLeague />
-      <Predictions />
+      <div className="mobileNone">
+        <Predictions />
+      </div>
     </main>
   );
 }

@@ -28,3 +28,13 @@
   font-size: 14px;
   color: #001e28;
 }
+
+@media only screen and (max-width: 550px) {
+  .matchInfoItem {
+    flex-direction: column;
+    margin-bottom: 28px;
+  }
+  .matchInfoItem h3 {
+    padding-left: 28px;
+  }
+}

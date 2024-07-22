@@ -28,7 +28,8 @@
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   display: grid;
-  grid-template-columns: 1fr 6fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr 5fr;
+  grid-template-columns: 1fr 6fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr;
+  /* grid-template-columns: 1fr 6fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr 5fr; */
 }
 
 .infoTableTitle p {
@@ -40,4 +41,15 @@
   color: #555e61;
   font-size: 12.5px;
   margin-top: 13px;
+}
+
+@media only screen and (max-width: 460px) {
+  .infoTableTitle {
+    grid-template-columns: 6fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr;
+    padding-left: 4px;
+  }
+
+  .infoTableTitle p {
+    font-size: 10px;
+  }
 }

@@ -55,7 +55,7 @@ img {
 
 .mobailmain {
   display: grid;
-  grid-template-columns: 0.655fr 2fr 0.85fr;
+  grid-template-columns: 0.655fr 2fr 0.75fr;
   width: 100%;
 }
 .swiper-container {

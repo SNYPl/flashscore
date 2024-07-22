@@ -45,3 +45,17 @@
   color: #143f36;
   border-bottom: 1px solid #143f36;
 }
+
+@media only screen and (max-width: 460px) {
+  .infoItem {
+    padding-left: 4px;
+    grid-template-columns: minmax(22px, 25px) minmax(100px, 140px) repeat(
+        6,
+        minmax(20px, 30px)
+      );
+  }
+
+  .infoNumber {
+    justify-self: center;
+  }
+}

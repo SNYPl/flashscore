@@ -73,3 +73,25 @@
   color: #001e28;
   width: 16px;
 }
+.player a:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 400px) {
+  .player h2 {
+    font-size: 11px;
+  }
+  .num {
+    font-size: 11px;
+  }
+  .player h2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .player a {
+    display: inline-grid;
+    gap: 2px;
+    grid-auto-flow: column;
+  }
+}

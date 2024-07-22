@@ -48,7 +48,7 @@ const TableTeamInfo: React.FC<matchProps> = ({
       <div
         className={`${rank < 6 ? style.numColor : ""} ${
           rank === 6 ? style.numColorYellow : ""
-        } flex justify-center items-center`}
+        } flex justify-center items-center mobileNone`}
       >
         <p
           className={`${style.num}  flex justify-start items-center font-bold`}
@@ -56,7 +56,9 @@ const TableTeamInfo: React.FC<matchProps> = ({
           {rank}.
         </p>
       </div>
-      <div className="flex justify-start items-center font-bold gap-x-2">
+      <div
+        className={`${style.imgName} flex justify-start items-center font-bold gap-x-2 `}
+      >
         <Image src={image} alt="flag" width={20} height={20} />
         <Link
           href={`/team/${shortName}?id=${id}&sportId=${sportId?.id}`}
@@ -72,13 +74,13 @@ const TableTeamInfo: React.FC<matchProps> = ({
       <p className="flex justify-center items-center font-normal">{goals}</p>
       <p className="flex items-center justify-center">{goalDifferences}</p>
       <p className="flex items-center justify-center font-bold">{points}</p>
-      <div className={` items-center font-normal ${style.tableWords} gap-x-1`}>
+      {/* <div className={` items-center font-normal ${style.tableWords} gap-x-1`}>
         <p style={{ backgroundColor: "#C8CDCD" }}>?</p>
         <p className={style.greenColor}>W</p>
         <p className={style.yellowColor}>D</p>
         <p className={style.greenColor}>W</p>
         <p className={style.redColor}>L</p>
-      </div>
+      </div> */}
     </div>
   );
 };

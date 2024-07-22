@@ -120,3 +120,6 @@
 .winner {
   font-weight: bolder !important;
 }
+
+@media only screen and (max-width: 600px) {
+}

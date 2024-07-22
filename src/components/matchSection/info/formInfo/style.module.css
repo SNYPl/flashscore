@@ -89,3 +89,20 @@
 .tooltip {
   font-size: 11px;
 }
+
+@media only screen and (max-width: 550px) {
+  .formInfo {
+    grid-template-columns: 1fr;
+  }
+  .infoItem {
+    margin-bottom: 50px;
+  }
+
+  .infoItemCont {
+    justify-content: center;
+  }
+
+  .vs {
+    top: 38%;
+  }
+}

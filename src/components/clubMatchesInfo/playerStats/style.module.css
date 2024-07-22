@@ -71,3 +71,23 @@
 .cardRed {
   background-color: red;
 }
+
+@media only screen and (max-width: 560px) {
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 12px;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .titles {
+    grid-template-columns: minmax(22px, 25px) minmax(100px, 140px) repeat(
+        6,
+        minmax(20px, 30px)
+      );
+  }
+  .playerStats {
+    padding-left: 4px;
+  }
+}

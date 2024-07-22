@@ -4,10 +4,14 @@ import ClubMatchesInfo from "@/components/clubMatchesInfo/ClubMatchesInfo";
 
 export default function Home() {
   return (
-    <main className=" flex  py-4 pb-0 container gap-x-4">
-      <UserLists />
+    <main className=" flex  py-4 pb-0 container gap-x-4 mobailmain">
+      <div className="mobileNone">
+        <UserLists />
+      </div>
       <ClubMatchesInfo />
-      <Predictions />
+      <div className="mobileNone">
+        <Predictions />
+      </div>
     </main>
   );
 }

@@ -1,7 +1,8 @@
 import React from "react";
 import style from "./style.module.css";
-import { UserOutlined } from "@ant-design/icons";
 import Image from "next/image";
+import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
+import Link from "next/link";
 
 interface props {
   homeTeamImg: string[];
@@ -15,6 +16,7 @@ const Subtitutes: React.FC<props> = ({
   homeTeamImg,
 }) => {
   const [teamOneFormation, teamTwoFormation] = subtitiles?.FORMATIONS;
+  const sportId = useSportIdHandler();
 
   return (
     <article
@@ -32,20 +34,25 @@ const Subtitutes: React.FC<props> = ({
                 <div className={`${style.img} mr-2 flex items-center`}>
                   <div className={`${style.num} mr-2 `}>{el.PLAYER_NUMBER}</div>
                   <div className={`${style.imgBorder} `}>
-                    {homeTeamImg ? (
-                      <Image
-                        src={homeTeamImg[0]}
-                        width={31}
-                        height={31}
-                        alt="flag"
-                      />
-                    ) : (
-                      <UserOutlined />
-                    )}
+                    <Image
+                      src={
+                        homeTeamImg
+                          ? homeTeamImg[0]
+                          : "/images/default/person.gif"
+                      }
+                      width={31}
+                      height={31}
+                      alt="flag"
+                    />
                   </div>
                 </div>
                 <div className={`${style.player}  `}>
-                  <h2>{el.PLAYER_FULL_NAME}</h2>
+                  <Link
+                    href={`/player/${el.PLAYER_FULL_NAME}?playerId=${el.PLAYER_ID}&sportId=${sportId?.id}`}
+                  >
+                    {" "}
+                    <h2>{el.PLAYER_FULL_NAME}</h2>
+                  </Link>
                 </div>
               </div>
             );
@@ -62,20 +69,24 @@ const Subtitutes: React.FC<props> = ({
                 <div className={`${style.img} ml-2 flex items-center `}>
                   <div className={`${style.num} mr-2 `}>{el.PLAYER_NUMBER}</div>
                   <div className={`${style.imgBorder} `}>
-                    {awayTeamImg ? (
-                      <Image
-                        src={awayTeamImg[0]}
-                        width={31}
-                        height={31}
-                        alt="flag"
-                      />
-                    ) : (
-                      <UserOutlined />
-                    )}
+                    <Image
+                      src={
+                        awayTeamImg
+                          ? awayTeamImg[0]
+                          : "/images/default/person.gif"
+                      }
+                      width={31}
+                      height={31}
+                      alt="flag"
+                    />
                   </div>
                 </div>
                 <div className={`${style.player}  `}>
-                  <h2>{el.PLAYER_FULL_NAME}</h2>
+                  <Link
+                    href={`/player/${el.PLAYER_FULL_NAME}?playerId=${el.PLAYER_ID}&sportId=${sportId?.id}`}
+                  >
+                    <h2>{el.PLAYER_FULL_NAME}</h2>
+                  </Link>
                 </div>
               </div>
             );
