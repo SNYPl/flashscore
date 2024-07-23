@@ -55,7 +55,7 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
       <div className={`${style.blitz} transition-3 `}>
         <div
           onClick={showModal}
-          className={style.blitzImgP}
+          className={`${style.blitzImgP}  `}
           style={{ padding: isNavFixed ? "7px 12px" : "" }}
         >
           <Tooltip title="projects">
@@ -64,7 +64,7 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
               alt="blitz"
               width={60}
               height={20}
-              className="mobileNone"
+              className="mobileNone "
             />
           </Tooltip>
           <Tooltip title="projects">
@@ -73,7 +73,7 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
               alt="blitz"
               width={22}
               height={22}
-              className="desktopNo"
+              className="desktopNo w-6"
             />
           </Tooltip>
         </div>

@@ -85,3 +85,26 @@
 .iconMenu {
   font-size: 13px !important;
 }
+
+@media only screen and (max-width: 625px) {
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .titleCompetition {
+    display: none !important;
+  }
+
+  .titles {
+    grid-template-columns: 50px 1fr repeat(6, 25px);
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  .infoItem {
+    grid-template-columns: 40px 1fr repeat(6, 25px);
+  }
+}

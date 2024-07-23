@@ -18,3 +18,14 @@
     height: 65px;
   }
 }
+
+@media only screen and (max-width: 350px) {
+  .mobileResponsiveLogo {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    column-gap: 6px;
+  }
+  .mainMenuContainer {
+    justify-content: center;
+  }
+}

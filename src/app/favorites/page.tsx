@@ -10,7 +10,9 @@ export default function Favorites() {
 
   return (
     <main className=" flex  py-4 pb-0 container gap-x-4 mobailmain">
-      <UserTeams />
+      <div className="mobileNone">
+        <UserTeams />
+      </div>
       <NoSSR />
       <div className="mobileNone">
         <Predictions />

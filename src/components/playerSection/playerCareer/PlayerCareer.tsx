@@ -76,7 +76,9 @@ const PlayerCareer = () => {
   }
 
   return (
-    <article className={`${style.playerStats} bg-white rounded-lg p-4 `}>
+    <article
+      className={`${style.playerStats} bg-white rounded-lg p-4  mobilePadding8`}
+    >
       <h4 className={style.matchesTitle}>Career</h4>
       {data?.DATA.length === 0 && (
         <div className="p3">
@@ -86,25 +88,23 @@ const PlayerCareer = () => {
 
       {data?.DATA.length !== 0 && (
         <>
-          <div>
-            <div className={`flex items-center  gap-x-3 ${style.nav}`}>
-              {menu.map((el, id) => (
-                <button
-                  className={`${active === el ? style.active : ""}`}
-                  onClick={() => setActive(el)}
-                  key={id}
-                >
-                  {el.toUpperCase()}
-                </button>
-              ))}
-            </div>
+          <div className={`flex items-center  gap-x-3 ${style.nav}`}>
+            {menu.map((el, id) => (
+              <button
+                className={`${active === el ? style.active : ""}`}
+                onClick={() => setActive(el)}
+                key={id}
+              >
+                {el.toUpperCase()}
+              </button>
+            ))}
           </div>
 
           <article className={` mb-6`}>
             <div className={style.titles}>
               <p>Season</p>
               <p>Team</p>
-              <p>Competition</p>
+              <p className={style.titleCompetition}>Competition</p>
 
               <Tooltip title="Rating">
                 <p className={style.iconMenu}>

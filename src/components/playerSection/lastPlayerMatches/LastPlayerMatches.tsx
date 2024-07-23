@@ -58,7 +58,7 @@ const LastPlayerEvents = () => {
 
   return (
     <>
-      <section className="bg-white rounded-lg p-4  mb-3">
+      <section className="bg-white rounded-lg p-4  mb-3 mobilePadding8">
         <h4 className={style.matchesTitle}>Last Matches</h4>
         <div className={`${style.title}`}>
           <div></div>

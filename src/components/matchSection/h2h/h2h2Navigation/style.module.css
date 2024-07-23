@@ -24,3 +24,17 @@
 .selected p {
   color: #fff;
 }
+
+@media only screen and (max-width: 550px) {
+  .navLink {
+    white-space: nowrap;
+  }
+  .navContainer {
+    padding-bottom: 10px;
+    overflow-x: auto;
+  }
+
+  .navContainer::-webkit-scrollbar {
+    height: 2px;
+  }
+}

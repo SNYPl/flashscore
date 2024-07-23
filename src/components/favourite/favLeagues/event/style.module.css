@@ -63,3 +63,23 @@
 .scoreInfo p {
   color: #122e37;
 }
+
+@media only screen and (max-width: 525px) {
+  .dateInfo {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  .moreBtn {
+    display: none;
+  }
+  .match {
+    display: grid;
+    grid-template-columns: 3fr 20px;
+    width: 100%;
+  }
+  .starIcon {
+    margin-right: 1rem;
+  }
+}

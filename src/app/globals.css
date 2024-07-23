@@ -74,6 +74,10 @@ img {
   justify-content: center;
 }
 
+.mobilePadding8 {
+  padding: 10px;
+}
+
 @media only screen and (max-width: 965px) {
   .desktopNo {
     display: flex;

@@ -72,7 +72,7 @@ const MatchInfoList = ({ filteredData }: { filteredData: any }) => {
                         </Tooltip>
                         <div className={`flex  flex-col ${style.matchesItems}`}>
                           <div className="flex  flex-row mb-1">
-                            <p className="mr-2">
+                            <p className={`mr-2 ${style.clubImg}`}>
                               <Image
                                 src={
                                   match.HOME_IMAGES &&
@@ -98,7 +98,7 @@ const MatchInfoList = ({ filteredData }: { filteredData: any }) => {
                           </div>
 
                           <div className="flex  flex-row mb-1">
-                            <p className="mr-2">
+                            <p className={`mr-2 ${style.clubImg}`}>
                               <Image
                                 src={
                                   match.AWAY_IMAGES &&

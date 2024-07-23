@@ -148,7 +148,7 @@ const FavLeague: React.FC<leagueProps> = ({
               />
             )}
             <h2 className="ml-2">{NAME1}:</h2>
-            <Link href={newUrl} className="mr-2">
+            <Link href={newUrl} className={`mr-2 ${style.nameLink}`}>
               {NAME2}
             </Link>
             <div
@@ -172,11 +172,11 @@ const FavLeague: React.FC<leagueProps> = ({
             className={`flex items-center gap-x-2 ${style.showMatchesBtn}`}
           >
             {!showMatches ? (
-              <span className={`${style.displayText}`}>
+              <span className={`${style.displayText} `}>
                 Display Matches ({events.length})
               </span>
             ) : (
-              <span className={`${style.standings}`}>Standings</span>
+              <span className={`${style.standings} `}>Standings</span>
             )}
             <span
               className={`${style.arrowIconBtn} ${

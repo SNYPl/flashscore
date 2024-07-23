@@ -40,14 +40,18 @@ const Header = () => {
       }    w-full
       ${isNavFixed ? style.fixed : ""}  transition-3`}
     >
-      <div className={`container flex justify-between items-center h-full`}>
+      <div
+        className={`${style.mobileResponsiveLogo} container flex justify-between items-center h-full`}
+      >
         <Logo matchRouteHandler={matchRouteHandler} isNavFixed={isNavFixed} />
 
         <div className="mobileNone h-full">
           <Navigation />
         </div>
 
-        <div className="flex items-center gap-x-3 pr-3">
+        <div
+          className={`flex items-center gap-x-3 pr-3 ${style.mainMenuContainer}`}
+        >
           <div className="desktopNo">
             <Search />
           </div>

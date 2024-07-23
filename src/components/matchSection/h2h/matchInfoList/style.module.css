@@ -121,5 +121,25 @@
   font-weight: bolder !important;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 550px) {
+  .matchInfoTitle {
+    column-gap: 8px;
+  }
+  .matchesItems p {
+    white-space: nowrap;
+  }
+  .matchContainer {
+    overflow-x: auto;
+  }
+  .matchContainer::-webkit-scrollbar {
+    height: 2px;
+    background-color: #aaa;
+    border-radius: 15px;
+  }
+  .scoreInfo {
+    text-align: center;
+  }
+  .clubImg {
+    width: 16px;
+  }
 }

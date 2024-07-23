@@ -90,3 +90,33 @@
 .pinActive:hover {
   background-color: #0787fa26 !important;
 }
+
+@media only screen and (max-width: 525px) {
+  .displayText {
+    display: none;
+  }
+
+  .standings {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .nameLink {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 170px;
+    width: 100%;
+    font-size: 11px !important;
+  }
+  .starIcon {
+    margin-right: 0.4rem;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .nameLink {
+    max-width: 130px;
+  }
+}

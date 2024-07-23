@@ -36,3 +36,53 @@
   width: 100%;
   white-space: nowrap;
 }
+.infoIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.infoIcon img {
+  width: 20px;
+  height: 18px;
+}
+
+@media only screen and (max-width: 850px) {
+  .tournamentName {
+    text-align: left;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .infoTitle {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .infoItem {
+    grid-template-columns: 50px 1fr repeat(6, 25px);
+  }
+  .tournamentName {
+    display: none;
+  }
+  .infoIndex {
+    margin-right: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  .infoItem {
+    grid-template-columns: 40px 1fr repeat(6, 25px);
+  }
+
+  .infoIndex {
+    margin-right: 0.3rem;
+    font-size: 11px;
+  }
+  .infoIcon {
+    margin-right: 0.3rem;
+  }
+  .infoTitle {
+    font-size: 12px;
+  }
+}

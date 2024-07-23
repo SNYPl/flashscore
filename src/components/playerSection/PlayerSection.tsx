@@ -9,8 +9,8 @@ import PlayerCareer from "./playerCareer/PlayerCareer";
 const PlayerSection: React.FC = () => {
   return (
     <section className={`${style.playerSection} flex flex-col  `}>
-      <div className=" p-4">
-        <div className="bg-white rounded-lg p-4 mb-3">
+      <div className=" p-4 mobilePadding8">
+        <div className="bg-white rounded-lg p-4 mb-3 ">
           <ParamInfo />
           <PlayerInfo />
         </div>
@@ -18,7 +18,7 @@ const PlayerSection: React.FC = () => {
         <LastPlayerEvents />
         <PlayerCareer />
 
-        <div className="bg-white rounded-lg p-4">
+        <div className="bg-white rounded-lg p-2 mt-3">
           <Image
             src="/images/ad/matchAd.png"
             alt="ad"

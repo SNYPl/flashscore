@@ -76,7 +76,7 @@ const Match: React.FC<matchProps> = ({
       >
         <section className={` items-center ${style.match}`}>
           <article className={`flex   items-center `}>
-            <div className="mr-7 w-16">
+            <div className={`${style.dateInfo} mr-7 w-16 `}>
               {!ShowFullDate && (
                 <h4>
                   {status == "SCHEDULED" ||

@@ -87,7 +87,7 @@ const PlayerInfo = () => {
     <section
       className={`${style.playerInfo}  w-full px-3 flex justify-between items-center`}
     >
-      <div className="flex gap-x-4">
+      <div className={`flex gap-x-4 ${style.playerTitles}`}>
         <div className={style.img}>
           <Image
             src={

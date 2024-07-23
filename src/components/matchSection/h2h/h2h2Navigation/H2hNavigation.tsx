@@ -19,7 +19,7 @@ const H2hNavigation = ({
     { title: awayTeamName.replace("*", "").trim() },
   ];
   return (
-    <section className={`flex items-center gap-x-2 mt-3`}>
+    <section className={`flex items-center gap-x-2 mt-3 ${style.navContainer}`}>
       {nav.map((el, id) => (
         <div
           className={`${

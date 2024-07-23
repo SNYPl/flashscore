@@ -177,6 +177,15 @@
     border-radius: 10px;
   }
   .blitzImgP {
-    padding: 12px !important;
+    padding: 11px !important;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .blitz {
+    border-radius: 10px;
+  }
+  .blitzImgP img {
+    width: 22px;
   }
 }

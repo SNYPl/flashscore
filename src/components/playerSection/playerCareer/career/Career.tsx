@@ -3,8 +3,6 @@ import style from "./style.module.css";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
 
 interface playerProps {
   id: string;
@@ -35,8 +33,11 @@ const Career: React.FC<playerProps> = ({
         <span className={`${style.infoIcon} mr-2`}>
           <Image src={image} width={20} height={20} alt="player" />
         </span>
-        <Link href={`/team/${name}?id=${id}&sportId=${sportId} `}>
-          <h3 className={`${style.infoTitle} font-semibold `}>{name}</h3>
+        <Link
+          className={`${style.infoTitle} font-semibold `}
+          href={`/team/${name}?id=${id}&sportId=${sportId} `}
+        >
+          {name}
         </Link>
       </div>
 

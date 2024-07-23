@@ -195,3 +195,36 @@
   font-size: 18px;
   font-weight: bold;
 }
+
+@media only screen and (max-width: 530px) {
+  .matchInfoTitle {
+    column-gap: 8px;
+  }
+  .dateTitle {
+    margin-right: 0.7rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .matchInfoTitle {
+    column-gap: 8px;
+  }
+  .dateTitle {
+    display: none;
+  }
+
+  .matchesItems div {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+  }
+
+  .match {
+    grid-template-columns: 1fr 30px 1fr;
+  }
+
+  .title {
+    grid-template-columns: 1fr 30px 1fr;
+  }
+}

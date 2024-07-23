@@ -10,14 +10,14 @@ const Logo = ({
   isNavFixed: boolean;
 }) => {
   return (
-    <article className={`${matchRouteHandler ? " pl-4" : ""}`}>
+    <article className={`${matchRouteHandler ? " pl-4" : ""} `}>
       <Link href={"/"}>
         <Image
           src={"/images/header/logo.svg"}
           alt="logo"
           width={!isNavFixed ? 165 : 120}
           height={!isNavFixed ? 35 : 25}
-          className={"transition-3 "}
+          className={"transition-3  "}
         />
       </Link>
     </article>

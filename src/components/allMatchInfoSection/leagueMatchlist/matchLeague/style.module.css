@@ -116,3 +116,19 @@
     padding-top: 8px;
   }
 }
+
+@media only screen and (max-width: 410px) {
+  .matchNames a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 150px;
+  }
+
+  .starIcon {
+    margin-right: 0.4rem;
+  }
+  .matchNames {
+    margin-left: 6px;
+  }
+}
