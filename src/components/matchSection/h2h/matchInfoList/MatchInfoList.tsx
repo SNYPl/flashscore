@@ -87,7 +87,7 @@ const MatchInfoList = ({ filteredData }: { filteredData: any }) => {
                               />
                             </p>
                             <p
-                              className={`${
+                              className={`${style.partificant} ${
                                 whoWin === match.HOME_PARTICIPANT
                                   ? style.winner
                                   : ""
@@ -113,7 +113,7 @@ const MatchInfoList = ({ filteredData }: { filteredData: any }) => {
                               />
                             </p>
                             <p
-                              className={`${
+                              className={`${style.partificant} ${
                                 whoWin === match.AWAY_PARTICIPANT
                                   ? style.winner
                                   : ""

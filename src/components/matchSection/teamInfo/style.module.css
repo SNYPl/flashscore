@@ -11,6 +11,11 @@
   margin-bottom: 6px;
 }
 
+.infoItem {
+  position: relative;
+  max-width: 85px;
+}
+
 .infoItem h3 {
   font-size: 14px;
   color: #001e28;
@@ -56,6 +61,40 @@
   align-items: center;
 }
 
+.infoTime .live,
+.live h3 {
+  color: #ff0046;
+}
+.live h4 svg path {
+  fill: #ff0046;
+}
+
+.starIcon {
+  cursor: pointer;
+  position: absolute;
+  left: -35px;
+  top: 32%;
+}
+.starIconRight {
+  left: 105px;
+}
+
+.starIcon svg {
+  cursor: pointer;
+}
+.starIcon:hover path {
+  fill: #ffcd00;
+  stroke: #ffcd00;
+}
+.favorited {
+  transition: all 0.3s ease;
+}
+
+.favorited path {
+  fill: #ffcd00;
+  stroke: #ffcd00;
+}
+
 @media only screen and (max-width: 400px) {
   .infoTime h3 {
     font-size: 30px;
@@ -63,10 +102,16 @@
   .infoTime p {
     font-size: 11px;
   }
+  .infoItem {
+    max-width: 100%;
+  }
   .infoItem h3 {
     font-size: 12px;
   }
   .infoImage {
     padding: 8px;
+  }
+  .starIcon {
+    display: none;
   }
 }

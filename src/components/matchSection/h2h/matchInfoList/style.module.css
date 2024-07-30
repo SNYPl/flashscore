@@ -121,6 +121,13 @@
   font-weight: bolder !important;
 }
 
+.partificant {
+  overflow: hidden;
+  width: 160px;
+  height: 1.2em;
+  white-space: nowrap;
+}
+
 @media only screen and (max-width: 550px) {
   .matchInfoTitle {
     column-gap: 8px;

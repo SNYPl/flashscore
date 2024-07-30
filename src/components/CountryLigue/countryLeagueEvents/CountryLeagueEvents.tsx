@@ -14,21 +14,40 @@ import {
 import { usePinnedLeagues } from "@/components/hooks/usePineedLeagues";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
-interface leagueProps {
+interface EventDetail {
+  EVENT_ID: string;
+  AWAY_NAME: string;
+  AWAY_IMAGES: string;
+  HOME_IMAGES: string;
+  HOME_NAME: string;
+  HOME_SCORE_CURRENT: number;
+  AWAY_SCORE_CURRENT: number;
+  STAGE: string;
+  START_TIME: string;
+  STAGE_TYPE: string;
+}
+
+interface Event {
+  round: string;
+  events: EventDetail[];
+}
+
+interface LeagueProps {
   tournamentStageId: string;
   NAME1: string;
   NAME2: string;
   url: string;
-  events: any[];
+  events: Event[]; // Updated the type here
   countryId: number;
   tournamentId: string;
   countryName: string;
   showMatchesDefault?: boolean;
   ShowFullDate?: boolean;
   ShowFullDateHour?: boolean;
+  setActiveMenu: any;
 }
 
-const MatchLeague: React.FC<leagueProps> = ({
+const CountryLeagueEvents: React.FC<LeagueProps> = ({
   NAME1,
   NAME2,
   countryId,
@@ -40,6 +59,7 @@ const MatchLeague: React.FC<leagueProps> = ({
   url,
   showMatchesDefault = false,
   ShowFullDateHour = false,
+  setActiveMenu,
 }) => {
   const [showMatches, setShowMatches] = useState(showMatchesDefault);
 
@@ -59,6 +79,13 @@ const MatchLeague: React.FC<leagueProps> = ({
 
   const newUrl = `${url}?seasonStageId=${tournamentStageId}&name=${NAME2}&tournamentId=${tournamentId}`;
 
+  const combinedEvents: EventDetail[] = events.reduce<EventDetail[]>(
+    (acc, current) => {
+      return acc.concat(current.events);
+    },
+    []
+  );
+
   return (
     <section className={``}>
       <article className="mb-1">
@@ -71,7 +98,7 @@ const MatchLeague: React.FC<leagueProps> = ({
               onClick={() =>
                 addToFavourite(
                   tournamentId,
-                  events,
+                  combinedEvents,
                   {
                     NAME1,
                     NAME2,
@@ -89,7 +116,7 @@ const MatchLeague: React.FC<leagueProps> = ({
               <EmptyFavouriteStarIcon />
             </div>
 
-            {countryObject && countryObject?.countryCode ? (
+            {countryObject ? (
               <Flag
                 code={countryObject?.countryCode}
                 style={{ width: "18px", height: "13px" }}
@@ -132,10 +159,15 @@ const MatchLeague: React.FC<leagueProps> = ({
           >
             {!showMatches ? (
               <span className={`${style.displayText} mobileNone`}>
-                Display Matches ({events.length})
+                Display Matches ({combinedEvents?.length})
               </span>
             ) : (
-              <span className={`${style.standings} mobileNone`}>Standings</span>
+              <span
+                className={`${style.standings} mobileNone`}
+                onClick={() => setActiveMenu("STANDINGS")}
+              >
+                Standings
+              </span>
             )}
             <span
               className={`${style.arrowIconBtn} ${
@@ -149,42 +181,51 @@ const MatchLeague: React.FC<leagueProps> = ({
         <article
           className={`${showMatches ? style.showMatcher : "hidden"} mb-5`}
         >
-          {events?.map((match, index) => {
+          {events?.map((event: any, index: number) => {
             return (
-              <Match
-                key={match.EVENT_ID}
-                awayTeam={match.AWAY_NAME}
-                awayImage={match.AWAY_IMAGES}
-                homeImage={match.HOME_IMAGES}
-                homeTeam={match.HOME_NAME}
-                homeScore={match.HOME_SCORE_CURRENT}
-                awayScore={match.AWAY_SCORE_CURRENT}
-                status={match.STAGE}
-                ShowFullDate={ShowFullDate}
-                ShowFullDateHour={ShowFullDateHour}
-                stageType={match.STAGE_TYPE}
-                time={match.START_TIME}
-                id={match.EVENT_ID}
-                addToFavourite={() =>
-                  addToFavourite(
-                    tournamentId,
-                    events,
-                    {
-                      NAME1,
-                      NAME2,
-                      url,
-                      countryId,
-                      countryName,
-                      sportHref: sportIdCheck?.href,
-                      img: countryObject?.countryCode,
-                    },
-                    tournamentStageId,
-                    match.EVENT_ID
-                  )
-                }
-                sportId={sportIdCheck}
-                tournamentId={tournamentStageId}
-              />
+              <div key={index}>
+                <p className={style.round}>{event.round}</p>
+                <div>
+                  {event?.events.map((el: any) => {
+                    return (
+                      <Match
+                        key={el.EVENT_ID}
+                        awayTeam={el.AWAY_NAME}
+                        awayImage={el.AWAY_IMAGES}
+                        homeImage={el.HOME_IMAGES}
+                        homeTeam={el.HOME_NAME}
+                        homeScore={el.HOME_SCORE_CURRENT}
+                        awayScore={el.AWAY_SCORE_CURRENT}
+                        status={el.STAGE}
+                        ShowFullDate={ShowFullDate}
+                        ShowFullDateHour={ShowFullDateHour}
+                        stageType={el.STAGE_TYPE}
+                        time={el.START_TIME}
+                        id={el.EVENT_ID}
+                        addToFavourite={() =>
+                          addToFavourite(
+                            tournamentId,
+                            el,
+                            {
+                              NAME1,
+                              NAME2,
+                              url,
+                              countryId,
+                              countryName,
+                              sportHref: sportIdCheck?.href,
+                              img: countryObject?.countryCode,
+                            },
+                            tournamentStageId,
+                            el.EVENT_ID
+                          )
+                        }
+                        sportId={sportIdCheck}
+                        tournamentId={tournamentStageId}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
             );
           })}
         </article>
@@ -193,4 +234,4 @@ const MatchLeague: React.FC<leagueProps> = ({
   );
 };
 
-export default MatchLeague;
+export default CountryLeagueEvents;

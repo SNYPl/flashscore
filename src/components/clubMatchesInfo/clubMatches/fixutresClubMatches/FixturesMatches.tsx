@@ -29,7 +29,7 @@ const FixturesMatches = () => {
 
     // Sort the EVENTS array within each league by START_TIME
     mergedLeagues.forEach((league: any) => {
-      league.EVENTS.sort((a: any, b: any) => a.START_TIME - b.START_TIME);
+      league.EVENTS.sort((a: any, b: any) => b.START_TIME - a.START_TIME);
     });
 
     return mergedLeagues;

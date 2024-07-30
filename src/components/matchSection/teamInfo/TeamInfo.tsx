@@ -3,16 +3,24 @@ import style from "./style.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
+import { Live } from "@/common/svg/match";
+import {
+  isFavoriteEvent,
+  useFavouriteLeagues,
+} from "@/components/hooks/useFavouriteLeagues ";
+import { EmptyFavouriteStarIcon } from "@/common/svg/home";
+import { countries } from "@/lib/countriesList";
 
 interface props {
   data: any;
-  h2hData: any;
+  tournamentData: any;
 }
 
-const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
+const TeamInfo: React.FC<props> = ({ data, tournamentData }) => {
   const START_TIME = data?.START_TIME;
   const sportIdCheck = useSportIdHandler();
   const date = new Date(START_TIME * 1000);
+  const { favouriteLeagues, addToFavourite } = useFavouriteLeagues();
 
   const formattedDate = date.toLocaleDateString("de-DE", {
     day: "2-digit",
@@ -31,10 +39,49 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
   const [homeTeamId] = data?.HOME_PARTICIPANT_IDS;
   const [awayTeamId] = data?.AWAY_PARTICIPANT_IDS;
 
+  const currentLeagueStageIds = favouriteLeagues.find(
+    (el) => el.tournamentStageId === tournamentData.TOURNAMENT_STAGE_ID
+  )?.stageIds;
+
+  const currentCountryIcon = countries.filter(
+    (el) => el.name === tournamentData.COUNTRY_NAME
+  );
+  const [countryObject] = currentCountryIcon;
+
+  const isEventFavourited = isFavoriteEvent(
+    data?.EVENT_ID,
+    currentLeagueStageIds
+  );
+
   return (
     <section className={`${style.teamInfo}  w-full px-3`}>
       <article className="flex justify-around">
         <div className={`${style.infoItem} flex flex-col`}>
+          <div
+            className={`flex items-center justify-center mr-4
+          ${style.starIcon} ${isEventFavourited ? style.favorited : ""}
+           `}
+            onClick={() =>
+              addToFavourite(
+                tournamentData?.TOURNAMENT_ID,
+                data,
+                {
+                  NAME1: tournamentData?.NAME_PART_1,
+                  NAME2: tournamentData?.NAME_PART_2,
+                  url: tournamentData?.URL,
+                  countryId: tournamentData.COUNTRY_ID,
+                  countryName: tournamentData.COUNTRY_NAME,
+                  sportHref: sportIdCheck?.href,
+                  img: countryObject?.countryCode,
+                },
+                tournamentData.TOURNAMENT_STAGE_ID,
+                data?.EVENT_ID
+              )
+            }
+          >
+            <EmptyFavouriteStarIcon />
+          </div>
+
           <div className={`${style.infoImage}`}>
             <Image
               src={
@@ -57,9 +104,20 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
         </div>
 
         <div className={`${style.infoTime} flex flex-col items-center`}>
-          <p className="mb-5">{formattedDateTime}</p>
-          <div className="flex items-center gap-x-2">
-            <h3 className="text-4xl">
+          <p className={`${data.STAGE_TYPE === "LIVE" ? "mb-1" : "mb-5"} `}>
+            {formattedDateTime}
+          </p>
+          {data.STAGE_TYPE === "LIVE" && (
+            <div className={`w-6 h-6`}>
+              <Live />
+            </div>
+          )}
+          <div
+            className={`flex items-center gap-x-2 ${
+              data.STAGE_TYPE == "LIVE" ? style.live : ""
+            }`}
+          >
+            <h3 className={`text-4xl `}>
               {data?.AWAY_SCORE_CURRENT && data?.AWAY_SCORE_CURRENT}
             </h3>
             <h4>
@@ -80,12 +138,45 @@ const TeamInfo: React.FC<props> = ({ data, h2hData }) => {
               {data?.HOME_SCORE_CURRENT && data?.HOME_SCORE_CURRENT}
             </h3>
           </div>
+
+          {data.STAGE_TYPE === "LIVE" && (
+            <p className={style.live}>
+              {" "}
+              {`${data?.STAGE.slice(0, 1)}${data?.STAGE.slice(1)
+                .toLowerCase()
+                .replace("_", " ")}`}
+            </p>
+          )}
           {data?.STAGE === "FINISHED" && (
             <p className={style.stageTitle}>{data?.STAGE}</p>
           )}
         </div>
 
         <div className={`${style.infoItem} flex flex-col`}>
+          <div
+            className={`flex items-center justify-center mr-4
+          ${style.starIcon} ${isEventFavourited ? style.favorited : ""}
+           ${style.starIconRight}`}
+            onClick={() =>
+              addToFavourite(
+                tournamentData?.TOURNAMENT_ID,
+                data,
+                {
+                  NAME1: tournamentData?.NAME_PART_1,
+                  NAME2: tournamentData?.NAME_PART_2,
+                  url: tournamentData?.URL,
+                  countryId: tournamentData.COUNTRY_ID,
+                  countryName: tournamentData.COUNTRY_NAME,
+                  sportHref: sportIdCheck?.href,
+                  img: countryObject?.countryCode,
+                },
+                tournamentData.TOURNAMENT_STAGE_ID,
+                data?.EVENT_ID
+              )
+            }
+          >
+            <EmptyFavouriteStarIcon />
+          </div>
           <div className={`${style.infoImage}`}>
             <Image
               src={

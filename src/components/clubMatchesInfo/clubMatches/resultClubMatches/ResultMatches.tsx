@@ -16,24 +16,23 @@ const ResultMatches = () => {
     const mergedLeagues: any = [];
 
     leagues.forEach((league) => {
-      // const existingLeague = mergedLeagues.find(
-      //   (l: any) => l.NAME === league.NAME
-      // );
+      const existingLeague = mergedLeagues.find(
+        (l: any) => l.NAME === league.NAME
+      );
 
-      // if (existingLeague) {
-      //   existingLeague.EVENTS = existingLeague.EVENTS.concat(league.EVENTS);
-      // } else {
-      //   mergedLeagues.push({ ...league });
-      // }
-      league.EVENTS.sort((a: any, b: any) => a.START_TIME - b.START_TIME);
+      if (existingLeague) {
+        existingLeague.EVENTS = existingLeague.EVENTS.concat(league.EVENTS);
+      } else {
+        mergedLeagues.push({ ...league });
+      }
     });
 
     // Sort the EVENTS array within each league by START_TIME
-    // mergedLeagues.forEach((league: any) => {
-    //   league.EVENTS.sort((a: any, b: any) => a.START_TIME - b.START_TIME);
-    // });
+    mergedLeagues.forEach((league: any) => {
+      league.EVENTS.sort((a: any, b: any) => b.START_TIME - a.START_TIME);
+    });
 
-    return leagues;
+    return mergedLeagues;
   }
 
   const allCompetentiosnObjects = {
@@ -98,27 +97,13 @@ const ResultMatches = () => {
   }
 
   const mergedLeagues = mergeLeagues(data?.DATA);
-  console.log(mergedLeagues);
 
-  // const leagueNameOptions = mergedLeagues.map((el: any) => {
-  //   return {
-  //     value: el.NAME,
-  //     label: el.NAME,
-  //   };
-  // });
-
-  const leagueNameOptions = data?.DATA.map((el: any) => {
+  const leagueNameOptions = mergedLeagues.map((el: any) => {
     return {
       value: el.NAME,
       label: el.NAME,
     };
-  }).reduce((acc: any, current: any) => {
-    const isDuplicate = acc.find((item: any) => item.value === current.value);
-    if (!isDuplicate) {
-      acc.push(current);
-    }
-    return acc;
-  }, []);
+  });
 
   const handleChange = (value: string) => {
     setCompetitionsFilter(() => value);

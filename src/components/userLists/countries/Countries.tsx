@@ -182,7 +182,9 @@ const Countries = () => {
                       }`}
                       key={leagues.ACTUAL_TOURNAMENT_SEASON_ID}
                     >
-                      <span className={`${style.blockLink}`}>
+                      <span
+                        className={`${style.blockLink} tracking-wider  truncate max-w-40`}
+                      >
                         <Link
                           href={`/${sportName}/${countryName}/${leagueName}?seasonStageId=${seasonId}&name=${name}&tournamentId=${stageId}`}
                         >

@@ -12,6 +12,10 @@
   margin-right: 18px;
 }
 
+.img img {
+  border-radius: 12px;
+}
+
 .title h3 {
   font-size: 17px;
   color: #000;

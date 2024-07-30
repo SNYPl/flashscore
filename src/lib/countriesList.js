@@ -244,8 +244,8 @@ export const countries = [
   { name: "Yemen", countryCode: "ye" },
   { name: "Zambia", countryCode: "zm" },
   { name: "Zimbabwe", countryCode: "zw" },
-  //   { name: "World", countryCode: "world" },
-  //   { name: "South America", countryCode: "world" },
-  //   { name: "Réunion", countryCode: "fr" },
-  //   { name: "Europe", countryCode: "world" },
+  { name: "World", countryCode: "" },
+  { name: "South America", countryCode: "" },
+  { name: "Réunion", countryCode: "fr" },
+  { name: "Europe", countryCode: "" },
 ];

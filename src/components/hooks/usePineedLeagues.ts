@@ -14,10 +14,20 @@ export const usePinnedLeagues = () => {
       const arrayOfIds = [
         "xjLzNo5G",
         "hYZkYQNG",
-        "vJuMPo6c",
-        "Y1GgcKlj",
+        "6PcHXsLl",
+        "YTpcH4Cr",
         "x0z4oZsj",
         "A1MYWy8T",
+        "ABkrguJ9",
+        "x0KXIZfD",
+        "fLWNsJXD",
+        "8OzStwmK",
+        "bcZ6ZZ9O",
+        "ET7JxfI5",
+        "xYqrfcAn",
+        "zeSHfCx3",
+        "6XkGb7p3",
+        "lduLcRa9",
       ];
       setPinnedLeagueIds(arrayOfIds);
       return;

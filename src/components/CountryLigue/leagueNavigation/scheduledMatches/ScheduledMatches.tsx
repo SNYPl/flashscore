@@ -1,7 +1,6 @@
 import React from "react";
 import style from "./style.module.css";
-
-import League from "@/components/allMatchInfoSection/leagueMatchlist/matchLeague/MatchLeague";
+import CountryLeagueEvents from "../../countryLeagueEvents/CountryLeagueEvents";
 
 const ScheduledMatches = ({
   fixturesMatchData,
@@ -9,12 +8,12 @@ const ScheduledMatches = ({
   setActiveMenu,
   activeMenu,
 }: {
-  fixturesMatchData: any[];
-  sliceLength: number;
+  fixturesMatchData: any;
+  sliceLength: number | undefined;
   setActiveMenu?: any;
   activeMenu: string;
 }) => {
-  if (activeMenu === "FIXTURES" && fixturesMatchData?.length === 0) {
+  if (activeMenu === "FIXTURES" && fixturesMatchData?.EVENTS?.length === 0) {
     return (
       <div>
         <p>ინფორმაცია არ არის</p>
@@ -22,28 +21,29 @@ const ScheduledMatches = ({
     );
   }
 
+  if (!fixturesMatchData) {
+    return <div></div>;
+  }
+
   return (
     <section className={` py-4 px-3 bg-white mb-4 rounded-lg`}>
       <h2 className={`font-bold ${style.title}`}>Scheduled</h2>
 
-      {fixturesMatchData?.map((eventMatch: any) => {
-        return (
-          <League
-            tournamentStageId={eventMatch.TOURNAMENT_STAGE_ID}
-            NAME1={eventMatch.NAME_PART_1}
-            NAME2={eventMatch.NAME_PART_2}
-            url={eventMatch.URL}
-            events={eventMatch.EVENTS.slice(0, sliceLength)}
-            countryId={eventMatch.COUNTRY_ID}
-            tournamentId={eventMatch.TOURNAMENT_ID}
-            key={eventMatch.TOURNAMENT_STAGE_ID}
-            countryName={eventMatch.COUNTRY_NAME}
-            showMatchesDefault={true}
-            ShowFullDate={true}
-            ShowFullDateHour={true}
-          />
-        );
-      })}
+      <CountryLeagueEvents
+        tournamentStageId={fixturesMatchData.TOURNAMENT_STAGE_ID}
+        NAME1={fixturesMatchData.NAME_PART_1}
+        NAME2={fixturesMatchData.NAME_PART_2}
+        url={fixturesMatchData.URL}
+        events={fixturesMatchData.EVENTS.slice(0, sliceLength)}
+        countryId={fixturesMatchData.COUNTRY_ID}
+        tournamentId={fixturesMatchData.TOURNAMENT_ID}
+        key={fixturesMatchData.TOURNAMENT_STAGE_ID}
+        countryName={fixturesMatchData.COUNTRY_NAME}
+        showMatchesDefault={true}
+        ShowFullDate={true}
+        ShowFullDateHour={true}
+        setActiveMenu={setActiveMenu}
+      />
 
       {activeMenu !== "FIXTURES" && (
         <div

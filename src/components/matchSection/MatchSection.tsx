@@ -104,7 +104,10 @@ const MatchSection: React.FC = () => {
 
   return (
     <section className={` flex flex-col `}>
-      <TeamMatchInfo data={data?.DATA.EVENT} h2hData={h2hData?.data?.DATA} />
+      <TeamMatchInfo
+        data={data?.DATA.EVENT}
+        tournamentData={data?.DATA?.TOURNAMENT}
+      />
       <Nav activeMenu={activeMenu} setActiveSection={setActiveSection} />
 
       {activeMenu === "INFO" && (

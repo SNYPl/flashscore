@@ -17,16 +17,31 @@ const PinnedLeagues = () => {
   const sportId = useSportIdHandler();
 
   const { pinnedLeagueIds, removePinnedLeague } = usePinnedLeagues();
-
   const filteredLeagues = allTournament?.DATA?.filter((league: any) =>
     pinnedLeagueIds.includes(league.ACTUAL_TOURNAMENT_SEASON_ID)
-  ).map((league: any) => {
-    const country = countries.find((c: any) => c.name === league.COUNTRY_NAME);
-    return {
-      ...league,
-      countryCode: country ? country.countryCode : null,
-    };
-  });
+  )
+    .map((league: any) => {
+      const country = countries.find(
+        (c: any) => c.name === league.COUNTRY_NAME
+      );
+      return {
+        ...league,
+        countryCode: country ? country.countryCode : null,
+      };
+    })
+    .sort((a: any, b: any) => {
+      const importantCountries = ["Europe", "World", "South America"];
+      const isACountryImportant = importantCountries.includes(a.COUNTRY_NAME);
+      const isBCountryImportant = importantCountries.includes(b.COUNTRY_NAME);
+
+      if (!isACountryImportant && isBCountryImportant) {
+        return -1;
+      } else if (isACountryImportant && !isBCountryImportant) {
+        return 1;
+      } else {
+        return a.COUNTRY_NAME.localeCompare(b.COUNTRY_NAME);
+      }
+    });
 
   return (
     <section className={`mb-7 `}>
