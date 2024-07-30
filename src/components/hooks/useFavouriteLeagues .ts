@@ -132,7 +132,7 @@ export const isFavoritedLeague = (
   if (favouriteLeagues.length === 0) return false;
 
   const favoriteLeague = favouriteLeagues.find(
-    (el: any) => el.mainLeagueID === tournamentId
+    (el: any) => el.tournamentStageId === tournamentId
   );
 
   if (favoriteLeague) {

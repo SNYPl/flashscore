@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./style.module.css";
 import Link from "next/link";
 import { EmptyFavouriteStarIcon, LeagueArrowIcon } from "@/common/svg/home";
@@ -25,6 +25,7 @@ interface leagueProps {
   countryName: string;
   showMatchesDefault?: boolean;
   ShowFullDate?: boolean;
+  ShowFullDateHour?: boolean;
 }
 
 const MatchLeague: React.FC<leagueProps> = ({
@@ -38,6 +39,7 @@ const MatchLeague: React.FC<leagueProps> = ({
   countryName,
   url,
   showMatchesDefault = false,
+  ShowFullDateHour = false,
 }) => {
   const [showMatches, setShowMatches] = useState(showMatchesDefault);
 
@@ -50,7 +52,10 @@ const MatchLeague: React.FC<leagueProps> = ({
 
   const { pinnedLeagueIds, addLeagueToLocalStorage } = usePinnedLeagues();
 
-  const isLeagueFavorited = isFavoritedLeague(tournamentId, favouriteLeagues);
+  const isLeagueFavorited = isFavoritedLeague(
+    tournamentStageId,
+    favouriteLeagues
+  );
 
   const newUrl = `${url}?seasonStageId=${tournamentStageId}&name=${NAME2}&tournamentId=${tournamentId}`;
 
@@ -156,6 +161,8 @@ const MatchLeague: React.FC<leagueProps> = ({
                 awayScore={match.AWAY_SCORE_CURRENT}
                 status={match.STAGE}
                 ShowFullDate={ShowFullDate}
+                ShowFullDateHour={ShowFullDateHour}
+                stageType={match.STAGE_TYPE}
                 time={match.START_TIME}
                 id={match.EVENT_ID}
                 addToFavourite={() =>
@@ -176,7 +183,7 @@ const MatchLeague: React.FC<leagueProps> = ({
                   )
                 }
                 sportId={sportIdCheck}
-                tournamentId={tournamentId}
+                tournamentId={tournamentStageId}
               />
             );
           })}

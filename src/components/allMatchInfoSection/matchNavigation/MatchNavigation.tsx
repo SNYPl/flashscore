@@ -12,13 +12,13 @@ const MatchNavigation = ({
   const filterLinks = [
     { title: "ALL", name: "all" },
     { title: "LIVE", name: "live" },
-    { title: "ODDS", name: "odds" },
+    // { title: "ODDS", name: "odds" },
     { title: "FINISHED", name: "finished" },
     { title: "SCHEDULED", name: "scheduled" },
   ];
 
   const handleClick = (title: string) => {
-    if (title === "LIVE") {
+    if (title === "ODDS") {
       return;
     }
     setSelected(title);
@@ -32,7 +32,7 @@ const MatchNavigation = ({
             ${selected === el.title ? style.selected : ""} cursor-pointer ${
             style.navLink
           } 
-          ${el.title === "LIVE" ? style.disabled : ""}`}
+          ${el.title === "ODDS" ? style.disabled : ""}`}
           onClick={() => handleClick(el.title)}
           key={id}
         >

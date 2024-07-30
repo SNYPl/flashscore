@@ -10,11 +10,13 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { Skeleton } from "antd";
 import { useSportIdHandler } from "../hooks/useSportIdHandler";
+import useGMTOffset from "../hooks/useTimeZone";
 
 const AllMatchInfos = () => {
   const [selectedMatchNav, setSelected] = useState("ALL");
   const defaultActiveIndex = 0;
   const [activeDateIndex, setActiveDateIndex] = useState(defaultActiveIndex);
+  const { gmtOffset } = useGMTOffset();
 
   const sportIdCheck = useSportIdHandler();
 
@@ -25,7 +27,7 @@ const AllMatchInfos = () => {
       sport_id: sportIdCheck?.id,
       indent_days: activeDateIndex,
       locale: "en_INT",
-      timezone: "4",
+      timezone: gmtOffset.replace("+", ""),
     },
     headers: {
       "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
@@ -34,7 +36,7 @@ const AllMatchInfos = () => {
   };
 
   const { data, isLoading, isError, isFetched } = useQuery(
-    ["sportEvents", activeDateIndex, sportIdCheck?.id],
+    ["sportEvents", activeDateIndex, sportIdCheck?.id, gmtOffset],
     async () => {
       try {
         const response = await axios.request(options);
@@ -44,6 +46,9 @@ const AllMatchInfos = () => {
         console.error("Error fetching featured products", error);
         throw new Error("Error fetching featured products");
       }
+    },
+    {
+      enabled: !!gmtOffset,
     }
   );
   return (

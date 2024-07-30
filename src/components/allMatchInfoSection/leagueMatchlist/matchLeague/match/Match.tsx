@@ -3,6 +3,7 @@ import Image from "next/image";
 import style from "./style.module.css";
 
 import { EmptyFavouriteStarIcon } from "@/common/svg/home";
+import { Live } from "@/common/svg/match";
 import {
   useFavouriteLeagues,
   isFavoriteEvent,
@@ -22,6 +23,8 @@ interface matchProps {
   addToFavourite: any;
   tournamentId: string;
   sportId: any;
+  stageType: string;
+  ShowFullDateHour?: boolean;
 }
 
 const Match: React.FC<matchProps> = ({
@@ -38,13 +41,17 @@ const Match: React.FC<matchProps> = ({
   addToFavourite,
   tournamentId,
   sportId,
+  stageType,
+  ShowFullDateHour,
 }) => {
   const timeStamp = time * 1000;
   const date = new Date(timeStamp);
 
   const { favouriteLeagues } = useFavouriteLeagues();
 
-  const [favIds] = favouriteLeagues;
+  const currentLeagueStageIds = favouriteLeagues.find(
+    (el) => el.tournamentStageId === tournamentId
+  )?.stageIds;
 
   const hour = date.getHours();
   const minute = date.getMinutes();
@@ -55,7 +62,7 @@ const Match: React.FC<matchProps> = ({
     year: "2-digit",
   });
 
-  const isEventFavourited = isFavoriteEvent(id, favIds?.stageIds);
+  const isEventFavourited = isFavoriteEvent(id, currentLeagueStageIds);
 
   return (
     <div className={`flex ${style.matchContainer} p-2`}>
@@ -72,27 +79,50 @@ const Match: React.FC<matchProps> = ({
         target="_blank"
         className="w-full"
       >
-        <section className={` items-center ${style.match}`}>
-          <article className={`flex   items-center `}>
-            <div className="mr-7 w-16 mobileNone">
+        <div className={` items-center ${style.match}`}>
+          <div className={`flex   items-center `}>
+            <div
+              className={`mr-7 w-16 mobileNone ${
+                ShowFullDateHour ? "w-24" : ""
+              }`}
+            >
               {!ShowFullDate && (
-                <h4>
-                  {status == "SCHEDULED" ||
-                  status == "SECOND_HALF" ||
-                  status == "FIRST_HALF" ||
-                  status == "HALF_TIME" ? (
-                    <span>
+                <>
+                  {status == "SCHEDULED" && (
+                    <h4>
+                      <span>
+                        {hour}:{minute === 0 ? "00" : minute}
+                      </span>
+                    </h4>
+                  )}
+
+                  {stageType == "LIVE" && (
+                    <div className={style.live}>
+                      <Live />
+                    </div>
+                  )}
+
+                  {stageType == "FINISHED" && (
+                    <h4>
+                      <span className="font-xs font-medium text-prediction-team-title">
+                        {`${status.slice(0, 1)}${status
+                          .slice(1)
+                          .toLowerCase()}`}
+                      </span>
+                    </h4>
+                  )}
+                </>
+              )}
+              {ShowFullDate && (
+                <h4 className={ShowFullDateHour ? "mr-4" : ""}>
+                  {formattedDate}
+                  {ShowFullDateHour && (
+                    <span className="ml-1 ">
                       {hour}:{minute === 0 ? "00" : minute}
-                    </span>
-                  ) : (
-                    <span className="font-xs font-medium text-prediction-team-title">
-                      {status}
                     </span>
                   )}
                 </h4>
               )}
-
-              {ShowFullDate && <h4>{formattedDate}</h4>}
             </div>
             <div className={`flex  flex-col ${style.matchesItems}`}>
               <div className="flex  flex-row mb-1">
@@ -129,7 +159,7 @@ const Match: React.FC<matchProps> = ({
                 <p>{awayTeam}</p>
               </div>
             </div>
-          </article>
+          </div>
           <div className={`flex  flex-col ${style.scoreInfo}`}>
             <p className="text-xs font-semibold mb-2 ">
               {homeScore ? homeScore : "-"}
@@ -144,7 +174,7 @@ const Match: React.FC<matchProps> = ({
           >
             <p>MORE INFO</p>
           </div>
-        </section>
+        </div>
       </Link>
     </div>
   );

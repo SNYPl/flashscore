@@ -8,6 +8,11 @@ import { Modal, Skeleton } from "antd";
 import Link from "next/link";
 import Image from "next/image";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+type Inputs = {
+  search: string;
+};
 
 const Search = () => {
   const [searchItems, setSearchItems] = useState<string | null | undefined>("");
@@ -15,6 +20,13 @@ const Search = () => {
   const [open, setOpen] = useState(false);
   const sport = useSportIdHandler();
   const searchRef = useRef<HTMLInputElement>(null);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
 
   const options = {
     method: "GET",
@@ -43,27 +55,18 @@ const Search = () => {
     {
       enabled: !!searchItems,
       onSuccess: (data) => {
-        if (searchRef.current) {
-          searchRef.current.value = "";
-        }
         setSearchedData(data);
-        setSearchItems("");
       },
     }
   );
 
-  const handleSubmitForm = (e: any) => {
-    e.preventDefault();
-    setOpen(true);
-
-    setSearchItems(searchRef?.current?.value);
-  };
-
   const handleCancel = () => {
     setOpen(false);
-    if (searchRef.current) {
-      searchRef.current.value = "";
-    }
+  };
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    setSearchItems(data.search);
+    setOpen(true);
   };
 
   return (
@@ -76,14 +79,29 @@ const Search = () => {
       </div>
       <form
         className={`${style.searchInput} relative w-60 h-9 mr-3 desktopYes `}
-        onSubmit={handleSubmitForm}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <input
           type="text"
           placeholder="Search..."
-          className=" w-full h-full rounded-full pl-5 pr-7  mr outline-none text-xs"
-          ref={searchRef}
+          className={` w-full h-full rounded-full pl-5 pr-7  mr outline-none text-xs ${
+            errors.search ? style.error : ""
+          }`}
+          {...register("search", {
+            required: {
+              value: true,
+              message: "გრაფა ცარიელია",
+            },
+            minLength: {
+              value: 2,
+              message: "მინიმუმ 2 ასო",
+            },
+          })}
         />
+        {/* {errors.search && (
+          <p className={style.error}>{errors.search.message}</p>
+        )} */}
+
         <div className="absolute right-3 top-2">
           <button type="submit" aria-label="Search">
             <SearchICon />
@@ -102,13 +120,24 @@ const Search = () => {
       >
         <form
           className={`${style.mobileSearchForm} relative w-60 h-9 mr-3 desktopNo`}
-          onSubmit={handleSubmitForm}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <input
             type="text"
             placeholder="Search..."
-            className={`w-full h-full rounded-full pl-5 pr-7  mr outline-none text-xs ${style.mobileSearchInput}`}
-            ref={searchRef}
+            className={` w-full h-full rounded-full pl-5 pr-7  mr outline-none text-xs ${
+              errors.search ? style.error : ""
+            }`}
+            {...register("search", {
+              required: {
+                value: true,
+                message: "გრაფა ცარიელია",
+              },
+              minLength: {
+                value: 2,
+                message: "მინიმუმ 2 ასო",
+              },
+            })}
           />
           <div className="absolute right-3 top-2">
             <button type="submit" aria-label="Search">

@@ -71,3 +71,7 @@
   border: 1px solid #c8cdcd;
   width: 100%;
 }
+
+.error {
+  border: 1px solid red;
+}

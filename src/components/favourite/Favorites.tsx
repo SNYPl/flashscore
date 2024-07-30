@@ -18,28 +18,34 @@ const Favorites = () => {
         className={`bg-white rounded-lg  p-3 w-full `}
         suppressHydrationWarning
       >
-        {favouriteLeagues?.map((eventMatch: any) => {
-          const eventIds =
-            eventMatch.stageIds.length !== 0 ? eventMatch.stageIds : [];
+        {favouriteLeagues ? (
+          favouriteLeagues?.map((eventMatch: any) => {
+            const eventIds =
+              eventMatch.stageIds.length !== 0 ? eventMatch.stageIds : [];
 
-          return (
-            <FavLeagues
-              tournamentStageId={eventMatch.mainLeagueID}
-              NAME1={eventMatch.leagueInfo.NAME1}
-              NAME2={eventMatch.leagueInfo.NAME2}
-              url={eventMatch.leagueInfo.url}
-              events={eventIds}
-              countryId={eventMatch.leagueInfo.countryId}
-              tournamentId={eventMatch.tournamentStageId}
-              key={eventMatch.mainLeagueID}
-              sportHref={eventMatch.leagueInfo.sportHref}
-              countryName={eventMatch.COUNTRY_NAME}
-              ShowFullDate={true}
-              showMatchesDefault={true}
-              img={eventMatch.leagueInfo.img}
-            />
-          );
-        })}
+            return (
+              <FavLeagues
+                tournamentStageId={eventMatch.mainLeagueID}
+                NAME1={eventMatch.leagueInfo.NAME1}
+                NAME2={eventMatch.leagueInfo.NAME2}
+                url={eventMatch.leagueInfo.url}
+                events={eventIds}
+                countryId={eventMatch.leagueInfo.countryId}
+                tournamentId={eventMatch.tournamentStageId}
+                key={eventMatch.mainLeagueID}
+                sportHref={eventMatch.leagueInfo.sportHref}
+                countryName={eventMatch.COUNTRY_NAME}
+                ShowFullDate={true}
+                showMatchesDefault={true}
+                img={eventMatch.leagueInfo.img}
+              />
+            );
+          })
+        ) : (
+          <div>
+            <p>There Is No Favorite League</p>
+          </div>
+        )}
       </article>
     </section>
   );

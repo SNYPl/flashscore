@@ -12,6 +12,29 @@ const FixturesMatches = () => {
   const teamId = searchParams.get("id");
   const sportIdCheck = searchParams.get("sportId");
 
+  function mergeLeagues(leagues: any[]) {
+    const mergedLeagues: any = [];
+
+    leagues.forEach((league) => {
+      const existingLeague = mergedLeagues.find(
+        (l: any) => l.NAME === league.NAME
+      );
+
+      if (existingLeague) {
+        existingLeague.EVENTS = existingLeague.EVENTS.concat(league.EVENTS);
+      } else {
+        mergedLeagues.push({ ...league });
+      }
+    });
+
+    // Sort the EVENTS array within each league by START_TIME
+    mergedLeagues.forEach((league: any) => {
+      league.EVENTS.sort((a: any, b: any) => a.START_TIME - b.START_TIME);
+    });
+
+    return mergedLeagues;
+  }
+
   const allCompetentiosnObjects = {
     value: "All Competitions",
     label: "All Competitions",
@@ -21,27 +44,42 @@ const FixturesMatches = () => {
     allCompetentiosnObjects.value
   );
 
-  const options = {
+  const fixturesEvents = (page: any) => ({
     method: "GET",
     url: "https://flashlive-sports.p.rapidapi.com/v1/teams/fixtures",
     params: {
       team_id: teamId,
       locale: "en_INT",
       sport_id: sportIdCheck,
-      page: "1",
+      page: page.toString(),
     },
     headers: {
       "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
       "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
     },
-  };
+  });
 
   const { data, isLoading, isError, isFetched, isFetching } = useQuery(
     ["clubFixturesEvents", teamId, sportIdCheck],
     async () => {
       try {
-        const response = await axios.request(options);
-        return response.data;
+        const responses = await Promise.all([
+          axios.request(fixturesEvents(1)),
+          axios.request(fixturesEvents(2)),
+        ]);
+        const data = responses.map((response) => response.data);
+        const combinedData = data.flat();
+
+        const mergedObject = combinedData.reduce(
+          (acc, current) => {
+            acc.DATA = [...acc.DATA, ...current.DATA];
+
+            return acc;
+          },
+          { DATA: [] }
+        );
+
+        return mergedObject;
       } catch (error) {
         console.error("Error fetching result events", error);
         throw new Error("Error fetching result events");
@@ -57,24 +95,20 @@ const FixturesMatches = () => {
     );
   }
 
-  const leagueNameOptions = data?.DATA.map((el: any) => {
+  const mergedLeagues = mergeLeagues(data?.DATA);
+
+  const leagueNameOptions = mergedLeagues.map((el: any) => {
     return {
       value: el.NAME,
       label: el.NAME,
     };
-  }).reduce((acc: any, current: any) => {
-    const isDuplicate = acc.find((item: any) => item.value === current.value);
-    if (!isDuplicate) {
-      acc.push(current);
-    }
-    return acc;
-  }, []);
+  });
 
   const handleChange = (value: string) => {
     setCompetitionsFilter(() => value);
   };
 
-  const filteredLeagues = data?.DATA.filter((el: any) => {
+  const filteredLeagues = mergedLeagues.filter((el: any) => {
     if (competitionsFilter === "All Competitions") return el;
     if (el.NAME === competitionsFilter) {
       return el;

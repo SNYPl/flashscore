@@ -5,11 +5,6 @@ import Prediction from "./prediction/Prediction";
 import { PredictionStart } from "@/common/svg/home";
 import Link from "next/link";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/free-mode";
-
-import { FreeMode } from "swiper/modules";
 
 const Predictions = () => {
   const arr = [1, 2, 3];
@@ -43,7 +38,7 @@ const Predictions = () => {
       </article>
       <article className={style.adImgSection}>
         <Image
-          src="/images/ad/sideAd.png "
+          src="/images/ad/sideAd.png"
           width={272}
           height={100}
           alt="ad"

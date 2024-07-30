@@ -48,7 +48,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   position: relative;
-  max-width: 174px;
+  /* max-width: 174px; */
+  width: 100%;
 }
 
 .league:hover {

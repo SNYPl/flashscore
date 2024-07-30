@@ -21,7 +21,6 @@ interface team {
 const UserTeams = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchItems, setSearchItems] = useState<string | null | undefined>("");
-  // const [searchedData, setSearchedData] = useState<any[]>([]);
   const sport = useSportIdHandler();
   const searchRef = useRef<HTMLInputElement>(null);
   const [myTeamsList, setMyTeamsList] = useLocalStorage<team[]>(
@@ -168,7 +167,7 @@ const UserTeams = () => {
           </div>
         ) : (
           <article>
-            {!data && (
+            {data?.length === 0 && isFetched && (
               <div>
                 <p className="font-bold">No data</p>
               </div>

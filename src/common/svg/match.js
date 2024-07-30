@@ -90,3 +90,74 @@ export const InjuriesICon = () => (
     />
   </svg>
 );
+
+export const Live = () => (
+  <svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 26 22"
+    className="liveBet liveBet--animated"
+    data-bookmaker-id="16"
+  >
+    <defs>
+      <clipPath id="clip">
+        <path d="M0,22v-22h26v22z"></path>
+      </clipPath>
+    </defs>
+    <g clipPath="url(#clip)" transform="matrix(1,0,0,1,0,0)">
+      <path
+        d="M4,22c-2.20914,0 -4,-1.79086 -4,-4v-14c0,-2.20914 1.79086,-4 4,-4h18c2.20914,0 4,1.79086 4,4v14c0,2.20914 -1.79086,4 -4,4z"
+        fillRule="nonzero"
+        fill="#ff0046"
+        fillOpacity="1"
+      ></path>
+      <g transform="matrix(1,0,0,1,-15,5)" opacity="0">
+        <path
+          d="M4.74949,9h-3.573v-5.841h1.08v4.896h2.493zM6.65532,9h-1.08v-5.841h1.08zM10.6918,9h-1.18804l-2.043,-5.841h1.143l1.52104,4.482l1.521,-4.482h1.08zM17.228,8.055v0.945h-3.69v-5.841h3.654v0.954h-2.574v1.467h2.385v0.936h-2.385v1.539z"
+          fill="#ffffff"
+          fillOpacity="1"
+        ></path>
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          values="0 0;16 0;16 0;0 0;0 0"
+          dur="2.2s"
+          repeatCount="indefinite"
+          calcMode="spline"
+          keyTimes="0;0.13;0.37;0.5;1"
+          keySplines="0.5 0.35 0.15 1;0.5 0.35 0.15 1;0.5 0.35 0.15 1;0.5 0.35 0.15 1"
+          additive="sum"
+          fill="freeze"
+        ></animateTransform>
+        <animate
+          attributeName="opacity"
+          values="0;1;1;0;0"
+          dur="2.2s"
+          repeatCount="indefinite"
+          calcMode="spline"
+          keyTimes="0;0.13;0.37;0.5;1"
+          keySplines="0.5 0.35 0.15 1;0.5 0.35 0.15 1;0.5 0.35 0.15 1;0.5 0.35 0.15 1"
+          additive="sum"
+          fill="freeze"
+        ></animate>
+      </g>
+
+      <g transform="matrix(6.123233995736766e-17,1,-1,6.123233995736766e-17,25,7)">
+        <g transform="matrix(-1,2.4492935982947064e-16,-2.4492935982947064e-16,-1,7,4.5)">
+          <path
+            d="M5.70688,0l-2.70704,2.46585l-2.70674,-2.4653l-0.29311,0.26721l2.99985,2.73224l3.00015,-2.73279l-0.29251,-0.26721z"
+            fillRule="evenodd"
+            fill="#ffffff"
+            fillOpacity="1"
+          ></path>
+          <path
+            d="M5.70688,0l-2.70704,2.46585l-2.70674,-2.4653l-0.29311,0.26721l2.99985,2.73224l3.00015,-2.73279l-0.29251,-0.26721z"
+            fill="none"
+            stroke="#ffffff"
+            strokeWidth="0.7"
+          ></path>
+        </g>
+      </g>
+    </g>
+  </svg>
+);

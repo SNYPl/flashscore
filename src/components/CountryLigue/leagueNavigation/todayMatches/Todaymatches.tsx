@@ -6,10 +6,12 @@ import League from "@/components/allMatchInfoSection/leagueMatchlist/matchLeague
 import { useSearchParams } from "next/navigation";
 import { Skeleton } from "antd";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
+import useGMTOffset from "@/components/hooks/useTimeZone";
 
 const Todaymatches: React.FC = ({}) => {
   const sportIdCheck = useSportIdHandler();
   const searchParams = useSearchParams();
+  const { gmtOffset } = useGMTOffset();
 
   const tournamentId = searchParams.get("tournamentId");
 
@@ -20,7 +22,7 @@ const Todaymatches: React.FC = ({}) => {
       sport_id: sportIdCheck?.id,
       indent_days: "0",
       locale: "en_INT",
-      timezone: "4",
+      timezone: gmtOffset.replace("+", ""),
     },
     headers: {
       "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
@@ -29,7 +31,7 @@ const Todaymatches: React.FC = ({}) => {
   };
 
   const { data, isLoading, isError, isFetched } = useQuery(
-    ["todayMatches", sportIdCheck?.id],
+    ["todayMatches", sportIdCheck?.id, gmtOffset],
     async () => {
       try {
         const response = await axios.request(options);
@@ -38,6 +40,9 @@ const Todaymatches: React.FC = ({}) => {
         console.error("Error fetching featured products", error);
         throw new Error("Error fetching featured products");
       }
+    },
+    {
+      enabled: !!gmtOffset,
     }
   );
 
@@ -73,6 +78,8 @@ const Todaymatches: React.FC = ({}) => {
             key={eventMatch.TOURNAMENT_STAGE_ID}
             countryName={eventMatch.COUNTRY_NAME}
             showMatchesDefault={true}
+            ShowFullDate={false}
+            ShowFullDateHour={false}
           />
         );
       })}
