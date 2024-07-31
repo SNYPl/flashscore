@@ -13,6 +13,7 @@ import {
 } from "@/components/hooks/useFavouriteLeagues ";
 import { usePinnedLeagues } from "@/components/hooks/usePineedLeagues";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface leagueProps {
   tournamentStageId: string;
@@ -42,7 +43,8 @@ const MatchLeague: React.FC<leagueProps> = ({
   ShowFullDateHour = false,
 }) => {
   const [showMatches, setShowMatches] = useState(showMatchesDefault);
-
+  const params = useSearchParams();
+  const path = usePathname();
   const currentCountryIcon = countries.filter((el) => el.name === countryName);
   const [countryObject] = currentCountryIcon;
 
@@ -57,7 +59,9 @@ const MatchLeague: React.FC<leagueProps> = ({
     favouriteLeagues
   );
 
+  const isLeagueRoute = path.includes("/team");
   const newUrl = `${url}?seasonStageId=${tournamentStageId}&name=${NAME2}&tournamentId=${tournamentId}`;
+  const teamId = isLeagueRoute && params.get("id");
 
   return (
     <section className={``}>
@@ -150,6 +154,21 @@ const MatchLeague: React.FC<leagueProps> = ({
           className={`${showMatches ? style.showMatcher : "hidden"} mb-5`}
         >
           {events?.map((match, index) => {
+            const [awayId] = match.AWAY_PARTICIPANT_IDS;
+            const [homeId] = match.HOME_PARTICIPANT_IDS;
+
+            let matchResult = "";
+            if (match.WINNER === 0) {
+              matchResult = "D";
+            } else if (match.WINNER === 1 && teamId === homeId) {
+              matchResult = "W";
+            } else if (match.WINNER === 2 && teamId === awayId) {
+              matchResult = "W";
+            } else if (!match.WINNER) {
+              matchResult = "";
+            } else {
+              matchResult = "L";
+            }
             return (
               <Match
                 key={match.EVENT_ID}
@@ -165,6 +184,7 @@ const MatchLeague: React.FC<leagueProps> = ({
                 stageType={match.STAGE_TYPE}
                 time={match.START_TIME}
                 id={match.EVENT_ID}
+                winner={matchResult}
                 addToFavourite={() =>
                   addToFavourite(
                     tournamentId,

@@ -177,7 +177,10 @@
     border-radius: 10px;
   }
   .blitzImgP {
-    padding: 11px !important;
+    padding: 8px !important;
+  }
+  .blitzMobileImg {
+    width: 18px;
   }
 }
 

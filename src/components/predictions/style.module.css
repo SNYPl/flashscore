@@ -50,8 +50,10 @@
   .predictionList img {
     /* width: 100%; */
     border-radius: 10px;
-    min-width: 222px;
-    max-width: 230px;
+    min-width: 275px;
+    max-width: 275px;
+    height: 155px;
+    object-fit: cover;
   }
 
   .prediction {
@@ -63,17 +65,14 @@
     padding-right: 15px;
     max-height: 100px;
     height: 100%;
+    margin-bottom: 16px;
   }
   .adImgSection img {
     object-fit: cover;
   }
 }
 
-@media only screen and (max-width: 965px) {
-  .adImgSection {
-    margin-bottom: 16px;
-  }
-
+@media only screen and (max-width: 400px) {
   .adImgSection img {
     object-fit: contain;
   }

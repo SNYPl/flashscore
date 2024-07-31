@@ -49,13 +49,19 @@
 @media only screen and (max-width: 965px) {
   .nav {
     overflow-x: scroll;
-    padding-left: 12px;
+    padding-left: 27px;
+    scrollbar-width: none;
     padding-bottom: 0;
+    -ms-overflow-style: none;
   }
 
   .nav::-webkit-scrollbar {
     width: 0px;
-    height: 0;
+    height: 0px;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
   }
 
   .navContainer {

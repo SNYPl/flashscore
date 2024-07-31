@@ -115,7 +115,7 @@ const ResultMatches = () => {
   });
 
   return (
-    <article className={`${style.clubmatches} bg-white rounded-lg p-4`}>
+    <article className={`${style.clubmatches} bg-white rounded-lg py-4`}>
       <div className="w-full mb-4">
         <Space wrap className={style.selector} style={{ width: "100%" }}>
           <Select

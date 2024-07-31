@@ -8,6 +8,7 @@ import {
   useFavouriteLeagues,
   isFavoriteEvent,
 } from "@/components/hooks/useFavouriteLeagues ";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface matchProps {
   homeTeam: any;
@@ -25,6 +26,7 @@ interface matchProps {
   sportId: any;
   stageType: string;
   ShowFullDateHour?: boolean;
+  winner?: string | any;
 }
 
 const Match: React.FC<matchProps> = ({
@@ -43,9 +45,11 @@ const Match: React.FC<matchProps> = ({
   sportId,
   stageType,
   ShowFullDateHour,
+  winner,
 }) => {
   const timeStamp = time * 1000;
   const date = new Date(timeStamp);
+  const path = usePathname();
 
   const { favouriteLeagues } = useFavouriteLeagues();
 
@@ -64,6 +68,8 @@ const Match: React.FC<matchProps> = ({
 
   const isEventFavourited = isFavoriteEvent(id, currentLeagueStageIds);
 
+  const isLeagueRoute = path.includes("/team");
+
   return (
     <div className={`flex ${style.matchContainer} p-2`}>
       <div
@@ -78,7 +84,13 @@ const Match: React.FC<matchProps> = ({
         target="_blank"
         className="w-full"
       >
-        <div className={` items-center ${style.match}`}>
+        <div
+          className={` items-center ${style.match} ${
+            stageType == "LIVE" || !!winner || isLeagueRoute
+              ? style.matchLive
+              : ""
+          } ${winner ? style.winnerWidth : ""}`}
+        >
           <div className={`flex   items-center `}>
             <div
               className={`mr-7 w-16 mobileNone ${
@@ -183,11 +195,31 @@ const Match: React.FC<matchProps> = ({
               </div>
             </div>
           ) : (
-            <div
-              className={`flex ${style.moreBtn} px-2 py-1 items-center justify-center mobileNone`}
-            >
-              <p>MORE INFO</p>
-            </div>
+            <>
+              {isLeagueRoute && (
+                <div className={`${style.mobileDateInfo} desktopNo`}>
+                  {!winner ? (
+                    formattedDate
+                  ) : (
+                    <div className={`${style[winner]} ${style.tableWord}`}>
+                      {winner}
+                    </div>
+                  )}
+                </div>
+              )}
+              <div className="flex items-center gap-x-2 mobileNone">
+                <div
+                  className={`flex ${style.moreBtn} px-2 py-1 items-center justify-center mobileNone`}
+                >
+                  <p>MORE INFO</p>
+                </div>
+                {winner && (
+                  <p className={`${style[winner]} ${style.tableWord}`}>
+                    {winner}
+                  </p>
+                )}
+              </div>
+            </>
           )}
         </div>
       </Link>

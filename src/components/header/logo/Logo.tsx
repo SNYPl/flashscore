@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import style from "../style.module.css";
 
 const Logo = ({
   matchRouteHandler,
@@ -17,7 +18,7 @@ const Logo = ({
           alt="logo"
           width={!isNavFixed ? 165 : 120}
           height={!isNavFixed ? 35 : 25}
-          className={"transition-3  "}
+          className={`transition-3  ${style.mainLogo}`}
         />
       </Link>
     </article>

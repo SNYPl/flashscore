@@ -47,10 +47,10 @@ img {
 }
 
 .desktopNo {
-  display: none;
+  display: none !important;
 }
 .desktopYes {
-  display: flex;
+  display: flex !important;
 }
 
 .mobailmain {
@@ -80,10 +80,10 @@ img {
 
 @media only screen and (max-width: 965px) {
   .desktopNo {
-    display: flex;
+    display: flex !important;
   }
   .desktopYes {
-    display: none;
+    display: none !important;
   }
 
   .mobileNone {

@@ -13,3 +13,9 @@
 .mobileAd img {
   object-fit: cover;
 }
+
+@media only screen and (max-width: 400px) {
+  .mobileAd img {
+    object-fit: contain;
+  }
+}

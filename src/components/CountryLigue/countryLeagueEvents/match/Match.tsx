@@ -78,7 +78,11 @@ const Match: React.FC<matchProps> = ({
         target="_blank"
         className="w-full"
       >
-        <div className={` items-center ${style.match}`}>
+        <div
+          className={` items-center ${style.match} ${
+            stageType == "LIVE" ? style.matchLive : ""
+          }`}
+        >
           <div className={`flex   items-center `}>
             <div
               className={`mr-7 w-16 mobileNone ${

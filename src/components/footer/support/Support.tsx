@@ -47,7 +47,15 @@ const Support = () => {
             width={95}
             height={30}
             key={"blitzIcon"}
-            className={`${style.blitzLogo}`}
+            className={`${style.blitzLogo} mobileNone`}
+          />
+          <Image
+            src={"/images/footer/blitzMobile.svg"}
+            alt={"logo"}
+            width={100}
+            height={40}
+            key={"blitzIconMobile"}
+            className={`${style.blitzLogoMobile} desktopNo`}
           />
         </Link>
         <svg

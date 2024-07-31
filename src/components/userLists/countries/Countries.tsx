@@ -41,7 +41,7 @@ const Countries = () => {
     method: "GET",
     url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/list",
     params: {
-      sport_id: sportIdCheck?.id,
+      sport_id: sportIdCheck?.id || 1,
       locale: "en_INT",
     },
     headers: {

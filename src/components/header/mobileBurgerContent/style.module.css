@@ -56,3 +56,9 @@
   display: block;
   transition: all 0.3s;
 }
+
+@media only screen and (max-width: 965px) {
+  .burgerMenu {
+    padding: 8px;
+  }
+}

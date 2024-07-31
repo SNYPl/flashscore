@@ -79,7 +79,15 @@
   .match {
     grid-template-columns: 3fr 0.4fr;
   }
+  .matchLive {
+    grid-template-columns: 3fr 0.4fr 35px;
+    column-gap: 5px;
+  }
 
+  .matchLive .scoreInfo p {
+    width: 100%;
+    text-align: center;
+  }
   .scoreInfo {
     align-items: flex-end;
   }

@@ -15,7 +15,19 @@
 
 @media only screen and (max-width: 965px) {
   .fixed {
-    height: 65px;
+    height: 55px;
+  }
+
+  .header {
+    height: 55px;
+    padding: 10px 0;
+  }
+  .mainLogo {
+    width: 120px;
+  }
+  .mobileResponsiveLogo {
+    display: flex;
+    justify-content: space-around;
   }
 }
 

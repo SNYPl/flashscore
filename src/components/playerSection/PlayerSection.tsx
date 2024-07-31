@@ -5,6 +5,7 @@ import Image from "next/image";
 import ParamInfo from "../paramInfo/ParamInfo";
 import LastPlayerEvents from "./lastPlayerMatches/LastPlayerMatches";
 import PlayerCareer from "./playerCareer/PlayerCareer";
+import PlayerTransfers from "./playerTransfers/PlayerTransfers";
 
 const PlayerSection: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const PlayerSection: React.FC = () => {
 
         <LastPlayerEvents />
         <PlayerCareer />
+        <PlayerTransfers />
 
         <div className="bg-white rounded-lg p-2 mt-3">
           <Image

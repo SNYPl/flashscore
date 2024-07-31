@@ -71,9 +71,9 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
             <Image
               src="/images/header/blizMob.svg"
               alt="blitz"
-              width={22}
-              height={22}
-              className="desktopNo w-6"
+              width={14}
+              height={14}
+              className={`desktopNo ${style.blitzMobileImg}`}
             />
           </Tooltip>
         </div>

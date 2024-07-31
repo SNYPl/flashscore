@@ -51,6 +51,27 @@
   opacity: 1;
 }
 
+.fixed {
+  position: fixed;
+  top: 55px;
+  left: 0;
+  right: 0;
+  background-color: #002e3d;
+  height: 46px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 965px) {
+  .nav {
+    margin-left: 0;
+    justify-content: space-around;
+    width: 100%;
+    z-index: 2;
+  }
+}
+
 @media only screen and (max-width: 390px) {
   .nav {
     margin-left: 0;

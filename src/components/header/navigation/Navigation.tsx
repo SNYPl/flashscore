@@ -4,17 +4,21 @@ import React from "react";
 import style from "./style.module.css";
 import { usePathname } from "next/navigation";
 import { SoccerIcon, PredictionIcon } from "@/common/svg/navigation";
+import { useSelector } from "react-redux";
 
 const Navigation = () => {
   const pathName = usePathname();
   const matchRouteHandler = pathName.includes("match");
   const isActiveSoccer = pathName.includes("prediction");
+  const isNavFixed = useSelector(
+    (state: any) => state.headerNavReducer.fixedNav
+  );
 
   return (
     <section
-      className={`flex items-center justify-center  h-full  ${style.nav} ${
+      className={`flex items-center justify-center  h-full   ${style.nav} ${
         matchRouteHandler ? "hide" : ""
-      }`}
+      } ${isNavFixed ? style.fixed : ""}`}
     >
       <div
         className={`${!isActiveSoccer ? style.active : ""} ${
