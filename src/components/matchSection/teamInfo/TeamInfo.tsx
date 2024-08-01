@@ -118,7 +118,7 @@ const TeamInfo: React.FC<props> = ({ data, tournamentData }) => {
             }`}
           >
             <h3 className={`text-4xl `}>
-              {data?.AWAY_SCORE_CURRENT && data?.AWAY_SCORE_CURRENT}
+              {data?.HOME_SCORE_CURRENT && data?.HOME_SCORE_CURRENT}
             </h3>
             <h4>
               <svg
@@ -135,7 +135,7 @@ const TeamInfo: React.FC<props> = ({ data, tournamentData }) => {
               </svg>
             </h4>
             <h3 className="text-4xl">
-              {data?.HOME_SCORE_CURRENT && data?.HOME_SCORE_CURRENT}
+              {data?.AWAY_SCORE_CURRENT && data?.AWAY_SCORE_CURRENT}
             </h3>
           </div>
 
