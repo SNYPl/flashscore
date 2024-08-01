@@ -14,8 +14,8 @@ const MatchesMenu = ({
   const menu = [
     { title: "STANDINGS", api: "overall" },
     { title: "FORM", api: "form" },
-    { title: "OVER/UNDER", api: "overall" },
-    { title: "HT/FT", api: "overall" },
+    // { title: "OVER/UNDER", api: "overall" },
+    // { title: "HT/FT", api: "overall" },
     { title: "TOP SCORES", api: "top_scores" },
   ];
 

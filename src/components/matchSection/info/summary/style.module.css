@@ -95,3 +95,17 @@
   display: flex;
   font-size: 12px;
 }
+
+.incidentName {
+  font-size: 13px;
+  line-height: 16px;
+  color: #555e61;
+  font-weight: 500;
+}
+
+.incidentName a {
+  font-size: 11px;
+  line-height: 16px;
+  color: #555e61;
+  font-weight: 500;
+}

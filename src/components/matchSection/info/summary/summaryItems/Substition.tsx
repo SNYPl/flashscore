@@ -1,8 +1,7 @@
 import React from "react";
-import style from "./style.module.css";
+import style from "../style.module.css";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import Link from "next/link";
-import { PiUserCircleDashedFill } from "react-icons/pi";
 import { IoPeopleCircleOutline } from "react-icons/io5";
 
 const Substition = ({
@@ -36,7 +35,7 @@ const Substition = ({
           fontWeight: type === "SUBSTITUTION_IN" ? "400" : "700",
         }}
       >
-        {name}
+        {type === "SUBSTITUTION_OUT" ? name : `(${name})`}
       </Link>
     </div>
   );

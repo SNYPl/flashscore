@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./style.module.css";
+import style from "../style.module.css";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import Link from "next/link";
 import { IoFootballOutline } from "react-icons/io5";
@@ -50,7 +50,7 @@ const Goal = ({
           fontWeight: type === "ASSISTANCE" ? "400" : "700",
         }}
       >
-        {name}
+        {type === "GOAL" ? name : `(${name})`}
       </Link>
     </div>
   );

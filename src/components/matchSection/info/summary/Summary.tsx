@@ -2,9 +2,10 @@ import React from "react";
 import style from "./style.module.css";
 import Link from "next/link";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
-import Substition from "./Substition";
-import Penalty from "./Penalty";
-import Goal from "./Goal";
+import Substition from "./summaryItems/Substition";
+import Penalty from "./summaryItems/Penalty";
+import Goal from "./summaryItems/Goal";
+import Dissalowed from "./summaryItems/Dissalowed";
 
 const Summary = ({ data }: { data: any }) => {
   return (
@@ -14,7 +15,7 @@ const Summary = ({ data }: { data: any }) => {
           return (
             <div
               className={` flex items-center mb-3 w-full flex-col`}
-              key={el.PLAYER_ID}
+              key={el.STAGE_NAME}
             >
               <div
                 className={`${style.title} mb-4  w-full flex justify-between`}
@@ -30,19 +31,31 @@ const Summary = ({ data }: { data: any }) => {
                 className={` ${style.incidentList} flex items-center mb-3 w-full flex-col`}
               >
                 {el?.ITEMS.map((incident: any) => {
-                  console.log(incident);
                   return (
                     <div
                       key={incident.INCIDENT_ID}
                       className={`w-full flex items-center gap-x-2 ${
                         style.incidentListItem
                       } ${
-                        incident.INCIDENT_TEAM === 1
+                        incident.INCIDENT_TEAM === 1 ||
+                        incident.SIDE_NEW === "1"
                           ? style.firstTeam
                           : style.secondTeam
                       }`}
                     >
-                      {!incident?.INCIDENT_PARTICIPANTS?.length && <div></div>}
+                      {/* {!incident?.INCIDENT_PARTICIPANTS?.length ? <div></div>:""} */}
+
+                      {incident.INCIDENT_NAME_NEW === "Goal Disallowed" && (
+                        <Dissalowed
+                          id={incident.PARTICIPANT_ID_NEW}
+                          name={incident.PARTICIPANT_NAME_NEW}
+                          time={incident.TIME_NEW}
+                          type={incident.INCIDENT_TYPE_NEW}
+                          key={incident.INCIDENT_ID}
+                          incidentName={incident.INCIDENT_NAME_NEW}
+                          side={incident.SIDE_NEW}
+                        />
+                      )}
 
                       {incident?.INCIDENT_PARTICIPANTS?.map((item: any) => {
                         return (
