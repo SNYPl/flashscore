@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
-import { SearchICon, SettingIcon } from "@/common/svg/navigation";
+import { SearchICon } from "@/common/svg/navigation";
 import style from "./style.module.css";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -9,6 +9,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
+import { useLocalStorage } from "usehooks-ts";
 
 type Inputs = {
   search: string;
@@ -20,6 +22,14 @@ const Search = () => {
   const [open, setOpen] = useState(false);
   const sport = useSportIdHandler();
   const searchRef = useRef<HTMLInputElement>(null);
+  const [isDarkMode, setIsDarkMode] = useLocalStorage<boolean>(
+    "darkMode",
+    false
+  );
+
+  const toggleDarkMode = (checked: boolean) => {
+    setIsDarkMode(checked);
+  };
 
   const {
     register,
@@ -109,7 +119,12 @@ const Search = () => {
         </div>
       </form>
       <div className="cursor-pointer mobileNone">
-        <SettingIcon />
+        <DarkModeSwitch
+          style={{ marginBottom: "2rem" }}
+          checked={isDarkMode}
+          onChange={toggleDarkMode}
+          size={120}
+        />
       </div>
 
       <Modal

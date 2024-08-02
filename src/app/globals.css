@@ -3,8 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --background--color: #f1f1f1;
-  --section-color: #ffffff;
+  --gry-color: #eee;
+  --match-color: #071e27;
+  --league-color: #505658;
+  --title-color: #001e28;
+  --user-list-color: #0e1d26;
+  --param-color: #5a5a5a;
 }
 
 @media (prefers-color-scheme: dark) {

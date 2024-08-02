@@ -122,6 +122,10 @@
   font-weight: bolder !important;
 }
 
+.matchLive .scoreInfo p {
+  color: #ff0046;
+}
+
 @media only screen and (max-width: 965px) {
   .matchLive {
     grid-template-columns: 3fr 0.4fr 35px;
