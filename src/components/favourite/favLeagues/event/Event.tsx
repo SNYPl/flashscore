@@ -87,7 +87,9 @@ const Match: React.FC<matchProps> = ({
                       {hour}:{minute === 0 ? "00" : minute}
                     </span>
                   ) : (
-                    <span className="font-xs font-medium text-prediction-team-title">
+                    <span
+                      className={`font-xs font-medium ${style.predictionTitleColor}`}
+                    >
                       {status}
                     </span>
                   )}

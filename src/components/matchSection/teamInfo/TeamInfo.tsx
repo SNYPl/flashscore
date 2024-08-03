@@ -130,7 +130,7 @@ const TeamInfo: React.FC<props> = ({ data, tournamentData }) => {
               >
                 <path
                   d="M12.5581 -0.00142133V4.81818H0.438743V-0.00142133H12.5581Z"
-                  fill="#00141E"
+                  fill={`var(--match-league-title-color)`}
                 />
               </svg>
             </h4>

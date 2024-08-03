@@ -10,26 +10,26 @@
 }
 
 .info ul {
-  background-color: #eeeeee;
+  background-color: var(--grey-color);
   padding-bottom: 10px;
   margin-bottom: 2px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
 .info li button {
-  color: #555e61;
+  color: var(--navItems-color);
   font-size: 13px;
   font-weight: 600;
 }
 
 .activeMenu {
-  background-color: #ffffff;
+  background-color: var(--white-color);
   border-radius: 7px;
   padding: 5px 10px;
 }
 
 .infoTableTitle {
-  background-color: #eeeeee;
+  background-color: var(--grey-color);
   padding-bottom: 10px;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -39,11 +39,11 @@
 
 .infoTableTitle p {
   font-size: 12px;
-  color: #2e3e46;
+  color: var(--table-text-color);
 }
 
 .infoText {
-  color: #555e61;
+  color: var(--navItems-color);
   font-size: 12.5px;
   margin-top: 13px;
 }

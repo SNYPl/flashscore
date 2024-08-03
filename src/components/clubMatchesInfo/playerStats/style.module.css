@@ -2,8 +2,8 @@
   font-size: 13px;
   padding: 6px 10px;
   border-radius: 5px;
-  background-color: #eeeeee;
-  color: #555e61;
+  background-color: var(--grey-color);
+  color: var(--navItems-color);
   font-weight: 600;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .infoItemSection {
-  border: 1px solid #e5e5e7;
+  border: 1px solid var(--grey-color);
   border-radius: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -30,8 +30,8 @@
 .seeAllBtn button {
   font-size: 12px;
   font-weight: bold;
-  color: #143f36;
-  border-bottom: 1px solid #143f36;
+  color: var(--show-matches-color);
+  border-bottom: 1px solid var(--show-matches-color);
 }
 
 .titles {
@@ -42,11 +42,11 @@
       6,
       minmax(30px, 48px)
     );
-  background-color: #eee;
+  background-color: var(--grey-color);
 }
 .titles p {
   font-size: 11px;
-  color: #555e61;
+  color: var(--navItems-color);
   align-items: center;
   display: flex;
   justify-content: center;
@@ -70,6 +70,10 @@
 
 .cardRed {
   background-color: red;
+}
+
+.sectionTitle {
+  color: var(--black-color);
 }
 
 @media only screen and (max-width: 560px) {

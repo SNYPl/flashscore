@@ -28,10 +28,11 @@ const Substition = ({
       )}
       <Link
         href={`/player/${name}?playerId=${id}&sportId=${sportId?.id}`}
-        className="flex items-center"
+        className={`flex items-center ${
+          type === "SUBSTITUTION_IN" ? style.assistanceColor : ""
+        }`}
         style={{
           fontSize: type === "SUBSTITUTION_IN" ? "10.5px" : "13px",
-          color: type === "SUBSTITUTION_IN" ? "#555e61" : "",
           fontWeight: type === "SUBSTITUTION_IN" ? "400" : "700",
         }}
       >

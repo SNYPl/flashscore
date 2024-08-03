@@ -61,12 +61,12 @@
 
 .title h3 {
   font-size: 17px;
-  color: #000;
+  color: var(--black-color);
   font-weight: bold;
 }
 
 .title p {
-  color: #555e61;
+  color: var(--navItems-color);
   font-weight: 600;
   font-size: 13px;
 }

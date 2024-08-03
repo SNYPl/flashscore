@@ -86,7 +86,7 @@ const Match: React.FC<matchProps> = ({
       >
         <div
           className={` items-center ${style.match} ${
-            stageType == "LIVE" || !!winner || isLeagueRoute
+            stageType == "LIVE" || (!!winner && isLeagueRoute)
               ? style.matchLive
               : ""
           } ${winner && isLeagueRoute ? style.winnerWidth : ""}`}
@@ -109,7 +109,9 @@ const Match: React.FC<matchProps> = ({
 
                   {stageType == "LIVE" && (
                     <h4 className={style.liveText}>
-                      <span className="font-xs font-medium text-prediction-team-title">
+                      <span
+                        className={`font-xs font-medium ${style.predictionTitleColor}`}
+                      >
                         {`${status.slice(0, 1)}${status
                           .slice(1)
                           .toLowerCase()
@@ -120,7 +122,9 @@ const Match: React.FC<matchProps> = ({
 
                   {stageType == "FINISHED" && (
                     <h4>
-                      <span className="font-xs font-medium text-prediction-team-title">
+                      <span
+                        className={`font-xs font-medium ${style.predictionTitleColor}`}
+                      >
                         {`${status.slice(0, 1)}${status
                           .slice(1)
                           .toLowerCase()

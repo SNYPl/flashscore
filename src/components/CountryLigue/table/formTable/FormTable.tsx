@@ -105,7 +105,7 @@ const FormTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
   if (!data?.DATA?.length) {
     return (
       <div>
-        <p>ინფორმაცია არ არის</p>
+        <p style={{ color: "var(--black-color)" }}>ინფორმაცია არ არის</p>
       </div>
     );
   }
@@ -146,7 +146,7 @@ const FormTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
                     xmlns="http://www.w3.org/2000/svg"
                     className="ml-0.5"
                   >
-                    <path d="M3 0L6 4H0L3 0Z" fill="#2E3E46" />
+                    <path d="M3 0L6 4H0L3 0Z" fill="var(--table-text-color)" />
                   </svg>
                 </p>
                 <p className="font-bold">{el.GROUP}</p>

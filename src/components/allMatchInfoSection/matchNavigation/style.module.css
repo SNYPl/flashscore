@@ -1,7 +1,7 @@
 .navLink {
   padding: 5px 10px;
-  background-color: #eeeeee;
   border-radius: 10px;
+  background-color: var(--grey-color);
 }
 
 .navLink:hover {
@@ -14,7 +14,7 @@
 
 .navLink p {
   font-size: 13px;
-  color: #555e61;
+  color: var(--navItems-color);
   font-weight: 600;
 }
 

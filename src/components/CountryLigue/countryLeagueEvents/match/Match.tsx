@@ -101,7 +101,9 @@ const Match: React.FC<matchProps> = ({
 
                   {stageType == "LIVE" && (
                     <h4 className={style.liveText}>
-                      <span className="font-xs font-medium text-prediction-team-title">
+                      <span
+                        className={`font-xs font-medium ${style.predictionTitleColor}`}
+                      >
                         {`${status.slice(0, 1)}${status
                           .slice(1)
                           .toLowerCase()
@@ -112,7 +114,9 @@ const Match: React.FC<matchProps> = ({
 
                   {stageType == "FINISHED" && (
                     <h4>
-                      <span className="font-xs font-medium text-prediction-team-title">
+                      <span
+                        className={`font-xs font-medium ${style.predictionTitleColor}`}
+                      >
                         {`${status.slice(0, 1)}${status
                           .slice(1)
                           .toLowerCase()

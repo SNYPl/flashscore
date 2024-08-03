@@ -5,7 +5,7 @@
 
 .clubMenu button {
   font-size: 12px;
-  color: #555e61;
+  color: var(--navItems-color);
   font-weight: 600;
   letter-spacing: 1px;
   position: relative;

@@ -3,7 +3,7 @@
   border-radius: 10px;
   padding: 24px;
   font-size: 13px;
-  color: #0f2d37;
+  color: var(--userTeams-league-color);
   margin-top: 15px;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .contactTitle {
-  background-color: #eeeeee;
+  background-color: var(--grey-color);
   width: 160px;
   padding: 13px 0;
   display: flex;
@@ -28,7 +28,7 @@
 .contactTitle h4 {
   font-weight: 700;
   font-size: 16px;
-  color: #0f2d37;
+  color: var(--userTeams-league-color);
 }
 
 .burgerMenu {
@@ -55,6 +55,14 @@
   height: 15px;
   display: block;
   transition: all 0.3s;
+}
+
+.modalHeader,
+.modalContent {
+  background-color: var(--white-color) !important;
+}
+.modalHeader div {
+  color: var(--black-color) !important;
 }
 
 @media only screen and (max-width: 965px) {

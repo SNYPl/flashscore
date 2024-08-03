@@ -8,6 +8,7 @@
 }
 .pinnedLeague h2 {
   font-size: 15px;
+  color: var(--user-list-color);
 }
 
 .pinIcon {
@@ -42,7 +43,7 @@
   position: absolute;
   right: 0px;
   top: 20%;
-  background-color: #f1f1f1;
+  background-color: var(--background--color);
 }
 
 .league {
@@ -58,12 +59,16 @@
 
 .league:hover {
   display: flex;
-  background-color: #f1f1f1;
+  background-color: var(--background--color);
   border-radius: 6px;
 }
 
 .league:hover .pinIcon {
   display: flex;
+}
+
+.league p {
+  color: var(--user-list-color);
 }
 
 .showMoreBtn {
@@ -75,8 +80,8 @@
 
 .showMoreBtn p {
   font-size: 12px;
-  color: #0e1d26;
-  border-bottom: 1px solid #0e1d26;
+  color: var(--user-list-color);
+  border-bottom: 1px solid var(--user-list-color);
   font-weight: 600;
   margin-right: 8px;
 }

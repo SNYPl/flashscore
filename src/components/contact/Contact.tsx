@@ -51,9 +51,7 @@ const Contact = () => {
       <div className={` ${style.contactContainer} flex flex-col `}>
         <div className={`${style.topHalf} flex items-center flex-col pt-14`}>
           <div className="flex items-center justify-center mb-7 flex-col">
-            <h2 className="font-semibold text-3xl mb-5 text-white">
-              Contact Us
-            </h2>
+            <h2 className="font-semibold text-3xl mb-5 ">Contact Us</h2>
             <p className={style.paragraph}>
               do you have questions We are ready to share our experience with
               you. Write to us, follow us.
@@ -66,12 +64,12 @@ const Contact = () => {
               </Link>
             ))}
           </div>
-          <article className="flex gap-x-7">
-            <div className="flex gap-x-3 text-white items-center">
+          <article className={`flex gap-x-7 ${style.contactInfo}`}>
+            <div className="flex gap-x-3  items-center">
               <Phone />
               <p className="font-semibold text-xs">+995 595 00 00 00 </p>
             </div>
-            <div className="flex  gap-x-3 text-white items-center">
+            <div className="flex  gap-x-3  items-center">
               <EmailIcon />
               <p className="font-semibold text-xs">Info@Score.ge</p>
             </div>

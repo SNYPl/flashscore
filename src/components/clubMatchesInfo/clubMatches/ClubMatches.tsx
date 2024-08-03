@@ -9,7 +9,7 @@ const ClubMatches = () => {
 
   return (
     <article className={`${style.clubmatches} bg-white rounded-lg p-4`}>
-      <div>
+      <div className={style.menu}>
         <div className={`flex items-center mb-4 gap-x-3 ${style.nav}`}>
           <button
             className={`${active === "FIXTURES" ? style.active : ""}`}

@@ -7,12 +7,14 @@
   font-size: 12.5px;
   padding-top: 4px;
   letter-spacing: 0.5px;
+  color: var(--user-list-color);
 }
 
 .teams h2 {
   color: #fd0046;
   font-size: 12.5px;
   cursor: pointer;
+  color: var(--user-list-color);
 }
 
 .teams:hover h2 {
@@ -24,7 +26,7 @@
 }
 
 .modalTitle {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--grey-color);
   font-size: 18px;
   font-weight: 700;
   padding-bottom: 20px;
@@ -59,7 +61,7 @@
 }
 
 .text {
-  color: #00141e;
+  color: var(--match-league-title-color);
   margin: 0 0 16px 0;
   font-size: 12px;
 }
@@ -78,9 +80,9 @@
 
 .searchImage {
   align-items: center;
-  background: #ffffff;
-  border: 1px solid #eeeeee;
-  border: 1px solid #eeeeee;
+  background: var(--white-color);
+  border: 1px solid var(--grey-color);
+  border: 1px solid var(--grey-color);
   display: flex;
   grid-area: participantImage;
   height: 36px;
@@ -100,13 +102,13 @@
 }
 
 .searchInfo h4 {
-  color: #001e28;
+  color: var(--title-color);
   font-size: 13px;
   font-weight: 700;
 }
 
 .searchInfo p {
-  color: #555e61;
+  color: var(--navItems-color);
   font-size: 11px;
   text-transform: uppercase;
 }
@@ -163,7 +165,7 @@
 
 .favItem a {
   align-items: center;
-  color: #0f2d37;
+  color: var(--userTeams-league-color);
   display: flex;
   font-size: 13px;
   column-gap: 8px;
@@ -209,6 +211,14 @@
 
 .favItem:hover {
   background-color: rgb(200 205 205 / 30%);
+}
+
+.modalHeader,
+.modalContent {
+  background-color: var(--white-color) !important;
+}
+.modalTitle {
+  color: var(--black-color) !important;
 }
 
 @media only screen and (max-width: 965px) {

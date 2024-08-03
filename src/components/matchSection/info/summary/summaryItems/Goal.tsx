@@ -43,10 +43,11 @@ const Goal = ({
 
       <Link
         href={`/player/${name}?playerId=${id}&sportId=${sportId?.id}`}
-        className="flex items-center"
+        className={`flex items-center ${
+          type === "ASSISTANCE" ? style.assistanceColor : ""
+        }`}
         style={{
           fontSize: type === "ASSISTANCE" ? "10.5px" : "13px",
-          color: type === "ASSISTANCE" ? "#555e61" : "",
           fontWeight: type === "ASSISTANCE" ? "400" : "700",
         }}
       >

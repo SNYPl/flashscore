@@ -48,7 +48,7 @@ const PinnedLeagues = () => {
       <article className=" p-4">
         <div className={`${style.pinnedLeague} flex items-center pb-3 `}>
           <PinIcon />
-          <h2 className="ml-2  text-userList-light font-extrabold ">
+          <h2 className="ml-2   font-extrabold ">
             <span className="font-semibold">PINNED</span> LEAGUES
           </h2>
         </div>
@@ -82,7 +82,9 @@ const PinnedLeagues = () => {
                     className="max-w-none max-h-none h-3"
                   />
                 )}
-                <p className="text-xs  text-userList-light font-medium tracking-wider  truncate max-w-40">
+                <p
+                  className={`text-xs  ${style.leagueTitleColor} font-medium tracking-wider  truncate max-w-40`}
+                >
                   {tournament.LEAGUE_NAME}
                 </p>
               </Link>

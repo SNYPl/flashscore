@@ -18,17 +18,17 @@
 
 .infoItem h3 {
   font-size: 14px;
-  color: #001e28;
+  color: var(--title-color);
 }
 
 .infoTime p {
   font-weight: 600;
   font-size: 13px;
-  color: #5a5a5a;
+  color: var(--param-color);
 }
 
 .infoTime {
-  color: #00141e;
+  color: var(--match-league-title-color);
   font-weight: 800;
   text-align: center;
 }
@@ -39,7 +39,7 @@
 
 .infoText p {
   font-size: 11px;
-  color: #555e61;
+  color: var(--navItems-color);
   background-color: #eeeeee;
   border-radius: 4px;
   padding: 8px 13px;
@@ -54,6 +54,7 @@
 
 .infoItem a:hover {
   text-decoration: underline;
+  text-decoration-color: var(--black-color);
 }
 .infoImage {
   display: flex;

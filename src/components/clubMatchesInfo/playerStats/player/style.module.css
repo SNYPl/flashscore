@@ -9,9 +9,8 @@
 }
 
 .infoIndex {
-  /* border: 1px solid #e5e5e7; */
   border-radius: 5px;
-  color: #505658;
+  color: var(--league-color);
   font-size: 12.5px;
   width: 22px;
   height: 22px;
@@ -22,17 +21,18 @@
 
 .infoItem a:hover {
   text-decoration: underline;
+  text-decoration-color: var(--black-color);
 }
 
 .infoTitle {
   font-size: 13px;
-  color: #505658;
+  color: var(--league-color);
 }
 
 .infoNumber {
   justify-self: flex-end;
   font-size: 13px;
-  color: #505658;
+  color: var(--league-color);
 }
 
 .seeAllBtn {
@@ -42,8 +42,8 @@
 .seeAllBtn button {
   font-size: 12px;
   font-weight: bold;
-  color: #143f36;
-  border-bottom: 1px solid #143f36;
+  color: var(--show-matches-color);
+  border-bottom: 1px solid var(--show-matches-color);
 }
 
 @media only screen and (max-width: 460px) {

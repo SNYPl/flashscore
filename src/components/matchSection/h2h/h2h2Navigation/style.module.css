@@ -1,6 +1,6 @@
 .navLink {
   padding: 5px 10px;
-  background-color: #eeeeee;
+  background-color: var(--grey-color);
   border-radius: 10px;
 }
 
@@ -14,7 +14,7 @@
 
 .navLink p {
   font-size: 13px;
-  color: #555e61;
+  color: var(--navItems-color);
   font-weight: 600;
 }
 

@@ -19,7 +19,7 @@ const Footer = () => {
   ];
   return (
     <section
-      className={`${style.footer}  mt-5 bg-white pt-9 ${
+      className={`${style.footer}  mt-5  pt-9 ${
         matchRouteHandler ? "hide" : ""
       }`}
     >

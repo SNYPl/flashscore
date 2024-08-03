@@ -71,7 +71,12 @@ const PlayerTransfers = () => {
       <h4 className={style.matchesTitle}>Transfers</h4>
       {data?.DATA.length === 0 && (
         <div className="p3">
-          <p className="text-l font-bold">No Data</p>
+          <p
+            className="text-l font-bold"
+            style={{ color: "var(--black-color)" }}
+          >
+            No Information
+          </p>
         </div>
       )}
 

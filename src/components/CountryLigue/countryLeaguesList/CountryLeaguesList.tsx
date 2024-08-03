@@ -48,9 +48,7 @@ const CountryLeaguesList = () => {
               className="max-w-none max-h-none h-3"
             />
           )}
-          <h2 className="ml-2  text-userList-light font-extrabold ">
-            {country}
-          </h2>
+          <h2 className="ml-2   font-extrabold ">{country}</h2>
         </div>
       </article>
       <article>
@@ -68,7 +66,7 @@ const CountryLeaguesList = () => {
               key={tournament.ACTUAL_TOURNAMENT_SEASON_ID}
             >
               <Link href={url} className="flex items-center gap-x-2">
-                <p className="text-xs  text-userList-light font-medium tracking-wider  truncate max-w-40">
+                <p className="text-xs   font-medium tracking-wider  truncate max-w-40">
                   {tournament.LEAGUE_NAME}
                 </p>
               </Link>
@@ -93,7 +91,7 @@ const CountryLeaguesList = () => {
             >
               <path
                 d="M13.6317 0.355291C13.5157 0.242666 13.3779 0.153312 13.2262 0.0923468C13.0745 0.0313812 12.9119 0 12.7477 0C12.5835 0 12.4209 0.0313812 12.2692 0.0923468C12.1175 0.153312 11.9798 0.242666 11.8638 0.355291L6.99891 5.06911L2.13404 0.355291C1.89961 0.128132 1.58164 0.000514428 1.2501 0.000514428C0.918549 0.000514428 0.60058 0.128132 0.366142 0.355291C0.131703 0.582451 -1.19209e-07 0.890546 -1.19209e-07 1.2118C-1.19209e-07 1.53305 0.131703 1.84114 0.366142 2.0683L6.12123 7.64471C6.23722 7.75734 6.375 7.84669 6.52668 7.90766C6.67836 7.96862 6.84096 8 7.00518 8C7.16939 8 7.33199 7.96862 7.48367 7.90766C7.63535 7.84669 7.77313 7.75734 7.88913 7.64471L13.6442 2.0683C14.1207 1.60664 14.1207 0.829104 13.6317 0.355291Z"
-                fill="#0E1D26"
+                fill=" var(--user-list-color)"
               />
             </svg>
           </span>

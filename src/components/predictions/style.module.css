@@ -7,17 +7,22 @@
   border-radius: 10px;
 }
 
+.predictionItem h3 {
+  color: var(--match-league-title-color);
+}
+
 .seeAlLink {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid #dee1e5;
+  border-top: 1px solid var(--button-border-color);
   padding: 14px;
 }
 
 .seeAlLink a {
   font-size: 14px;
   font-weight: bold;
+  color: var(--navItems-color);
 }
 
 .seeAlLink a:hover {
@@ -57,7 +62,7 @@
   }
 
   .prediction {
-    background-color: #fff;
+    background-color: var(--white-color);
     padding: 15px;
     padding-right: 0;
   }
@@ -69,6 +74,7 @@
   }
   .adImgSection img {
     object-fit: cover;
+    border-radius: 10px;
   }
 }
 

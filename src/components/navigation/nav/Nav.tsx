@@ -4,12 +4,12 @@ import React from "react";
 import Image from "next/image";
 import style from "./style.module.css";
 import { usePathname, useSearchParams } from "next/navigation";
-
 import { setSportIdUpdated } from "@/components/store/slices/navSlice";
 import { useDispatch } from "react-redux";
 import { sportNavigation } from "@/lib/sportNavigation";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import { useFavouriteLeagues } from "@/components/hooks/useFavouriteLeagues ";
+import { FavoriteStarIcon } from "@/common/svg/navigation";
 
 const Nav = () => {
   const pathName = usePathname();
@@ -28,9 +28,9 @@ const Nav = () => {
             style.linkItem
           } ${pathName === "/favorites" ? style.active : ""} `}
         >
-          <Image src={"/images/nav/fav.svg"} width={21} height={20} alt="fav" />
+          <FavoriteStarIcon />
           <h4>FAVORITES</h4>
-          <span className="w-5 flex justify-center items-center">
+          <span className={`w-5 flex justify-center items-center`}>
             {favouriteLeagues.length}
           </span>
         </Link>

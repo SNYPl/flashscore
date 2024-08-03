@@ -10,14 +10,18 @@
 
 .matchesItems p {
   font-size: 13px;
-  color: #071e27;
+  color: var(--match-color);
   font-weight: 500;
 }
 
 .match h4 {
-  color: #071e27;
+  color: var(--match-color);
   font-size: 13px;
   font-weight: 600;
+}
+
+.predictionTitleColor {
+  color: var(--navItems-color);
 }
 
 .starIcon {
@@ -41,13 +45,13 @@
 }
 
 .moreBtn {
-  background-color: #ffffff;
-  border: 1px solid #dee1e5;
+  background-color: var(--white-color);
+  border: 1px solid var(--button-border-color);
   border-radius: 5px;
 }
 
 .moreBtn p {
-  color: #797d7e;
+  color: var(--button-text-color);
   font-size: 10px;
 }
 
@@ -61,7 +65,7 @@
 }
 
 .scoreInfo p {
-  color: #122e37;
+  color: var(--match-score-color);
 }
 
 @media only screen and (max-width: 525px) {

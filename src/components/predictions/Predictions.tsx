@@ -13,7 +13,7 @@ const Predictions = () => {
       <article className={`${style.predictionItem} bg-white w-full  mb-4`}>
         <div className="mb-5 flex gap-x-1 items-center p-4 pb-0 mobileNone">
           <PredictionStart />
-          <h3 className="text-prediction-color text-base  font-semibold">
+          <h3 className=" text-base  font-semibold">
             SPORT <span className="font-bold">PREDICTION</span>
           </h3>
         </div>
@@ -31,9 +31,7 @@ const Predictions = () => {
         </div>
 
         <div className={`${style.seeAlLink} mobileNone`}>
-          <Link href="#" className="text-prediction-team-title ">
-            See All{" "}
-          </Link>
+          <Link href="#">See All </Link>
         </div>
       </article>
       <article className={style.adImgSection}>

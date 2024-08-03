@@ -105,7 +105,7 @@ const UserTeams = () => {
     <section className={`p-4 px-2 mb-9 ${style.userTeamContainer} `}>
       <div className={`${style.myTeamsTitle} flex items-center pb-3 pl-2   `}>
         <StarIcon />
-        <h2 className="ml-2  text-userList-light font-bold ">MY TEAMS</h2>
+        <h2 className="ml-2  font-bold ">MY TEAMS</h2>
       </div>
 
       <article className={`${style.userListItems}`}>
@@ -139,12 +139,15 @@ const UserTeams = () => {
         onClick={showModal}
       >
         <PlusIcon />
-        <h2 className="ml-2 text-userList-light font-semibold  ">
-          ADD THE TEAM
-        </h2>
+        <h2 className="ml-2  font-semibold  ">ADD THE TEAM</h2>
       </div>
 
-      <Modal open={isModalOpen} onCancel={handleCancel} footer={null}>
+      <Modal
+        open={isModalOpen}
+        onCancel={handleCancel}
+        footer={null}
+        classNames={{ content: style.modalContent, header: style.modalHeader }}
+      >
         <h4 className={style.modalTitle}>Search</h4>
         <form className={`${style.searchInput}`} onSubmit={handleSubmitForm}>
           <div className={`flex h-9 ${style.modalInputSearch}`}>
@@ -169,7 +172,12 @@ const UserTeams = () => {
           <article>
             {data?.length === 0 && isFetched && (
               <div>
-                <p className="font-bold">No data</p>
+                <p
+                  className="font-bold"
+                  style={{ color: "var(--black-color)" }}
+                >
+                  No data
+                </p>
               </div>
             )}
 

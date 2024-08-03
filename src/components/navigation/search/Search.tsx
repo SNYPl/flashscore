@@ -1,16 +1,16 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { SearchICon } from "@/common/svg/navigation";
 import style from "./style.module.css";
 import axios from "axios";
 import { useQuery } from "react-query";
-import { Modal, Skeleton } from "antd";
+import { Modal, Skeleton, Tooltip } from "antd";
 import Link from "next/link";
 import Image from "next/image";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
-import { useLocalStorage } from "usehooks-ts";
+import { useTheme } from "@/components/store/ThemeContext";
 
 type Inputs = {
   search: string;
@@ -21,15 +21,7 @@ const Search = () => {
   const [searchedData, setSearchedData] = useState<any[]>([]);
   const [open, setOpen] = useState(false);
   const sport = useSportIdHandler();
-  const searchRef = useRef<HTMLInputElement>(null);
-  const [isDarkMode, setIsDarkMode] = useLocalStorage<boolean>(
-    "darkMode",
-    false
-  );
-
-  const toggleDarkMode = (checked: boolean) => {
-    setIsDarkMode(checked);
-  };
+  const { mode, toggleDarkMode } = useTheme();
 
   const {
     register,
@@ -80,7 +72,7 @@ const Search = () => {
   };
 
   return (
-    <section className={`flex`}>
+    <section className={`flex items-center ${style.search}`}>
       <div
         className={`flex ${style.mobailSearchIcon} desktopNo`}
         onClick={() => setOpen(true)}
@@ -118,13 +110,16 @@ const Search = () => {
           </button>
         </div>
       </form>
-      <div className="cursor-pointer mobileNone">
-        <DarkModeSwitch
-          style={{ marginBottom: "2rem" }}
-          checked={isDarkMode}
-          onChange={toggleDarkMode}
-          size={120}
-        />
+      <div className="cursor-pointer flex justify-center items-center mobileNone">
+        <Tooltip title="Dark Mode">
+          <DarkModeSwitch
+            checked={mode === "dark"}
+            onChange={toggleDarkMode}
+            size={24}
+            moonColor="#F6F1D5"
+            sunColor="#FDB813"
+          />
+        </Tooltip>
       </div>
 
       <Modal
@@ -132,6 +127,7 @@ const Search = () => {
         open={open}
         onCancel={handleCancel}
         footer={false}
+        classNames={{ content: style.modalContent, header: style.modalHeader }}
       >
         <form
           className={`${style.mobileSearchForm} relative w-60 h-9 mr-3 desktopNo`}

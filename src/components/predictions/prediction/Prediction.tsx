@@ -19,7 +19,9 @@ const Prediction = ({ border }: { border: boolean }) => {
             height={34}
             className="object-contain"
           />
-          <p className="text-xs  text-prediction-team-title mt-2 font-semibold">
+          <p
+            className={`text-xs  ${style.predictionTitleColor} mt-2 font-semibold`}
+          >
             SEVILLA
           </p>
         </div>
@@ -41,7 +43,9 @@ const Prediction = ({ border }: { border: boolean }) => {
             height={34}
             className="object-contain"
           />
-          <p className="text-xs text-prediction-team-title mt-2 font-semibold">
+          <p
+            className={`text-xs ${style.predictionTitleColor} mt-2 font-semibold`}
+          >
             ROMA
           </p>
         </div>

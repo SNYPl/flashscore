@@ -1,9 +1,12 @@
 @media only screen and (max-width: 965px) {
   .ad {
-    background-color: #fff;
+    background-color: var(--white-color);
     padding: 15px;
     margin: 0;
   }
+}
+.ad img {
+  border-radius: 15px;
 }
 
 .mobileAd {

@@ -9,13 +9,13 @@
 }
 
 .params {
-  color: #5a5a5a;
+  color: var(--param-color);
   font-size: 13px;
   font-weight: 600;
 }
 
 .addedParams {
-  color: #5a5a5a;
+  color: var(--param-color);
   font-size: 13px;
   font-weight: 600;
 }

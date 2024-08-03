@@ -26,11 +26,15 @@
 .predictionLink a {
   color: #797d7e;
   padding: 4px 13px;
-  border: 1px solid #dee1e5;
+  border: 1px solid var(--button-border-color);
   border-radius: 5px;
 }
 
 .borderItem {
-  border: 1px solid #dee1e5;
+  border: 1px solid var(--button-border-color);
   border-radius: 10px;
+}
+
+.predictionTitleColor {
+  color: var(--navItems-color);
 }

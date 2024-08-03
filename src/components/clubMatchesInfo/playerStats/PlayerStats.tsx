@@ -178,7 +178,9 @@ const PlayerStats = ({ countryName }: { countryName: string }) => {
   return (
     <article className={`${style.playerStats} bg-white rounded-lg p-4 `}>
       <div className="mb-5">
-        <h2 className="font-bold">Last game statistic</h2>
+        <h2 className={`font-bold ${style.sectionTitle}`}>
+          Last game statistic
+        </h2>
       </div>
       <div>
         <div className={`flex items-center mb-4 gap-x-3 ${style.nav}`}>
@@ -197,7 +199,9 @@ const PlayerStats = ({ countryName }: { countryName: string }) => {
       {filteredData?.map((el: any) => {
         return (
           <article className={` mb-6`} key={el.GROUP_ID}>
-            <h4 className="font-semibold text-xl mb-3">{el.GROUP_LABEL}</h4>
+            <h4 className={`font-semibold text-xl mb-3 ${style.sectionTitle}`}>
+              {el.GROUP_LABEL}
+            </h4>
             <div className={style.titles}>
               <p>#</p>
               <p>NAME</p>

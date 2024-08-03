@@ -19,12 +19,12 @@
 
 .matchesItems p {
   font-size: 13px;
-  color: #071e27;
+  color: var(--match-color);
   font-weight: 500;
 }
 
 .match h4 {
-  color: #071e27;
+  color: var(--match-color);
   font-size: 13px;
   font-weight: 600;
 }
@@ -57,18 +57,18 @@
 }
 
 .scoreInfo p {
-  color: #122e37;
+  color: var(--match-score-color);
 }
 
 .dateTitle h4 {
-  color: #555e61;
+  color: var(--navItems-color);
 }
 
 .title {
   align-items: center;
-  background-color: #eee;
+  background-color: var(--grey-color);
   border-radius: 4px;
-  color: #555e61;
+  color: var(--navItems-color);
   display: flex;
   font-size: 11px;
   font-weight: 700;
@@ -99,8 +99,8 @@
 }
 
 .moreMatches button {
-  color: #143f36;
-  border-bottom: 1px solid #143f36;
+  color: var(--show-matches-color);
+  border-bottom: 1px solid var(--show-matches-color);
   font-size: 12px;
   font-weight: bold;
 }

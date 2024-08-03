@@ -6,5 +6,5 @@
 }
 
 .copyright h4 {
-  color: #56585b;
+  color: var(--footer-copyright-color);
 }

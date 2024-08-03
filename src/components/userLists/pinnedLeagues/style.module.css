@@ -4,6 +4,7 @@
 }
 .pinnedLeague h2 {
   font-size: 15px;
+  color: var(--user-list-color);
 }
 
 .pinIcon {
@@ -38,7 +39,7 @@
   position: absolute;
   right: 0px;
   top: 20%;
-  background-color: #f1f1f1;
+  background-color: var(--background--color);
 }
 
 .league {
@@ -54,8 +55,11 @@
 
 .league:hover {
   display: flex;
-  background-color: #f1f1f1;
+  background-color: var(--background--color);
   border-radius: 6px;
+}
+.leagueTitleColor {
+  color: var(--user-list-color);
 }
 
 .league:hover .pinIcon {

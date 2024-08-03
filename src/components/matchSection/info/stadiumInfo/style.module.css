@@ -2,14 +2,14 @@
   margin-bottom: 8px;
 }
 .title {
-  background-color: #eeeeee;
+  background-color: var(--grey-color);
   border-radius: 5px;
   padding: 5px 10px;
 }
 
 .title p {
   font-size: 12px;
-  color: #505658;
+  color: var(--league-color);
   font-weight: 600;
 }
 
@@ -19,14 +19,14 @@
 
 .matchInfoItem h4 {
   margin-left: 10px;
-  color: #505658;
+  color: var(--league-color);
   font-size: 14px;
   margin-right: 4px;
 }
 .matchInfoItem h3 {
   font-weight: bold;
   font-size: 14px;
-  color: #001e28;
+  color: var(--title-color);
 }
 
 @media only screen and (max-width: 550px) {

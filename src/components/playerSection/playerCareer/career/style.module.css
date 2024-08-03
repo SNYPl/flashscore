@@ -7,7 +7,7 @@
 
 .infoIndex {
   border-radius: 5px;
-  color: #505658;
+  color: var(--league-color);
   font-size: 12px;
   display: flex;
   justify-content: center;
@@ -16,21 +16,22 @@
 
 .infoItem a:hover {
   text-decoration: underline;
+  text-decoration-color: var(--black-color);
 }
 
 .infoTitle {
   font-size: 13px;
-  color: #505658;
+  color: var(--league-color);
 }
 
 .infoNumber {
   font-size: 12px;
-  color: #505658;
+  color: var(--league-color);
   text-align: center;
 }
 .tournamentName {
   font-size: 13px;
-  color: #505658;
+  color: var(--league-color);
   text-overflow: ellipsis;
   overflow: hidden;
   width: 100%;

@@ -1,17 +1,17 @@
 .title {
   font-size: 15px;
-  color: #001e28;
+  color: var(--title-color);
   margin-bottom: 14px;
 }
 
 .standings {
-  border-bottom: 1px solid #555e61;
+  border-bottom: 1px solid var(--navItems-color);
 }
 
 .showMatchesBtn {
   font-size: 12.5px;
   font-weight: 500;
-  color: #555e61;
+  color: var(--navItems-color);
 }
 
 .moreMatches {
@@ -23,8 +23,8 @@
 }
 
 .moreMatches button {
-  color: #143f36;
-  border-bottom: 1px solid #143f36;
+  color: var(--show-matches-color);
+  border-bottom: 1px solid var(--show-matches-color);
   font-size: 12px;
   font-weight: bold;
 }

@@ -1,3 +1,7 @@
+.footer {
+  background-color: var(--white-color);
+}
+
 .footerItem {
   display: flex;
   padding-left: 16px;

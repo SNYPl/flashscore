@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { Modal, Skeleton } from "antd";
+import { Modal } from "antd";
 import style from "./style.module.css";
 import UserLists from "@/components/userLists/UserLists";
-import { DarkModeIcon, SettingIcon, ArrrowIcon } from "@/common/svg/mobile";
-import { Switch } from "antd";
 import Link from "next/link";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
+import { useTheme } from "@/components/store/ThemeContext";
 
 const socialArray = [
   { component: "1", w: 9, h: 15, alt: "fb", href: "" },
@@ -16,13 +16,10 @@ const socialArray = [
 
 const MobileBurgerCotnent = () => {
   const [open, setOpen] = useState(false);
+  const { mode, toggleDarkMode } = useTheme();
 
   const handleCancel = () => {
     setOpen(false);
-  };
-
-  const onChange = (checked: boolean) => {
-    console.log(`switch to ${checked}`);
   };
 
   return (
@@ -47,21 +44,30 @@ const MobileBurgerCotnent = () => {
         open={open}
         onCancel={handleCancel}
         footer={false}
+        classNames={{ content: style.modalContent, header: style.modalHeader }}
       >
         <section className="bg-white">
           <div className={`${style.settings}`}>
-            <div className="flex justify-between mb-7">
+            {/* <div className="flex justify-between mb-7">
               <div className="flex gap-x-4">
                 <SettingIcon />
                 <p>Settings</p>
               </div>
               <ArrrowIcon />
-            </div>
+            </div> */}
             <div className="flex justify-between ">
               <div className="flex gap-x-4">
-                <DarkModeIcon /> <p>Dark mode</p>
+                <p>Dark mode</p>
               </div>
-              <Switch onChange={onChange} />
+              <div className="cursor-pointer flex justify-center items-center ">
+                <DarkModeSwitch
+                  checked={mode === "dark"}
+                  onChange={toggleDarkMode}
+                  size={24}
+                  moonColor="#F6F1D5"
+                  sunColor="#FDB813"
+                />
+              </div>
             </div>
           </div>
 

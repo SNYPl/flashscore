@@ -1,11 +1,10 @@
 .calendar {
-  background-color: #eeeeee;
+  background-color: var(--grey-color);
   border-radius: 50px;
   padding: 5px;
   display: flex;
   align-items: center;
   user-select: none;
-  /* max-width: 705px; */
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 55px;
@@ -13,14 +12,9 @@
 
 .calendarOptions {
   overflow-x: hidden;
-  /* display: flex;
-  align-items: center;
-  cursor: pointer; */
 }
 
 .calendarDate {
-  /* width: 11.5%; */
-  /* height: 100%; */
   border-radius: 50px;
   min-width: 76px;
   z-index: 22;
@@ -31,18 +25,19 @@
   align-items: center;
   cursor: pointer;
 }
+
 .calendarDate:hover {
   background-color: #e1e1e1;
 }
 
 .activeDate {
-  background-color: #fff;
+  background-color: var(--white-color);
 }
 .activeDate h4 {
-  color: #555e61;
+  color: var(--calendar-text-color);
 }
 .activeDate span {
-  color: #555e61;
+  color: var(--calendar-text-color);
 }
 
 /* Date Picker */
@@ -98,9 +93,9 @@
 .dropdown {
   display: block;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: var(--calendar-dropdown-background);
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 2222;
   margin-top: 10px;
   border-radius: 4px;
   width: calc(100% + 100px);
@@ -119,7 +114,7 @@
   background-color: initial;
   border: initial;
   border-radius: 4px;
-  color: #001e28;
+  color: var(--title-color);
   cursor: pointer;
   display: flex;
   flex-grow: 1;
@@ -145,7 +140,7 @@
 }
 
 .dateOption:hover {
-  background-color: #f1f1f1;
+  background-color: var(--background--color);
 }
 
 .dropdown .active {

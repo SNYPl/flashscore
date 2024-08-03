@@ -2,14 +2,14 @@
   margin-bottom: 8px;
 }
 .title {
-  background-color: #eeeeee;
+  background-color: var(--grey-color);
   border-radius: 5px;
   padding: 5px 10px;
 }
 
 .title p {
   font-size: 11px;
-  color: #505658;
+  color: var(--league-color);
   font-weight: 600;
 }
 
@@ -19,7 +19,7 @@
 
 .scoreInfo p {
   font-size: 11px;
-  color: #505658;
+  color: var(--league-color);
   font-weight: 600;
 }
 .incidentListItem {
@@ -27,14 +27,14 @@
 }
 
 .incidentTime {
-  color: #555e61;
+  color: var(--navItems-color);
   font-size: 12px;
   font-weight: 700;
   min-width: 20px;
 }
 .card {
   align-items: center;
-  border: 1px solid #eee;
+  border: 1px solid var(--grey-color);
   border-radius: 8px;
   display: flex;
   height: 28px;
@@ -64,6 +64,10 @@
   border-radius: 5px;
 }
 
+.card svg {
+  color: var(--black-color);
+}
+
 .yellowCard div {
   background-color: #ffcd00;
 }
@@ -73,18 +77,19 @@
 }
 
 .incidentItem a {
-  color: #001e28;
+  color: var(--title-color);
   font-weight: 700;
   font-size: 12px;
 }
 
 .incidentItem a:hover {
   text-decoration: underline;
+  text-decoration-color: var(--black-color);
 }
 
 .incidentTipInfo {
   font-size: 10.5px;
-  color: #555e61;
+  color: var(--navItems-color);
   font-weight: 400;
 }
 
@@ -99,13 +104,21 @@
 .incidentName {
   font-size: 13px;
   line-height: 16px;
-  color: #555e61;
+  color: var(--navItems-color);
   font-weight: 500;
 }
 
 .incidentName a {
   font-size: 11px;
   line-height: 16px;
-  color: #555e61;
+  color: var(--navItems-color);
   font-weight: 500;
+}
+
+.assistanceColor {
+  color: var(--navItems-color);
+}
+
+.penaltyScored {
+  color: var(--black-color);
 }

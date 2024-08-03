@@ -2,7 +2,7 @@
   margin-bottom: 8px;
 }
 .title {
-  background-color: #eeeeee;
+  background-color: var(--grey-color);
   display: flex;
   justify-content: flex-start;
   align-content: center;
@@ -14,7 +14,7 @@
 }
 
 .title p {
-  color: #505658;
+  color: var(--league-color);
   font-size: 12px;
   font-weight: 600;
 }
@@ -28,7 +28,7 @@
 .player h2 {
   font-size: 15px;
   font-weight: 600;
-  color: #001e28;
+  color: var(--title-color);
 }
 .player p {
   color: #73787a;

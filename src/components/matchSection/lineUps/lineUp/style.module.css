@@ -9,7 +9,7 @@
 }
 
 .title {
-  background-color: #eeeeee;
+  background-color: var(--grey-color);
   display: flex;
   justify-content: center;
   align-content: center;
@@ -21,7 +21,7 @@
 
 .noData,
 .title p {
-  color: #505658;
+  color: var(--league-color);
   font-size: 12px;
   font-weight: 600;
 }
