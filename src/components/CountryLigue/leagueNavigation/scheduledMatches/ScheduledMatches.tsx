@@ -25,6 +25,21 @@ const ScheduledMatches = ({
     return <div></div>;
   }
 
+  const sortedFixturedEvents = fixturesMatchData.EVENTS?.sort(
+    (a: any, b: any) => a.round - b.round
+  );
+
+  const extractRoundNumber = (roundString: any) => {
+    return parseInt(roundString.split(" ")[1]);
+  };
+
+  // Sort the array based on the round number
+  const sortedRoundsArray = fixturesMatchData?.EVENTS?.sort(
+    (a: any, b: any) => {
+      return extractRoundNumber(a.round) - extractRoundNumber(b.round);
+    }
+  );
+
   return (
     <section className={` py-4 px-3 bg-white mb-4 rounded-lg`}>
       <h2 className={`font-bold ${style.title}`}>Scheduled</h2>
@@ -34,7 +49,7 @@ const ScheduledMatches = ({
         NAME1={fixturesMatchData.NAME_PART_1}
         NAME2={fixturesMatchData.NAME_PART_2}
         url={fixturesMatchData.URL}
-        events={fixturesMatchData.EVENTS.slice(0, sliceLength)}
+        events={sortedRoundsArray.slice(0, sliceLength)}
         countryId={fixturesMatchData.COUNTRY_ID}
         tournamentId={fixturesMatchData.TOURNAMENT_ID}
         key={fixturesMatchData.TOURNAMENT_STAGE_ID}

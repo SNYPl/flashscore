@@ -57,7 +57,7 @@
 
 .supportItems {
   flex-direction: column;
-  border-top: 1px solid #024256;
+  border-top: 1px solid var(--support-images-border);
   position: relative;
 }
 
@@ -72,7 +72,7 @@
 }
 
 .itemOne {
-  border-bottom: 1px solid #024256;
+  border-bottom: 1px solid var(--support-images-border);
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -84,12 +84,11 @@
 
 .itemTwo div:first-child,
 .itemOne div:first-child {
-  border-right: 1px solid #024256;
+  border-right: 1px solid var(--support-images-border);
 }
 
 .itemTwo div:hover a,
 .itemOne div:hover a {
-  /* background: rgb(219 226 243 / 30%); */
   background: rgb(219 226 243 / 3%);
   transition: all 0.3s ease-in-out;
   opacity: 100% !important;
@@ -113,7 +112,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgb(8 20 24 / 80%);
+  background-color: rgba(8, 20, 24, 0.8);
   transition: opacity 0.3s 0s, visibility 0s 0.3s;
   z-index: 9999999999;
   opacity: 0;
@@ -147,12 +146,21 @@
 }
 
 .modal {
-  background-color: #003040;
+  background-color: var(--modal-bg-color);
   border-radius: 14px;
   width: 100%;
   position: relative;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   transition: all 0.4s ease-in;
+}
+.itemOne .lightThemeImage,
+.itemTwo .lightThemeImage {
+  display: var(--showDark-element);
+}
+
+.itemOne .darkThemeImage,
+.itemTwo .darkThemeImage {
+  display: var(--showLight-element);
 }
 
 .closeBtn {

@@ -86,10 +86,11 @@ const Match: React.FC<matchProps> = ({
       >
         <div
           className={` items-center ${style.match} ${
-            stageType == "LIVE" || (!!winner && isLeagueRoute)
-              ? style.matchLive
-              : ""
-          } ${winner && isLeagueRoute ? style.winnerWidth : ""}`}
+            stageType == "LIVE" ? style.matchLive : ""
+          } 
+          ${winner && isLeagueRoute ? style.winnerWidth : ""}
+          `}
+          // ${!!winner && isLeagueRoute ? style.matchLive : ""}
         >
           <div className={`flex   items-center `}>
             <div

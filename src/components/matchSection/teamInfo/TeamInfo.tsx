@@ -4,23 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import { Live } from "@/common/svg/match";
-import {
-  isFavoriteEvent,
-  useFavouriteLeagues,
-} from "@/components/hooks/useFavouriteLeagues ";
 import { EmptyFavouriteStarIcon } from "@/common/svg/home";
-import { countries } from "@/lib/countriesList";
+import { useAddToMyTeams } from "@/components/hooks/useAddToMyTeam";
 
 interface props {
   data: any;
-  tournamentData: any;
 }
 
-const TeamInfo: React.FC<props> = ({ data, tournamentData }) => {
+const TeamInfo: React.FC<props> = ({ data }) => {
   const START_TIME = data?.START_TIME;
   const sportIdCheck = useSportIdHandler();
   const date = new Date(START_TIME * 1000);
-  const { favouriteLeagues, addToFavourite } = useFavouriteLeagues();
+  const { addToMyTeam, isFavorited } = useAddToMyTeams();
 
   const formattedDate = date.toLocaleDateString("de-DE", {
     day: "2-digit",
@@ -39,19 +34,8 @@ const TeamInfo: React.FC<props> = ({ data, tournamentData }) => {
   const [homeTeamId] = data?.HOME_PARTICIPANT_IDS;
   const [awayTeamId] = data?.AWAY_PARTICIPANT_IDS;
 
-  const currentLeagueStageIds = favouriteLeagues.find(
-    (el) => el.tournamentStageId === tournamentData.TOURNAMENT_STAGE_ID
-  )?.stageIds;
-
-  const currentCountryIcon = countries.filter(
-    (el) => el.name === tournamentData.COUNTRY_NAME
-  );
-  const [countryObject] = currentCountryIcon;
-
-  const isEventFavourited = isFavoriteEvent(
-    data?.EVENT_ID,
-    currentLeagueStageIds
-  );
+  const isEventFavouritedFirstTeam = isFavorited(homeTeamId);
+  const isEventFavouritedSecondTeam = isFavorited(awayTeamId);
 
   return (
     <section className={`${style.teamInfo}  w-full px-3`}>
@@ -59,23 +43,17 @@ const TeamInfo: React.FC<props> = ({ data, tournamentData }) => {
         <div className={`${style.infoItem} flex flex-col`}>
           <div
             className={`flex items-center justify-center mr-4
-          ${style.starIcon} ${isEventFavourited ? style.favorited : ""}
+          ${style.starIcon} ${isEventFavouritedFirstTeam ? style.favorited : ""}
            `}
             onClick={() =>
-              addToFavourite(
-                tournamentData?.TOURNAMENT_ID,
-                data,
-                {
-                  NAME1: tournamentData?.NAME_PART_1,
-                  NAME2: tournamentData?.NAME_PART_2,
-                  url: tournamentData?.URL,
-                  countryId: tournamentData.COUNTRY_ID,
-                  countryName: tournamentData.COUNTRY_NAME,
-                  sportHref: sportIdCheck?.href,
-                  img: countryObject?.countryCode,
-                },
-                tournamentData.TOURNAMENT_STAGE_ID,
-                data?.EVENT_ID
+              addToMyTeam(
+                data?.HOME_NAME,
+                data?.HOME_IMAGES
+                  ? data?.HOME_IMAGES[0]
+                  : "/images/default/club.gif",
+                homeTeamId,
+                `${data?.HOME_NAME}`,
+                sportIdCheck?.id
               )
             }
           >
@@ -155,23 +133,19 @@ const TeamInfo: React.FC<props> = ({ data, tournamentData }) => {
         <div className={`${style.infoItem} flex flex-col`}>
           <div
             className={`flex items-center justify-center mr-4
-          ${style.starIcon} ${isEventFavourited ? style.favorited : ""}
+          ${style.starIcon} ${
+              isEventFavouritedSecondTeam ? style.favorited : ""
+            }
            ${style.starIconRight}`}
             onClick={() =>
-              addToFavourite(
-                tournamentData?.TOURNAMENT_ID,
-                data,
-                {
-                  NAME1: tournamentData?.NAME_PART_1,
-                  NAME2: tournamentData?.NAME_PART_2,
-                  url: tournamentData?.URL,
-                  countryId: tournamentData.COUNTRY_ID,
-                  countryName: tournamentData.COUNTRY_NAME,
-                  sportHref: sportIdCheck?.href,
-                  img: countryObject?.countryCode,
-                },
-                tournamentData.TOURNAMENT_STAGE_ID,
-                data?.EVENT_ID
+              addToMyTeam(
+                data?.AWAY_NAME,
+                data?.AWAY_IMAGES
+                  ? data?.AWAY_IMAGES[0]
+                  : "/images/default/club.gif",
+                awayTeamId,
+                `${data?.AWAY_NAME}`,
+                sportIdCheck?.id
               )
             }
           >

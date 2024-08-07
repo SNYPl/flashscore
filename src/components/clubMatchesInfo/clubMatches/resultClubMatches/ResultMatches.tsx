@@ -15,7 +15,7 @@ const ResultMatches = () => {
   function mergeLeagues(leagues: any[]) {
     const mergedLeagues: any = [];
 
-    leagues.forEach((league) => {
+    leagues?.forEach((league) => {
       const existingLeague = mergedLeagues.find(
         (l: any) => l.NAME === league.NAME
       );
@@ -66,7 +66,7 @@ const ResultMatches = () => {
         const responses = await Promise.all([
           axios.request(resultEvents(1)),
           axios.request(resultEvents(2)),
-          axios.request(resultEvents(3)),
+          // axios.request(resultEvents(3)),
         ]);
         const data = responses.map((response) => response.data);
         const combinedData = data.flat();
@@ -115,38 +115,52 @@ const ResultMatches = () => {
   });
 
   return (
-    <article className={`${style.clubmatches} bg-white rounded-lg py-4`}>
-      <div className="w-full mb-4">
-        <Space wrap className={style.selector} style={{ width: "100%" }}>
-          <Select
-            defaultValue="All Competitions"
-            style={{ width: "100%" }}
-            onChange={handleChange}
-            options={[allCompetentiosnObjects, ...leagueNameOptions]}
-            className={style.selector}
-          />
-        </Space>
-      </div>
+    <article className={`${style.clubmatches} bg-white rounded-lg p-4`}>
+      <h4 className={style.matchesTitle}>Results</h4>
+      {filteredLeagues.length ? (
+        <>
+          <div className="w-full mb-4">
+            <Space wrap className={style.selector} style={{ width: "100%" }}>
+              <Select
+                defaultValue="All Competitions"
+                style={{ width: "100%" }}
+                onChange={handleChange}
+                options={[allCompetentiosnObjects, ...leagueNameOptions]}
+                className={style.selector}
+              />
+            </Space>
+          </div>
 
-      <div className="mt-5">
-        {filteredLeagues?.map((eventMatch: any, id: number) => {
-          return (
-            <League
-              tournamentStageId={eventMatch.TOURNAMENT_STAGE_ID}
-              NAME1={eventMatch.NAME_PART_1}
-              NAME2={eventMatch.NAME_PART_2}
-              url={eventMatch.URL}
-              events={eventMatch.EVENTS}
-              countryId={eventMatch.COUNTRY_ID}
-              tournamentId={eventMatch.TOURNAMENT_ID}
-              key={id}
-              countryName={eventMatch.COUNTRY_NAME}
-              showMatchesDefault={true}
-              ShowFullDate={true}
-            />
-          );
-        })}
-      </div>
+          <div className="mt-5">
+            {filteredLeagues?.map((eventMatch: any, id: number) => {
+              return (
+                <League
+                  tournamentStageId={eventMatch.TOURNAMENT_STAGE_ID}
+                  NAME1={eventMatch.NAME_PART_1}
+                  NAME2={eventMatch.NAME_PART_2}
+                  url={eventMatch.URL}
+                  events={eventMatch.EVENTS}
+                  countryId={eventMatch.COUNTRY_ID}
+                  tournamentId={eventMatch.TOURNAMENT_ID}
+                  key={id}
+                  countryName={eventMatch.COUNTRY_NAME}
+                  showMatchesDefault={true}
+                  ShowFullDate={true}
+                />
+              );
+            })}
+          </div>
+        </>
+      ) : (
+        <div className="p-3">
+          <p
+            className="text-sm font-bold"
+            style={{ color: "var(--black-color)" }}
+          >
+            No Data
+          </p>
+        </div>
+      )}
     </article>
   );
 };

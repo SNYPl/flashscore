@@ -1,5 +1,5 @@
 "use client";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import style from "./style.module.css";
 import MatchesMenu from "./matchesMenu/MatchesMenu";
 import StandingTable from "./standingTable/StandingTable";
@@ -15,7 +15,11 @@ const Matches = ({
 }) => {
   const [apiMenuRequest, setApiMenuRequest] = useState("overall");
   const [activeMenu, setActiveMenu] = useState("STANDINGS");
-  
+
+  // console.log(leagueId);
+  // console.log(seasonId);
+
+  //DRAW COMPONENT
 
   return (
     <section className={`${style.matches} bg-white p-4 rounded-xl`}>

@@ -87,7 +87,7 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
           <div className={style.modalContainer}>
             <article className={style.modal}>
               <div className={style.closeBtn} onClick={handleCancel}>
-                <IoCloseSharp />
+                <IoCloseSharp style={{ fill: "var(--black-color)" }} />
               </div>
               <div
                 className={`flex justify-center items-center py-6 ${style.blitzHover}`}
@@ -109,13 +109,21 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
                     <Link
                       href="#"
                       target="_blank"
-                      className="w-full h-full flex justify-center items-center relative"
+                      className="w-full h-full flex justify-center items-center relative "
                     >
                       <Image
                         src={"/images/header/blitz/soccer.svg"}
                         alt="soccer"
                         width={90}
                         height={20}
+                        className={style.lightThemeImage}
+                      />
+                      <Image
+                        src={"/images/header/blitz/soccer1.svg"}
+                        alt="soccer"
+                        width={90}
+                        height={20}
+                        className={style.darkThemeImage}
                       />
                     </Link>
                   </div>
@@ -130,6 +138,14 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
                         alt="football"
                         width={145}
                         height={12}
+                        className={style.lightThemeImage}
+                      />
+                      <Image
+                        src={"/images/header/blitz/FOTBALLNEWS1.svg"}
+                        alt="football"
+                        width={145}
+                        height={12}
+                        className={style.darkThemeImage}
                       />
                     </Link>
                   </div>
@@ -148,6 +164,14 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
                         alt="isport"
                         width={90}
                         height={22}
+                        className={style.lightThemeImage}
+                      />
+                      <Image
+                        src={"/images/header/blitz/ISPORT2.svg"}
+                        alt="isport"
+                        width={90}
+                        height={22}
+                        className={style.darkThemeImage}
                       />
                     </Link>
                   </div>
@@ -162,6 +186,14 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
                         alt="inews"
                         width={80}
                         height={23}
+                        className={style.lightThemeImage}
+                      />
+                      <Image
+                        src={"/images/header/blitz/INEWS2.svg"}
+                        alt="inews"
+                        width={80}
+                        height={23}
+                        className={style.darkThemeImage}
                       />
                     </Link>
                   </div>

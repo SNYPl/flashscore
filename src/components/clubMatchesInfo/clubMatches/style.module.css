@@ -1,3 +1,8 @@
+.menu {
+  border-radius: 0.5rem;
+  margin-bottom: 12px;
+}
+
 .nav button {
   font-size: 13px;
   padding: 6px 10px;

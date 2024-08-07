@@ -33,7 +33,7 @@ const TopScoresTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
     },
   };
 
-  const { data, isLoading, isError, isFetched, refetch } = useQuery(
+  const { data, isLoading, isError, isFetched } = useQuery(
     ["topScoresTable", leagueId, seasonId],
     async () => {
       try {
@@ -71,7 +71,7 @@ const TopScoresTable: React.FC<tableProps> = ({ seasonId, leagueId }) => {
     );
   }
 
-  if (!data?.DATA?.length) {
+  if (!data?.ROWS?.length) {
     return (
       <div>
         <p style={{ color: "var(--black-color)" }}>ინფორმაცია არ არის</p>

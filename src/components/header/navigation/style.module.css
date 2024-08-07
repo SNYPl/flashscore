@@ -65,10 +65,34 @@
   }
 
   .nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin-left: 0;
-    justify-content: space-around;
+    justify-content: flex-start;
+    padding: 0 4%;
     width: 100%;
     z-index: 2;
+  }
+  .itemContainer {
+    justify-content: flex-start;
+  }
+
+  .itemContainer:first-child {
+    padding-left: 15%;
+  }
+  .itemContainer:last-child {
+    justify-content: flex-end;
+  }
+
+  .active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
   }
 }
 
@@ -76,5 +100,9 @@
   .nav {
     margin-left: 0;
     justify-content: flex-start;
+  }
+
+  .itemContainer:first-child {
+    padding-left: 0;
   }
 }

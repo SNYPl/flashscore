@@ -10,7 +10,7 @@ import { useQuery } from "react-query";
 import { Skeleton } from "antd";
 
 const ClubMatchesInfo = () => {
-  const [activeSection, setActiveSection] = useState<string>("MATCHES");
+  const [activeSection, setActiveSection] = useState<string>("SUMMARY");
   const searchParams = useSearchParams();
   const teamId = searchParams.get("id");
   const sportIdCheck = searchParams.get("sportId");
@@ -58,7 +58,7 @@ const ClubMatchesInfo = () => {
         clubInfoData={data?.DATA}
       />
 
-      {activeSection === "MATCHES" && <ClubMatches />}
+      {activeSection === "SUMMARY" && <ClubMatches />}
       {activeSection === "PLAYER STATS" && (
         <PlayerStats countryName={data?.DATA.NAME} />
       )}

@@ -3,14 +3,21 @@ import React, { useState } from "react";
 import style from "./style.module.css";
 import FixturesMatches from "./fixutresClubMatches/FixturesMatches";
 import ResultMatches from "./resultClubMatches/ResultMatches";
+import ClubTransfers from "../clubTransfers/ClubTransfers";
 
 const ClubMatches = () => {
-  const [active, setActive] = useState("FIXTURES");
+  const [active, setActive] = useState("TOTAL");
 
   return (
-    <article className={`${style.clubmatches} bg-white rounded-lg p-4`}>
-      <div className={style.menu}>
+    <article className={`${style.clubmatches}   `}>
+      <div className={`${style.menu} bg-white  p-4 `}>
         <div className={`flex items-center mb-4 gap-x-3 ${style.nav}`}>
+          <button
+            className={`${active === "TOTAL" ? style.active : ""}`}
+            onClick={() => setActive("TOTAL")}
+          >
+            TOTAL
+          </button>
           <button
             className={`${active === "FIXTURES" ? style.active : ""}`}
             onClick={() => setActive("FIXTURES")}
@@ -26,6 +33,13 @@ const ClubMatches = () => {
         </div>
       </div>
 
+      {active === "TOTAL" && (
+        <>
+          <FixturesMatches />
+          <ResultMatches />
+          <ClubTransfers />
+        </>
+      )}
       {active === "FIXTURES" && <FixturesMatches />}
       {active === "RESULTS" && <ResultMatches />}
     </article>

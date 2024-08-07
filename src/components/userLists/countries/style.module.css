@@ -1,5 +1,5 @@
 .countriesTitle {
-  border-bottom: 1px solid #e0e1e2;
+  border-bottom: 1px solid var(--matches-titles-color);
   margin-bottom: 10px;
 }
 
@@ -42,7 +42,7 @@
 .blockList {
   display: none;
   padding-bottom: 9px;
-  border-bottom: 1px solid #e0e1e2;
+  border-bottom: 1px solid var(--matches-titles-color);
 }
 
 .blockOpened .arrowIcon svg {

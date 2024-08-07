@@ -11,6 +11,7 @@ import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { useTheme } from "@/components/store/ThemeContext";
+import { sportNavigation } from "@/lib/sportNavigation";
 
 type Inputs = {
   search: string;
@@ -57,7 +58,8 @@ const Search = () => {
     {
       enabled: !!searchItems,
       onSuccess: (data) => {
-        setSearchedData(data);
+        const filteredData = data?.filter((el: any) => el.SPORT_ID <= 4);
+        setSearchedData(filteredData);
       },
     }
   );
@@ -172,12 +174,18 @@ const Search = () => {
             ? searched.TOURNAMENT_STAGE_IDS_WITH_STATS_DATA[0]
             : [];
 
+          const [sportData] = sportNavigation.filter(
+            (el: any) => el.id == searched.SPORT_ID
+          );
+
+          const sportCategory = sportData || searched.SPORT_ID;
+
           const url =
             searched.TYPE === "playersInTeam"
               ? `/player/${searched.URL}?playerId=${searched.ID}&sportId=${sport?.id}`
               : searched.TYPE === "participants"
-              ? `/team/${searched.URL}?id=${searched.ID}&sportId=${sport?.id}`
-              : `${sport?.href}/${searched.COUNTRY_NAME}/${searched.URL}?seasonStageId=${stageId}&name=${searched.NAME}&tournamentId=${searched.ID}`;
+              ? `/team/${searched.URL}?id=${searched.ID}&sportId=${sportCategory?.id}`
+              : `${sportCategory?.href}/${searched.COUNTRY_NAME}/${searched.URL}?seasonStageId=${stageId}&name=${searched.NAME}&tournamentId=${searched.ID}`;
 
           return (
             <Link
@@ -198,7 +206,7 @@ const Search = () => {
                 <div className={style.searchInfo}>
                   <h4>{searched.NAME}</h4>
                   <p>
-                    {sport?.text},<span>{searched.COUNTRY_NAME}</span>
+                    {sportCategory?.text},<span>{searched.COUNTRY_NAME}</span>
                   </p>
                 </div>
               </article>

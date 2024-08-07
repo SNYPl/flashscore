@@ -13,6 +13,10 @@
   height: 57px;
 }
 
+.mainMenuContainer {
+  padding-right: 0.75rem;
+}
+
 @media only screen and (max-width: 965px) {
   .fixed {
     height: 55px;
@@ -27,7 +31,12 @@
   }
   .mobileResponsiveLogo {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0 4%;
+  }
+  .mainMenuContainer {
+    justify-content: center;
+    padding-right: 0;
   }
 }
 

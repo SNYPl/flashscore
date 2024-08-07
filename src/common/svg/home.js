@@ -53,8 +53,8 @@ export const PlusIcon = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect x="5" width="2" height="12" fill="#FD0046" />
-    <rect y="5" width="12" height="2" fill="#FD0046" />
+    <rect x="5" width="2" height="12" fill="#0092c1" />
+    <rect y="5" width="12" height="2" fill="#0092c1" />
   </svg>
 );
 

@@ -5,7 +5,7 @@
   width: 100%;
 }
 .matchContainer {
-  border-bottom: 1px solid #e5e5e7;
+  border-bottom: 1px solid var(--matches-border-color);
   grid-template-columns: 18px 1fr;
   display: flex;
   justify-content: center;

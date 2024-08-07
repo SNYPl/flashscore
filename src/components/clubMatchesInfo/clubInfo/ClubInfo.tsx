@@ -37,7 +37,7 @@ const ClubInfo: React.FC<infoProps> = ({
   clubInfoData,
 }) => {
   const menu = [
-    { title: "MATCHES", href: "#" },
+    { title: "SUMMARY", href: "#" },
     { title: "PLAYER STATS", href: "#" },
   ];
 

@@ -1,5 +1,5 @@
 .myTeamsTitle {
-  border-bottom: 1px solid #e0e1e2;
+  border-bottom: 1px solid var(--matches-titles-color);
   margin-bottom: 10px;
 }
 
@@ -11,18 +11,18 @@
 }
 
 .teams h2 {
-  color: #fd0046;
+  color: #0092c1;
   font-size: 12.5px;
   cursor: pointer;
   color: var(--user-list-color);
 }
 
 .teams:hover h2 {
-  color: #d6033f;
+  color: #0092c1;
 }
 
 .teams:hover path {
-  fill: #d6033f;
+  fill: #0092c1;
 }
 
 .modalTitle {
@@ -34,23 +34,18 @@
 }
 
 .modalInputSearch {
-  border: 1px solid #c8cdcd;
-  border-radius: 8px;
-  /* display: grid; */
-  /* grid-template-columns: 2fr 1fr; */
   margin-bottom: 20px;
-  padding-right: 24px;
 }
 
 .modalInputSearch input {
   -webkit-appearance: none;
   appearance: none;
-  background: transparent;
+  background-color: var(--input-background-color);
+  color: var(--input--color);
   border: none;
   border-radius: 0;
   box-shadow: none;
   box-sizing: border-box;
-  color: var(--color-combination-2);
   flex: 1;
   font-family: inherit;
   font-size: 13px;
@@ -58,6 +53,9 @@
   margin: 0;
   outline: 0;
   padding-left: 12px;
+  padding-right: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--grey-color);
 }
 
 .text {

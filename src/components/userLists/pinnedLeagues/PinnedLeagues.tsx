@@ -55,8 +55,8 @@ const PinnedLeagues = () => {
       </article>
       <article className="pl-2 pr-2">
         {filteredLeagues?.map((tournament: any) => {
-          const stageId = tournament.STAGES.filter(
-            (el: any) => el.STAGE_NAME === "Main"
+          const stageId = tournament.STAGES.filter((el: any) =>
+            el.STAGE_NAME.includes("Main")
           );
           const stageSeasonId =
             stageId.length > 0 ? stageId[0] : tournament.STAGES[0];

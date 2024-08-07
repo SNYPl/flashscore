@@ -9,6 +9,7 @@ import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import axios, { isAxiosError } from "axios";
 import { useQuery } from "react-query";
 import { useLocalStorage } from "usehooks-ts";
+import { useAddToMyTeams } from "@/components/hooks/useAddToMyTeam";
 
 interface team {
   image: string;
@@ -27,6 +28,7 @@ const UserTeams = () => {
     "myTeamsList",
     []
   );
+  const { addToMyTeam, removeFromMyTeam } = useAddToMyTeams();
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -78,28 +80,6 @@ const UserTeams = () => {
     e.preventDefault();
     setSearchItems(searchRef?.current?.value);
   };
-
-  function addToMyTeam(
-    name: string,
-    image: string,
-    id: string,
-    url: string,
-    sportId: number
-  ) {
-    const itemIndex = myTeamsList?.findIndex((el) => el.id === id);
-
-    if (itemIndex !== -1) {
-      setMyTeamsList(myTeamsList.filter((el) => el.id !== id));
-    } else {
-      setMyTeamsList([...myTeamsList, { name, image, id, url, sportId }]);
-    }
-  }
-
-  function removeFromMyTeam(id: string) {
-    const filteredList = myTeamsList.filter((el: team) => el.id !== id);
-
-    setMyTeamsList(filteredList);
-  }
 
   return (
     <section className={`p-4 px-2 mb-9 ${style.userTeamContainer} `}>
@@ -192,7 +172,6 @@ const UserTeams = () => {
                 const stageId = searched.TOURNAMENT_STAGE_IDS_WITH_STATS_DATA
                   ? searched.TOURNAMENT_STAGE_IDS_WITH_STATS_DATA[0]
                   : [];
-
                 const url =
                   searched.TYPE === "playersInTeam"
                     ? `/player/${searched.URL}?playerId=${searched.ID}&sportId=${sport?.id}`
