@@ -136,7 +136,7 @@ const LatestScores = ({
   if (activeMenu === "RESULTS" && !data) {
     return (
       <div>
-        <p>ინფორმაცია არ არის</p>
+        <p>No matches found</p>
       </div>
     );
   }

@@ -2,7 +2,7 @@
   display: grid;
   align-items: center;
   grid-template-columns: 90px 1fr 1fr repeat(6, 40px);
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--standings-border-color);
 }
 
 .infoIndex {

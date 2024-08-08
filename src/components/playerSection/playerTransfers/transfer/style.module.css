@@ -2,7 +2,7 @@
   display: grid;
   align-items: center;
   grid-template-columns: 40px repeat(3, 1fr) 0.5fr;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--standings-border-color);
   padding: 0 10px;
   column-gap: 8px;
 }

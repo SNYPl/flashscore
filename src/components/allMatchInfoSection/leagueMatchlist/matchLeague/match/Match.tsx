@@ -202,10 +202,19 @@ const Match: React.FC<matchProps> = ({
           ) : (
             <>
               {isLeagueRoute && (
-                <div className={`${style.mobileDateInfo} desktopNo`}>
-                  {!winner ? (
+                <div
+                  className={`${style.mobileDateInfo} desktopNo  items-center gap-x-2 flex-col`}
+                >
+                  {/* {!winner ? (
                     formattedDate
                   ) : (
+                    <div className={`${style[winner]} ${style.tableWord}`}>
+                      {winner}
+                    </div>
+                  )} */}
+
+                  {formattedDate}
+                  {winner && (
                     <div className={`${style[winner]} ${style.tableWord}`}>
                       {winner}
                     </div>

@@ -1,15 +1,12 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import style from "./style.module.css";
 import LeagueTitle from "./leagueTitle/LeagueTitle";
 import LeagueMenu from "./menu/LeagueMenu";
 import ParamInfo from "@/components/paramInfo/ParamInfo";
 import axios from "axios";
 import { useQuery } from "react-query";
-import { useDispatch } from "react-redux";
-import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
-import { setAllStages } from "@/components/store/slices/matchesSlice";
-import { useSearchParams, usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Skeleton } from "antd";
 
 const LeagueNavigation = ({

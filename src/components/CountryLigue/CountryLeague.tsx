@@ -144,7 +144,7 @@ const CountryLeague = () => {
 
       {activeMenu === "SUMMARY" && (
         <div>
-          <Todaymatches />
+          <Todaymatches setActiveMenu={setActiveMenu} activeMenu={activeMenu} />
 
           <LatestScores
             setActiveMenu={setActiveMenu}

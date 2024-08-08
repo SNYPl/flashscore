@@ -38,6 +38,7 @@
   --input-background-color: #fff;
   --input--color: #878d8e;
   --matches-titles-color: #e0e1e2;
+  --standings-border-color: #eee;
 }
 
 /* #0f2d37 */
@@ -79,6 +80,7 @@
   --input-background-color: #023c4e;
   --input--color: #fff;
   --matches-titles-color: rgb(255 255 255 / 20%);
+  --standings-border-color: rgb(255 255 255 / 20%);
 }
 
 * {

@@ -1,7 +1,7 @@
 .matchItem {
   display: grid;
   grid-template-columns: 1fr 6fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid var(--standings-border-color);
 }
 
 .matchItem a,

@@ -7,8 +7,15 @@ import { useSearchParams } from "next/navigation";
 import { Skeleton } from "antd";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import useGMTOffset from "@/components/hooks/useTimeZone";
+import CountryLeagueEvents from "../../countryLeagueEvents/CountryLeagueEvents";
 
-const Todaymatches: React.FC = ({}) => {
+const Todaymatches = ({
+  setActiveMenu,
+  activeMenu,
+}: {
+  setActiveMenu?: any;
+  activeMenu: string;
+}) => {
   const sportIdCheck = useSportIdHandler();
   const searchParams = useSearchParams();
   const { gmtOffset } = useGMTOffset();
@@ -80,6 +87,7 @@ const Todaymatches: React.FC = ({}) => {
             showMatchesDefault={true}
             ShowFullDate={false}
             ShowFullDateHour={false}
+            // setActiveMenu={setActiveMenu}
           />
         );
       })}

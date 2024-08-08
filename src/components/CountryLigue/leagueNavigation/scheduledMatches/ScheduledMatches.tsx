@@ -25,10 +25,6 @@ const ScheduledMatches = ({
     return <div></div>;
   }
 
-  const sortedFixturedEvents = fixturesMatchData.EVENTS?.sort(
-    (a: any, b: any) => a.round - b.round
-  );
-
   const extractRoundNumber = (roundString: any) => {
     return parseInt(roundString.split(" ")[1]);
   };
