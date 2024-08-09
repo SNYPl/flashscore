@@ -1,12 +1,12 @@
 .teamInfo {
   padding-top: 20px;
-  border-top: 1px solid #e8e8e8;
-  border-bottom: 1px solid #e8e8e8;
+  border-top: 1px solid var(--event-matches-border);
+  border-bottom: 1px solid var(--event-matches-border);
   padding-bottom: 20px;
 }
 .infoImage {
   padding: 14px;
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--event-matches-border);
   border-radius: 10px;
   margin-bottom: 6px;
 }

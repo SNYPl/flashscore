@@ -88,7 +88,9 @@ const LineUp: React.FC<props> = ({
         </article>
       ) : (
         <div className="pl-2">
-          <p className={style.noData}>ინფორმაცია არ არის</p>
+          <p className={style.noData} style={{ color: "var(--black-color)" }}>
+            There is no information
+          </p>
         </div>
       )}
     </section>

@@ -1,5 +1,5 @@
 .LeagueMenu {
-  border-top: 1px solid #dfdfdf;
+  border-top: 1px solid var(--event-menu-border);
 }
 
 .LeagueMenu button {

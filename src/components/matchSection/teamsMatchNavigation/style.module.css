@@ -1,5 +1,5 @@
 .clubMenu {
-  border-bottom: 1px solid #dfdfdf;
+  border-bottom: 1px solid var(--event-menu-border);
   margin-bottom: 15px;
 }
 

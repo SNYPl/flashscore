@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #dfdfdf;
+  border: 1px solid var(--event-menu-border);
   border-radius: 10px;
   margin-right: 18px;
 }

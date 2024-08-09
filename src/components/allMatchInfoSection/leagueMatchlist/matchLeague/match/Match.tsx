@@ -70,6 +70,8 @@ const Match: React.FC<matchProps> = ({
 
   const isLeagueRoute = path.includes("/team");
 
+  const isHomePath = path === "/";
+
   return (
     <div className={`flex ${style.matchContainer} p-2`}>
       <div
@@ -90,7 +92,6 @@ const Match: React.FC<matchProps> = ({
           } 
           ${winner && isLeagueRoute ? style.winnerWidth : ""}
           `}
-          // ${!!winner && isLeagueRoute ? style.matchLive : ""}
         >
           <div className={`flex   items-center `}>
             <div
@@ -203,7 +204,7 @@ const Match: React.FC<matchProps> = ({
             <>
               {isLeagueRoute && (
                 <div
-                  className={`${style.mobileDateInfo} desktopNo  items-center gap-x-2 flex-col`}
+                  className={`${style.mobileDateInfo} desktopNo  items-center  flex-col`}
                 >
                   {/* {!winner ? (
                     formattedDate
@@ -212,8 +213,12 @@ const Match: React.FC<matchProps> = ({
                       {winner}
                     </div>
                   )} */}
-
                   {formattedDate}
+                  <span
+                    className={`ml-1 mr-2.5 ${style.mobileResponsiveHour} flex items-center`}
+                  >
+                    - {hour}:{minute === 0 ? "00" : minute}
+                  </span>
                   {winner && (
                     <div className={`${style[winner]} ${style.tableWord}`}>
                       {winner}
@@ -237,6 +242,13 @@ const Match: React.FC<matchProps> = ({
           )}
         </div>
       </Link>
+      {isHomePath && (
+        <span
+          className={`flex items-center  text-xs desktopNo ${style.homeHour}`}
+        >
+          {hour}:{minute === 0 ? "00" : minute}
+        </span>
+      )}
     </div>
   );
 };

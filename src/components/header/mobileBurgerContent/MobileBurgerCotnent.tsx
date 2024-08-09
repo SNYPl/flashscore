@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 import style from "./style.module.css";
 import UserLists from "@/components/userLists/UserLists";
 import Link from "next/link";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { useTheme } from "@/components/store/ThemeContext";
+import { useRouter, usePathname } from "next/navigation";
 
 const socialArray = [
   { component: "1", w: 9, h: 15, alt: "fb", href: "" },
@@ -17,10 +18,15 @@ const socialArray = [
 const MobileBurgerCotnent = () => {
   const [open, setOpen] = useState(false);
   const { mode, toggleDarkMode } = useTheme();
+  const path = usePathname();
 
   const handleCancel = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    setOpen(false);
+  }, [path]);
 
   return (
     <section className={`desktopNo `}>

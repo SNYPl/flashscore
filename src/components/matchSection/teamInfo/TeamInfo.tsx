@@ -60,24 +60,27 @@ const TeamInfo: React.FC<props> = ({ data }) => {
             <EmptyFavouriteStarIcon />
           </div>
 
-          <div className={`${style.infoImage}`}>
-            <Image
-              src={
-                data?.HOME_IMAGES
-                  ? data?.HOME_IMAGES[0]
-                  : "/images/default/club.gif"
-              }
-              alt="club"
-              width={55}
-              height={55}
-            />
-          </div>
           <Link
             href={`/team/${data?.SHORTNAME_HOME}?id=${homeTeamId}&sportId=${sportIdCheck?.id}`}
           >
-            <h3 className="text-center font-bold">
-              {data?.HOME_NAME.replace("*", "").trim()}
-            </h3>
+            <>
+              <div className={`${style.infoImage}`}>
+                <Image
+                  src={
+                    data?.HOME_IMAGES
+                      ? data?.HOME_IMAGES[0]
+                      : "/images/default/club.gif"
+                  }
+                  alt="club"
+                  width={55}
+                  height={55}
+                />
+              </div>
+
+              <h3 className="text-center font-bold">
+                {data?.HOME_NAME.replace("*", "").trim()}
+              </h3>
+            </>
           </Link>
         </div>
 
@@ -151,24 +154,27 @@ const TeamInfo: React.FC<props> = ({ data }) => {
           >
             <EmptyFavouriteStarIcon />
           </div>
-          <div className={`${style.infoImage}`}>
-            <Image
-              src={
-                data?.AWAY_IMAGES
-                  ? data?.AWAY_IMAGES[0]
-                  : "/images/default/club.gif"
-              }
-              alt="club"
-              width={55}
-              height={55}
-            />
-          </div>
           <Link
             href={`/team/${data?.SHORTNAME_AWAY}?id=${awayTeamId}&sportId=${sportIdCheck?.id}`}
           >
-            <h3 className="text-center font-bold">
-              {data?.AWAY_NAME.replace("*", "").trim()}
-            </h3>
+            <>
+              <div className={`${style.infoImage}`}>
+                <Image
+                  src={
+                    data?.AWAY_IMAGES
+                      ? data?.AWAY_IMAGES[0]
+                      : "/images/default/club.gif"
+                  }
+                  alt="club"
+                  width={55}
+                  height={55}
+                />
+              </div>
+
+              <h3 className="text-center font-bold">
+                {data?.AWAY_NAME.replace("*", "").trim()}
+              </h3>
+            </>
           </Link>
         </div>
       </article>

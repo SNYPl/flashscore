@@ -16,7 +16,7 @@ const ScheduledMatches = ({
   if (activeMenu === "FIXTURES" && fixturesMatchData?.EVENTS?.length === 0) {
     return (
       <div>
-        <p>ინფორმაცია არ არის</p>
+        <p style={{ color: "var(--black-color)" }}>There is no information</p>
       </div>
     );
   }

@@ -6,28 +6,61 @@ import Link from "next/link";
 
 const supportImages = [
   {
-    src: "/images/footer/support2.png",
-    alt: "support-1",
-    width: 80,
-    height: 22,
-  },
-  {
     src: "/images/footer/support5.svg",
     alt: "support-2",
     width: 90,
     height: 22,
+    displayStyle: "var(--showLight-element)",
+  },
+  {
+    src: "/images/footer/sp1.svg",
+    alt: "support-2",
+    width: 90,
+    height: 22,
+    displayStyle: "var(--showDark-element)",
+  },
+
+  {
+    src: "/images/footer/support2.svg",
+    alt: "support-1",
+    width: 80,
+    height: 22,
+    displayStyle: "var(--showLight-element)",
+  },
+  {
+    src: "/images/footer/sp2.svg",
+    alt: "support-1",
+    width: 80,
+    height: 22,
+    displayStyle: "var(--showDark-element)",
   },
   {
     src: "/images/footer/support3.svg",
     alt: "support-3",
     width: 90,
     height: 22,
+    displayStyle: "var(--showLight-element)",
   },
   {
-    src: "/images/footer/support4.png",
+    src: "/images/footer/sp3.svg",
+    alt: "support-3",
+    width: 90,
+    height: 22,
+    displayStyle: "var(--showDark-element)",
+  },
+  {
+    src: "/images/footer/support4.svg",
     alt: "support-4",
     width: 145,
     height: 13,
+    displayStyle: "var(--showLight-element)",
+  },
+  {
+    src: "/images/footer/sp4.svg",
+    alt: "support-4",
+    width: 145,
+    height: 13,
+    displayStyle: "var(--showDark-element)",
   },
 ];
 
@@ -79,7 +112,12 @@ const Support = () => {
       </div>
 
       {supportImages.map((el, id) => (
-        <Link href={"#"} key={id} className={style.supportLinks}>
+        <Link
+          href={"#"}
+          key={id}
+          className={style.supportLinks}
+          style={{ display: el.displayStyle }}
+        >
           <Image
             src={el.src}
             alt={el.alt}

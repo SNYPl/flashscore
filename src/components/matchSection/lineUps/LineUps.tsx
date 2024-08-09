@@ -80,7 +80,9 @@ const LineUps: React.FC<lineUpProp> = ({
   if (data.DATA.length === 0) {
     return (
       <div className="p-5 ">
-        <p className="text-sm">ინფორმაცია არ არის</p>
+        <p className="text-sm" style={{ color: "var(--black-color)" }}>
+          There is no information
+        </p>
       </div>
     );
   }

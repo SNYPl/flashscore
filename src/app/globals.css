@@ -39,9 +39,9 @@
   --input--color: #878d8e;
   --matches-titles-color: #e0e1e2;
   --standings-border-color: #eee;
+  --event-matches-border: #e8e8e8;
+  --event-menu-border: #dfdfdf;
 }
-
-/* #0f2d37 */
 
 [data-theme="dark"] {
   --background--color: #034256;
@@ -81,6 +81,8 @@
   --input--color: #fff;
   --matches-titles-color: rgb(255 255 255 / 20%);
   --standings-border-color: rgb(255 255 255 / 20%);
+  --event-matches-border: #0092c1;
+  --event-menu-border: #0092c1;
 }
 
 * {
@@ -171,6 +173,10 @@ img {
 
   .mobailmain {
     grid-template-columns: 1fr;
+  }
+
+  .matchContainer {
+    max-width: 100%;
   }
 }
 

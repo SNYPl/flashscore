@@ -82,7 +82,7 @@ const StandingTable: React.FC<tableProps> = ({
   if (!data?.DATA?.length) {
     return (
       <div>
-        <p style={{ color: "var(--black-color)" }}>ინფორმაცია არ არის</p>
+        <p style={{ color: "var(--black-color)" }}>There is no information</p>
       </div>
     );
   }

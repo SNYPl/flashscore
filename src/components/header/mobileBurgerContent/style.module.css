@@ -1,5 +1,5 @@
 .settings {
-  border: 1px solid #dfdfdf;
+  border: 1px solid var(--event-menu-border);
   border-radius: 10px;
   padding: 24px;
   font-size: 13px;

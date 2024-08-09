@@ -52,7 +52,7 @@
 }
 
 .flagBorder {
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--event-matches-border);
   padding: 7px 6px 8px 6px;
   border-radius: 100px;
   width: 31px;
