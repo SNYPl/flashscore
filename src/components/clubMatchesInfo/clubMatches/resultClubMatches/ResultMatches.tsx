@@ -6,8 +6,9 @@ import League from "@/components/allMatchInfoSection/leagueMatchlist/matchLeague
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useSearchParams } from "next/navigation";
+import { IoFootballOutline } from "react-icons/io5";
 
-const ResultMatches = () => {
+const ResultMatches = ({ pages }: { pages: number }) => {
   const searchParams = useSearchParams();
   const teamId = searchParams.get("id");
   const sportIdCheck = searchParams.get("sportId");
@@ -63,28 +64,39 @@ const ResultMatches = () => {
     ["clubResultEvents", teamId, sportIdCheck],
     async () => {
       try {
-        const responses = await Promise.all([
-          axios.request(resultEvents(1)),
-          axios.request(resultEvents(2)),
-          // axios.request(resultEvents(3)),
-        ]);
-        const data = responses.map((response) => response.data);
-        const combinedData = data.flat();
+        // Array to hold successful responses
+        const responses: any[] = [];
 
-        const mergedObject = combinedData.reduce(
-          (acc, current) => {
-            acc.DATA = [...acc.DATA, ...current.DATA];
-
-            return acc;
-          },
-          { DATA: [] }
+        // List of request promises
+        const requests = Array.from({ length: pages }, (_, index) =>
+          (async () => {
+            try {
+              const response = await axios.request(resultEvents(index + 1));
+              if (response?.data?.DATA) {
+                responses.push(response?.data?.DATA);
+              }
+            } catch (error) {
+              console.error(
+                `Error fetching data for page ${index + 1}:`,
+                error
+              );
+              // Continue to the next request
+            }
+          })()
         );
 
-        return mergedObject;
+        await Promise.all(requests);
+
+        const combinedData = responses.flat();
+
+        return combinedData;
       } catch (error) {
-        console.error("Error fetching result events", error);
-        throw new Error("Error fetching result events");
+        console.error("Error fetching result matches", error);
+        throw new Error("Error fetching result matches");
       }
+    },
+    {
+      retry: false,
     }
   );
 
@@ -96,7 +108,7 @@ const ResultMatches = () => {
     );
   }
 
-  const mergedLeagues = mergeLeagues(data?.DATA);
+  const mergedLeagues = mergeLeagues(data || []);
 
   const leagueNameOptions = mergedLeagues.map((el: any) => {
     return {
@@ -123,10 +135,12 @@ const ResultMatches = () => {
             <Space wrap className={style.selector} style={{ width: "100%" }}>
               <Select
                 defaultValue="All Competitions"
-                style={{ width: "100%" }}
+                style={{
+                  width: "100%",
+                }}
                 onChange={handleChange}
                 options={[allCompetentiosnObjects, ...leagueNameOptions]}
-                className={style.selector}
+                className={style.select}
               />
             </Space>
           </div>
@@ -152,12 +166,18 @@ const ResultMatches = () => {
           </div>
         </>
       ) : (
-        <div className="p-3">
+        <div className="flex items-center justify-center flex-col p-3">
+          <IoFootballOutline
+            style={{
+              fontSize: "80px",
+              color: "var(--match-league-title-color)",
+            }}
+          />
           <p
-            className="text-sm font-bold"
-            style={{ color: "var(--black-color)" }}
+            style={{ color: "var(--black-color)", fontSize: "13px" }}
+            className="mt-3"
           >
-            No Data
+            No matches found
           </p>
         </div>
       )}

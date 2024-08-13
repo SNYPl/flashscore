@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import style from "./style.module.css";
 import CountryLeagueEvents from "../../countryLeagueEvents/CountryLeagueEvents";
 import { useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { Skeleton } from "antd";
+import { IoFootballOutline } from "react-icons/io5";
 
 const LatestScores = ({
   setActiveMenu,
@@ -19,7 +20,6 @@ const LatestScores = ({
   const sportId = useSelector((state: any) => state.navigationReducer.sportId);
   const searchParams = useSearchParams();
   const seasonStageId = searchParams.get("seasonStageId");
-  const [sliceLength, setSliceLength] = useState<number>(1);
 
   const resultMatchesOption = (page: any) => ({
     method: "GET",
@@ -34,8 +34,9 @@ const LatestScores = ({
       "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
     },
   });
+
   const { data, isLoading, isError, isFetched } = useQuery(
-    ["matchesResults", sportId, seasonStageId, sliceLength],
+    ["matchesResults", sportId, seasonStageId],
     async () => {
       try {
         // Array to hold successful responses
@@ -135,8 +136,16 @@ const LatestScores = ({
 
   if (activeMenu === "RESULTS" && !data) {
     return (
-      <div>
-        <p>No matches found</p>
+      <div className="flex items-center justify-center flex-col">
+        <IoFootballOutline
+          style={{ fontSize: "80px", color: "var(--match-league-title-color)" }}
+        />
+        <p
+          style={{ color: "var(--black-color)", fontSize: "13px" }}
+          className="mt-3"
+        >
+          No matches found
+        </p>
       </div>
     );
   }
@@ -144,6 +153,15 @@ const LatestScores = ({
   if (!data) {
     return <div></div>;
   }
+
+  const extractRoundNumber = (roundString: any) => {
+    return parseInt(roundString.split(" ")[1]);
+  };
+
+  // Sort the array based on the round number
+  const sortedRoundsArray = data?.EVENTS?.sort((a: any, b: any) => {
+    return extractRoundNumber(a.round) - extractRoundNumber(b.round);
+  });
 
   return (
     <section className={` py-4 px-3 bg-white mb-4 rounded-lg`}>
@@ -154,7 +172,7 @@ const LatestScores = ({
         NAME1={data?.NAME_PART_1}
         NAME2={data?.NAME_PART_2}
         url={data?.URL}
-        events={data?.EVENTS || []}
+        events={sortedRoundsArray || []}
         countryId={data?.COUNTRY_ID}
         tournamentId={data?.TOURNAMENT_ID}
         key={data?.TOURNAMENT_STAGE_ID}
@@ -168,7 +186,6 @@ const LatestScores = ({
           className={style.moreMatches}
           onClick={() => {
             setActiveMenu("RESULTS");
-            setSliceLength((state: number) => state + 2);
           }}
         >
           <button>Show More Matches</button>

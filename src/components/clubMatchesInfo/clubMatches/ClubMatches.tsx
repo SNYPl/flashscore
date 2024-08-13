@@ -35,13 +35,13 @@ const ClubMatches = () => {
 
       {active === "TOTAL" && (
         <>
-          <FixturesMatches />
-          <ResultMatches />
+          <FixturesMatches pages={1} />
+          <ResultMatches pages={1} />
           <ClubTransfers />
         </>
       )}
-      {active === "FIXTURES" && <FixturesMatches />}
-      {active === "RESULTS" && <ResultMatches />}
+      {active === "FIXTURES" && <FixturesMatches pages={4} />}
+      {active === "RESULTS" && <ResultMatches pages={5} />}
     </article>
   );
 };

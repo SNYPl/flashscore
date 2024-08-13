@@ -6,6 +6,7 @@ import Transfer from "./transfer/Transfer";
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "react-query";
 import axios, { isAxiosError } from "axios";
+import { IoFootballOutline } from "react-icons/io5";
 
 const ClubTransfers = () => {
   const searchParams = useSearchParams();
@@ -70,12 +71,18 @@ const ClubTransfers = () => {
     >
       <h4 className={style.matchesTitle}>Transfers</h4>
       {data?.DATA.length === 0 && (
-        <div className="p3">
+        <div className="flex items-center justify-center flex-col p-3">
+          <IoFootballOutline
+            style={{
+              fontSize: "80px",
+              color: "var(--match-league-title-color)",
+            }}
+          />
           <p
-            className="text-l font-bold"
-            style={{ color: "var(--black-color)" }}
+            style={{ color: "var(--black-color)", fontSize: "13px" }}
+            className="mt-3"
           >
-            No Data
+            No matches found
           </p>
         </div>
       )}

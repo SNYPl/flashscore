@@ -42,6 +42,9 @@
   --event-matches-border: #e8e8e8;
   --event-menu-border: #dfdfdf;
   --dark-mode: #fff;
+  --selector-border: #d9d9d9;
+  --notFound-ball: #00141e;
+  --top-scores: #f7f8f8;
 }
 
 [data-theme="dark"] {
@@ -85,6 +88,8 @@
   --event-matches-border: #0092c1;
   --event-menu-border: #0092c1;
   --dark-mode: #0092c1;
+  --selector-border: #0092c1;
+  --top-scores: #034256;
 }
 
 * {
