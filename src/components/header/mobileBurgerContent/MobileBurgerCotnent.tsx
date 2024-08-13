@@ -4,9 +4,13 @@ import { Modal } from "antd";
 import style from "./style.module.css";
 import UserLists from "@/components/userLists/UserLists";
 import Link from "next/link";
-import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { useTheme } from "@/components/store/ThemeContext";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
+const NoSSRButton = dynamic(
+  () => import("@/components/navigation/search/DarkModeBtn"),
+  { ssr: false }
+);
 
 const socialArray = [
   { component: "1", w: 9, h: 15, alt: "fb", href: "" },
@@ -18,6 +22,7 @@ const socialArray = [
 const MobileBurgerCotnent = () => {
   const [open, setOpen] = useState(false);
   const { mode, toggleDarkMode } = useTheme();
+  const [changeDarkMode, setChangeDarkMode] = useState(mode === "dark");
   const path = usePathname();
 
   const handleCancel = () => {
@@ -61,17 +66,17 @@ const MobileBurgerCotnent = () => {
               </div>
               <ArrrowIcon />
             </div> */}
-            <div className="flex justify-between ">
+            <div className="flex justify-between items-center">
               <div className="flex gap-x-4">
                 <p>Dark mode</p>
               </div>
-              <div className="cursor-pointer flex justify-center items-center ">
-                <DarkModeSwitch
-                  checked={mode === "dark"}
-                  onChange={toggleDarkMode}
-                  size={24}
-                  moonColor="#F6F1D5"
-                  sunColor="#FDB813"
+              <div
+                className={`cursor-pointer flex justify-center items-center darkBtnBurger`}
+              >
+                <NoSSRButton
+                  setChangeDarkMode={setChangeDarkMode}
+                  toggleDarkMode={toggleDarkMode}
+                  changeDarkMode={changeDarkMode}
                 />
               </div>
             </div>

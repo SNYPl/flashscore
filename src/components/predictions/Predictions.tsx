@@ -5,11 +5,21 @@ import Prediction from "./prediction/Prediction";
 import { PredictionStart } from "@/common/svg/home";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { checkPage } from "@/components/helper/checkMainPage";
 
 const Predictions = () => {
+  const path = usePathname();
+
+  const isMainPage = checkPage(path);
+
   const arr = [1, 2, 3];
   return (
-    <section className={`${style.prediction}  w-full  `}>
+    <section
+      className={`${style.prediction}  w-full    ${
+        isMainPage ? style.activePrediction : "mobileNone"
+      }`}
+    >
       <article className={`${style.predictionItem} bg-white w-full  mb-4`}>
         <div className="mb-5 flex gap-x-1 items-center p-4 pb-0 mobileNone">
           <PredictionStart />

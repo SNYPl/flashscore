@@ -9,9 +9,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { useTheme } from "@/components/store/ThemeContext";
 import { sportNavigation } from "@/lib/sportNavigation";
+import dynamic from "next/dynamic";
+const NoSSRButton = dynamic(() => import("./DarkModeBtn"), { ssr: false });
 
 type Inputs = {
   search: string;
@@ -23,6 +24,7 @@ const Search = () => {
   const [open, setOpen] = useState(false);
   const sport = useSportIdHandler();
   const { mode, toggleDarkMode } = useTheme();
+  const [changeDarkMode, setChangeDarkMode] = useState(mode === "dark");
 
   const {
     register,
@@ -114,12 +116,10 @@ const Search = () => {
       </form>
       <div className="cursor-pointer flex justify-center items-center mobileNone">
         <Tooltip title="Dark Mode">
-          <DarkModeSwitch
-            checked={mode === "dark"}
-            onChange={toggleDarkMode}
-            size={24}
-            moonColor="#F6F1D5"
-            sunColor="#FDB813"
+          <NoSSRButton
+            setChangeDarkMode={setChangeDarkMode}
+            toggleDarkMode={toggleDarkMode}
+            changeDarkMode={changeDarkMode}
           />
         </Tooltip>
       </div>

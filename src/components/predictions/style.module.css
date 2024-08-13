@@ -76,6 +76,10 @@
     object-fit: cover;
     border-radius: 10px;
   }
+
+  .activePrediction {
+    display: flex;
+  }
 }
 
 @media only screen and (max-width: 400px) {

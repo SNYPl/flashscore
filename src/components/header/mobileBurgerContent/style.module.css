@@ -65,6 +65,11 @@
   color: var(--black-color) !important;
 }
 
+.darkBtn {
+  border: 1px solid #000;
+  border-radius: 100px;
+}
+
 @media only screen and (max-width: 965px) {
   .burgerMenu {
     padding: 8px;

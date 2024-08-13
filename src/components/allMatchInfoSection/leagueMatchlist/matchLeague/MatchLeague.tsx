@@ -139,7 +139,9 @@ const MatchLeague: React.FC<leagueProps> = ({
                 Display Matches ({events.length})
               </span>
             ) : (
-              <span className={`${style.standings} mobileNone`}>Standings</span>
+              <span className={`${style.standings} mobileNone`}>
+                Hide Matches
+              </span>
             )}
             <span
               className={`${style.arrowIconBtn} ${

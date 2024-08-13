@@ -89,6 +89,15 @@
   color: var(--black-color) !important;
 }
 
+.darkModeChange {
+  opacity: 100%;
+  -webkit-transform: rotate(230deg);
+  -ms-transform: rotate(230deg);
+  transform: rotate(230deg);
+  transition: all 0.2s;
+  margin: 8px 0px 6px 23px;
+}
+
 @media only screen and (max-width: 965px) {
   .mobailSearchIcon {
     padding: 10px;

@@ -15,7 +15,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "FlashScore",
-  description: "Scores for football",
+  description: "Scores for different sports",
 };
 
 export default function RootLayout({

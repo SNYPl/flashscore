@@ -14,6 +14,13 @@
   font-weight: 500;
 }
 
+.matchesItems img {
+  width: auto;
+  height: auto;
+  max-width: 16px;
+  max-height: 19.5px;
+}
+
 .match h4 {
   color: var(--match-color);
   font-size: 13px;
@@ -80,20 +87,37 @@
   color: var(--navItems-color);
 }
 
-@media only screen and (max-width: 500px) {
-  .match {
-    grid-template-columns: 3fr 0.5fr 1.5fr;
-  }
+@media only screen and (max-width: 965px) {
   .matchLive {
     grid-template-columns: 3fr 0.4fr 35px;
+    column-gap: 5px;
+  }
+  .mobileDateInfo {
+    white-space: nowrap;
+  }
+  .match {
+    grid-template-columns: 3fr 0.4fr 35px;
+  }
+
+  .scoreInfo p {
+    text-align: left;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .match {
+    grid-template-columns: 3fr 0.5fr 35px;
+  }
+  .matchLive {
+    grid-template-columns: 3fr 0.5fr 35px;
     column-gap: 5px;
   }
 
   .matchLive .scoreInfo p {
     width: 100%;
-    text-align: center;
   }
+
   .scoreInfo {
-    align-items: flex-end;
+    align-items: flex-start;
   }
 }

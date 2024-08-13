@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import style from "./style.module.css";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { IoCloseSharp } from "react-icons/io5";
 import { Tooltip } from "antd";
 
@@ -16,8 +15,6 @@ const socialArray = [
 
 const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const pathName = usePathname();
-  const matchRouteHandler = pathName.includes("match");
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -33,11 +30,7 @@ const Socials = ({ isNavFixed }: { isNavFixed: boolean }) => {
     }
   };
   return (
-    <section
-      className={`flex items-center justify-center gap-x-5 ${
-        matchRouteHandler ? "hide" : ""
-      }`}
-    >
+    <section className={`flex items-center justify-center gap-x-5`}>
       <div
         className={`flex justify-between items-center gap-x-4 desktopYes ${style.socialItems}`}
       >

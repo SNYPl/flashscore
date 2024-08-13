@@ -18,6 +18,12 @@
   color: var(--match-color);
   font-weight: 500;
 }
+.matchesItems img {
+  width: auto;
+  height: auto;
+  max-width: 16px;
+  max-height: 19.5px;
+}
 
 .match h4 {
   color: var(--match-color);
@@ -133,6 +139,10 @@
   color: var(--black-color);
   line-height: 15px;
   font-size: 11px;
+  margin-left: 4px;
+}
+.scoreInfo p {
+  text-align: left;
 }
 
 @media only screen and (max-width: 965px) {
@@ -143,39 +153,41 @@
   .mobileDateInfo {
     white-space: nowrap;
   }
+  .match {
+    grid-template-columns: 3fr 0.4fr 35px;
+  }
+
+  .scoreInfo p {
+    text-align: left;
+  }
 }
 
 @media only screen and (max-width: 500px) {
   .match {
-    grid-template-columns: 3fr 0.5fr 1.5fr;
+    grid-template-columns: 3fr 0.5fr 35px;
   }
   .matchLive {
-    grid-template-columns: 3fr 0.4fr 35px;
+    grid-template-columns: 3fr 0.5fr 35px;
     column-gap: 5px;
   }
 
   .matchLive .scoreInfo p {
     width: 100%;
-    text-align: center;
   }
 
   .scoreInfo {
-    align-items: flex-end;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .match {
-    grid-template-columns: 2.5fr 0.5fr 2fr;
+    align-items: flex-start;
   }
 }
 
 @media only screen and (max-width: 420px) {
-  .mobileResponsiveHour {
+  .mobileResponsiveHour span {
     display: none;
   }
 
   .mobileDateInfo {
     column-gap: 8px;
+    display: flex;
+    flex-direction: column;
   }
 }

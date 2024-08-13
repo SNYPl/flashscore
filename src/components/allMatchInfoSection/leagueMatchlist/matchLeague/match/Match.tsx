@@ -9,6 +9,7 @@ import {
   isFavoriteEvent,
 } from "@/components/hooks/useFavouriteLeagues ";
 import { usePathname, useSearchParams } from "next/navigation";
+import { checkPage } from "@/components/helper/checkMainPage";
 
 interface matchProps {
   homeTeam: any;
@@ -70,7 +71,7 @@ const Match: React.FC<matchProps> = ({
 
   const isLeagueRoute = path.includes("/team");
 
-  const isHomePath = path === "/";
+  const isHomePath = checkPage(path);
 
   return (
     <div className={`flex ${style.matchContainer} p-2`}>
@@ -217,7 +218,7 @@ const Match: React.FC<matchProps> = ({
                   <span
                     className={`ml-1 mr-2.5 ${style.mobileResponsiveHour} flex items-center`}
                   >
-                    - {hour}:{minute === 0 ? "00" : minute}
+                    <span>-</span> {hour}:{minute === 0 ? "00" : minute}
                   </span>
                   {winner && (
                     <div className={`${style[winner]} ${style.tableWord}`}>
@@ -243,11 +244,11 @@ const Match: React.FC<matchProps> = ({
         </div>
       </Link>
       {isHomePath && (
-        <span
+        <div
           className={`flex items-center  text-xs desktopNo ${style.homeHour}`}
         >
           {hour}:{minute === 0 ? "00" : minute}
-        </span>
+        </div>
       )}
     </div>
   );
