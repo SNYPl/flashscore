@@ -59,8 +59,6 @@ const Matches = ({
     );
   }
 
-  console.log(data?.DATA);
-
   return (
     <section className={`${style.matches} bg-white p-4 rounded-xl`}>
       <MatchesMenu

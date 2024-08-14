@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import style from "./style.module.css";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 

@@ -80,5 +80,8 @@
   }
 }
 
-@media only screen and (max-width: 460px) {
+@media only screen and (max-width: 429px) {
+  .tableWrapper {
+    max-width: 250px;
+  }
 }

@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import Image from "next/image";
 import style from "./style.module.css";
 import { usePathname, useSearchParams } from "next/navigation";
 import { setSportIdUpdated } from "@/components/store/slices/navSlice";

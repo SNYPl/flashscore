@@ -1,18 +1,22 @@
 "use client";
-
 import React from "react";
 import style from "./style.module.css";
 import { usePathname } from "next/navigation";
+import { sportNavigation } from "@/lib/sportNavigation";
 
 const ParamInfo: React.FC = () => {
   const path = usePathname();
   const pathArray = path.split("/").filter((el) => el);
 
+  const PathArr = sportNavigation.find((el) => el.href.includes(pathArray[0]));
+
   return (
     <section className={`${style.info}`}>
       <i className="fa-solid fa-house-chimney"></i>
 
-      <p className={`${style.addedParams}`}>
+      <p className={`${style.addedParams} flex items-center`}>
+        <div className="mr-1"> {PathArr && PathArr.img}</div>
+
         {pathArray.map((el: any, id: number) => (
           <React.Fragment key={el}>
             <span>
