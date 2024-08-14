@@ -19,6 +19,10 @@ const Nav = () => {
   const sportSearchId = searchParams.get("sportId");
   const { favouriteLeagues } = useFavouriteLeagues();
 
+  const matchesLength = favouriteLeagues
+    .map((el) => el.stageIds)
+    .reduce((acc, curr) => acc.concat(curr), []);
+
   return (
     <article className={`flex items-center h-full ${style.nav}`}>
       <div className="mr-9 flex justify-center items-center h-full">
@@ -31,7 +35,7 @@ const Nav = () => {
           <FavoriteStarIcon />
           <h4>FAVORITES</h4>
           <span className={`w-5 flex justify-center items-center`}>
-            {favouriteLeagues.length}
+            {matchesLength.length}
           </span>
         </Link>
       </div>

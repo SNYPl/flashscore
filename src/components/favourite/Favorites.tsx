@@ -5,6 +5,7 @@ import style from "./style.module.css";
 import { useFavouriteLeagues } from "@/components/hooks/useFavouriteLeagues ";
 
 import FavLeagues from "./favLeagues/FavLeagues";
+import { IoFootballOutline } from "react-icons/io5";
 
 const Favorites = () => {
   const { favouriteLeagues } = useFavouriteLeagues();
@@ -42,8 +43,19 @@ const Favorites = () => {
             );
           })
         ) : (
-          <div>
-            <p>There Is No Favorite League</p>
+          <div className="flex items-center justify-center flex-col p-3">
+            <IoFootballOutline
+              style={{
+                fontSize: "80px",
+                color: "var(--match-league-title-color)",
+              }}
+            />
+            <p
+              style={{ color: "var(--black-color)", fontSize: "13px" }}
+              className="mt-3"
+            >
+              There Is No Favorite Matches
+            </p>
           </div>
         )}
       </article>

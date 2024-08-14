@@ -94,7 +94,7 @@ const FavLeague: React.FC<leagueProps> = ({
         for (let i = 0; i < events.length; i++) {
           try {
             const data = await getPlayerInfo(events[i]);
-            await delay(210);
+            await delay(250);
             if (data) {
               setLoading(false);
               setEventData((pevEventData) => [

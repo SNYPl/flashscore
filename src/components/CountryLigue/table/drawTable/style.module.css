@@ -3,52 +3,82 @@
   flex-direction: column;
 }
 
-.info ul {
-  background-color: var(--grey-color);
-  padding-bottom: 10px;
-  margin-bottom: 2px;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-}
-.info li button {
-  color: var(--navItems-color);
-  font-size: 13px;
-  font-weight: 600;
+.drawContainer {
+  overflow-x: auto;
 }
 
-.activeMenu {
-  background-color: var(--white-color);
-  border-radius: 10px;
-  padding: 5px 10px;
+.tableWrapper {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(202px, 1fr));
+  max-height: 70vh;
+
+  column-gap: 8px;
+  max-width: 600px;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+/* width */
+.drawContainer::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+.drawContainer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.drawContainer::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.drawContainer::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.drawTable {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  min-width: 202px;
+}
+.drawTableList {
+  display: grid;
+  row-gap: 12px;
+  align-content: space-around;
+  height: 100%;
 }
 
 .infoTableTitle {
   background-color: var(--grey-color);
-  padding-bottom: 10px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  display: grid;
-  grid-template-columns: 1fr 6fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr;
+  justify-content: space-between;
+}
+
+.drawContainer {
+  background-color: var(--grey-color);
 }
 
 .infoTableTitle p {
   font-size: 12px;
   color: var(--table-text-color);
+  width: 100%;
+  text-transform: uppercase;
+}
+
+@media only screen and (max-width: 1150px) {
+  .tableWrapper {
+    max-width: 550px;
+  }
 }
 
 @media only screen and (max-width: 965px) {
-  .infoTableTitle {
-    grid-template-columns: 6fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr;
+  .tableWrapper {
+    max-width: 400px;
   }
 }
 
 @media only screen and (max-width: 460px) {
-  .infoTableTitle {
-    grid-template-columns: 5.5fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr;
-    padding-left: 4px;
-  }
-
-  .infoTableTitle p {
-    font-size: 10px;
-  }
 }

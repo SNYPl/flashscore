@@ -1,10 +1,66 @@
-.textColor {
-  color: var(--black-color);
+.draw {
+  margin-left: 6px;
+}
+
+.draw:hover {
+  opacity: 80%;
+}
+
+.drawPlayers {
+  background-color: var(--white-color);
+  border: 1px solid var(--event-matches-border);
+  border-radius: 8px;
+  color: #eee;
+  cursor: pointer;
+  display: grid;
+  grid-template:
+    " homeParticipant homeResult " 16px
+    " awayParticipant awayResult " 16px / minmax(72px, max-content) minmax(max-content, 1fr);
+  padding: 12px 8px;
+  row-gap: 4px;
+}
+.homePlayer {
+  grid-area: homeParticipant;
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.homeScore {
+  grid-area: homeResult;
+  align-items: center;
+  display: flex;
+  font-weight: 700;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  font-size: 12px;
+}
+
+.awayPlayer {
+  grid-area: awayParticipant;
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.awayScore {
+  grid-area: awayResult;
+  align-items: center;
+  display: flex;
+  font-weight: 700;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  font-size: 12px;
+}
+
+.drawPlayers span {
+  font-size: 11px;
 }
 
 @media only screen and (max-width: 460px) {
-  .info {
-    flex-direction: column;
-    row-gap: 8px;
-  }
 }

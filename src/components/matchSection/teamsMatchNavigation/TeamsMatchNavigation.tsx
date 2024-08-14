@@ -1,7 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import style from "./style.module.css";
-import Link from "next/link";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
 type infoProps = {

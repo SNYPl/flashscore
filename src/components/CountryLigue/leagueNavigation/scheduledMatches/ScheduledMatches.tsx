@@ -134,6 +134,10 @@ const ScheduledMatches = ({
     );
   }
 
+  if (!data) {
+    return <div></div>;
+  }
+
   if (activeMenu === "FIXTURES" && data?.EVENTS?.length === 0) {
     return (
       <div className="flex items-center justify-center flex-col">

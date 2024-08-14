@@ -1,16 +1,20 @@
 "use client";
 import React, { useState } from "react";
 import style from "./style.module.css";
+import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
 const MatchesMenu = ({
   setApiMenuRequest,
   activeMenu,
   setActiveMenu,
+  isDraw,
 }: {
   setApiMenuRequest: any;
   activeMenu: string;
   setActiveMenu: any;
+  isDraw: boolean;
 }) => {
+  const sportId = useSportIdHandler();
   const menu = [
     { title: "STANDINGS", api: "overall" },
     { title: "FORM", api: "form" },
@@ -19,10 +23,13 @@ const MatchesMenu = ({
     { title: "TOP SCORES", api: "top_scores" },
   ];
 
+  const filteredMenu =
+    sportId?.id === "2" ? menu.filter((item) => item.title !== "FORM") : menu;
+
   return (
     <section className={`${style.menu} mb-4`}>
       <ul className="flex items-center gap-x-2">
-        {menu.map((el, index) => (
+        {filteredMenu.map((el, index) => (
           <li
             key={index}
             className={`${activeMenu === el.title ? style.activeMenu : ""}`}
@@ -34,6 +41,17 @@ const MatchesMenu = ({
             <button>{el.title}</button>
           </li>
         ))}
+        {isDraw && (
+          <li
+            className={`${activeMenu === "DRAW" ? style.activeMenu : ""}`}
+            onClick={() => {
+              setActiveMenu("DRAW");
+              setApiMenuRequest("DRAW");
+            }}
+          >
+            <button>DRAW</button>
+          </li>
+        )}
       </ul>
     </section>
   );

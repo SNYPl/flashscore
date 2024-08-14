@@ -8,6 +8,7 @@ import TopScoresTable from "./topScoresTable/TopScores";
 import DrawTable from "./drawTable/DrawTable";
 import axios from "axios";
 import { useQuery } from "react-query";
+import { Skeleton } from "antd";
 
 const Matches = ({
   leagueId,
@@ -21,7 +22,7 @@ const Matches = ({
 
   const options = {
     method: "GET",
-    url: "https://flashlive-sports.p.rapidapi.com/v1/events/data",
+    url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/standings",
     params: {
       tournament_season_id: seasonId,
       standing_type: "draw",
@@ -50,7 +51,15 @@ const Matches = ({
     }
   );
 
-  console.log(data);
+  {
+    isLoading && (
+      <div className="p-5 ">
+        <Skeleton />
+      </div>
+    );
+  }
+
+  console.log(data?.DATA);
 
   return (
     <section className={`${style.matches} bg-white p-4 rounded-xl`}>
@@ -58,6 +67,7 @@ const Matches = ({
         setApiMenuRequest={setApiMenuRequest}
         activeMenu={activeMenu}
         setActiveMenu={setActiveMenu}
+        isDraw={!!data?.DATA}
       />
       {activeMenu === "STANDINGS" && (
         <StandingTable
@@ -85,8 +95,7 @@ const Matches = ({
           leagueId={leagueId}
         />
       )}
-      {activeMenu === "DRAW" && <DrawTable />}
-      {/* <DrawTable /> */}
+      {activeMenu === "DRAW" && <DrawTable data={data?.DATA} />}
     </section>
   );
 };

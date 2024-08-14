@@ -5,8 +5,6 @@ import style from "./nav/style.module.css";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
-import { useTheme } from "../store/ThemeContext";
-import { useLocalStorage } from "usehooks-ts";
 
 const NoSSR = dynamic(() => import("./nav/Nav"), { ssr: false });
 
