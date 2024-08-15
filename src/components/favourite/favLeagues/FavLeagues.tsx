@@ -160,7 +160,7 @@ const FavLeague: React.FC<leagueProps> = ({
               <Image
                 src={`/images/match/${
                   !pinnedLeagueIds.includes(tournamentId) ? "pin" : "pinActive"
-                }.svg`}
+                }.png`}
                 alt="pin"
                 width={14}
                 height={18}

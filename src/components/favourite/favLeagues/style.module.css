@@ -86,6 +86,7 @@
 .pinImage img {
   width: 14px;
   height: 18px;
+  object-fit: contain;
 }
 
 .pinActive:hover {
