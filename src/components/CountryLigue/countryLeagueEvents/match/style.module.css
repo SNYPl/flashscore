@@ -87,16 +87,28 @@
   color: var(--navItems-color);
 }
 
+.mobileDateInfo {
+  align-items: center;
+  color: #999;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  line-height: 15px;
+  /* margin-left: 8px; */
+  text-align: right;
+  font-size: 11px;
+}
+
 @media only screen and (max-width: 965px) {
   .matchLive {
-    grid-template-columns: 3fr 0.4fr 35px;
+    grid-template-columns: 2fr 0.4fr 45px;
     column-gap: 5px;
   }
   .mobileDateInfo {
     white-space: nowrap;
   }
   .match {
-    grid-template-columns: 3fr 0.4fr 35px;
+    grid-template-columns: 2fr 0.4fr 55px;
   }
 
   .scoreInfo p {
@@ -106,10 +118,10 @@
 
 @media only screen and (max-width: 500px) {
   .match {
-    grid-template-columns: 3fr 0.5fr 35px;
+    grid-template-columns: 2fr 0.5fr 45px;
   }
   .matchLive {
-    grid-template-columns: 3fr 0.5fr 35px;
+    grid-template-columns: 2fr 0.5fr 45px;
     column-gap: 5px;
   }
 
@@ -119,5 +131,17 @@
 
   .scoreInfo {
     align-items: flex-start;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .mobileResponsiveHour span {
+    display: none;
+  }
+
+  .mobileDateInfo {
+    column-gap: 8px;
+    display: flex;
+    flex-direction: column;
   }
 }

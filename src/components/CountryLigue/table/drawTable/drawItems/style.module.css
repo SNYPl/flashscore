@@ -10,7 +10,7 @@
   background-color: var(--white-color);
   border: 1px solid var(--event-matches-border);
   border-radius: 8px;
-  color: #eee;
+  color: var(--black-color);
   cursor: pointer;
   display: grid;
   grid-template:
@@ -21,7 +21,6 @@
 }
 .homePlayer {
   grid-area: homeParticipant;
-  font-weight: 800;
   font-size: 13px;
   line-height: 16px;
   overflow: hidden;
@@ -40,7 +39,6 @@
 
 .awayPlayer {
   grid-area: awayParticipant;
-  font-weight: 800;
   font-size: 13px;
   line-height: 16px;
   overflow: hidden;

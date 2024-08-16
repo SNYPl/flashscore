@@ -1,6 +1,6 @@
 .support {
   border-radius: 50px;
-  border: 1px solid #eeeeee;
+  border: 1px solid var(--matches-border-color);
   padding: 4px;
   margin-top: 27px;
 }

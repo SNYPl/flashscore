@@ -87,7 +87,7 @@
   --standings-border-color: rgb(255 255 255 / 20%);
   --event-matches-border: #0092c1;
   --event-menu-border: #0092c1;
-  --dark-mode: #0092c1;
+  --dark-mode: #04526b;
   --selector-border: #0092c1;
   --top-scores: #034256;
 }
@@ -250,11 +250,10 @@ img {
   cursor: pointer;
   overflow: hidden;
   width: 60px;
-  height: 38px;
+  height: 36px;
   line-height: 40px;
   float: right;
   position: relative;
-  margin: 10px 0px 0px 0px;
   border-radius: 100px;
   background: var(--dark-mode);
   text-align: center;

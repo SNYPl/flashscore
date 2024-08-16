@@ -207,13 +207,6 @@ const Match: React.FC<matchProps> = ({
                 <div
                   className={`${style.mobileDateInfo} desktopNo  items-center  flex-col`}
                 >
-                  {/* {!winner ? (
-                    formattedDate
-                  ) : (
-                    <div className={`${style[winner]} ${style.tableWord}`}>
-                      {winner}
-                    </div>
-                  )} */}
                   {formattedDate}
                   <span
                     className={`ml-1 mr-2.5 ${style.mobileResponsiveHour} flex items-center`}

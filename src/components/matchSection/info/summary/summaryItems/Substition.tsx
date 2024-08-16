@@ -2,7 +2,7 @@ import React from "react";
 import style from "../style.module.css";
 import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import Link from "next/link";
-import { IoPeopleCircleOutline } from "react-icons/io5";
+import Image from "next/image";
 
 const Substition = ({
   type,
@@ -23,7 +23,14 @@ const Substition = ({
       )}
       {type === "SUBSTITUTION_OUT" && (
         <div className={`${style.card} `}>
-          <IoPeopleCircleOutline />
+          {/* <IoPeopleCircleOutline /> */}
+          <Image
+            src="/images/match/exchange.png"
+            width={16}
+            height={16}
+            alt="card"
+            style={{ objectFit: "contain" }}
+          />
         </div>
       )}
       <Link

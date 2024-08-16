@@ -147,14 +147,14 @@
 
 @media only screen and (max-width: 965px) {
   .matchLive {
-    grid-template-columns: 3fr 0.4fr 35px;
+    grid-template-columns: 2fr 0.4fr 55px;
     column-gap: 5px;
   }
   .mobileDateInfo {
     white-space: nowrap;
   }
   .match {
-    grid-template-columns: 3fr 0.4fr 35px;
+    grid-template-columns: 2fr 0.4fr 55px;
   }
 
   .scoreInfo p {
@@ -164,10 +164,10 @@
 
 @media only screen and (max-width: 500px) {
   .match {
-    grid-template-columns: 3fr 0.5fr 35px;
+    grid-template-columns: 2fr 0.5fr 45px;
   }
   .matchLive {
-    grid-template-columns: 3fr 0.5fr 35px;
+    grid-template-columns: 2fr 0.5fr 45px;
     column-gap: 5px;
   }
 

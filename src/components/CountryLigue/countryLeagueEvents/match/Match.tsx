@@ -137,6 +137,7 @@ const Match: React.FC<matchProps> = ({
                 </h4>
               )}
             </div>
+
             <div className={`flex  flex-col ${style.matchesItems}`}>
               <div className="flex  flex-row mb-1">
                 <p className="mr-2">
@@ -182,6 +183,17 @@ const Match: React.FC<matchProps> = ({
             <p className="text-xs font-semibold ">
               {awayScore ? awayScore : "-"}
             </p>
+          </div>
+
+          <div
+            className={`${style.mobileDateInfo} desktopNo  items-center  flex-col`}
+          >
+            {formattedDate}
+            <span
+              className={`ml-1 mr-2.5 ${style.mobileResponsiveHour} flex items-center`}
+            >
+              <span>-</span> {hour}:{minute === 0 ? "00" : minute}
+            </span>
           </div>
 
           {stageType == "LIVE" ? (

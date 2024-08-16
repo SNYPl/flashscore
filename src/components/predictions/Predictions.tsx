@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 import style from "./style.module.css";
-import Prediction from "./prediction/Prediction";
-import { PredictionStart } from "@/common/svg/home";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -22,7 +20,7 @@ const Predictions = () => {
     >
       <article className={`${style.predictionItem} bg-white w-full  mb-4`}>
         <div className="mb-5 flex gap-x-1 items-center p-4 pb-0 mobileNone">
-          <PredictionStart />
+          <Image src="/images/graph.png" width={28} height={28} alt="graph" />
           <h3 className=" text-base  font-semibold">
             SPORT <span className="font-bold">PREDICTION</span>
           </h3>
