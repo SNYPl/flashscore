@@ -1,6 +1,7 @@
 import React from "react";
 import League from "./matchLeague/MatchLeague";
 import { usePinnedLeagues } from "@/components/hooks/usePineedLeagues";
+import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
 interface matchProps {
   selectedMatchNav: string;
@@ -9,6 +10,7 @@ interface matchProps {
 
 const MatchLists: React.FC<matchProps> = ({ selectedMatchNav, data }) => {
   const { pinnedLeagueIds } = usePinnedLeagues();
+  const sportid = useSportIdHandler();
 
   const filterEvents = (events: any[]) => {
     switch (selectedMatchNav) {
@@ -29,7 +31,8 @@ const MatchLists: React.FC<matchProps> = ({ selectedMatchNav, data }) => {
   };
 
   const isPinnedLeague = (leagueId: string) => {
-    return pinnedLeagueIds.includes(leagueId);
+    const id = sportid?.id ? Number(sportid?.id) : 1;
+    return pinnedLeagueIds[id].includes(leagueId);
   };
 
   const filteredMatchData = data?.DATA?.map((matchData: any) => {

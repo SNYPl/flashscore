@@ -62,6 +62,7 @@ const MatchLeague: React.FC<leagueProps> = ({
   const isLeagueRoute = path.includes("/team");
   const newUrl = `${url}?seasonStageId=${tournamentStageId}&name=${NAME2}&tournamentId=${tournamentId}`;
   const teamId = isLeagueRoute && params.get("id");
+  const id = sportIdCheck?.id ? Number(sportIdCheck?.id) : 1;
 
   return (
     <section className={``}>
@@ -84,8 +85,10 @@ const MatchLeague: React.FC<leagueProps> = ({
                     countryName,
                     sportHref: sportIdCheck?.href,
                     img: countryObject?.countryCode,
+                    sportId: id,
                   },
                   tournamentStageId,
+
                   undefined
                 )
               }
@@ -116,13 +119,19 @@ const MatchLeague: React.FC<leagueProps> = ({
             </div>
             <div
               className={`${style.pinImage} ${
-                pinnedLeagueIds.includes(tournamentId) ? style.pinActive : ""
+                pinnedLeagueIds[id].includes(tournamentId)
+                  ? style.pinActive
+                  : ""
               }`}
-              onClick={() => addLeagueToLocalStorage(tournamentId)}
+              onClick={() => {
+                addLeagueToLocalStorage(id, tournamentId);
+              }}
             >
               <Image
                 src={`/images/match/${
-                  !pinnedLeagueIds.includes(tournamentId) ? "pin" : "pinActive"
+                  !pinnedLeagueIds[id].includes(tournamentId)
+                    ? "pin"
+                    : "pinActive"
                 }.png`}
                 alt="pin"
                 width={14}
@@ -199,6 +208,7 @@ const MatchLeague: React.FC<leagueProps> = ({
                       countryName,
                       sportHref: sportIdCheck?.href,
                       img: countryObject?.countryCode,
+                      sportId: id,
                     },
                     tournamentStageId,
                     match.EVENT_ID

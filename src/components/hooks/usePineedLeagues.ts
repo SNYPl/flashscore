@@ -1,53 +1,60 @@
 import { useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import { defaultPinnedLeagues } from "@/lib/pinnedLeaguesData";
+
+type leagueId = string;
+
+type PinnedLeagues = {
+  [key: number]: string[];
+};
 
 export const usePinnedLeagues = () => {
-  const [pinnedLeagueIds, setPinnedLeagueIds] = useLocalStorage<string[]>(
+  const [pinnedLeagueIds, setPinnedLeagueIds] = useLocalStorage<PinnedLeagues>(
     "leagueIds",
-    []
+    defaultPinnedLeagues
   );
 
   useEffect(() => {
-    let pinnedIds = JSON.parse(localStorage.getItem("leagueIds") || "[]");
+    const storedPinnedIds = JSON.parse(
+      localStorage.getItem("leagueIds") || "{}"
+    );
 
-    if (pinnedIds.length === 0 || undefined || null) {
-      const arrayOfIds = [
-        "xjLzNo5G",
-        "hYZkYQNG",
-        "6PcHXsLl",
-        "YTpcH4Cr",
-        "x0z4oZsj",
-        "A1MYWy8T",
-        "ABkrguJ9",
-        "x0KXIZfD",
-        "fLWNsJXD",
-        "8OzStwmK",
-        "bcZ6ZZ9O",
-        "ET7JxfI5",
-        "xYqrfcAn",
-        "zeSHfCx3",
-        "6XkGb7p3",
-        "lduLcRa9",
-      ];
-      setPinnedLeagueIds(arrayOfIds);
+    if (!Object.keys(storedPinnedIds).length) {
+      setPinnedLeagueIds(defaultPinnedLeagues);
       return;
     }
 
-    setPinnedLeagueIds(pinnedIds);
+    setPinnedLeagueIds(storedPinnedIds);
   }, []);
 
-  const addLeagueToLocalStorage = (tournamentId: string) => {
-    if (pinnedLeagueIds.includes(tournamentId)) {
-      setPinnedLeagueIds(pinnedLeagueIds.filter((id) => id !== tournamentId));
-    } else {
-      setPinnedLeagueIds([...pinnedLeagueIds, tournamentId]);
-    }
+  const addLeagueToLocalStorage = (sportId: number, tournamentId: leagueId) => {
+    setPinnedLeagueIds((prevPinnedLeagues) => {
+      const currentLeagues = prevPinnedLeagues[sportId] || {};
+      const isLeaguePinned = currentLeagues.includes(tournamentId);
+
+      const updatedLeagues = isLeaguePinned
+        ? currentLeagues.filter((id: string) => id !== tournamentId)
+        : [...currentLeagues, tournamentId];
+
+      return {
+        ...prevPinnedLeagues,
+        [sportId]: updatedLeagues,
+      };
+    });
   };
 
-  const removePinnedLeague = (tournamentId: string) => {
-    if (pinnedLeagueIds.includes(tournamentId)) {
-      setPinnedLeagueIds(pinnedLeagueIds.filter((id) => id !== tournamentId));
-    }
+  const removePinnedLeague = (sportId: number, tournamentId: leagueId) => {
+    setPinnedLeagueIds((prevPinnedLeagues) => {
+      const currentLeagues = prevPinnedLeagues[sportId] || [];
+      const updatedLeagues = currentLeagues.filter(
+        (id: string) => id !== tournamentId
+      );
+
+      return {
+        ...prevPinnedLeagues,
+        [sportId]: updatedLeagues,
+      };
+    });
   };
 
   return { pinnedLeagueIds, addLeagueToLocalStorage, removePinnedLeague };

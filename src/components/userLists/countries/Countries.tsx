@@ -1,10 +1,5 @@
 "use client";
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 import style from "./style.module.css";
 import Link from "next/link";
 import axios from "axios";
@@ -126,6 +121,8 @@ const Countries = () => {
     );
   }
 
+  const sportChekedId = sportIdCheck?.id ? Number(sportIdCheck?.id) : 1;
+
   return (
     <section className={`p-4`}>
       <div className={`${style.countriesTitle} flex items-center pb-3  `}>
@@ -176,7 +173,7 @@ const Countries = () => {
                   return (
                     <div
                       className={`flex items-center justify-between ${
-                        pinnedLeagueIds.includes(stageId)
+                        pinnedLeagueIds[sportChekedId].includes(stageId)
                           ? style.pinActive
                           : null
                       }`}
@@ -193,7 +190,9 @@ const Countries = () => {
                       </span>
                       <span
                         className={`${style.pinIcon} `}
-                        onClick={() => addLeagueToLocalStorage(stageId)}
+                        onClick={() => {
+                          addLeagueToLocalStorage(sportChekedId, stageId);
+                        }}
                       >
                         <svg
                           width="13"

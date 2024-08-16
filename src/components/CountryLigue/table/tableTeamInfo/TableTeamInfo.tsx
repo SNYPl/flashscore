@@ -59,7 +59,12 @@ const TableTeamInfo: React.FC<matchProps> = ({
       <div
         className={`${style.imgName} flex justify-start items-center font-bold gap-x-2 `}
       >
-        <Image src={image} alt="flag" width={20} height={20} />
+        <Image
+          src={image ? image : "/images/default/club.gif"}
+          alt="flag"
+          width={20}
+          height={20}
+        />
         <Link
           href={`/team/${shortName}?id=${id}&sportId=${sportId?.id}`}
           className={style.teamLink}

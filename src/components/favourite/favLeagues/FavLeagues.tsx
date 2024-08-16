@@ -27,6 +27,7 @@ interface leagueProps {
   ShowFullDate?: boolean;
   sportHref: string;
   img: string;
+  sportId: number;
 }
 
 const FavLeague: React.FC<leagueProps> = ({
@@ -42,6 +43,7 @@ const FavLeague: React.FC<leagueProps> = ({
   sportHref,
   showMatchesDefault = false,
   img,
+  sportId,
 }) => {
   const [showMatches, setShowMatches] = useState(showMatchesDefault);
   const [eventData, setEventData] = useState<any[]>([]);
@@ -153,13 +155,17 @@ const FavLeague: React.FC<leagueProps> = ({
             </Link>
             <div
               className={`${style.pinImage} ${
-                pinnedLeagueIds.includes(tournamentId) ? style.pinActive : ""
+                pinnedLeagueIds[sportId].includes(tournamentId)
+                  ? style.pinActive
+                  : ""
               }`}
-              onClick={() => addLeagueToLocalStorage(tournamentId)}
+              onClick={() => addLeagueToLocalStorage(sportId, tournamentId)}
             >
               <Image
                 src={`/images/match/${
-                  !pinnedLeagueIds.includes(tournamentId) ? "pin" : "pinActive"
+                  !pinnedLeagueIds[sportId].includes(tournamentId)
+                    ? "pin"
+                    : "pinActive"
                 }.png`}
                 alt="pin"
                 width={14}

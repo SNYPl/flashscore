@@ -86,6 +86,8 @@ const CountryLeagueEvents: React.FC<LeagueProps> = ({
     []
   );
 
+  const sportId = sportIdCheck?.id ? Number(sportIdCheck?.id) : 1;
+
   return (
     <section className={``}>
       <article className="mb-1">
@@ -107,6 +109,7 @@ const CountryLeagueEvents: React.FC<LeagueProps> = ({
                     countryName,
                     sportHref: sportIdCheck?.href,
                     img: countryObject?.countryCode,
+                    sportId: sportId,
                   },
                   tournamentStageId,
                   undefined
@@ -139,13 +142,17 @@ const CountryLeagueEvents: React.FC<LeagueProps> = ({
             </div>
             <div
               className={`${style.pinImage} ${
-                pinnedLeagueIds.includes(tournamentId) ? style.pinActive : ""
+                pinnedLeagueIds[sportId].includes(tournamentId)
+                  ? style.pinActive
+                  : ""
               }`}
-              onClick={() => addLeagueToLocalStorage(tournamentId)}
+              onClick={() => addLeagueToLocalStorage(sportId, tournamentId)}
             >
               <Image
                 src={`/images/match/${
-                  !pinnedLeagueIds.includes(tournamentId) ? "pin" : "pinActive"
+                  !pinnedLeagueIds[sportId].includes(tournamentId)
+                    ? "pin"
+                    : "pinActive"
                 }.png`}
                 alt="pin"
                 width={14}
@@ -214,6 +221,7 @@ const CountryLeagueEvents: React.FC<LeagueProps> = ({
                               countryName,
                               sportHref: sportIdCheck?.href,
                               img: countryObject?.countryCode,
+                              sportId: sportId,
                             },
                             tournamentStageId,
                             el.EVENT_ID

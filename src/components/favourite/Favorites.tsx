@@ -39,6 +39,7 @@ const Favorites = () => {
                 ShowFullDate={true}
                 showMatchesDefault={true}
                 img={eventMatch.leagueInfo.img}
+                sportId={eventMatch.leagueInfo.sportId}
               />
             );
           })

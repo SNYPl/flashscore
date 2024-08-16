@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Mark } from "@/common/svg/mark";
 import { usePinnedLeagues } from "@/components/hooks/usePineedLeagues";
 import { useSearchParams } from "next/navigation";
+import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
 const LeagueTitle = ({
   leagueName,
@@ -16,10 +17,12 @@ const LeagueTitle = ({
   const currentYear = new Date().getFullYear();
   const { pinnedLeagueIds, addLeagueToLocalStorage } = usePinnedLeagues();
   const searchParams = useSearchParams();
+  const sportIdCheck = useSportIdHandler();
+  const sportId = sportIdCheck?.id ? Number(sportIdCheck?.id) : 1;
 
   const tournamentId = searchParams.get("tournamentId") || "";
 
-  const isActivePin = pinnedLeagueIds.includes(tournamentId);
+  const isActivePin = pinnedLeagueIds[sportId].includes(tournamentId);
 
   const [isActive, setIsActive] = useState(false);
 
@@ -46,7 +49,7 @@ const LeagueTitle = ({
           {leagueName}{" "}
           <span
             className={`${isActive ? style.activePin : style.notActive}`}
-            onClick={() => addLeagueToLocalStorage(tournamentId)}
+            onClick={() => addLeagueToLocalStorage(sportId, tournamentId)}
           >
             <Mark />
           </span>

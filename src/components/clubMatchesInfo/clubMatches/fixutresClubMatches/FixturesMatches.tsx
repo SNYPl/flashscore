@@ -109,8 +109,6 @@ const FixturesMatches = ({ pages }: { pages: number }) => {
     );
   }
 
-  // console.log(data?.DATA);
-
   const mergedLeagues = mergeLeagues(data || []);
 
   const leagueNameOptions = mergedLeagues.map((el: any) => {

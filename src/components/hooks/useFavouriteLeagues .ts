@@ -8,6 +8,7 @@ interface LeagueInfo {
   countryName: string;
   sportHref: string | undefined;
   img: string;
+  sportId: number;
 }
 
 interface FavouriteLeague {

@@ -17,8 +17,10 @@ const PinnedLeagues = () => {
   const sportId = useSportIdHandler();
 
   const { pinnedLeagueIds, removePinnedLeague } = usePinnedLeagues();
+  const id = sportId?.id ? Number(sportId?.id) : 1;
+
   const filteredLeagues = allTournament?.DATA?.filter((league: any) =>
-    pinnedLeagueIds.includes(league.ACTUAL_TOURNAMENT_SEASON_ID)
+    pinnedLeagueIds[id].includes(league.ACTUAL_TOURNAMENT_SEASON_ID)
   )
     .map((league: any) => {
       const country = countries.find(
@@ -42,6 +44,10 @@ const PinnedLeagues = () => {
         return a.COUNTRY_NAME.localeCompare(b.COUNTRY_NAME);
       }
     });
+
+  const filtered = allTournament?.DATA?.filter(
+    (league: any) => league.COUNTRY_NAME === "USA"
+  );
 
   return (
     <section className={`mb-7 `}>
@@ -93,7 +99,11 @@ const PinnedLeagues = () => {
                 <div
                   className={`${style.pinIcon} cursor-pointer`}
                   onClick={() =>
-                    removePinnedLeague(tournament.ACTUAL_TOURNAMENT_SEASON_ID)
+                    sportId?.id &&
+                    removePinnedLeague(
+                      Number(sportId?.id),
+                      tournament.ACTUAL_TOURNAMENT_SEASON_ID
+                    )
                   }
                 >
                   <LeaguePinIcon />
