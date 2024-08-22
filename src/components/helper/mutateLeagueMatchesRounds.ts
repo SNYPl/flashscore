@@ -45,3 +45,7 @@ export function mutateLeagueMatchRounds(data: any) {
 
   return finalData;
 }
+
+export const extractRoundNumber = (roundString: any) => {
+  return parseInt(roundString.split(" ")[1]);
+};

@@ -8,7 +8,10 @@ import { useSelector } from "react-redux";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { IoFootballOutline } from "react-icons/io5";
-import { mutateLeagueMatchRounds } from "@/components/helper/mutateLeagueMatchesRounds";
+import {
+  mutateLeagueMatchRounds,
+  extractRoundNumber,
+} from "@/components/helper/mutateLeagueMatchesRounds";
 
 const ScheduledMatches = ({
   setActiveMenu,
@@ -124,11 +127,7 @@ const ScheduledMatches = ({
     );
   }
 
-  // const extractRoundNumber = (roundString: any) => {
-  //   return parseInt(roundString.split(" ")[1]);
-  // };
-
-  // // Sort the array based on the round number
+  // Sort the array based on the round number
   // const sortedRoundsArray = data?.EVENTS?.sort((a: any, b: any) => {
   //   return extractRoundNumber(a.round) - extractRoundNumber(b.round);
   // });
