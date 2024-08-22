@@ -1,8 +1,6 @@
 export function mutateLeagueMatchRounds(data: any) {
   const combinedData = data.flat();
 
-  console.log(combinedData);
-
   // Assuming the first item has the common league information
   const leagueInfo = {
     CATEGORY_NAME: combinedData[0].CATEGORY_NAME,
@@ -43,9 +41,17 @@ export function mutateLeagueMatchRounds(data: any) {
     EVENTS: eventsByRound,
   };
 
-  return finalData;
+  const sortedRoundsArray = finalData?.EVENTS?.sort((a: any, b: any) => {
+    return extractRoundNumber(a.round) - extractRoundNumber(b.round);
+  });
+
+  const sortedResultsArray = finalData?.EVENTS?.sort((a: any, b: any) => {
+    return extractRoundNumber(b.round) - extractRoundNumber(a.round);
+  });
+
+  return { finalData, sortedRoundsArray, sortedResultsArray };
 }
 
-export const extractRoundNumber = (roundString: any) => {
+function extractRoundNumber(roundString: any) {
   return parseInt(roundString.split(" ")[1]);
-};
+}

@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import style from "./style.module.css";
 import CountryLeagueEvents from "../../countryLeagueEvents/CountryLeagueEvents";
 import { useSelector } from "react-redux";
@@ -7,6 +8,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { Skeleton } from "antd";
 import { IoFootballOutline } from "react-icons/io5";
+import { mutateLeagueMatchRounds } from "@/components/helper/mutateLeagueMatchesRounds";
 
 const LatestScores = ({
   setActiveMenu,
@@ -20,113 +22,58 @@ const LatestScores = ({
   const sportId = useSelector((state: any) => state.navigationReducer.sportId);
   const searchParams = useSearchParams();
   const seasonStageId = searchParams.get("seasonStageId");
+  const [allDataInfo, setAllDataInfo] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [showMoreBtn, setShowMoreBtn] = useState(true);
 
-  const resultMatchesOption = (page: any) => ({
-    method: "GET",
-    url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/results",
-    params: {
-      locale: "en_INT",
-      tournament_stage_id: seasonStageId,
-      page: page.toString(),
-    },
-    headers: {
-      "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
-      "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
-    },
-  });
+  const fetchMatches = async (startPage: number, endPage: number) => {
+    const successfulResponses: any[] = [];
 
-  const { data, isLoading, isError, isFetched } = useQuery(
-    ["matchesResults", sportId, seasonStageId],
-    async () => {
+    for (let page = startPage; page <= endPage; page++) {
       try {
-        // Array to hold successful responses
-        const successfulResponses: any[] = [];
-
-        // List of request promises
-        const requests = Array.from({ length: pages }, (_, index) =>
-          (async () => {
-            try {
-              const response = await axios.request(
-                resultMatchesOption(index + 1)
-              );
-              if (response.data?.DATA) {
-                successfulResponses.push(response.data.DATA);
-              }
-            } catch (error) {
-              console.error(
-                `Error fetching data for page ${index + 1}:`,
-                error
-              );
-              // Continue to the next request
-            }
-          })()
-        );
-
-        // Wait for all requests to complete
-        await Promise.all(requests);
-
-        // Ensure there is data to process
-        if (successfulResponses.length === 0) {
-          throw new Error("No data received from any requests");
+        const response = await axios.request({
+          method: "GET",
+          url: "https://flashlive-sports.p.rapidapi.com/v1/tournaments/results",
+          params: {
+            locale: "en_INT",
+            tournament_stage_id: seasonStageId,
+            page: page.toString(),
+          },
+          headers: {
+            "x-rapidapi-key": process.env.NEXT_PUBLIC_FLASHSCORE_API,
+            "x-rapidapi-host": "flashlive-sports.p.rapidapi.com",
+          },
+        });
+        if (response.data?.DATA) {
+          successfulResponses.push(response.data.DATA);
         }
-
-        // Combine the successful data
-        const combinedData = successfulResponses.flat();
-
-        // Assuming the first item has the common league information
-        const leagueInfo = {
-          CATEGORY_NAME: combinedData[0].CATEGORY_NAME,
-          COUNTRY_ID: combinedData[0].COUNTRY_ID,
-          COUNTRY_NAME: combinedData[0].COUNTRY_NAME,
-          NAME: combinedData[0].NAME,
-          NAME_PART_1: combinedData[0].NAME_PART_1,
-          NAME_PART_2: combinedData[0].NAME_PART_2,
-          TOURNAMENT_ID: combinedData[0].TOURNAMENT_ID,
-          TOURNAMENT_IMAGE: combinedData[0].TOURNAMENT_IMAGE,
-          TOURNAMENT_SEASON_ID: combinedData[0].TOURNAMENT_SEASON_ID,
-          TOURNAMENT_STAGE_ID: combinedData[0].TOURNAMENT_STAGE_ID,
-          TOURNAMENT_STAGE_TYPE: combinedData[0].TOURNAMENT_STAGE_TYPE,
-          URL: combinedData[0].URL,
-        };
-
-        // Combine and group events by their round
-        const eventsByRoundObject = combinedData
-          .flatMap((dataItem) => dataItem.EVENTS)
-          .reduce((acc, event) => {
-            const round = event.ROUND || "Unknown Round";
-            if (!acc[round]) {
-              acc[round] = [];
-            }
-            acc[round].push(event);
-            return acc;
-          }, {});
-
-        // Transform the eventsByRoundObject into an array of objects
-        const eventsByRound = Object.keys(eventsByRoundObject).map((round) => ({
-          round,
-          events: eventsByRoundObject[round],
-        }));
-
-        // Create the final combined object
-        const finalData = {
-          ...leagueInfo,
-          EVENTS: eventsByRound,
-        };
-
-        return finalData;
       } catch (error) {
-        console.error("Error fetching result events:", error);
-        throw new Error("Error fetching result events");
+        console.error(`Error fetching data for page ${page}:`, error);
+        if (page >= pages) throw error;
       }
-    },
+    }
+
+    return successfulResponses;
+  };
+
+  const { isLoading, isError, isFetching } = useQuery(
+    ["scheduledMatches", sportId, seasonStageId, currentPage],
+    () => fetchMatches(currentPage, currentPage + pages - 1),
     {
       retry: false,
       refetchOnWindowFocus: false,
       enabled: !!seasonStageId,
+      onSuccess: (data) => {
+        setAllDataInfo((prevState) => [...prevState, ...data]);
+      },
+      onError: (err) => {
+        console.log("Error occurred:", err);
+        setShowMoreBtn(false);
+      },
     }
   );
 
-  if (isLoading) {
+  if (isFetching && allDataInfo.length === 0) {
     return (
       <div className="p-5 ">
         <Skeleton />
@@ -134,7 +81,7 @@ const LatestScores = ({
     );
   }
 
-  if (activeMenu === "RESULTS" && !data) {
+  if (activeMenu === "RESULTS" && allDataInfo.length === 0) {
     return (
       <div className="flex items-center justify-center flex-col">
         <IoFootballOutline
@@ -150,36 +97,42 @@ const LatestScores = ({
     );
   }
 
-  if (!data) {
+  if (allDataInfo.length === 0) {
     return <div></div>;
   }
 
-  const extractRoundNumber = (roundString: any) => {
-    return parseInt(roundString.split(" ")[1]);
+  const { finalData, sortedResultsArray } = mutateLeagueMatchRounds(
+    allDataInfo
+  );
+
+  const handleShowMore = () => {
+    setCurrentPage((prevPage) => prevPage + pages);
   };
-
-  // Sort the array based on the round number
-  const sortedRoundsArray = data?.EVENTS?.sort((a: any, b: any) => {
-    return extractRoundNumber(a.round) - extractRoundNumber(b.round);
-  });
-
   return (
     <section className={` py-4 px-3 bg-white mb-4 rounded-lg`}>
       <h2 className={`font-bold ${style.title}`}>Latest Scores</h2>
 
       <CountryLeagueEvents
-        tournamentStageId={data?.TOURNAMENT_STAGE_ID}
-        NAME1={data?.NAME_PART_1}
-        NAME2={data?.NAME_PART_2}
-        url={data?.URL}
-        events={sortedRoundsArray || []}
-        countryId={data?.COUNTRY_ID}
-        tournamentId={data?.TOURNAMENT_ID}
-        key={data?.TOURNAMENT_STAGE_ID}
-        countryName={data?.COUNTRY_NAME}
+        tournamentStageId={finalData?.TOURNAMENT_STAGE_ID}
+        NAME1={finalData?.NAME_PART_1}
+        NAME2={finalData?.NAME_PART_2}
+        url={finalData?.URL}
+        events={sortedResultsArray || []}
+        countryId={finalData?.COUNTRY_ID}
+        tournamentId={finalData?.TOURNAMENT_ID}
+        key={finalData?.TOURNAMENT_STAGE_ID}
+        countryName={finalData?.COUNTRY_NAME}
         showMatchesDefault={true}
         setActiveMenu={setActiveMenu}
       />
+
+      {isLoading && allDataInfo.length !== 0 ? (
+        <div className="p-5 ">
+          <Skeleton />
+        </div>
+      ) : (
+        ""
+      )}
 
       {activeMenu !== "RESULTS" && (
         <div
@@ -190,6 +143,17 @@ const LatestScores = ({
         >
           <button>Show More Matches</button>
         </div>
+      )}
+
+      {activeMenu === "RESULTS" && showMoreBtn ? (
+        <div
+          className={`${style.moreMatches} ${style.fixMoreMatchesBtn}`}
+          onClick={handleShowMore}
+        >
+          <button>Show More Matches</button>
+        </div>
+      ) : (
+        ""
       )}
     </section>
   );

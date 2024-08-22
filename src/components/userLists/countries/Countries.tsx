@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo, useMemo } from "react";
 import style from "./style.module.css";
 import Link from "next/link";
 import axios from "axios";
@@ -9,7 +9,6 @@ import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import { setAllTournament } from "@/components/store/slices/matchesSlice";
 import { useDispatch } from "react-redux";
 import { usePinnedLeagues } from "@/components/hooks/usePineedLeagues";
-import { memo } from "react";
 
 interface League {
   LEAGUE_NAME: string;
@@ -25,7 +24,7 @@ interface Country {
   leagues: League[];
 }
 
-const Countries = memo(() => {
+const Countries = () => {
   const [listOpen, setListOpen] = useState<number[]>([]);
   const [countrieShowNumber, setCountrieShowNumber] = useState(50);
   const sportIdCheck = useSportIdHandler();
@@ -59,6 +58,8 @@ const Countries = memo(() => {
     },
     {
       refetchOnWindowFocus: false,
+      staleTime: 60 * 60 * 1000,
+      cacheTime: 12 * 60 * 60 * 1000,
     }
   );
 
@@ -68,41 +69,43 @@ const Countries = memo(() => {
     }
   }, [data, isLoading, dispatch]);
 
-  const aggregatedData: { [key: number]: Country } = {};
+  const result = useMemo(() => {
+    const aggregatedData: { [key: number]: Country } = {};
 
-  data?.DATA.forEach((item: any) => {
-    const {
-      COUNTRY_ID,
-      COUNTRY_NAME,
-      LEAGUE_NAME,
-      SPORT_ID,
-      ACTUAL_TOURNAMENT_SEASON_ID,
-      STAGES,
-    } = item;
-
-    if (!aggregatedData[COUNTRY_ID]) {
-      aggregatedData[COUNTRY_ID] = {
+    data?.DATA.forEach((item: any) => {
+      const {
         COUNTRY_ID,
         COUNTRY_NAME,
-        leagues: [],
-      };
-    }
+        LEAGUE_NAME,
+        SPORT_ID,
+        ACTUAL_TOURNAMENT_SEASON_ID,
+        STAGES,
+      } = item;
 
-    const stageId = STAGES.filter((el: any) => el.STAGE_NAME === "Main");
-    const stageSeasonId = stageId.length > 0 ? stageId[0] : STAGES[0];
+      if (!aggregatedData[COUNTRY_ID]) {
+        aggregatedData[COUNTRY_ID] = {
+          COUNTRY_ID,
+          COUNTRY_NAME,
+          leagues: [],
+        };
+      }
 
-    aggregatedData[COUNTRY_ID].leagues.push({
-      LEAGUE_NAME,
-      SPORT_ID,
-      ACTUAL_TOURNAMENT_SEASON_ID,
-      COUNTRY_ID,
-      stageSeasonId,
+      const stageId = STAGES.filter((el: any) => el.STAGE_NAME === "Main");
+      const stageSeasonId = stageId.length > 0 ? stageId[0] : STAGES[0];
+
+      aggregatedData[COUNTRY_ID].leagues.push({
+        LEAGUE_NAME,
+        SPORT_ID,
+        ACTUAL_TOURNAMENT_SEASON_ID,
+        COUNTRY_ID,
+        stageSeasonId,
+      });
     });
-  });
 
-  const result: Country[] = Object.values(aggregatedData).slice(7, -1);
-
-  result.sort((a, b) => a.COUNTRY_NAME.localeCompare(b.COUNTRY_NAME));
+    return Object.values(aggregatedData)
+      .slice(7, -1)
+      .sort((a, b) => a.COUNTRY_NAME.localeCompare(b.COUNTRY_NAME));
+  }, [data]);
 
   const toggleCountryList = (countryId: number) => {
     setListOpen((prevOpen) => {
@@ -252,6 +255,6 @@ const Countries = memo(() => {
       )}
     </section>
   );
-});
+};
 
 export default Countries;

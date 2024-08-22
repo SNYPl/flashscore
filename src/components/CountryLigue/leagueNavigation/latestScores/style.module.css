@@ -28,3 +28,11 @@
   font-size: 12px;
   font-weight: bold;
 }
+
+.fixMoreMatchesBtn button {
+  border-bottom: 0;
+}
+
+.fixMoreMatchesBtn button:hover {
+  border-bottom: 1px solid var(--show-matches-color);
+}

@@ -102,6 +102,7 @@ const DrawItem: React.FC<draw> = ({
                     borderBottom:
                       id === 0 ? " 1px solid var(--grey-color)" : "",
                   }}
+                  key={id}
                 >
                   <span className="w-12 pl-2">{formattedDate}</span>
                   <Link

@@ -39,7 +39,7 @@ const CountryLeague = () => {
       )}
 
       {activeMenu === "RESULTS" && (
-        <LatestScores activeMenu={activeMenu} pages={6} />
+        <LatestScores activeMenu={activeMenu} pages={3} />
       )}
 
       {activeMenu === "FIXTURES" && (
