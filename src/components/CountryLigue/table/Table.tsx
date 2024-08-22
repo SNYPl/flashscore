@@ -48,6 +48,7 @@ const Matches = ({
     },
     {
       retry: false,
+      refetchOnWindowFocus: false,
     }
   );
 

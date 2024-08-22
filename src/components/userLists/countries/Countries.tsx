@@ -9,6 +9,7 @@ import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 import { setAllTournament } from "@/components/store/slices/matchesSlice";
 import { useDispatch } from "react-redux";
 import { usePinnedLeagues } from "@/components/hooks/usePineedLeagues";
+import { memo } from "react";
 
 interface League {
   LEAGUE_NAME: string;
@@ -24,7 +25,7 @@ interface Country {
   leagues: League[];
 }
 
-const Countries = () => {
+const Countries = memo(() => {
   const [listOpen, setListOpen] = useState<number[]>([]);
   const [countrieShowNumber, setCountrieShowNumber] = useState(50);
   const sportIdCheck = useSportIdHandler();
@@ -251,6 +252,6 @@ const Countries = () => {
       )}
     </section>
   );
-};
+});
 
 export default Countries;

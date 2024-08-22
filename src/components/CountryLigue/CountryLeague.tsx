@@ -39,11 +39,11 @@ const CountryLeague = () => {
       )}
 
       {activeMenu === "RESULTS" && (
-        <LatestScores activeMenu={activeMenu} pages={5} />
+        <LatestScores activeMenu={activeMenu} pages={6} />
       )}
 
       {activeMenu === "FIXTURES" && (
-        <ScheduledMatches pages={5} activeMenu={activeMenu} />
+        <ScheduledMatches pages={4} activeMenu={activeMenu} />
       )}
 
       {activeMenu === "STANDINGS" && (

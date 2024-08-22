@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { checkPage } from "@/components/helper/checkMainPage";
+import { GrAnalytics } from "react-icons/gr";
 
 const Predictions = () => {
   const path = usePathname();
@@ -20,7 +21,9 @@ const Predictions = () => {
     >
       <article className={`${style.predictionItem} bg-white w-full  mb-4`}>
         <div className="mb-5 flex gap-x-1 items-center p-4 pb-0 mobileNone">
-          <Image src="/images/graph.png" width={28} height={28} alt="graph" />
+          <GrAnalytics
+            style={{ color: "var(--black-color)", fontSize: "32px" }}
+          />
           <h3 className=" text-base  font-semibold">
             SPORT <span className="font-bold">PREDICTION</span>
           </h3>

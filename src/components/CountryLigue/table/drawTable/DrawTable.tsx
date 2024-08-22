@@ -43,6 +43,7 @@ const DrawTable: React.FC<tableProps> = ({ data }) => {
           winnerOverall: block.DRAW_ROUND_EVENT_WINNER_OVERALL || "",
           eventId: block.DRAW_ROUND_EVENT_ID || "",
           eventStart: block.DRAW_ROUND_EVENT_START || "",
+          eventIds: block.DRAW_ROUND_EVENT_IDS || [],
         };
       });
 
@@ -78,11 +79,11 @@ const DrawTable: React.FC<tableProps> = ({ data }) => {
                 >
                   {draw?.blocks.map((block: any) => {
                     const homeResult = Array.isArray(block?.home?.results)
-                      ? block.home.results[0]
-                      : "";
+                      ? block.home.results
+                      : [];
                     const awayResult = Array.isArray(block?.away?.results)
-                      ? block.away.results[0]
-                      : "";
+                      ? block.away.results
+                      : [];
 
                     return (
                       <DrawItem
@@ -96,6 +97,7 @@ const DrawTable: React.FC<tableProps> = ({ data }) => {
                         awaySide={block.away.side}
                         eventId={block.eventId}
                         key={block.roundName}
+                        eventIds={block.eventIds}
                       />
                     );
                   })}

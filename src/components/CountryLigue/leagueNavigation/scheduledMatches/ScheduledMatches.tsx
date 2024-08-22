@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import style from "./style.module.css";
 import CountryLeagueEvents from "../../countryLeagueEvents/CountryLeagueEvents";
 import { Skeleton } from "antd";
@@ -7,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { IoFootballOutline } from "react-icons/io5";
+import { mutateLeagueMatchRounds } from "@/components/helper/mutateLeagueMatchesRounds";
 
 const ScheduledMatches = ({
   setActiveMenu,
@@ -20,6 +22,8 @@ const ScheduledMatches = ({
   const sportId = useSelector((state: any) => state.navigationReducer.sportId);
   const searchParams = useSearchParams();
   const seasonStageId = searchParams.get("seasonStageId");
+  const [fixturesPages, setFixturesPages] = useState(pages);
+  const [allDataInfo, setAllDataInfo] = useState<any[]>([]);
 
   const shcheduledMatches = (page: any) => ({
     method: "GET",
@@ -43,14 +47,16 @@ const ScheduledMatches = ({
         const successfulResponses: any[] = [];
 
         // List of request promises
-        const requests = Array.from({ length: pages }, (_, index) =>
+        const requests = Array.from({ length: fixturesPages }, (_, index) =>
           (async () => {
             try {
               const response = await axios.request(
                 shcheduledMatches(index + 1)
               );
               if (response.data?.DATA) {
+                console.log(response);
                 successfulResponses.push(response.data.DATA);
+                setAllDataInfo((state) => [...state, response.data.DATA]);
               }
             } catch (error) {
               console.error(
@@ -66,54 +72,13 @@ const ScheduledMatches = ({
         await Promise.all(requests);
 
         // Ensure there is data to process
-        if (successfulResponses.length === 0) {
-          throw new Error("No data received from any requests");
-        }
+        // if (allDataInfo.length === 0) {
+        //   throw new Error("No data received from any requests");
+        // }
 
         // Combine the successful data
-        const combinedData = successfulResponses.flat();
 
-        // Assuming the first item has the common league information
-        const leagueInfo = {
-          CATEGORY_NAME: combinedData[0].CATEGORY_NAME,
-          COUNTRY_ID: combinedData[0].COUNTRY_ID,
-          COUNTRY_NAME: combinedData[0].COUNTRY_NAME,
-          NAME: combinedData[0].NAME,
-          NAME_PART_1: combinedData[0].NAME_PART_1,
-          NAME_PART_2: combinedData[0].NAME_PART_2,
-          TOURNAMENT_ID: combinedData[0].TOURNAMENT_ID,
-          TOURNAMENT_IMAGE: combinedData[0].TOURNAMENT_IMAGE,
-          TOURNAMENT_SEASON_ID: combinedData[0].TOURNAMENT_SEASON_ID,
-          TOURNAMENT_STAGE_ID: combinedData[0].TOURNAMENT_STAGE_ID,
-          TOURNAMENT_STAGE_TYPE: combinedData[0].TOURNAMENT_STAGE_TYPE,
-          URL: combinedData[0].URL,
-        };
-
-        // Combine and group events by their round
-        const eventsByRoundObject = combinedData
-          .flatMap((dataItem) => dataItem.EVENTS)
-          .reduce((acc, event) => {
-            const round = event.ROUND || "Unknown Round";
-            if (!acc[round]) {
-              acc[round] = [];
-            }
-            acc[round].push(event);
-            return acc;
-          }, {});
-
-        // Transform the eventsByRoundObject into an array of objects
-        const eventsByRound = Object.keys(eventsByRoundObject).map((round) => ({
-          round,
-          events: eventsByRoundObject[round],
-        }));
-
-        // Create the final combined object
-        const finalData = {
-          ...leagueInfo,
-          EVENTS: eventsByRound,
-        };
-
-        return finalData;
+        return successfulResponses;
       } catch (error) {
         console.error("Error fetching scheduled events:", error);
         throw new Error("Error fetching scheduled events");
@@ -125,6 +90,8 @@ const ScheduledMatches = ({
       enabled: !!seasonStageId,
     }
   );
+
+  console.log(allDataInfo);
 
   if (isLoading) {
     return (
@@ -138,7 +105,10 @@ const ScheduledMatches = ({
     return <div></div>;
   }
 
-  if (activeMenu === "FIXTURES" && data?.EVENTS?.length === 0) {
+  const mutatedData = mutateLeagueMatchRounds(allDataInfo);
+
+  console.log(mutatedData);
+  if (activeMenu === "FIXTURES" && allDataInfo.length === 0) {
     return (
       <div className="flex items-center justify-center flex-col">
         <IoFootballOutline
@@ -154,20 +124,20 @@ const ScheduledMatches = ({
     );
   }
 
-  const extractRoundNumber = (roundString: any) => {
-    return parseInt(roundString.split(" ")[1]);
-  };
+  // const extractRoundNumber = (roundString: any) => {
+  //   return parseInt(roundString.split(" ")[1]);
+  // };
 
-  // Sort the array based on the round number
-  const sortedRoundsArray = data?.EVENTS?.sort((a: any, b: any) => {
-    return extractRoundNumber(a.round) - extractRoundNumber(b.round);
-  });
+  // // Sort the array based on the round number
+  // const sortedRoundsArray = data?.EVENTS?.sort((a: any, b: any) => {
+  //   return extractRoundNumber(a.round) - extractRoundNumber(b.round);
+  // });
 
   return (
     <section className={` py-4 px-3 bg-white mb-4 rounded-lg`}>
       <h2 className={`font-bold ${style.title}`}>Scheduled</h2>
 
-      <CountryLeagueEvents
+      {/* <CountryLeagueEvents
         tournamentStageId={data?.TOURNAMENT_STAGE_ID}
         NAME1={data?.NAME_PART_1}
         NAME2={data?.NAME_PART_2}
@@ -181,7 +151,7 @@ const ScheduledMatches = ({
         ShowFullDate={true}
         ShowFullDateHour={true}
         setActiveMenu={setActiveMenu}
-      />
+      /> */}
 
       {activeMenu !== "FIXTURES" && (
         <div
