@@ -7,34 +7,12 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { useSearchParams } from "next/navigation";
 import { IoFootballOutline } from "react-icons/io5";
+import { mergeClubMatches } from "@/components/helper/mergeClubMatches";
 
 const FixturesMatches = ({ pages }: { pages: number }) => {
   const searchParams = useSearchParams();
   const teamId = searchParams.get("id");
   const sportIdCheck = searchParams.get("sportId");
-
-  function mergeLeagues(leagues: any[]) {
-    const mergedLeagues: any = [];
-
-    leagues?.forEach((league) => {
-      const existingLeague = mergedLeagues.find(
-        (l: any) => l.NAME === league.NAME
-      );
-
-      if (existingLeague) {
-        existingLeague.EVENTS = existingLeague.EVENTS.concat(league.EVENTS);
-      } else {
-        mergedLeagues.push({ ...league });
-      }
-    });
-
-    // Sort the EVENTS array within each league by START_TIME
-    mergedLeagues.forEach((league: any) => {
-      league.EVENTS.sort((a: any, b: any) => a.START_TIME - b.START_TIME);
-    });
-
-    return mergedLeagues;
-  }
 
   const allCompetentiosnObjects = {
     value: "All Competitions",
@@ -109,7 +87,7 @@ const FixturesMatches = ({ pages }: { pages: number }) => {
     );
   }
 
-  const mergedLeagues = mergeLeagues(data || []);
+  const mergedLeagues = mergeClubMatches(data || []);
 
   const leagueNameOptions = mergedLeagues.map((el: any) => {
     return {
