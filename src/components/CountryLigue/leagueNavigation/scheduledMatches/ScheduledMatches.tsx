@@ -50,15 +50,14 @@ const ScheduledMatches = ({
         }
       } catch (error) {
         console.error(`Error fetching data for page ${page}:`, error);
-        if (page >= pages) throw error;
+        if (page > pages) throw error;
       }
     }
-
     return successfulResponses;
   };
 
   const { isLoading, isError, isFetching } = useQuery(
-    ["scheduledMatches", sportId, seasonStageId, currentPage],
+    ["scheduledMatchesLeague", sportId, seasonStageId, currentPage],
     () => fetchMatches(currentPage, currentPage + pages - 1),
     {
       retry: false,

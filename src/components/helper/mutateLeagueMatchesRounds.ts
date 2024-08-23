@@ -46,7 +46,7 @@ export function mutateLeagueMatchRounds(data: any) {
   });
 
   const sortedResultsArray = finalData?.EVENTS?.sort((a: any, b: any) => {
-    return extractRoundNumber(b.round) - extractRoundNumber(a.round);
+    return extractRoundNumber(b.round) + extractRoundNumber(a.round);
   });
 
   return { finalData, sortedRoundsArray, sortedResultsArray };
