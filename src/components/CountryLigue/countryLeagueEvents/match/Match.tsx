@@ -113,7 +113,7 @@ const Match: React.FC<matchProps> = ({
                   )}
 
                   {stageType == "FINISHED" && (
-                    <h4>
+                    <h4 className="flex flex-col items-center">
                       <span
                         className={`font-xs font-medium ${style.predictionTitleColor}`}
                       >
@@ -122,6 +122,7 @@ const Match: React.FC<matchProps> = ({
                           .toLowerCase()
                           .replace("_", " ")}`}
                       </span>
+                      <span>{formattedDate}</span>
                     </h4>
                   )}
                 </>

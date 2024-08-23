@@ -1,4 +1,4 @@
-export function mergeClubMatches(leagues: any[]) {
+export function mergeClubMatches(leagues: any[], leagueInfo: string) {
   const mergedLeagues: any = [];
 
   leagues?.forEach((league) => {
@@ -15,7 +15,11 @@ export function mergeClubMatches(leagues: any[]) {
 
   // Sort the EVENTS array within each league by START_TIME
   mergedLeagues.forEach((league: any) => {
-    league.EVENTS.sort((a: any, b: any) => a.START_TIME - b.START_TIME);
+    if (leagueInfo == "fixtures") {
+      league.EVENTS.sort((a: any, b: any) => a.START_TIME - b.START_TIME);
+    } else {
+      league.EVENTS.sort((a: any, b: any) => b.START_TIME - a.START_TIME);
+    }
   });
 
   return mergedLeagues;

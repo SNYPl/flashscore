@@ -125,7 +125,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     height: auto;
-    max-width: 265px;
+    max-width: 245px;
     width: 100%;
   }
   .teamOne {
@@ -153,5 +153,11 @@
 
   .teamOnePlayers .player .playerName {
     bottom: 15px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .stadium {
+    background-size: cover;
   }
 }

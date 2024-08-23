@@ -32,7 +32,7 @@ const MatchLists: React.FC<matchProps> = ({ selectedMatchNav, data }) => {
 
   const isPinnedLeague = (leagueId: string) => {
     const id = sportid?.id ? Number(sportid?.id) : 1;
-    return pinnedLeagueIds[id].includes(leagueId);
+    return pinnedLeagueIds[id]?.includes(leagueId);
   };
 
   const filteredMatchData = data?.DATA?.map((matchData: any) => {

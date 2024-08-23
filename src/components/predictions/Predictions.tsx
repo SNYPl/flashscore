@@ -7,10 +7,12 @@ import { usePathname } from "next/navigation";
 import { checkPage } from "@/components/helper/checkMainPage";
 import { GrAnalytics } from "react-icons/gr";
 
-const Predictions = () => {
+const Predictions = ({ data }: { data?: any }) => {
   const path = usePathname();
 
   const isMainPage = checkPage(path);
+
+  // console.log(data);
 
   const arr = [1, 2, 3];
   return (
@@ -22,7 +24,11 @@ const Predictions = () => {
       <article className={`${style.predictionItem} bg-white w-full  mb-4`}>
         <div className="mb-5 flex gap-x-1 items-center p-4 pb-0 mobileNone">
           <GrAnalytics
-            style={{ color: "var(--black-color)", fontSize: "32px" }}
+            style={{
+              color: "var(--black-color)",
+              fontSize: "17px",
+              objectFit: "contain",
+            }}
           />
           <h3 className=" text-base  font-semibold">
             SPORT <span className="font-bold">PREDICTION</span>

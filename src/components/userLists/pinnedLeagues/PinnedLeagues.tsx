@@ -20,7 +20,7 @@ const PinnedLeagues = () => {
   const id = sportId?.id ? Number(sportId?.id) : 1;
 
   const filteredLeagues = allTournament?.DATA?.filter((league: any) =>
-    pinnedLeagueIds[id].includes(league.ACTUAL_TOURNAMENT_SEASON_ID)
+    pinnedLeagueIds[id]?.includes(league.ACTUAL_TOURNAMENT_SEASON_ID)
   )
     .map((league: any) => {
       const country = countries.find(

@@ -36,7 +36,7 @@ export const useFavouriteLeagues = () => {
 
     if (eventId) {
       if (existingLeague) {
-        const updatedStageIds = existingLeague.stageIds.includes(eventId)
+        const updatedStageIds = existingLeague.stageIds?.includes(eventId)
           ? existingLeague.stageIds.filter((id) => id !== eventId)
           : [...existingLeague.stageIds, eventId];
 
@@ -149,7 +149,7 @@ export const isFavoriteEvent = (
 ): boolean => {
   if (favouriteLeagues.length === 0) return false;
 
-  const favoriteLeague = favouriteLeagues.includes(eventId);
+  const favoriteLeague = favouriteLeagues?.includes(eventId);
 
   if (favoriteLeague) {
     return true;

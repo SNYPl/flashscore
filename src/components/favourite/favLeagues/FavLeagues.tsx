@@ -155,7 +155,7 @@ const FavLeague: React.FC<leagueProps> = ({
             </Link>
             <div
               className={`${style.pinImage} ${
-                pinnedLeagueIds[sportId].includes(tournamentId)
+                pinnedLeagueIds[sportId]?.includes(tournamentId)
                   ? style.pinActive
                   : ""
               }`}
@@ -163,7 +163,7 @@ const FavLeague: React.FC<leagueProps> = ({
             >
               <Image
                 src={`/images/match/${
-                  !pinnedLeagueIds[sportId].includes(tournamentId)
+                  !pinnedLeagueIds[sportId]?.includes(tournamentId)
                     ? "pin"
                     : "pinActive"
                 }.png`}

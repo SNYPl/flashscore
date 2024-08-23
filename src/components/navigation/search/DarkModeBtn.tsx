@@ -1,3 +1,4 @@
+"use client";
 import { useLocalStorage } from "usehooks-ts";
 import style from "./style.module.css";
 

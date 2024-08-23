@@ -22,7 +22,7 @@ const LeagueTitle = ({
 
   const tournamentId = searchParams.get("tournamentId") || "";
 
-  const isActivePin = pinnedLeagueIds[sportId].includes(tournamentId);
+  const isActivePin = pinnedLeagueIds[sportId]?.includes(tournamentId);
 
   const [isActive, setIsActive] = useState(false);
 

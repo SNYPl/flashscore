@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import style from "./style.module.css";
+import { NoMatchFound } from "../noMatchFound/NoMatchFound";
 
 import { useFavouriteLeagues } from "@/components/hooks/useFavouriteLeagues ";
 
@@ -9,6 +10,9 @@ import { IoFootballOutline } from "react-icons/io5";
 
 const Favorites = () => {
   const { favouriteLeagues } = useFavouriteLeagues();
+
+  if (favouriteLeagues.length === 0)
+    return <NoMatchFound title="No favorite matches found" />;
 
   return (
     <section

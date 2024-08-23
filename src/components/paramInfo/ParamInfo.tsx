@@ -14,7 +14,7 @@ const ParamInfo: React.FC = () => {
     <section className={`${style.info}`}>
       <i className="fa-solid fa-house-chimney"></i>
 
-      <p className={`${style.addedParams} flex items-center`}>
+      <div className={`${style.addedParams} flex items-center`}>
         <div className="mr-1"> {PathArr && PathArr.img}</div>
 
         {pathArray.map((el: any, id: number) => (
@@ -29,7 +29,7 @@ const ParamInfo: React.FC = () => {
             )}
           </React.Fragment>
         ))}
-      </p>
+      </div>
     </section>
   );
 };

@@ -9,6 +9,7 @@ import DrawTable from "./drawTable/DrawTable";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { Skeleton } from "antd";
+import { useSportIdHandler } from "@/components/hooks/useSportIdHandler";
 
 const Matches = ({
   leagueId,
@@ -17,8 +18,10 @@ const Matches = ({
   leagueId: string | null;
   seasonId: string | null;
 }) => {
+  const sportId = useSportIdHandler();
+  const sportMenuHandle = sportId?.id === "2" ? "DRAW" : "STANDINGS";
   const [apiMenuRequest, setApiMenuRequest] = useState("overall");
-  const [activeMenu, setActiveMenu] = useState("STANDINGS");
+  const [activeMenu, setActiveMenu] = useState(sportMenuHandle);
 
   const options = {
     method: "GET",

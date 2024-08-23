@@ -86,7 +86,7 @@ const ResultMatches = ({ pages }: { pages: number }) => {
     );
   }
 
-  const mergedLeagues = mergeClubMatches(data || []);
+  const mergedLeagues = mergeClubMatches(data || [], "results");
 
   const leagueNameOptions = mergedLeagues.map((el: any) => {
     return {

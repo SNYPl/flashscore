@@ -21,10 +21,13 @@ const MatchesMenu = ({
     // { title: "OVER/UNDER", api: "overall" },
     // { title: "HT/FT", api: "overall" },
     { title: "TOP SCORES", api: "top_scores" },
+    { title: "DRAW", api: "draw" },
   ];
 
   const filteredMenu =
-    sportId?.id === "2" ? menu.filter((item) => item.title !== "FORM") : menu;
+    sportId?.id === "2"
+      ? menu.filter((item) => item.title == "DRAW")
+      : menu.filter((item) => item.title !== "DRAW");
 
   return (
     <section className={`${style.menu} mb-4`}>
@@ -41,7 +44,7 @@ const MatchesMenu = ({
             <button>{el.title}</button>
           </li>
         ))}
-        {isDraw && (
+        {isDraw && sportId?.id !== "2" && (
           <li
             className={`${activeMenu === "DRAW" ? style.activeMenu : ""}`}
             onClick={() => {

@@ -1,12 +1,16 @@
 import Predictions from "@/components/predictions/Predictions";
 import UserTeams from "@/components/userLists/userTeams/UserTeams";
-import FavoritesSection from "@/components/favourite/Favorites";
 import dynamic from "next/dynamic";
+import { getPrediction } from "@/utils/getPredictions";
 
-export default function Favorites() {
+export default async function Favorites() {
   const NoSSR = dynamic(() => import("@/components/favourite/Favorites"), {
     ssr: false,
   });
+
+  const res = await getPrediction();
+
+  const parsedData = res.props.rssData.rss.channel.item;
 
   return (
     <main className=" flex  py-4 pb-0 container gap-x-4 mobailmain">
@@ -15,7 +19,7 @@ export default function Favorites() {
       </div>
       <NoSSR />
       <div className="mobileNone">
-        <Predictions />
+        <Predictions data={parsedData} />
       </div>
     </main>
   );

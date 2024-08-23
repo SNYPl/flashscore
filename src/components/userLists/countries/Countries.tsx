@@ -177,7 +177,7 @@ const Countries = () => {
                   return (
                     <div
                       className={`flex items-center justify-between ${
-                        pinnedLeagueIds[sportChekedId].includes(stageId)
+                        pinnedLeagueIds[sportChekedId]?.includes(stageId)
                           ? style.pinActive
                           : null
                       }`}

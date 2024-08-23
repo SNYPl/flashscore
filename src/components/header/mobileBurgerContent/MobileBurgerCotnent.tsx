@@ -7,17 +7,12 @@ import Link from "next/link";
 import { useTheme } from "@/components/store/ThemeContext";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
+import { socialArray } from "@/lib/socials";
+
 const NoSSRButton = dynamic(
   () => import("@/components/navigation/search/DarkModeBtn"),
   { ssr: false }
 );
-
-const socialArray = [
-  { component: "1", w: 9, h: 15, alt: "fb", href: "" },
-  { component: "2", w: 17, h: 15, alt: "tw", href: "" },
-  { component: "3", w: 15, h: 15, alt: "inst", href: "" },
-  { component: "4", w: 18, h: 15, alt: "email", href: "" },
-];
 
 const MobileBurgerCotnent = () => {
   const [open, setOpen] = useState(false);

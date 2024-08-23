@@ -50,7 +50,8 @@ const ScheduledMatches = ({
         }
       } catch (error) {
         console.error(`Error fetching data for page ${page}:`, error);
-        if (page > pages) throw error;
+
+        if (error) setShowMoreBtn(false);
       }
     }
     return successfulResponses;
@@ -68,7 +69,6 @@ const ScheduledMatches = ({
       },
       onError: (err) => {
         console.log("Error occurred:", err);
-        setShowMoreBtn(false);
       },
     }
   );

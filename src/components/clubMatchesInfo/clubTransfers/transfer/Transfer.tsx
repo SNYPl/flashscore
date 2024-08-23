@@ -76,7 +76,7 @@ const Transfer: React.FC<transferProps> = ({
         </Link>
       </div>
 
-      <p className={`${style.infoNumber}  `}>
+      <div className={`${style.infoNumber}  `}>
         {transferDirection === "in" ? (
           <FaArrowLeft />
         ) : (
@@ -84,7 +84,7 @@ const Transfer: React.FC<transferProps> = ({
         )}
         <Image src={oppositeTeamImage} alt="teamLogo" width={16} height={16} />
         <p>{oppositeTeam} </p>
-      </p>
+      </div>
       <div className={`${style.infoNumber}  flex-col ${style.reason}`}>
         <p>{transferType}</p>
         <p className={`${style.infoNumber} `}>{tj}</p>

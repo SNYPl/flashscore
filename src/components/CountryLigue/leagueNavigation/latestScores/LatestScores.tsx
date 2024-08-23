@@ -49,7 +49,7 @@ const LatestScores = ({
         }
       } catch (error) {
         console.error(`Error fetching data for page ${page}:`, error);
-        if (page > pages) throw error;
+        if (error) setShowMoreBtn(false);
       }
     }
 
@@ -68,7 +68,6 @@ const LatestScores = ({
       },
       onError: (err) => {
         console.log("Error occurred:", err);
-        setShowMoreBtn(false);
       },
     }
   );
@@ -124,6 +123,7 @@ const LatestScores = ({
         countryName={finalData?.COUNTRY_NAME}
         showMatchesDefault={true}
         setActiveMenu={setActiveMenu}
+        ShowFullDateHour
       />
 
       {isLoading && allDataInfo.length !== 0 ? (
