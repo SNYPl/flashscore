@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { IoFootballOutline } from "react-icons/io5";
 import { mutateLeagueMatchRounds } from "@/components/helper/mutateLeagueMatchesRounds";
+import { NoMatchFound } from "@/components/noMatchFound/NoMatchFound";
 
 const ScheduledMatches = ({
   setActiveMenu,
@@ -82,19 +83,7 @@ const ScheduledMatches = ({
   }
 
   if (activeMenu === "FIXTURES" && allDataInfo.length === 0) {
-    return (
-      <div className="flex items-center justify-center flex-col">
-        <IoFootballOutline
-          style={{ fontSize: "80px", color: "var(--match-league-title-color)" }}
-        />
-        <p
-          style={{ color: "var(--black-color)", fontSize: "13px" }}
-          className="mt-3"
-        >
-          No matches found
-        </p>
-      </div>
-    );
+    return <NoMatchFound title="No matches found" />;
   }
 
   if (allDataInfo.length === 0) {

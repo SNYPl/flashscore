@@ -49,7 +49,7 @@ const ClubInfo: React.FC<infoProps> = ({
           <section className={`${style.leagueTitle} flex  items-center`}>
             <div className={style.img}>
               <Image
-                src={clubInfoData.IMAGE_PATH}
+                src={clubInfoData?.IMAGE_PATH || "/images/default/club.gif"}
                 alt="img"
                 width={60}
                 height={60}
@@ -58,9 +58,9 @@ const ClubInfo: React.FC<infoProps> = ({
 
             <div className={style.title}>
               <h3 className="flex items-center gap-x-4">
-                {clubInfoData.NAME}{" "}
+                {clubInfoData?.NAME}{" "}
               </h3>
-              <p>Country: {clubInfoData.COUNTRY_NAME}</p>
+              <p>Country: {clubInfoData?.COUNTRY_NAME}</p>
             </div>
           </section>
         </div>

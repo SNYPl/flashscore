@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import { useSearchParams } from "next/navigation";
 import { IoFootballOutline } from "react-icons/io5";
 import { mergeClubMatches } from "@/components/helper/mergeClubMatches";
+import { NoMatchFound } from "@/components/noMatchFound/NoMatchFound";
 
 const ResultMatches = ({ pages }: { pages: number }) => {
   const searchParams = useSearchParams();
@@ -144,20 +145,7 @@ const ResultMatches = ({ pages }: { pages: number }) => {
           </div>
         </>
       ) : (
-        <div className="flex items-center justify-center flex-col p-3">
-          <IoFootballOutline
-            style={{
-              fontSize: "80px",
-              color: "var(--match-league-title-color)",
-            }}
-          />
-          <p
-            style={{ color: "var(--black-color)", fontSize: "13px" }}
-            className="mt-3"
-          >
-            No matches found
-          </p>
-        </div>
+        <NoMatchFound title="No matches found" />
       )}
     </article>
   );
